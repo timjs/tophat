@@ -78,18 +78,18 @@ The typing rules for pretasks are given in \cref{fig:typing-rules}.
 
 \begin{figure}[h]
   \small
-  \begin{mathpar}
-    \boxed{\RelationT} \\
-    \userule{T-Edit} \quad
-    \userule{T-Enter} \quad
-    \userule{T-Update} \\
-    \userule{T-Then} \quad
-    \userule{T-Next} \\
-    \userule{T-Fail} \quad
-    \userule{T-And} \\
-    \userule{T-Or} \quad
+  \begin{gather*}
+    \boxed{\RelationT} \Break
+    \userule{T-Edit} \Quad
+    \userule{T-Enter} \Quad
+    \userule{T-Update} \Quad
+    \userule{T-Fail} \Break
+    \userule{T-Then} \Quad
+    \userule{T-Next} \Break
+    \userule{T-And} \Quad
+    \userule{T-Or} \Quad
     \userule{T-Xor}
-  \end{mathpar}
+  \end{gather*}
   \caption{Typing rules} \label{fig:typing-rules}
 \end{figure}
 

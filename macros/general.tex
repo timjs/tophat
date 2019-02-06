@@ -146,11 +146,27 @@
   {\makebox[0pt][l]{\ensuremath{#2}}\phantom{\ensuremath{#1}}}
 
 
+%% Spacing %%
+
+\newmacro{Quad}
+  {\hspace{1.5em}}
+\newmacro{Break}
+  {\\[\smallskipamount]}
+
+
+
+%% Fractions %%
+
+\newmacro{upon}
+  {\genfrac{}{}{0pt}{0}}
+
+
 
 %% Symbols %%
 
 %% NOTE: change this to \emptyset when using a font that includes a nice standard emptyset
 \let\nothing\varnothing
+
 
 
 %% Braces %%
@@ -289,3 +305,25 @@
 
 \newtheorem{example}[theorem]{Example}
 \newtheorem{definition}[theorem]{Definition}
+
+
+
+%% Inference rules %%
+
+\newmacro{placerule}[4][1,4]
+  {\ensuremath{
+    \upon
+      {\text{\smallcaps{#1}}\hfill}
+      {\dfrac{#2}{#3}\ #4}
+  }}
+
+\newmacro{newrule}[4][4]
+  {\newmacro{#1}{\placerule[#1]{#2}{#3}[#4]}}
+\newmacro{userule}
+  {\usemacro}
+\newmacro{refrule}[1]
+  {\ifthenelse{\isundefined{#1}}
+    {\GenericError{}{Rule `#1` is not defined}{}{}}
+    {\textsc{#1}}}
+% \newmacro{refrule}
+%   {\textsc}
