@@ -1,0 +1,96 @@
+% !TEX root=../main.tex
+
+\section{Introduction}
+
+In the next sections we will gradually develop a language to model interactive processes.
+Each section will introduce one of the following basic constructs,
+making our language more powerful after every addition:
+\begin{itemize}
+  \item interactive \emph{editors} with a value ($\Edit v$) and without a value ($\Enter \tau$);
+  \item the \emph{failure} task ($\Fail$);
+  \item sequential composition or \emph{stepping} of tasks ($t_1 \Then e_2$);
+  \item parallel composition or \emph{pairing} of tasks ($t_1 \And t_2$);
+  \item making a \emph{choice} between tasks ($t_1 \Or t_2$);
+\end{itemize}
+Additionally, we will discuss two convenience constructs and one extension for shared data:
+\begin{itemize}
+  \item continuing to the next task upon users' requests ($t_1 \Next e_2$);
+  \item giving users an explicit choice ($t_1 \Xor t_2$);
+  \item watching and changing shared data ($\Update l$).
+\end{itemize}
+
+Compared to previous attempts \cite{conf/ifl/KoopmanPA08,conf/ppdp/PlasmeijerLMAK12,theses/radboud/VinterHviid18},
+our approach distinguishes itself by the following points:
+\begin{itemize}
+  \item
+    There is a clear distinction between the underlaying \emph{host language}
+    and the task layer (\emph{object language}) on top of it.
+    % For example, \textcite{conf/ppdp/PlasmeijerLMAK12} present a reference implementation of task oriented programming
+    % as an embedded domain specific language in Clean \cite{manuals/PlasmeijerE98} which blurs the lines between the host and object language.
+  \item
+    There is no notion of values which can be stable or unstable.
+    Our language has editors which can be valued ($\Edit v$) or unvalued ($\Enter \tau$),
+    but values themselves do not have special distinguishing features and are just values,
+    as in every other lambda calculus or functional programming language.
+  \item
+    Tasks are never done!
+    A value lifted into the task world can always interactively be changed by end users.
+  \item
+    All tasks are, in the end, about interaction with end users.
+    Not because every construct introduced in our language has a way to interact with the user,
+    but the leafs are.\footnote{
+      There are two leafs in our language: editors ($\Edit v$ and $\Enter \tau$) and fail ($\Fail$).
+      Editors are the main focus of user interaction.
+      Users can enter and change information using an editor.
+      Fail is a special case.
+      It acts like a black hole regarding interaction and will swallow every event users will throw at it.
+      All other language constructs are nodes.
+    }
+  \item
+    Entering some information into a system is not a one-shot action.
+    Editors keep asking for input continuously.
+    Thus repeatedly asking for information does not need to be modelled with recursion.
+    The next task is only executed under preprogrammed internal conditions or external actions by users.
+  \item
+    Tasks do not need to be identified by a task identifier.
+    Sending events is based on the \emph{structure} of the task at hand.
+  \item
+    Events are not accessible by users, they are built into the semantics.
+  \item
+    Semantically, tasks do not return a value \emph{and} a continuation
+    but \emph{only} a continuation.
+    Obtaining the current value of a task is an \emph{observation},
+    implemented by an additional semantic function.\footnote{
+      Looking at tasks in this way mitigates the problem of a stream-like type which can not be made into a monad
+      (as described in \textcite{theses/radboud/VinterHviid18})
+      and make sure some tasks, such as a step, do not have a value.
+    }
+  \item
+    We make use of multiple semantic functions that describe different aspects of the language.
+    At the core, we assume a big step \emph{evaluation} semantics for the host language.\footnote{
+      We use a $\lambda$-calculus with some primitive types and simple extensions like $\If{}{}{}$, pairs, and references.}
+    On top of this there is \emph{normalisation} of tasks
+    and \emph{handling} of events.
+    Normalisation is done before starting the main event loop
+    and after handling an event.
+    Next to these three core semantics,
+    there are also semantic functions querying the current \emph{value} of a task,
+    giving enabled \emph{actions},
+    or producing a (rudimentary) \emph{user interface}.
+\end{itemize}
+
+The remainder of this report is structured as follows.
+In the first section we set up our our host language,
+the $\lambda$-calculus extended with primitive types and operations.
+Thereafter, in the next \fixme{seven} sections, we will gradually define our object language,
+extending the properties of our host language when needed.
+After some sections,
+we will make a small intermezzo,
+showing the current properties and laws of our language.
+We strive to keep the host language as small as possible.
+At the end of the report,
+we will see an overview of our our language,
+summarising all static and dynamic rules defined along the way.
+
+
+\todo{Consistent capitalization style of section headings}

@@ -1,0 +1,105 @@
+% !TEX root=../report.tex
+
+\section{Black holes and values}
+
+We have seen editors,
+which are key to user interaction.
+Before we continue with constructs to combine tasks,
+we first need to introduce the other leaf task in our language:
+the \emph{failure task} $\Fail$.
+
+\begin{grammar}
+  Pretasks
+    & p & ::=& \ldots & \\
+    &   &\mid& \Fail  & – fail \\
+\end{grammar}
+Conceptually,
+the failure task is a task which \emph{never ends} and \emph{never has a value}.
+Its type is therefore polymorphic.
+\begin{equation*}
+  \userule{T-Fail}
+\end{equation*}
+For this,
+we need to extend our type syntax with polymorphic types.
+\begin{grammar}
+  Types
+    & \tau &::= & \ldots             & \\
+    &      &\mid& \alpha             & – type variable \\
+\end{grammar}
+
+The failure task evaluates to itself.
+\begin{equation*}
+  \userule{E-Fail}
+\end{equation*}
+Therefore,
+it is a value with respect to evaluation and thus a syntactic task.
+\begin{grammar}
+  Tasks
+    & t & ::=& \ldots & \\
+    &   &\mid& \Fail  & – fail \\
+\end{grammar}
+
+Every event $h$ users send to the failure task will be swallowed
+and no answer will ever be given.
+\begin{equation*}
+  \userule{H-Fail}
+\end{equation*}
+This is why we say that the failure task is a \emph{black hole}.
+You can throw anything in it,
+but nothing will ever come out!
+
+
+\subsection{Failing and succeeding}
+\label{sec:failing}
+
+So, what is the usage of this simple and dull addition to our task language?
+Think of $\Fail$ as the error value \type{Nothing} from Haskell's \type{Maybe} data type
+or \type{None} from ML's \type{option} lifted into the task world.
+Note the difference between $\Fail$ and $\Enter\beta$.
+The first is the failing task,
+the second an unvalued editor waiting for users to fill in a value.
+Editors are tasks that clearly have a future and thus are not \emph{failing}.
+
+We will need to distinguish tasks which succeed and tasks which fail in the remaining of this report.
+To do this,
+we introduce the predicate $\boxed{\Failing(t)}$,
+which tells us if a task is failing or not.
+\begin{equation*}
+  \begin{array}{lcl}
+    \multicolumn{3}{l}{\Failing : \mathrm{Tasks} \to \mathrm{Booleans}} \\
+    \Failing(\Edit v)     &=& \False \\
+    \Failing(\Enter \tau) &=& \False \\
+    \Failing(\Fail)       &=& \True
+  \end{array}
+\end{equation*}
+For now,
+only $\Failing(\Fail)$ holds.
+We will step-by-step extend this definition in future sections.
+
+
+\subsection{The value of a task}
+\label{sec:value}
+
+Above, we stated that the failure task \emph{will never have a value}.
+But we never defined what it means for a task to have a value\ldots\
+Intuitively,
+a valued editor obviously has a value,
+namely the one contained in it.
+Along the same line,
+an unvalued editor does not have a value
+and the same holds for the failure task.
+
+To make this intuition more formal,
+we define the semantic function $\boxed{\Value(t)}$.
+Given a task $t$, this function will answer the question:
+\enquote{Does task $t$ have a value?}.
+\begin{equation*}
+  \begin{array}{lcl}
+    \multicolumn{3}{l}{\Value : \mathrm{Tasks} \rightharpoonup \mathrm{Values}} \\
+    \Value(\Edit v)     &=& v \\
+    \Value(\Enter \tau) &=& \bot \\
+    \Value(\Fail)       &=& \bot
+  \end{array}
+\end{equation*}
+The harpoon in the type definition denotes that $\Value$ is a \emph{partial function}.
+We use the symbol $\bot$ to denote an undefined mapping.

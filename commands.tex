@@ -1,0 +1,139 @@
+% !TEX root=../main.tex
+
+
+
+%% Host language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newkeyword[IF]  {if}
+\newkeyword[THEN]{then}
+\newkeyword[ELSE]{else}
+
+\newkeyword[Let]{let}
+\newkeyword[In]{in}
+
+\newkeyword[Ref] {ref}
+
+
+\newmacro{If}[3]
+  {\IF #1 \THEN #2 \ELSE #3}
+
+
+
+%% Values %%
+
+
+\newmathcommand{unit}{\<\>}
+
+
+\newvalue{True}
+\newvalue{False}
+\newvalue[Not]{not}
+
+
+\newmacro{str}[1]
+  {\text{``#1''}}
+
+\newoperator{Length}{\mathrm{length}}
+
+
+\newvalue[Map]{map}
+\newvalue[Fst]{fst}
+\newvalue[Snd]{snd}
+\newvalue[Assoc]{assoc}
+
+
+
+%% Types %%
+
+
+\newtype{Unit}
+\newtype{Bool}
+\newtype{Nat}
+\newtype{Int}
+\newtype{String}
+\newtype[Reference]{Ref}
+\newtype{Task}
+\newtype{Maybe}
+
+\newtype{Euro}
+
+
+
+%% Object language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newmacro{TOPHAT}
+  {$\widehat{\text{\smallcaps{top}}}$\xspace}
+
+
+\let\And\relax
+\newoperator{Then}  {\blacktriangleright}
+\newoperator{Next}  {\vartriangleright}
+\newoperator{And}   {\Join}
+\newoperator{Or}    {\blacklozenge}
+\newoperator{Xor}   {\lozenge}
+\newoperator{Edit}  {\square}
+\newoperator{View}  {\overline{\square}}
+\newoperator{Enter} {\boxtimes}
+\newoperator{Update}{\blacksquare}
+\newoperator{Watch} {\overline{\blacksquare}}
+\newoperator{Fail}  {\lightning}
+\newoperator{At}    {@}
+
+\newoperator{AndOr} {\DEPRECATED}
+
+
+
+%% Events %%
+
+
+\newvalue[Left]   {L}
+\newvalue[Right]  {R}
+
+
+\newvalue[Empty]   {E}
+\newvalue[Continue]{C}
+\newvalue[Pick]    {P}
+
+
+\newvalue[First]  {F}
+\newvalue[Second] {S}
+\newvalue[Here]   {H}
+
+
+
+%% Semantic functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newmathcommand{evaluate}[rel]
+  {\;\downarrow\;}
+\newmathcommand{stride}[rel]
+  % {\;\rightarrow\!\shortmid\;}
+  {\;\rightsquigarrow\;}
+\newmathcommand{normalise}[rel]
+  {\;\Downarrow\;}
+\newmacro{handle}[1]
+  {\mathrel{\;\xrightarrow{\;#1\;}\;}}
+\newmacro{drive}[1]
+  {\mathrel{\;\xRightarrow{\;#1\;}\;}}
+
+
+\newmathcommand{Value}[cal]
+  {V}
+\newmathcommand{Inputs}[cal]
+  {I}
+\newmathcommand{Interface}[cal]
+  {U}
+\newmathcommand{Failing}[cal]
+  {F}
+\newmathcommand{Watching}[cal]
+  {W}
+\newmathcommand{Dirty}
+  {\Delta}
+
+
+
+%% Depricated %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newvalue[Execute] {<depricated>}

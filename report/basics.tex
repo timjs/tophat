@@ -1,0 +1,104 @@
+% !TEX root=../report.tex
+
+\section{Our base language}
+
+Let us start by defining our host language.
+It is a simple $\lambda$-calculus.
+Next to abstraction, application and variables,
+it contains constants for booleans, integers and strings
+and some basic operations on them.
+We will embed our task language \emph{into} this basic language.
+This means we can use all the power of the host language,
+such as arithmetic operations and (higher order) functions,
+in our task language.
+Because all the constructs in our host language are standard,
+we will not give typing rules and semantic rules here.
+For this we refer to standard work like \textcite{books/Pierce02TAPL} and \textcite{books/Harper16PFPL}.
+
+
+\subsection{Syntax}
+\label{sec:syntax}
+
+\begin{grammar}
+  Expressions
+    & e &::= & \lambda x:\tau.\ e & – abstraction \\
+    &   &\mid& e_1\ e_2           & – application \\
+    &   &\mid& x                  & – variable \\
+    &   &\mid& c                  & – constant \\
+    &   &\mid& e_1 \star e_2      & – operator \\
+    &   &\mid& \If{e_1}{e_2}{e_3} & – branching \\
+    &   &\mid& p                  & – pretask \\
+  Constants
+    & c &::= & B                  & – boolean \\
+    &   &\mid& I                  & – integer \\
+    &   &\mid& S                  & – string \\
+  Pretasks
+    & p &::= & \ldots             & (to be defined) \\
+\end{grammar}
+Expressions are typed abstractions, applications, variables or constants.
+Constants can be booleans, integers or strings.
+The $\star$ represents a general notion of operators.
+With $\If{}{}{}$ one can do basic branching.
+The syntactic category of pretasks will be defined in the upcoming sections.
+Pretasks $p$ are tasks \emph{in making},
+just as expressions are values in making.
+A \emph{task} will be introduced in \autoref{sec:evaluation}.
+
+We will use double quotation marks ($\str{}$) to denote strings.
+Integers are denoted by their decimal representation,
+and booleans are written $\True$ and $\False$.
+In the remaining of this report,
+we will freely make use of the logic operators $\Not$, $\land$, and $\lor$,
+arithmetic operators $+$, $-$, $\times$,
+and the string append operator $\pp$.
+Also, we will use the standard comparison operations $<$, $\le$, $\equiv$, $\not\equiv$, $\ge$, and $>$
+as builtins.
+Only when referring to operators in general we will use $\star$.
+
+
+\subsection{Typing}
+
+\begin{grammar}
+  Types
+    & \tau &::= & \tau_1 \to \tau_2 & – function type \\
+    &      &\mid& \beta             & – basic type \\
+    &      &\mid& \Task \tau        & – task type \\
+  Basic types
+    &\beta &::= & \Bool             & – boolean type \\
+    &      &\mid& \Int              & – integer type \\
+    &      &\mid& \String           & – string type \\
+\end{grammar}
+Typing of our expressions $e$ is as to be expected,
+and won't be given in this document.
+There is one big difference with respect to standard work.
+This is the addition of a type for tasks $\Task \tau$.
+Typing rules are of the form $\boxed{\Gamma \infers e : \tau}$,
+which we read as \enquote{in environment $\Gamma$, expression $e$ has type $\tau$}.
+
+
+\subsection{Evaluation}
+\label{sec:evaluation}
+
+To express evaluation,
+we use the big step semantics of our host language.
+Turning an expression $e$ into a value $v$ is denoted by $\boxed{e \evaluate v}$.
+The rules to evaluate expressions $e$ do not differ from standard work.
+
+\begin{grammar}
+  Values
+    & v &::= & \lambda x.\ e  & – abstractions \\
+    &   &\mid& c              & – constants \\
+    &   &\mid& t              & – tasks \\
+  Tasks
+    & t &::= & \ldots         & – (to be defined for each $p$) \\
+\end{grammar}
+Regarding our base language, lambda abstractions are values, as are all constants.
+Each \emph{pretask} $p$ we will encounter in the upcoming sections,
+will be accompanied by a corresponding \emph{task} $t$.
+Tasks are also values with respect to evaluation.
+This means pretasks will be eagerly evaluated to tasks by the relation $\evaluate$.\footnote{
+  The same applies to pairs,
+  which we will add to our host language in \autoref{sec:pairing}.
+}
+This suggestion by \textcite[p. 323]{books/Harper16PFPL}
+makes it easier to reason about data constructors.

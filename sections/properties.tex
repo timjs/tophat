@@ -1,0 +1,178 @@
+% !TEX root=../pldi2019.tex
+
+
+
+\section{Properties}
+\label{sec:properties}
+
+
+
+% \subsection{Safety}
+
+In order to validate our semantics, we show that our evaluation, normalisation
+and handling semantics is type preserving. We additionally prove a progress
+theorem for our small-step handling semantics.
+
+Additionally, we show that the normalisation semantics is a big-step semantics.
+While at first sight, this might seem obvious, the fact that we are dealing with
+state complicates matters.
+
+We show that our failing function $\Failing$ indeed only indicates expressions
+that can not be normalised and that allow no further interaction.
+
+Finally, we prove that the function to compute all possible inputs $\Inputs$ is sound and complete.
+
+
+
+\subsection{Preservation}
+\label{sub:preservation}
+
+We show that the following three preservation Theorems hold.
+
+\begin{theorem}[Preservation under evaluation]
+  % For all well typed expressions $e$ and states $s$,
+  For all expressions $e$ and states $s$
+  such that $\Gamma,\Sigma \infers e:\tau$ and $\Gamma,\Sigma \infers s$,
+  if $e,s \evaluate e',s'$,
+  then $\Gamma,\Sigma \infers e':\tau$ and $\Sigma \infers s'$.
+  \label{thm:pres-eval}
+\end{theorem}
+
+Where $\Sigma \infers s$ means that for all $l\in s$, it holds that
+$\Sigma(l)=\Gamma,\Sigma\infers s(l)$.
+
+Theorem~\ref{thm:pres-eval} is shown to be correct by induction over $e$. The full
+proof can be found in the appendix.
+
+
+Moving on, we show that normalisation also preserves, by showing that the
+following Theorem holds.
+
+\begin{theorem}[Preservation under normalisation]
+  % For all well typed expressions $e$ and states $s$,
+  For all expressions $e$ and states $s$
+  such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers s$,
+  if $e,s \normalise e',s'$,
+  then $\Gamma,\Sigma \infers e':\Task\tau$ and $\Sigma \infers s'$.
+  \label{thm:pres-norm}
+\end{theorem}
+
+Since this semantics makes use of the value function $\Value$ and the striding semantics $\stride$. We first need to
+show that preservation also holds for these two semantics.
+
+\begin{lemma}[Task value preserves]
+  % For all well typed expressions $e$ and states $s$,
+  For all expressions $e$ and states $s$
+  such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers s$,
+  if $\Value{(e,s)}=v$,
+  then $v:\tau$.
+  \label{lem:presvalue}
+\end{lemma}
+
+\begin{lemma}[Striding preserves]
+  For all expressions $e$ and states $s$
+  such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers s$,
+  if $e,s \stride e',s'$,
+  then $\Gamma,\Sigma \infers e':\tau$ and $\Sigma \infers s'$.
+  \label{thm:pres-stride}
+\end{lemma}
+
+Lemma~\ref{lem:presvalue} and Theorem~\ref{thm:pres-stride} are proven in the
+appendix by induction over $e$. This subsequently allows us to prove
+Theorem~\ref{thm:pres-norm}, again by induction over $e$.
+
+This brings us finally to the type preservation property of the handling semantics.
+
+\begin{theorem}[Preservation under handling]
+  % For all well typed expressions $e$, states $s$, and inputs $i$,
+  For all expressions $e$, states $s$ and inputs $i$
+  such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers s$,
+  if $ e,s \handle{i} e's'$,
+  then $\Gamma,\Sigma\infers e':\Task\tau$ and $\Sigma\infers s'$.
+  \label{thm:pres-handle}
+\end{theorem}
+
+And again, this is proven by induction over $e$.
+
+From Theorem~\ref{thm:pres-handle} and Theorem~\ref{thm:pres-norm} we directly
+obtain that the driving semantics also preserves.
+
+\subsection{Progress}
+
+A well-typed term of a task type is guaranteed to progress after normalisation,
+unless it is failing.
+
+We define what we mean with progress in Theorem~\ref{thm:prog-norm}.
+\begin{theorem}[Progress under handling]
+  For all well typed expressions $e$ and states $s$,
+  % For all expressions $e$ and states $s$
+  % such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers s$,
+  if $e,s \normalise e',s'$,
+  then either $\Failing(e', s')$
+  or there exist $e''$, $s''$, and $i$ such that $e',s'\handle{i} e'',s''$.
+  \label{thm:prog-norm}
+\end{theorem}
+
+Where a well typed expression $e$ means that $\Gamma,\Sigma\infers e:\tau$ for
+some type $\tau$, and a well typed state means that $\Sigma\infers s$.
+
+If an expression $e$ and state $s$ are well-typed, then after normalisation, it
+either fails, or there exists some input $i$ that can be handled by it.
+In order to prove this Theorem, we require an additional theorem.
+
+% \paragraph{Failing}
+
+We need to show that the failing function $\Failing$ behaves as desired.
+
+\begin{theorem}[Failing means no interaction possible]
+  For all well typed expressions $e$ and states $s$,
+  % For all expressions $e$ and states $s$
+  % such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers s$,
+  and $e,s \normalise e',s'$,
+  we have that $\Failing(e',s') = \True$,
+  if and only if there is no input $i$
+  such that $e',s'\handle{i} e'',s''$ for some $e''$ and $s''$.
+  \label{thm:failing}
+\end{theorem}
+
+The Theorem above states that an expression $e$ and state $s$ are failing, if,
+after normalisation, there exists no input that can be handled by it.
+We prove the theorem to be true by induction on $e'$.
+
+% \paragraph{Proof}
+
+We now have the ingredients to prove Theorem~\ref{thm:prog-norm}.
+
+\begin{proof}
+  Given $\Gamma,\Sigma\infers e:\Task\tau$ and $\Sigma\infers s$ and after
+  normalisation $e,s \normalise e',s'$, we find ourselves in either one of the
+  following situations:
+
+  There exists an $i$ such that $e',s'\handle{i} e'',s''$.
+
+  There does not exist an $i$ such that $e',s'\handle{i} e'',s''$. In this case, we
+  know that $\Failing(e',s')$ must be true, by Theorem~\ref{thm:failing}.
+\end{proof}
+
+
+
+\subsection{Soundness and Completeness of Inputs}
+
+In order to validate the function that calculates all possible inputs $\Inputs$,
+we want to show that the set of possible inputs it produces is both sound and
+complete with respect to the handle semantics. By sound we mean that all inputs
+in the set of possible inputs can actually be handled by the handle semantics,
+and by complete we mend that the set of possible inputs contains all inputs
+that can be handled by the handle semantics. Theorem~\ref{thm:safety-i} expresses
+exactly this property.
+
+\begin{theorem}[Inputs function is sound and complete]
+  For all well typed expressions $e$, states $s$, and inputs $i$,
+  % For all expressions $e$, states $s$, and inputs $i$
+  % such that $\Gamma,\Sigma \infers e:\tau$ and $\Sigma \infers s$,
+  we have that $i \in \Inputs{(e)}$ if and only if $e,s \handle{i} e',s'$.
+  \label{thm:safety-i}
+\end{theorem}
+
+We prove the above theorem by induction over $e$. The proof is listed in the
+appendix.

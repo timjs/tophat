@@ -1,0 +1,76 @@
+% !TEX root=../report.tex
+
+\section{Sharing data}
+
+\statefultrue
+
+\begin{grammar}
+  Expressions
+    & e    &::= & \ldots          & \\
+    &      &\mid& \unit           & – unit \\
+    &      &\mid& e_1; e_2        & – sequence \\
+    &      &\mid& \Ref e          & – reference \\
+    &      &\mid& !e              & – dereference \\
+    &      &\mid& e_1 := e_2      & – assign \\
+    &      &\mid& l               & – location \\
+  Values
+    & v    & ::=& \ldots          & \\
+    &      &\mid& \unit           & – unit \\
+    &      &\mid& l               & – location \\
+  Pretasks
+    & p    & ::=& \ldots          & \\
+    &      &\mid& \Update e       & – stored editor \\
+    &      &\mid& \Watch e        & – stored readonly editor \\
+  Tasks
+    & t    & ::=& \ldots          & \\
+    &      &\mid& \Update l       & – stored editor \\
+    &      &\mid& \Watch l        & – stored readonly editor \\
+  Types
+    & \tau & ::=& \ldots          & \\
+    &      &\mid& \Unit           & – unit \\
+    &      &\mid& \Reference \tau & – reference type \\
+\end{grammar}
+
+\begin{equation*}
+  \boxed{\RelationT}
+\end{equation*}
+
+\begin{equation*}
+  \userule{T-Update}
+\end{equation*}
+
+\begin{equation*}
+  \userule{E-Update}
+\end{equation*}
+
+\begin{equation*}
+  \boxed{\RelationN}
+\end{equation*}
+
+\begin{equation*}
+  \userule{S-Update}
+\end{equation*}
+
+\begin{margintext}{Aside: Shared data in iTasks}
+  $\Update l$ is similar to \type{watch} in iTasks.
+\end{margintext}
+
+\begin{equation*}
+  \boxed{\RelationH}
+\end{equation*}
+
+\begin{equation*}
+  \begin{array}{lcl}
+    \Value(\Update l, s) &=& s(l)
+  \end{array}
+\end{equation*}
+
+\begin{equation*}
+  \begin{array}{lcl}
+    \Failing(\Update l) &=& \True
+  \end{array}
+\end{equation*}
+
+\begin{equation*}
+  \userule{H-Update}
+\end{equation*}
