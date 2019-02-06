@@ -56,3 +56,43 @@ Petri nets, and more specifically Workflow nets, have also been used to describe
 workflows~\cite{journals/jcsc/Aalst98}. They allow for the modelling and
 analysis of business processes. A downside of using workflow nets is that the
 model is not directly implementable, which is possible with the \TOPHAT calculus.
+
+
+% NEW RELATED WORK sections
+
+\paragraph{Business process modeling}
+
+A plethora of languages exists to describe, model, display and execute these
+processes. YAWL by van der Aalst~\cite{DBLP:journals/is/AalstH05} is one of
+these languages. It facilitates modeling and execution of dynamic workflows,
+with support for AND, OR and XOR workflow patterns. YAWL programs consist of
+Nets, and are therefore programmed visually. BPEL\todo{cite} is another popular business process language.
+The standardized language allows for the specification of actions within
+business processes, using an XML format. Processes specified in BEPL are
+executable, just like YAWL.
+
+
+\paragraph{IFTTT}
+
+If This Then That (IFTTT)\todo{cite} is a web service that allows users to write and
+configure simple conditional statements called applets, that can interact with
+web services and IoT devices. These applets can be seen as tiny workflows, that
+facilitate collaboration between different services and platforms. The
+complexity of the flow is very limited however, and is not geared towards humans
+collaborating.
+
+\paragraph{Google forms \& Wufoo}
+
+Google forms\todo{cite} and Wufoo\todo{cite} are web based survey administration apps that allows
+users to compose forms and gather data from them. They are comparable to TOP and
+iTasks in that they provide an easy way for users to construct forms on the web.
+However, Google forms and Wufoo do not allow users to define what the system
+then should do with this information, and can therefore not be regarded as a
+workflow or business process modeling systems.
+
+\paragraph{Chorus} % (http://www.chorus-home.org/)
+
+Chorus~\cite{chen2017chorus} is a visual programming environment for online
+collaboration apps. The goal of Chorus is to allow users to program their own
+application, though which a collective task can be coordinated. Users work on a
+preset data-type that drives the behavior of the user defined applications.
