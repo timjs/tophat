@@ -1,0 +1,52 @@
+% !TEX root=../icfp2019.tex
+
+\section{Additional rules}
+
+\subsection{Evaluation rules}
+
+% \begin{figure}
+
+  \begin{gather*}
+    \boxed{\RelationE} \Break
+    \userule{E-Value} \Break
+    \userule{E-App} \Break
+    \userule{E-IfTrue} \Break
+    \userule{E-IfFalse} \Break
+    \userule{E-Pair} \Break
+    \userule{E-Ref} \Quad
+    \userule{E-Deref} \Break
+    \userule{E-Assign} \Break
+    \userule{E-Edit} \Quad
+    \userule{E-Enter} \Quad
+    \userule{E-Update} \Break
+    \userule{E-Then} \Quad
+    \userule{E-Next} \Break
+    \userule{E-And} \Quad
+    \userule{E-Or} \Break
+    \userule{E-Xor} \Quad
+    \userule{E-Appoint} \Quad
+    \userule{E-Fail}
+  \end{gather*}
+
+%   \caption{Evaluation semantics} \label{fig:evaluation-semantics}
+% \end{figure}
+
+\subsection{Typing rules}
+
+% \begin{figure}[h]
+
+  \begin{gather*}
+    \boxed{\RelationT} \Break
+    \userule{T-Var} \Quad
+    \userule{T-Loc} \Break
+    \userule{T-Abs} \Quad
+    \userule{T-App} \Break
+    \userule{T-If} \Break
+    \userule{T-Pair} \Break
+    \userule{T-Ref} \Quad
+    \userule{T-Deref} \Break
+    \userule{T-Assign}
+  \end{gather*}
+
+%   \caption{Additional typing rules}
+% \end{figure}

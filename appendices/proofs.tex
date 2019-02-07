@@ -1,59 +1,9 @@
 % !TEX root=../icfp2019.tex
 
-\section{Appendix}
+\section{Proofs}
 
-  \subsection{Evaluation rules}
+\subsection{Theorem~\ref{thm:pres-eval}}
 
-  % \begin{figure}
-
-    \begin{gather*}
-      \boxed{\RelationE} \Break
-      \userule{E-Value} \Break
-      \userule{E-App} \Break
-      \userule{E-IfTrue} \Break
-      \userule{E-IfFalse} \Break
-      \userule{E-Pair} \Break
-      \userule{E-Ref} \Quad
-      \userule{E-Deref} \Break
-      \userule{E-Assign} \Break
-      \userule{E-Edit} \Quad
-      \userule{E-Enter} \Quad
-      \userule{E-Update} \Break
-      \userule{E-Then} \Quad
-      \userule{E-Next} \Break
-      \userule{E-And} \Quad
-      \userule{E-Or} \Break
-      \userule{E-Xor} \Quad
-      \userule{E-Appoint} \Quad
-      \userule{E-Fail}
-    \end{gather*}
-
-  %   \caption{Evaluation semantics} \label{fig:evaluation-semantics}
-  % \end{figure}
-
-  \subsection{Additional typing rules}
-
-  % \begin{figure}[h]
-
-    \begin{gather*}
-      \boxed{\RelationT} \Break
-      \userule{T-Var} \Quad
-      \userule{T-Loc} \Break
-      \userule{T-Abs} \Quad
-      \userule{T-App} \Break
-      \userule{T-If} \Break
-      \userule{T-Pair} \Break
-      \userule{T-Ref} \Quad
-      \userule{T-Deref} \Break
-      \userule{T-Assign}
-    \end{gather*}
-
-  %   \caption{Additional typing rules}
-  % \end{figure}
-
-  \subsection{Proofs}
-
-  \subsubsection{Theorem~\ref{thm:pres-eval}}
 \begin{proof}
   We prove Theorem~\ref{thm:pres-eval} by induction on $e$:\\
 
@@ -126,7 +76,8 @@
 
 
 
-\subsubsection{Lemma~\ref{lem:presvalue}}
+\subsection{Lemma~\ref{lem:presvalue}}
+
 \begin{proof}
   We prove Lemma~\ref{lem:presvalue} by induction over $e$.\\
 
@@ -188,7 +139,8 @@
 
 
 
-\subsubsection{Theorem~\ref{thm:pres-stride}}
+\subsection{Theorem~\ref{thm:pres-stride}}
+
 \begin{proof}
   We prove Theorem~\ref{thm:pres-stride} by induction on $e$:\\
 
@@ -285,7 +237,9 @@
 
 \end{proof}
 
-\subsubsection{Theorem~\ref{thm:pres-norm}}
+
+
+\subsection{Theorem~\ref{thm:pres-norm}}
 
 \begin{proof}
   We prove Theorem~\ref{thm:pres-norm} by induction on $e$:\\
@@ -309,7 +263,9 @@
 
 \end{proof}
 
-\subsubsection{Theorem~\ref{thm:pres-handle}}
+
+
+\subsection{Theorem~\ref{thm:pres-handle}}
 
 We require the following Lemma for this proof.
 
@@ -431,7 +387,7 @@ This lemma follows immediately from definition.
   % $\Gamma,\Sigma\infers u\At t'$ and $\Sigma\infers s'$.
 \end{proof}
 
-% \subsubsection{Theorem~\ref{thmprogressnorm}}
+% \subsection{Theorem~\ref{thmprogressnorm}}
 %
 % \begin{proof} We prove this Theorem by induction on $e$.\\
 %
@@ -466,7 +422,7 @@ This lemma follows immediately from definition.
 %
 % \end{proof}
 
-% \subsubsection{Lemma~\ref{lem:stride-does-not-eval}}
+% \subsection{Lemma~\ref{lem:stride-does-not-eval}}
 %
 % \begin{proof}
 %   We prove Lemma~\ref{lem:stride-does-not-eval} by induction on $e$. First we
@@ -539,9 +495,7 @@ This lemma follows immediately from definition.
 
 
 
-
-
-\subsubsection{Theorem~\ref{thm:failing}}
+\subsection{Theorem~\ref{thm:failing}}
 
 \begin{proof}
 
@@ -581,7 +535,10 @@ This lemma follows immediately from definition.
   %  This case follows directly from applying the induction hypothesis, since $\Failing(u \At t,s)=\Failing(t,s)$ and any input that applies to $t$ also applies to $u \At t$.\\
 \end{proof}
 
-\subsubsection{Theorem~\ref{thm:safety-i}}
+
+
+\subsection{Theorem~\ref{thm:safety-i}}
+
 \begin{proof}
 
   \noindent\textbf{Case} $e=\Edit v:\Task\tau, i= v':\tau$\\
