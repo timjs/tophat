@@ -5,49 +5,60 @@
 \section{Intuition}
 \label{sec:comparison}
 
-This section gives an overview of the essential concepts of \TOP and how they are represented in \TOPHAT.
-While \TOP is focussed on collaboration, it gives rise to concepts like communication and multiprogramming.
-% These concepts are: communication with the environment, communication between subsystems, sequential composition, concurrency, and synchronisation.
-These concepts can also be found in process algebras, which raises the question how \TOPHAT and process algebras relate.
-While introducing the concepts, we compare them with Hoare's Communicating Sequential Processes (\CSP).
-The comparison is based on Hoare's book \cite{books/Hoare85CSP}.
-We chose \CSP as an example to stand for the numerous process algebras in existence, which, as far as this section is concerned, are reasonably similar.
+%NOTE: Use \emph{process} as a general term for a process in process algebras and a reactive system from reactive programming?
+%NOTE: Main focus should be on \emph{collaboration} between tasks opposed to \emph{communication} between processes.
 
-We provide comparisons based on two aspects.
-First, we compare the scope of the languages, as intended by the authors.
-Second, we focus on features common to \TOP and \CSP, and study their realisation.
+This section gives an overview of the essential concepts of tasks and how they are represented in \TOPHAT.
+While tasks are focussed on collaboration, they give rise to concepts like communication, concurrency and synchronisation.
+% These concepts are: communication with the environment, communication between subsystems, sequential composition, concurrency, and synchronisation.
+These concepts can also be found in process algebras like \CSP, \CCS and \PICALC, \fixme{cite}
+and reactive programming languages like \ESTEREL, \HIPHOP, and \fixme{more?}.
+This raises the question how \TOPHAT relates to these algebras and languages.
+
+
+In the next subsections, we give an intuition about tasks, by discussing the concepts collaboration, communication \fixme{and multiprocessing}.
+While introducing these concepts, we compare them with \emph{processes}.
+We define a process as \fixme{definition}.
+% We chose processes as an example to stand for the numerous process algebras in existence, which, as far as this section is concerned, are reasonably similar.
+We focus on features common to tasks and processes, and study their realisation.
 When we point out differences, we do not argue that the different realisations are incompatible.
-As a matter of fact the primitives can certainly be expressed in terms of each other.
+As a matter of fact, primitives can certainly be expressed in terms of each other.
 Instead, we point out how the systems emphasise certain points of view by choosing different building blocks to express the same concepts.
 
+% we provide comparisons based on two aspects.
+% First, we compare the scope of the languages, as intended by the authors.
 
 
-\paragraph{Scope}
 
-The central objective of \TOP is to coordinate collaboration.
+
+\subsection{Collaboration}
+
+The central objective of tasks is to coordinate collaboration.
 Therefore it has combinators to express ways in which people can work together to reach a common goal.
 Tasks can be executed after each other, at the same time, or conditionally.
 This motivates the task combinators for steps, parallel combination, and choice.
 To employ these patterns of collaboration, users need to communicate.
 This motivates the different forms of communication: with the environment, along control flow, and across control flow.
-\TOPHAT is a language to specify workflows.
+Tasks are a way to model workflows.
+% \TOPHAT is a language to specify workflows.
 
-The central objective of \CSP is to model the patterns of behaviour of processes.
+The central objective of processes is to model patterns of their behaviour.
 These patterns of behaviour manifest themselves in sequences of actions that processes can engage in.
-\CSP is a language to specify synchronisation patterns.
+Actions can be events from the environment, or signals send internally between processes.
+Processes are a way to model synchronisation patterns.
 
-\begin{quote}
-\noindent In \TOP, communication is a means to an end. \\
-In \CSP, communication is the central matter of discourse.
-\end{quote}
+% \begin{quote}
+%   \noindent In \TOP, communication is a means to an end. \\
+%   In \CSP, communication is the central matter of discourse.
+% \end{quote}
 
 %%NOTE: Focus on what TOP is good at --TS
 % \CSP has a formal semantics that allows various kinds of correctness proofs, including equality of processes, and adherence to a specification.
 % This allows applications in program correctness, proofs of deadlock freedom, liveness, or verification of protocols.
 %
 % \TOP focuses less on formal correctness, and more on practical applicability.
-The big difference between \CSP and \TOP is the intended level of abstraction.
-While \CSP is used to explicitly model low-level details about communication, \TOPHAT wants to hide details and provide high-level communication mechanisms to the programmer.
+The big difference between processes and tasks is the intended level of abstraction.
+While processes are used to explicitly model low-level details about communication, tasks hide these details and provide high-level communication mechanisms to the programmer.
 It wants to be a calculus with intuitive semantics that facilitates communication between programmers and domain experts.
 Such programs are supposed to hide implementation details from domain experts while containing enough information to allow automatic generation of executable applications, including user interfaces.
 
@@ -58,10 +69,10 @@ Such programs are supposed to hide implementation details from domain experts wh
 
 \subsection{Communication}
 
-Both \TOP and \CSP have two sorts of communication: with the environment, and between subsystems.
-In both languages, communication with the \emph{environment} is input and output.
+Both tasks and processes have two sorts of communication: with the environment, and between subsystems.
+In both paradigms, communication with the \emph{environment} is input and output.
 They block evaluation of programs until the environment sends or receives events.
-In both languages, communication \emph{between subsystems} does not block.
+In both paradigms, communication \emph{between subsystems} does not block.
 They evaluate programs as far as possible until further external input is required.
 
 
@@ -70,7 +81,8 @@ They evaluate programs as far as possible until further external input is requir
 
 In \TOPHAT, communication with the environment is represented by editors.
 A task of the form $\Edit v$, where $v$ is of type $\tau$, can receive any change event with a value of type $\tau$ and additionally the special event $\Empty$ that empties the editor.
-The environment can always inspect the current value of an editor.
+There is no explicit communication of output,
+However, the environment can always inspect the current value of an editor.
 
 Editors have no notion of continuation.
 Their sole purpose is to interact with the environment, retaining the last value that has been sent to them.
@@ -79,23 +91,26 @@ They can be used for both input and output.
 The interpretation of whether an editor represents input or output is left to the reader.
 An empty editor is most commonly interpreted as a prompt to input data, while a filled editor can be seen either as outputting its value, or as an input that comes with a default value.
 
-In \CSP, communication with the environment is represented by prefixing.
-The process $(a \to P)$ can engage in action $a$, after which it continues as process $P$.
+Processes communicate with the environment by sending or receiving actions
+The \CSP process $(a \to P)$ can engage in action $a$, after which it continues as process $P$.
+% Prefixing has no direction of sending and receiving.
+Hoare uses the neutral phrase \emph{engaging in an action}.
+The interpretation of whether an action stands for input or output is left to the reader.
+For example, a vending machine $P = (\textit{coin} \to \textit{choc} \to P)$ is to be interpreted as taking a coin as input and producing chocolate as output.
 %%NOTE: Not that important I think, we don't use it in the rest of the text. --TS
 % In general, if $B$ is a set of events and $P(x)$ is an expression that evaluates to a process for each $x \in B$, the process $(x:B \to P(x))$ can engage in any one of the actions in $B$, after which it continues as the process determined by $P(x)$.
 % Hoare does not specify the language in which $P(x)$ is to be expressed.
 % He seems to permit any kind of mathematical formula, or any programming language.
-%
-Prefixing has no direction of sending and receiving.
-Hoare uses the neutral phrase \emph{engaging in an action}.
-The interpretation of whether an action stands for input or output is left to the reader.
-For example, a vending machine $P = (\textit{coin} \to \textit{choc} \to P)$ is to be interpreted as taking a coin as input and producing chocolate as output.
+
+The equivalent process in \ESTEREL is the reactive statement $\text{await} a; P$.
+Here, action $a$ is interpreted as an input.
+To emit an action, one can use $\text{emit} a$.
 
 Sending and receiving of values is modelled by giving additional structure to the names of actions.
 For example, an action name could be $\textit{in}.5$, which can be interpreted as inputting the value 5.
 %
-In \TOP, event values are typed to match the type of the receiving editor.
-In \CSP, action names are essentially strings, subject to implicit restrictions.
+In \TOP, input values are typed to match the type of the receiving editor.
+In \CSP and \ESTEREL, action names are essentially strings, subject to implicit restrictions.
 
 
 
@@ -104,18 +119,22 @@ In \CSP, action names are essentially strings, subject to implicit restrictions.
 This example demonstrates external communication and choice.
 The following \CSP program models a vending machine that dispenses a small biscuit for one coin and a large biscuit for two coins.
 \begin{equation*}
-  V = \textit{coin} \to (\textit{small} \to \text{STOP} \mid \textit{coin} \to \textit{large} \to \text{STOP})
+  V_\text{\CSP} = \textit{coin} \to (\textit{small} \to \text{STOP} \mid \textit{coin} \to \textit{large} \to \text{STOP})
+\end{equation*}
+An equivalent reactive system in \ESTEREL could be defined as\fixme{validate}
+\begin{equation*}
+  V_\text{\ESTEREL} = \text{await } \textit{coin}; ( \text{await } \textit{button}; \text{emit } \textit{small} \parallel \text{await } \textit{coin}; \text{await } \textit{button}; \text{emit } \textit{large})
 \end{equation*}
 
 A vending machine in \TOPHAT that is close in spirit to the one above looks as follows.
 \begin{TASK}
   enter Int >>? \n. if n == 1 then edit "small" else if n == 2 then edit "large" else fail
 \end{TASK}
-This machine does not exhibit exactly the same behaviour as the one in \CSP, nor is it intended to.
+This machine does not exhibit exactly the same behaviour as the ones in \CSP or \ESTEREL, nor is it intended to.
 Instead, it just demonstrates how the same choice
 %%NOTE: Problem is already stated --TS
 % of buying a small biscuit for one coin or a large biscuit for two coins
-can be expressed in \TOP.
+can be expressed in \TOPHAT.
 The task asks the user to enter an amount of money.
 This editor stands for a coin slot in a real machine that freely accepts and returns coins.
 There is a continue button that is initially disabled.
@@ -128,9 +147,9 @@ When the user presses the continue button, the machine dispenses either a large 
 
 \paragraph{Communication between subsystems}
 
-\TOP has two methods for internal communication, both different from its meth\-od for external communication.
+\TOPHAT has two methods for internal communication, both different from its method for external communication.
 The step combinator represents data flow that follows control flow, and shared data represents data flow across control flow.
-
+%
 The step combinators in $t \Then e$ and $t \Next e$ pass the value of $t$ to the continuation $e$.
 % The intuition about sequential composition is to first do one thing, and once it is done, do some other thing.
 % In \TOP, tasks never terminate.
@@ -140,10 +159,12 @@ Once it becomes unguarded, the task continues as $e\ v$, where $v$ is the value 
 The task $t \Next e$ requires an input event $\Continue$ in addition to the step being unguarded. % in order to step.
 % \CSP's semicolon is like an internal step $t \Then e$ in \TOP where $t$ uses $\Unit$ to signal when it is done, and $e$ never fails.
 
+\fixme{Add short intro on communication between non-sequential tasks.}
 Shared data sources are assignable references, whose changes in value are immediately visible to all tasks interested in them.
 The semantics of \TOPHAT requires all updates to shared data and all enabled internal steps to be processed before any further communication with the environment can take place.
 This introduces the possibility of diverging computations, where a cyclic dependency between shared data causes internal steps to be taken continuously without ever being able to engage in external communication.
 
+\fixme{What to do with this paragraph?}
 \CSP uses prefixing for both internal and external communication.
 Prefixing becomes internal by using \emph{concealment}.
 Processes must take any concealed steps as soon as possible, before any further communication with the environment can take place.
@@ -162,20 +183,18 @@ This introduces the possibility of diverging computations, that is processes whi
 
 
 
-\subsection{Multiprogramming}
+% \subsection{Multiprogramming}
 
-Both \TOP and \CSP are models of \emph{multiprogramming}, as opposed to \emph{multiprocessing}.
+\subsection{Concurrency}
+
+Both tasks and processes are models of \emph{multiprogramming}, as opposed to \emph{multiprocessing}.
 This means that one processor evaluates multiple programs in an interleaving fashion.
 % instead of multiple processors.
 Multiprogramming involves three aspects: concurrency, synchronisation, and nondeterminism.
 
-
-
-\paragraph{Concurrency}
-
 Concurrency is the source of parallelism: two things are done at the same time.
 %
-In \TOP, the parallel combinator $t_1 \And t_2$ stands for two independent tasks carried out at the same time.
+Using tasks $t_1$ and $t_2$, the parallel combination $t_1 \And t_2$ stands for two independent tasks carried out at the same time.
 For the system it does not matter if the tasks are executed by two people actually in parallel, or by one person who switches between the tasks.
 All events sent to the combined task are interleaved into a serial stream of inputs.
 The tasks are truly independent of each other, all interleavings are permitted.
@@ -193,7 +212,7 @@ Actions that occur in both alphabets are nondeterministically taken by either $P
 
 
 
-\paragraph{Synchronisation}
+\subsection{Synchronisation}
 
 Synchronisation means that an agent has to pause execution until some condition is met.
 The need for synchronisation arises quite naturally in countless variations in situations involving concurrency.
@@ -271,7 +290,7 @@ When the agent supplies two of the ingredients by setting the respective shares 
 
 
 
-\paragraph{Nondeterminism}
+\subsection{Nondeterminism}
 
 Nondeterminism means that a system can react to the same input in different ways, the choice of which can not be influenced by the environment.
 
@@ -286,7 +305,8 @@ A process with nondeterministic behaviour must always be regarded as a specifica
 Input events for parallel tasks are disambiguated, internal steps have a well-defined evaluation order, and internal choice is left-biased.
 
 
-\paragraph{Conclusion}
+
+\subsection{Recap}
 
 There are several concepts that exist in both languages, like concurrency, or sending values between concurrent agents.
 In \TOP however they are meant to be used on a higher level of abstraction, which allows concise declarative description of patterns of collaboration, without worrying about the implementation details of communication.
