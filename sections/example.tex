@@ -25,6 +25,21 @@ We also make use of string equality ($\equiv$), dereferencing ($!$), reference a
 For brevity, we omit the type annotations of variable bindings.
 
 
+\begin{figure}[b]
+  \includegraphics[width=0.8\columnwidth]{figures/flight-booking.png}
+  \caption{
+    Running web application of the flight booking example using a translation to \ITASKS.
+    It shows three users booking a flight simultaneously.
+    The first user entered name and age and continued picking seats.
+    The second is entering details of two passengers.
+    The ages are not filled in, therefore the \TS{Continue} button is disabled.
+    The third user finished a booking.
+    The first user can not pick seats \smallcaps{1b} and \smallcaps{1c} any more.
+    The message bubble shows that the \TS{age} field only accepts integer values.
+  }
+  \label{fig:flight-booking}
+\end{figure}
+
 
 \begin{example}[Flight booking]
 \label{exm:flight-booking}
@@ -86,20 +101,3 @@ It is not known upfront which task will finish first,
 and thus it is not possible to thread the free seat list between the parallel tasks.
 
 \end{example}
-
-
-
-\begin{figure}[h]
-  \includegraphics[width=0.8\columnwidth]{figures/flight-booking.png}
-  \caption{
-    Running web application of the flight booking example using a translation to \ITASKS.
-    It shows three users booking a flight simultaneously.
-    The first user entered name and age and continued picking seats.
-    The second is entering details of two passengers.
-    The ages are not filled in, therefore the \TS{Continue} button is disabled.
-    The third user finished a booking.
-    The first user can not pick seats \smallcaps{1b} and \smallcaps{1c} any more.
-    The message bubble shows that the \TS{age} field only accepts integer values.
-  }
-  \label{fig:flight-booking}
-\end{figure}
