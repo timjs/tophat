@@ -31,6 +31,15 @@
 \newmacro{type}[1]
   {\texttt{#1}}
 
+\newmacro{add}[1]
+  {\textcolor{green}{#1}}
+\newmacro{remove}[1]
+  {\textcolor{red}{#1}}
+\newmacro{change}[1]
+  {\textcolor{orange}{#1}}
+\newmacro{adjust}[2]
+  {\remove{#1} \add{#2}}
+
 \newenvironment{fadeout}
   {\color{gray}}
   {}
