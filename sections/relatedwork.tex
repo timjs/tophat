@@ -112,3 +112,14 @@ Chorus~\cite{chen2017chorus} is a visual programming environment for online
 collaboration apps. The goal of Chorus is to allow users to program their own
 application, though which a collective task can be coordinated. Users work on a
 preset data-type that drives the behavior of the user defined applications.
+
+
+\subsection{Functional Reactive Programming}
+
+Functional Reactive Programming (FRP) is a paradigm to describe graphs of values, called behaviors, that depend on each other and on external events.
+Behaviors can change over time, or triggered by events.
+When a behavior changes, all other behaviors that depend on it are updated automatically.
+
+There are some concepts that are similar in \TOP and FRP.
+The \emph{stepper} behavior is associated with an event and yields the value of the most recent event.
+This is similar to editors in \TOP.
