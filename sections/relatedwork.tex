@@ -265,3 +265,16 @@ The \emph{stepper} behavior for example is associated with an event and yields t
 This is similar to editors in \TOP.
 Furthermore, both systems can be used to declaratively program user interfaces, albeit in FRP the programmer has to construct the GUI elements manually, and connect inputs and outputs to the correct events and behaviors.
 In \TOP graphical user interfaces are automatically derived.
+
+
+\subsection{Session types}
+
+Session types are a type discipline that can be used to check whether communicating programs conform to a certain protocol.
+Session types are expressions in some process calculus that describe the input/output behavior of such programs.
+Session types are useful for programming languages where modules communicate with each other via messages, like CSP, $\pi$-calculus, or Go, to name a few.
+The only form of messages in \TOP are input events which drive execution, but modules do not communicate using messages.
+Therefore, session types are not applicable to \TOP in the sense used in the literature.
+
+Formal reasoning about \TOP programs is one of our future goals for \TOPHAT.
+The ideas and techniques of session types could be useful for specifying that a list of inputs of a certain form leads to desired task values.
+The details are a topic for future work.
