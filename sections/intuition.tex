@@ -12,7 +12,7 @@ This section gives an overview of the core concepts of tasks in task oriented pr
 \subsection{Tasks model real world collaborations between people and machines}
 
 The central objective of tasks is to \emph{coordinate collaboration}.
-Therefore it has combinators to express ways in which people can work together to reach a common goal.
+Therefore \TOPHAT has combinators to express ways in which people can work together to reach a common goal.
 Tasks can be executed after each other, at the same time, or conditionally.
 This motivates the task combinators for steps, parallel combination, and choice.
 One can say that tasks are a way to model \emph{workflows}.
@@ -41,7 +41,7 @@ Gives rise to communication with the environment.
 
 In \TOPHAT, communication with the environment is represented by editors.
 A task of the form $\Edit v$, where $v$ is of type $\tau$, can receive any change event with a value of type $\tau$ and additionally the special event $\Empty$ that empties the editor.
-There is no explicit communication of output.
+There are no output events, instead the environment can always inspect a task's value.
 % However, the environment can always inspect the current value of an editor.
 
 Editors have no notion of continuation.
@@ -55,7 +55,7 @@ An empty editor is most commonly interpreted as a prompt to input data, while a 
 \begin{example}[Vending machine]
 
 This example demonstrates external communication and choice.
-The following \CSP program models a vending machine that dispenses a small biscuit for one coin and a large biscuit for two coins.
+The following \CSP program models a vending machine that dispenses a small biscuit for one coin and a large biscuit for two coins. \todo{remove CSP?}
 \begin{equation*}
   \textit{coin} \to (\textit{small} \to \text{STOP} \mid \textit{coin} \to \textit{large} \to \text{STOP})
 \end{equation*}
@@ -92,7 +92,7 @@ Because every task has an observable value of a specified type,
 it is always possible to generate a (graphical) user interface from a \TOPHAT specification.
 %NOTE: depends on: editors
 The structure of the specification prescribes the structure of the \UI and possible input events.
-Editors form the leaves of such trees.
+Editors form the leaves of such trees \todo{which trees?}.
 
 
 
@@ -101,7 +101,7 @@ Editors form the leaves of such trees.
 %NOTE: depends on: editors
 As users can continuously update editors, tasks never terminate.
 
-The decision to move on to the next task is not performed by the task itself.
+The decision to move on to the next task is not taken by the task itself.
 It is based on a calculation to determine the next tasks.
 The step combinators in $t \Then e$ and $t \Next e$ pass the value of $t$ to the continuation $e$.
 They both act like $t$ as long as the step is guarded.
@@ -124,8 +124,6 @@ Shared data represents data flow \emph{across} control flow.
 Shared data sources are assignable references, whose changes in value are immediately visible to all tasks interested in them.
 The semantics of \TOPHAT requires all updates to shared data and all enabled internal steps to be processed before any further communication with the environment can take place.
 
-\fixme{?}
-This introduces the possibility of diverging computations, where a cyclic dependency between shared data causes internal steps to be taken continuously without ever being able to engage in external communication.
 
 \begin{example}[Cigarette smokers]
 
@@ -202,7 +200,7 @@ Input events for parallel tasks are disambiguated, internal steps have a well-de
 
 \subsection{Recap}
 
-While tasks are focussed on collaboration, they give rise to concepts like communication, concurrency and synchronisation.
+The focus on collaboration gives rise to concepts like communication, concurrency and synchronisation.
 Using tasks, however, they are meant to be used on a higher level of abstraction, which allows concise declarative description of patterns of collaboration, without worrying about the implementation details of communication.
 By focussing on collaboration, tasks and \TOPHAT lead to high-level specifications closer to real-world workflows which, at the same time, can be used to generate distributive, multi-user applications to support such workflows.
 
