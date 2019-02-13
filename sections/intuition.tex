@@ -1,0 +1,208 @@
+% !TEX root=../icfp2019.tex
+
+
+
+\section{Intuition}
+\label{sec:intuition}
+
+This section gives an overview of the core concepts of tasks in task oriented programming (\TOP).
+
+
+
+\subsection{Tasks model real world collaborations between people and machines}
+
+The central objective of tasks is to \emph{coordinate collaboration}.
+Therefore it has combinators to express ways in which people can work together to reach a common goal.
+Tasks can be executed after each other, at the same time, or conditionally.
+This motivates the task combinators for steps, parallel combination, and choice.
+One can say that tasks are a way to model \emph{workflows}.
+% \TOPHAT is a language to specify workflows.
+
+
+
+\subsection{Tasks are reusable}
+
+\fixme{Extend}
+Tasks are modular and composable,
+can be abstracted over zero or more arguments,
+arguments could themselves be tasks,
+thus we have higher order workflows.
+
+
+
+\subsection{Tasks are driven by user input}
+
+\fixme{Extend}
+Tasks process input events from users.
+Sensors are also regarded as users.
+Gives rise to communication with the environment.
+
+In \TOPHAT, communication with the environment is represented by editors.
+A task of the form $\Edit v$, where $v$ is of type $\tau$, can receive any change event with a value of type $\tau$ and additionally the special event $\Empty$ that empties the editor.
+There is no explicit communication of output.
+% However, the environment can always inspect the current value of an editor.
+
+Editors have no notion of continuation.
+Their sole purpose is to interact with the environment, retaining the last value that has been sent to them.
+%
+They can be used for both input and output.
+The interpretation of whether an editor represents input or output is left to the reader.
+An empty editor is most commonly interpreted as a prompt to input data, while a filled editor can be seen either as outputting its value, or as an input that comes with a default value.
+
+
+\begin{example}[Vending machine]
+
+This example demonstrates external communication and choice.
+The following \CSP program models a vending machine that dispenses a small biscuit for one coin and a large biscuit for two coins.
+\begin{equation*}
+  \textit{coin} \to (\textit{small} \to \text{STOP} \mid \textit{coin} \to \textit{large} \to \text{STOP})
+\end{equation*}
+% An equivalent reactive system in \ESTEREL could be defined as\fixme{validate}
+% \begin{equation*}
+  % V_\text{\ESTEREL} = \text{await } \textit{coin}; ( \text{await } \textit{button}; \text{emit } \textit{small} \parallel \text{await } \textit{coin}; \text{await } \textit{button}; \text{emit } \textit{large})
+% \end{equation*}
+
+A vending machine in \TOPHAT that is close in spirit to the one above looks as follows.
+\begin{TASK}
+  enter Int >>? \n. if n == 1 then edit "small" else if n == 2 then edit "large" else fail
+\end{TASK}
+This machine does not exhibit exactly the same behaviour as the ones in \CSP, nor is it intended to.
+Instead, it just demonstrates how the same choice
+%%NOTE: Problem is already stated --TS
+% of buying a small biscuit for one coin or a large biscuit for two coins
+can be expressed in \TOPHAT.
+The task asks the user to enter an amount of money.
+This editor stands for a coin slot in a real machine that freely accepts and returns coins.
+There is a continue button that is initially disabled.
+When the user has inserted exactly 1 or 2 coins, the continue button becomes enabled.
+When the user presses the continue button, the machine dispenses either a large or a small biscuit, depending on the amount of money.
+
+\end{example}
+
+
+
+\subsection{Tasks can be observed for their current status at all time}
+
+\fixme{Extend}
+The value of a task can be present or not.
+
+Because every task has an observable value of a specified type,
+it is always possible to generate a (graphical) user interface from a \TOPHAT specification.
+%NOTE: depends on: editors
+The structure of the specification prescribes the structure of the \UI and possible input events.
+Editors form the leaves of such trees.
+
+
+
+\subsection{Tasks are never done}
+
+%NOTE: depends on: editors
+As users can continuously update editors, tasks never terminate.
+
+The decision to move on to the next task is not performed by the task itself.
+It is based on a calculation to determine the next tasks.
+The step combinators in $t \Then e$ and $t \Next e$ pass the value of $t$ to the continuation $e$.
+They both act like $t$ as long as the step is guarded.
+Once it becomes unguarded, the task continues as $e\ v$, where $v$ is the observed value of $t$.
+% The continuation $e$ is a function which calculates the next task or $\Fail$, signalling no continuation is present.
+The task $t \Next e$ requires an input event $\Continue$ in addition to the step being unguarded. % in order to step.
+
+The step combinators give rise to a method of internal communication.
+They represent data flow that \emph{follows} control flow.
+
+% The intuition about sequential composition is to first do one thing, and once it is done, do some other thing.
+% The notion of sequential composition exists in two forms: the external and the internal step.
+
+
+
+\subsection{Tasks can share information}
+
+Second method of internal communication between tasks is shared data.
+Shared data represents data flow \emph{across} control flow.
+Shared data sources are assignable references, whose changes in value are immediately visible to all tasks interested in them.
+The semantics of \TOPHAT requires all updates to shared data and all enabled internal steps to be processed before any further communication with the environment can take place.
+
+\fixme{?}
+This introduces the possibility of diverging computations, where a cyclic dependency between shared data causes internal steps to be taken continuously without ever being able to engage in external communication.
+
+\begin{example}[Cigarette smokers]
+
+The cigarette smokers problem \cite{books/Downey08LBOS} is a surprisingly tricky synchronisation problem.
+We study it here because it demonstrates the capabilities of guarded steps.
+% The problem requires waiting for two conditions, waking up only if both conditions are satisfied.
+The problem is stated as follows.
+In order to smoke a cigarette, three ingredients are required: tobacco, paper, and a match.
+There are three smokers, each having one of the ingredients and requiring the other two.
+There is an agent that randomly provides two of the ingredients.
+
+Downey models availability of the ingredients using a semaphore for each ingredient.
+The agent randomly signals two of the three semaphores.
+% The problem asks writing code for the smokers so that the smoker who requires the two signalled semaphores wakes up and proceeds with smoking.
+%
+% A naïve attempt where each smoker first waits for one and then the other semaphore can lead to deadlock.
+% The following pseudo-code is a non-solution.
+% Let \emph{paper}, \emph{tobacco} and \emph{match} be semaphores, initialised to 0.
+% \begin{TASK}
+%   tobaccoSmoker = wait(match); wait(paper); smoke();
+%   paperSmoker = wait(tobacco); wait(match); smoke();
+%   matchSmoker = wait(tobacco); wait(paper); smoke();
+% \end{TASK}
+% To see what can go wrong, imagine the three smokers running in parallel.
+% Let the agent signal the two semaphores \emph{tobacco} and \emph{paper}.
+% One of \emph{paperSmoker} and \emph{matchSmoker} can take their first step, but if \emph{paperSmoker} takes the step, the system deadlocks.
+%
+The solution proposed by Downey involves an additional mutex, three additional semaphores, three additional threads called \emph{pushers}, and three regular Boolean variables.
+The job of the pushers is to record availability of their ingredient in their Boolean variable, and check availability of other resources, waking the correct smoker when appropriate.
+
+The details of the solution are not important here.
+What is important is that the implementation of what is essentially waiting for two semaphores requires a substantial amount of additional synchronisation, together with non-trivial conditional statements.
+
+% A similar effort as in Downey's solution must be made in order to solve the problem using synchronised actions in \CSP.
+% This is because in \CSP, processes can only synchronise on one action at a time.
+
+\TOPHAT allows a simple solution to this problem, using guarded steps.
+Steps can be guarded with arbitrary expressions, and the parallel combinator can be used to watch two shared editors ($\Update$) at the same time.
+Let \TS{match}, \TS{paper}, and \TS{tobacco} be references to Booleans.
+The smokers are defined as follows.
+\begin{TASK}
+  let continue = \<<x,y>>. if x /\ y then smoke else fail in
+  let tobaccoSmoker = (update match <&> update paper) >>? continue in
+  let paperSmoker = (update tobacco <&> update match) >>? continue in
+  let matchSmoker = (update tobacco <&> update paper) >>? continue
+\end{TASK}
+When the agent supplies two of the ingredients by setting the respective shares to \TS{True}, only the step of the smoker that waits for those becomes enabled.
+
+\end{example}
+
+
+
+\subsection{Tasks are predictable}
+
+
+Concurrency is the source of parallelism: two things are done at the same time.
+%
+Using tasks $t_1$ and $t_2$, the parallel combination $t_1 \And t_2$ stands for two independent tasks carried out at the same time.
+For the system it does not matter if the tasks are executed by two people actually in parallel, or by one person who switches between the tasks.
+All inputs sent to the combined task are interleaved into a serial stream of inputs.
+The tasks are truly independent of each other, all interleavings are permitted.
+Inputs to $t_1$ and $t_2$ must be prefixed by $\First$(irst) and $\Second$(econd) respectively.
+This unambiguously renames the inputs, removing any source of nondeterminism.
+
+The basic method for synchronisation in \TOP is built into the step combinator.
+The task $t \Next e$ can only continue execution when two conditions are met:
+Task $t$ must have a value $v$, and $e\ v$ must not evaluate to $\Fail$.
+Programmers can encode arbitrary conditions in $e\ v$, which are evaluated atomically between interaction steps.
+This allows a variety of synchronisation problems to be solved in an intuitive and straight-forward manner.
+
+\TOPHAT is meant solely for implementation and does not have any form of nondeterminism.
+Input events for parallel tasks are disambiguated, internal steps have a well-defined evaluation order, and internal choice is left-biased.
+
+
+\subsection{Recap}
+
+While tasks are focussed on collaboration, they give rise to concepts like communication, concurrency and synchronisation.
+Using tasks, however, they are meant to be used on a higher level of abstraction, which allows concise declarative description of patterns of collaboration, without worrying about the implementation details of communication.
+By focussing on collaboration, tasks and \TOPHAT lead to high-level specifications closer to real-world workflows which, at the same time, can be used to generate distributive, multi-user applications to support such workflows.
+
+To employ these patterns of collaboration, users need to communicate.
+This motivates different forms of communication: with the environment, along control flow, and across control flow.
