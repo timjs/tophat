@@ -128,7 +128,8 @@ The idea of FRP was pioneered by \citet{conf/icfp/ElliottH97}, in the meantime t
 FRP and \TOP are different systems that have different goals in mind.
 Whereas FRP expresses automatically updating data dependencies, \TOP expresses collaboration patterns.
 \TOP has no notion of time.
-Tasks can not change over time, while behaviours can.
+Tasks can not change spontaneous over time, while behaviours can.
+Only input events can change task values.
 The biggest conceptual difference between a workflow in \TOP and a data network in FRP is that an event to a task only causes updates up until the next step, while an event in FRP propagates through the whole network.
 
 That being said, there are some concepts that are similar in \TOP and FRP.
