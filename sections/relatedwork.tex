@@ -122,6 +122,8 @@ They block evaluation of programs until the environment sends or receives events
 In both paradigms, communication \emph{between subsystems} does not block.
 They evaluate programs as far as possible until further external input is required.
 
+% \paragraph{Communication with the environment}
+
 Processes communicate with the environment by sending or receiving actions
 The \CSP process $(a \to P)$ can engage in action $a$, after which it continues as process $P$.
 % Prefixing has no direction of sending and receiving.
@@ -139,11 +141,8 @@ For example, an action name could be $\textit{in}.5$, which can be interpreted a
 In \TOP, input values are typed to match the type of the receiving editor.
 In \CSP action names are essentially strings, subject to implicit restrictions.
 
+% \paragraph{Communication between subsystems}
 
-
-\paragraph{Communication between subsystems}
-
-%
 % \CSP's semicolon is like an internal step $t \Then e$ in \TOP where $t$ uses $\Unit$ to signal when it is done, and $e$ never fails.
 \CSP uses prefixing for both internal and external communication.
 Prefixing becomes internal by using \emph{concealment}.
