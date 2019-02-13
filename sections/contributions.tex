@@ -2,7 +2,7 @@
 
 
 
-% \paragraph{Contributions}
+\subsection{Contributions}
 
 In this paper, we set out to develop a formal basis for \TOP, called \TOPHAT (TopHat).
 Our goal is to specify the basic building blocks of declarative workflows.
@@ -25,3 +25,19 @@ to gain confidence for our system and check practical applicability.
 Furthermore we compare \TOPHAT  with the process algebra \CSP, to show how their concepts, like communication, and sequential and parallel composition, relate.
 We show that, where process algebras focus on the \emph{coordination} of processes and the \emph{communication} between them,
 \TOP, and therefore \TOPHAT, focus on supporting \emph{tasks} and model ways to \emph{collaborate} on them.
+
+
+
+\begin{itemize*}
+  \item A calculus to model workflows, which can be used in a modular way and are driven by user inputs.\\
+  \item Embed this calculus in a simply typed $\lambda$-calculus.\\
+  \item Its operational semantics, presented and defined in a layered way.\\
+  \item Semantic observations on the calculus which can be used to:\\
+  \begin{itemize*}
+    \item calculate stuck configurations,\\
+    \item associate a value with a task,\\
+    \item draw a user interface (\UI) for a task,\\
+    \item calculate input possibilities for the user.\\
+  \end{itemize*}
+  \item A clear separation between \TOP principles and general purpose programming constructs.\\
+\end{itemize*}
