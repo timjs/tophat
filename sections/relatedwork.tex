@@ -10,7 +10,7 @@
 \paragraph{iTasks}
 
 As mentioned earlier, iTasks is an implementation of \TOP. iTasks has many
-features, and its basic combinators are versatile and powerful.vSimpler
+features, and its basic combinators are versatile and powerful. Simpler
 combinators are implemented by restricting the powerful ones. This is useful for
 everyday programming, where having lots of functionality at one's fingertips is
 convenient and efficient.
@@ -39,42 +39,58 @@ provide a formal semantics, which makes formal reasoning difficult.
 % mTasks is another implementation of TOP, designed for coordination of IoT devices. \alert{cite MSc Lubbers}
 % mTasks has been used in a demonstrator for home automation. \alert{cite MSc Andrade}
 
+
+\subsection{Worfklow modeling}
+
+Much research has been done into workflow modeling. These works focus on
+describing the collaboration between subsystems, rather than the communication
+between them.
+The systems described here follow a \emph{boxes and arrows} model of specifying workflows.
+Control flow, represented by arrows, usually can go unrestricted from anywhere to anywhere else in a workflow.
+We see \TOP as the functional programming of workflows, as opposed to this GOTO style.
+
+
 \paragraph{Workflow patterns}
 
-Much research has been done into workflow patterns. They are regarded as special
-kind of the design patterns in software engineering. They identify recurring patterns
-in workflow systems, much like the combinators defined by \TOPHAT. Work by
-Van der Aalst~\cite{journals/dpd/AalstHKB03} defines a comprehensive list of
-these pattens, and examines their availability in industry workflow software.
+Workflow patterns are regarded as special kind of the design patterns in
+software engineering. They identify recurring patterns in workflow systems, much
+like the combinators defined by \TOPHAT. Work by Van der
+Aalst~\cite{journals/dpd/AalstHKB03} defines a comprehensive list of these
+pattens, and examines their availability in industry workflow software.
 Workflow patterns are usually described in terms of control flow graphs, and no
 formal specification is given, which makes comparison and formal reasoning more
 difficult.
 
-\paragraph{Petri net}
+\paragraph{Workflow nets}
 
-Petri nets, and more specifically Workflow nets, have also been used to describe
-workflows~\cite{journals/jcsc/Aalst98}. They allow for the modelling and
-analysis of business processes. A downside of using workflow nets is that the
-model is not directly implementable, which is possible with the \TOPHAT calculus.
+Workflow nets~\cite{journals/jcsc/Aalst98} allow for the modeling and analysis
+of business processes. They are graphical in nature, and clearly display how
+every component is related to each other. A downside of Workflow nets is that
+they do not facilitate higher order constructs and that they are often not
+directly executable.
+
+\paragraph{YAWL}
+
+This is not always the case however. A language based on workflow nets that is
+actually directly executable is YAWL by van der
+Aalst~\cite{DBLP:journals/is/AalstH05}. It facilitates modeling and execution of
+dynamic workflows, with support for AND, OR and XOR workflow patterns. As
+mentioned, YAWL programs consist of Workflow Nets, and are therefore programmed
+visually.
+
+\paragraph{BPEL}
+
+BPEL~\cite{bpel} is another popular business process language. The standardized
+language allows for the specification of actions within business processes,
+using an XML format. Processes specified in BEPL are executable, just like YAWL.
 
 
-% NEW RELATED WORK sections
-
-\paragraph{Business process modeling}
-
-A plethora of languages exists to describe, model, display and execute these
-processes. YAWL by van der Aalst~\cite{DBLP:journals/is/AalstH05} is one of
-these languages. It facilitates modeling and execution of dynamic workflows,
-with support for AND, OR and XOR workflow patterns. YAWL programs consist of
-Nets, and are therefore programmed visually. BPEL\todo{cite} is another popular business process language.
-The standardized language allows for the specification of actions within
-business processes, using an XML format. Processes specified in BEPL are
-executable, just like YAWL.
+\subsection{Related web services}
 
 
 \paragraph{IFTTT}
 
-If This Then That (IFTTT)\todo{cite} is a web service that allows users to write and
+If This Then That (IFTTT)~\cite{IFTTT} is a web service that allows users to write and
 configure simple conditional statements called applets, that can interact with
 web services and IoT devices. These applets can be seen as tiny workflows, that
 facilitate collaboration between different services and platforms. The
@@ -83,7 +99,7 @@ collaborating.
 
 \paragraph{Google forms \& Wufoo}
 
-Google forms\todo{cite} and Wufoo\todo{cite} are web based survey administration apps that allows
+Google forms~\cite{googleforms} and Wufoo~\cite{wufoo} are web based survey administration apps that allows
 users to compose forms and gather data from them. They are comparable to TOP and
 iTasks in that they provide an easy way for users to construct forms on the web.
 However, Google forms and Wufoo do not allow users to define what the system
@@ -96,3 +112,14 @@ Chorus~\cite{chen2017chorus} is a visual programming environment for online
 collaboration apps. The goal of Chorus is to allow users to program their own
 application, though which a collective task can be coordinated. Users work on a
 preset data-type that drives the behavior of the user defined applications.
+
+
+\subsection{Functional Reactive Programming}
+
+Functional Reactive Programming (FRP) is a paradigm to describe graphs of values, called behaviors, that depend on each other and on external events.
+Behaviors can change over time, or triggered by events.
+When a behavior changes, all other behaviors that depend on it are updated automatically.
+
+There are some concepts that are similar in \TOP and FRP.
+The \emph{stepper} behavior is associated with an event and yields the value of the most recent event.
+This is similar to editors in \TOP.
