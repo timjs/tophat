@@ -35,7 +35,7 @@ A simple higher-order task which performs a task twice can be specified as follo
   let twice : Task $\tau$ -> Task $\tau$ = \t : Task $\tau$.
     t >>? \x : $\tau$. t
 \end{TASK}
-By using the step combinator $\When$ we specify that the given task \TS{t} should be performed a second time.
+By using the step combinator $\Next$ we specify that the given task \TS{t} should be performed a second time.
 The result \TS{x} from the first run is ignored.
 
 \end{example}
