@@ -64,31 +64,32 @@ An empty editor is most commonly interpreted as a prompt to input data, while a 
 
 \begin{example}[Vending machine]
 
-This example demonstrates external communication and choice.
-The following \CSP program models a vending machine that dispenses a small biscuit for one coin and a large biscuit for two coins. \todo{remove CSP?}
-\begin{equation*}
-  \textit{coin} \to (\textit{small} \to \text{STOP} \mid \textit{coin} \to \textit{large} \to \text{STOP})
-\end{equation*}
-% An equivalent reactive system in \ESTEREL could be defined as\fixme{validate}
+% The following \CSP program models a vending machine that dispenses a small biscuit for one coin and a large biscuit for two coins. \todo{remove CSP?}
 % \begin{equation*}
-  % V_\text{\ESTEREL} = \text{await } \textit{coin}; ( \text{await } \textit{button}; \text{emit } \textit{small} \parallel \text{await } \textit{coin}; \text{await } \textit{button}; \text{emit } \textit{large})
+%   \textit{coin} \to (\textit{small} \to \text{STOP} \mid \textit{coin} \to \textit{large} \to \text{STOP})
 % \end{equation*}
+% % An equivalent reactive system in \ESTEREL could be defined as\fixme{validate}
+% % \begin{equation*}
+%   % V_\text{\ESTEREL} = \text{await } \textit{coin}; ( \text{await } \textit{button}; \text{emit } \textit{small} \parallel \text{await } \textit{coin}; \text{await } \textit{button}; \text{emit } \textit{large})
+% % \end{equation*}
+% A vending machine in \TOPHAT that is close in spirit to the one above looks as follows.
 
-A vending machine in \TOPHAT that is close in spirit to the one above looks as follows.
+This example demonstrates external communication and choice.
+A vending machine in \TOPHAT that dispenses a small biscuit for one coin and a large biscuit for two coins can be specified as follows
 \begin{TASK}
-  enter Int >>? \n. if n == 1 then edit "small" else if n == 2 then edit "large" else fail
+  let vend : Task String = enter Int >>? \n. if n == 1 then edit "small" else if n == 2 then edit "large" else fail
 \end{TASK}
-This machine does not exhibit exactly the same behaviour as the ones in \CSP, nor is it intended to.
-Instead, it just demonstrates how the same choice
-%%NOTE: Problem is already stated --TS
-% of buying a small biscuit for one coin or a large biscuit for two coins
-can be expressed in \TOPHAT.
 The task asks the user to enter an amount of money.
 This editor stands for a coin slot in a real machine that freely accepts and returns coins.
 There is a continue button that is initially disabled.
 When the user has inserted exactly 1 or 2 coins, the continue button becomes enabled.
 When the user presses the continue button, the machine dispenses either a large or a small biscuit, depending on the amount of money.
 
+% This machine does not exhibit exactly the same behaviour as the ones in \CSP, nor is it intended to.
+% Instead, it just demonstrates how the same choice
+%%NOTE: Problem is already stated --TS
+% of buying a small biscuit for one coin or a large biscuit for two coins
+% can be expressed in \TOPHAT.
 \end{example}
 
 
