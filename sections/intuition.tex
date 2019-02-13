@@ -28,7 +28,17 @@ can be abstracted over zero or more arguments,
 arguments could themselves be tasks,
 thus we have higher order workflows.
 
-\fixme{Add example about higher order tasks}
+\begin{example}[Twice]
+
+A simple higher-order task which performs a task twice can be specified as follows.
+\begin{TASK}
+  let twice : Task $\tau$ -> Task $\tau$ = \t : Task $\tau$.
+    t >>? \x : $\tau$. t
+\end{TASK}
+By using the step combinator $\When$ we specify that the given task \TS{t} should be performed a second time.
+The result \TS{x} from the first run is ignored.
+
+\end{example}
 
 
 
