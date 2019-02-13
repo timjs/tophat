@@ -117,10 +117,10 @@ preset data-type that drives the behavior of the user defined applications.
 \subsection{Functional Reactive Programming}
 
 Functional Reactive Programming (FRP) is a paradigm to describe dynamic changes of values in a declarative way.
-This is done by specifying networks of values, called behaviors, that can depend on each other and on external events.
-Behaviors can change over time, or triggered by events.
-When a behavior changes, all other behaviors that depend on it are updated automatically.
-The underlying implementation that takes care of the updating usually can tie input devices, like mouse and keyboard, to event streams and behaviors to output facilities, like text fields.
+This is done by specifying networks of values, called behaviours, that can depend on each other and on external events.
+Behaviours can change over time, or triggered by events.
+When a behaviour changes, all other behaviours that depend on it are updated automatically.
+The underlying implementation that takes care of the updating usually can tie input devices, like mouse and keyboard, to event streams and behaviours to output facilities, like text fields.
 This allows for declarative specifications of applications with user interfaces.
 
 The idea of FRP was pioneered by \citet{conf/icfp/ElliottH97}, in the meantime there are many variants and implementations, with reactive-banana one of the most well-known \cite{reactive-banana}.
@@ -128,20 +128,20 @@ The idea of FRP was pioneered by \citet{conf/icfp/ElliottH97}, in the meantime t
 FRP and \TOP are different systems that have different goals in mind.
 Whereas FRP expresses automatically updating data dependencies, \TOP expresses collaboration patterns.
 \TOP has no notion of time.
-Tasks can not change over time, while behaviors can.
+Tasks can not change over time, while behaviours can.
 The biggest conceptual difference between a workflow in \TOP and a data network in FRP is that an event to a task only causes updates up until the next step, while an event in FRP propagates through the whole network.
 
 That being said, there are some concepts that are similar in \TOP and FRP.
-The \emph{stepper} behavior for example is associated with an event and yields the value of the most recent event.
+The \emph{stepper} behaviour, for example, is associated with an event and yields the value of the most recent event.
 This is similar to editors in \TOP.
-Furthermore, both systems can be used to declaratively program user interfaces, albeit in FRP the programmer has to construct the GUI elements manually, and connect inputs and outputs to the correct events and behaviors.
+Furthermore, both systems can be used to declaratively program user interfaces, albeit in FRP the programmer has to construct the GUI elements manually, and connect inputs and outputs to the correct events and behaviours.
 In \TOP graphical user interfaces are automatically derived.
 
 
 \subsection{Session types}
 
 Session types are a type discipline that can be used to check whether communicating programs conform to a certain protocol.
-Session types are expressions in some process calculus that describe the input/output behavior of such programs.
+Session types are expressions in some process calculus that describe the input/output behaviour of such programs.
 Session types are useful for programming languages where modules communicate with each other via messages, like CSP, $\pi$-calculus, or Go, to name a few.
 The only form of messages in \TOP are input events which drive execution, but modules do not communicate using messages.
 Therefore, session types are not applicable to \TOP in the sense used in the literature.
