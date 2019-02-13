@@ -40,49 +40,49 @@ provide a formal semantics, which makes formal reasoning difficult.
 % mTasks has been used in a demonstrator for home automation. \alert{cite MSc Andrade}
 
 
-\subsection{Worfklow modeling}
+\subsection{Worfklow modelling}
 
-Much research has been done into workflow modeling. These works focus on
+Much research has been done into workflow modelling. These works focus on
 describing the collaboration between subsystems, rather than the communication
 between them.
 The systems described here follow a \emph{boxes and arrows} model of specifying workflows.
 Control flow, represented by arrows, usually can go unrestricted from anywhere to anywhere else in a workflow.
-We see \TOP as the functional programming of workflows, as opposed to this GOTO style.
+We see \TOP as the functional programming of workflows, as opposed to this \emph{goto}-style.
 
 
 \paragraph{Workflow patterns}
 
 Workflow patterns are regarded as special kind of the design patterns in
 software engineering. They identify recurring patterns in workflow systems, much
-like the combinators defined by \TOPHAT. Work by Van der
-Aalst~\cite{journals/dpd/AalstHKB03} defines a comprehensive list of these
+like the combinators defined by \TOPHAT. Work by \citet{journals/dpd/AalstHKB03}
+defines a comprehensive list of these
 pattens, and examines their availability in industry workflow software.
 Workflow patterns are usually described in terms of control flow graphs, and no
 formal specification is given, which makes comparison and formal reasoning more
 difficult.
 
-\paragraph{Workflow nets}
+\paragraph{Workflow Nets}
 
-Workflow nets~\cite{journals/jcsc/Aalst98} allow for the modeling and analysis
+Workflow Nets~(\WFN)\cite{journals/jcsc/Aalst98} allow for the modelling and analysis
 of business processes. They are graphical in nature, and clearly display how
-every component is related to each other. A downside of Workflow nets is that
+every component is related to each other. A downside of \WFN is that
 they do not facilitate higher order constructs and that they are often not
 directly executable.
 
 \paragraph{YAWL}
 
-This is not always the case however. A language based on workflow nets that is
-actually directly executable is YAWL by van der
-Aalst~\cite{DBLP:journals/is/AalstH05}. It facilitates modeling and execution of
-dynamic workflows, with support for AND, OR and XOR workflow patterns. As
-mentioned, YAWL programs consist of Workflow Nets, and are therefore programmed
+This is not always the case however. A language based on \WFN that is
+actually directly executable is \YAWL by \citet{DBLP:journals/is/AalstH05}.
+It facilitates modelling and execution of
+dynamic workflows, with support for \emph{and}, \emph{or} and \emph{xor} workflow patterns. As
+mentioned, \YAWL programs consist of \WFN, and are therefore programmed
 visually.
 
 \paragraph{BPEL}
 
-BPEL~\cite{bpel} is another popular business process language. The standardized
+\BPEL~\cite{bpel} is another popular business process language. The standardised
 language allows for the specification of actions within business processes,
-using an XML format. Processes specified in BEPL are executable, just like YAWL.
+using an \XML format. Processes specified in \BPEL are executable, just like \YAWL.
 
 
 \subsection{Related web services}
@@ -90,7 +90,7 @@ using an XML format. Processes specified in BEPL are executable, just like YAWL.
 
 \paragraph{IFTTT}
 
-If This Then That (IFTTT)~\cite{IFTTT} is a web service that allows users to write and
+If This Then That (\IFTTT)~\cite{IFTTT} is a web service that allows users to write and
 configure simple conditional statements called applets, that can interact with
 web services and IoT devices. These applets can be seen as tiny workflows, that
 facilitate collaboration between different services and platforms. The
@@ -99,43 +99,43 @@ collaborating.
 
 \paragraph{Google forms \& Wufoo}
 
-Google forms~\cite{googleforms} and Wufoo~\cite{wufoo} are web based survey administration apps that allows
-users to compose forms and gather data from them. They are comparable to TOP and
+Google Forms~\cite{googleforms} and Wufoo~\cite{wufoo} are web based survey administration apps that allows
+users to compose forms and gather data from them. They are comparable to \TOP and
 iTasks in that they provide an easy way for users to construct forms on the web.
-However, Google forms and Wufoo do not allow users to define what the system
+However, Google Forms and Wufoo do not allow users to define what the system
 then should do with this information, and can therefore not be regarded as a
-workflow or business process modeling systems.
+workflow or business process modelling systems.
 
 \paragraph{Chorus} % (http://www.chorus-home.org/)
 
 Chorus~\cite{chen2017chorus} is a visual programming environment for online
 collaboration apps. The goal of Chorus is to allow users to program their own
 application, though which a collective task can be coordinated. Users work on a
-preset data-type that drives the behavior of the user defined applications.
+preset data-type that drives the behaviour of the user defined applications.
 
 
 \subsection{Functional Reactive Programming}
 
-Functional Reactive Programming (FRP) is a paradigm to describe dynamic changes of values in a declarative way.
+Functional Reactive Programming (\FRP) is a paradigm to describe dynamic changes of values in a declarative way.
 This is done by specifying networks of values, called behaviours, that can depend on each other and on external events.
 Behaviours can change over time, or triggered by events.
 When a behaviour changes, all other behaviours that depend on it are updated automatically.
 The underlying implementation that takes care of the updating usually can tie input devices, like mouse and keyboard, to event streams and behaviours to output facilities, like text fields.
 This allows for declarative specifications of applications with user interfaces.
 
-The idea of FRP was pioneered by \citet{conf/icfp/ElliottH97}, in the meantime there are many variants and implementations, with reactive-banana one of the most well-known \cite{reactive-banana}.
+The idea of \FRP was pioneered by \citet{conf/icfp/ElliottH97}, in the meantime there are many variants and implementations, with reactive-banana one of the most well-known \cite{reactive-banana}.
 
-FRP and \TOP are different systems that have different goals in mind.
-Whereas FRP expresses automatically updating data dependencies, \TOP expresses collaboration patterns.
+\FRP and \TOP are different systems that have different goals in mind.
+Whereas \FRP expresses automatically updating data dependencies, \TOP expresses collaboration patterns.
 \TOP has no notion of time.
 Tasks can not change spontaneous over time, while behaviours can.
 Only input events can change task values.
-The biggest conceptual difference between a workflow in \TOP and a data network in FRP is that an event to a task only causes updates up until the next step, while an event in FRP propagates through the whole network.
+The biggest conceptual difference between a workflow in \TOP and a data network in \FRP is that an event to a task only causes updates up until the next step, while an event in \FRP propagates through the whole network.
 
-That being said, there are some concepts that are similar in \TOP and FRP.
+That being said, there are some concepts that are similar in \TOP and \FRP.
 The \emph{stepper} behaviour, for example, is associated with an event and yields the value of the most recent event.
 This is similar to editors in \TOP.
-Furthermore, both systems can be used to declaratively program user interfaces, albeit in FRP the programmer has to construct the GUI elements manually, and connect inputs and outputs to the correct events and behaviours.
+Furthermore, both systems can be used to declaratively program user interfaces, albeit in \FRP the programmer has to construct the \GUI elements manually, and connect inputs and outputs to the correct events and behaviours.
 In \TOP graphical user interfaces are automatically derived.
 
 
@@ -143,7 +143,7 @@ In \TOP graphical user interfaces are automatically derived.
 
 Session types are a type discipline that can be used to check whether communicating programs conform to a certain protocol.
 Session types are expressions in some process calculus that describe the input/output behaviour of such programs.
-Session types are useful for programming languages where modules communicate with each other via messages, like CSP, $\pi$-calculus, or Go, to name a few.
+Session types are useful for programming languages where modules communicate with each other via messages, like \CSP, \PICALC, or Go, to name a few.
 The only form of messages in \TOP are input events which drive execution, but modules do not communicate using messages.
 Therefore, session types are not applicable to \TOP in the sense used in the literature.
 
