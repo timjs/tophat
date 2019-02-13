@@ -272,7 +272,7 @@ When it steps, the continuation uses the pair of integer and string to calculate
 
 \paragraph{Internal and external choice $(e_1 \Or e_2, e_1 \Xor e_2)$}
 
-\hfill Internal \\ choice ($\Or$) is a parallel \emph{or}.
+Internal choice ($\Or$) is a parallel \emph{or}.
 It picks the leftmost branch that has a value.
 Its typing rule \refrule{T-Or} states that both branches must have the same type $\Task \tau$.
 For example $\Enter \Int \Or \Edit 37$ normalizes to $\Edit 37$, because $\Enter \Int$ doesn't have a value.
