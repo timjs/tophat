@@ -133,7 +133,11 @@ picking a task that fails.
 \subsection{Tasks are never done}
 
 %NOTE: depends on: editors
-As users can continuously update editors, tasks never terminate.
+Users can continuously interact with tasks, they will never terminate. The event
+send by a user leads to a new task that can always receive a new event.
+
+The new task can either be the same task, but with a new value for the changed
+editor, or the system can decide to move on to the next task.
 
 The decision to move on to the next task is not taken by the task itself.
 It is based on a calculation to determine the next tasks.
