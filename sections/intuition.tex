@@ -103,17 +103,31 @@ When the user presses the continue button, the machine dispenses either a large 
 
 
 
-\subsection{Tasks can be observed for their current status at all time}
+\subsection{Tasks can be observed}
 
-\fixme{Extend}
-The value of a task can be present or not.
+Several oberservations can be made of a task. The most obvious and basic
+observation is determining the value of a task. Not all tasks have a value
+though, for example, the empty editor $\Enter \tau$ does not have a value.
 
-Because every task has an observable value of a specified type,
-it is always possible to generate a (graphical) user interface from a \TOPHAT specification.
-%NOTE: depends on: editors
-The structure of the specification prescribes the structure of the \UI and possible input events.
-Editors form the leaves of such trees \todo{which trees?}.
+We can also observe what potential events a task can take. This is essential in
+generating a (graphical) user interface for tasks. For example, the task
+$\Edit 5$ can take a new value as input, or it can be cleared, resulting in an
+empty editor of type Int.
 
+In order to complete the user interface, we also need to be able to render a
+task. This is done in a modular and recursive fashion. Every combinator renders
+their sub-tasks in a certain way. For example, when rendering a task that is
+composed of a step combinator, we simply render the left side of it.
+
+When we are able to render tasks, and we are able to list all possible inputs,
+we can obviously construct a user interface, that displays the current state of
+the system, together with buttons that show the potential actions a user can
+apply.
+
+Another useful observation is to determine whether a task results in $\Fail$.
+This is used by the step combinator, as demonstrated in
+Example~\ref{Vending machine}, and the choice combinator, to prevent users from
+picking a task that fails.
 
 
 \subsection{Tasks are never done}
