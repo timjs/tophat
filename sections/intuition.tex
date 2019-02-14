@@ -157,7 +157,10 @@ They represent data flow that \emph{follows} control flow.
 
 \subsection{Tasks can share information}
 
-Second method of internal communication between tasks is shared data.
+We have already seen communication between tasks by means of the step
+combinator. The resulting value from the left task is passed on to the task on
+the right. The second method of internal communication between tasks is shared
+data.
 Shared data represents data flow \emph{across} control flow.
 Shared data sources are assignable references, whose changes in value are immediately visible to all tasks interested in them.
 The semantics of \TOPHAT requires all updates to shared data and all enabled internal steps to be processed before any further communication with the environment can take place.
