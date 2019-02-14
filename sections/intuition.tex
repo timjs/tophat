@@ -5,42 +5,45 @@
 \section{Intuition}
 \label{sec:intuition}
 
-This section gives an overview of the core concepts of tasks in task oriented programming (\TOP).
+This section gives an overview of the core concepts of tasks in task oriented
+programming (\TOP).
 
 
 
 \subsection{Tasks model real world collaborations between people and machines}
 
-The central objective of tasks is to \emph{coordinate collaboration}.
-Therefore \TOPHAT has combinators to express ways in which people can work together to reach a common goal.
-Tasks can be executed after each other, at the same time, or conditionally.
-This motivates the task combinators for steps, parallel combination, and choice.
-One can say that tasks are a way to model \emph{workflows}.
+The central objective of \TOP is to \emph{coordinate collaboration}.
+To this end, \TOPHAT has basic tasks called editors, whith which users can
+interact, and combinators to express ways in which people can work together on
+these tasks. Tasks can be executed after each other, at the same time, or
+conditionally. This motivates the task combinators for steps, parallel
+combination, and choice.
+%One can say that tasks are a way to model \emph{workflows}.
 % \TOPHAT is a language to specify workflows.
 
 
 
 \subsection{Tasks are reusable}
 
-\fixme{Extend}
-Tasks are modular and composable,
-can be abstracted over zero or more arguments,
-arguments could themselves be tasks,
-thus we have higher order workflows.
+Tasks are extremely flexible. They are modular; \fixme{why exactly?}. Tasks are
+composable, using the aforementioned combinators. And tasks are higher order;
+they can be abstracted over zero or more arguments, and those arguments could
+be tasks themselves.
 
 \begin{example}[Twice]
 
-A simple higher-order task which performs a task twice can be specified as follows.
+A simple higher-order task which performs a task twice can be specified as
+follows.
 \begin{TASK}
-  let twice : Task $\tau$ -> Task $\tau$ = \t : Task $\tau$.
-    t >>? \x : $\tau$. t
+  let twice : Task $\tau$ -> Task $\tau$ = \t : Task $\tau$. t >>? \x : $\tau$. t
 \end{TASK}
-By using the step combinator $\Next$ we specify that the given task \TS{t} should be performed a second time.
-The result \TS{x} from the first run is ignored.
+By using the step combinator $\Next$ we specify that the given task \TS{t}
+should be performed a second time. The result \TS{x} from the first run is
+ignored.
 
 \end{example}
 
-
+\fixme{conclude something about why this is convenient}
 
 \subsection{Tasks are driven by user input}
 
