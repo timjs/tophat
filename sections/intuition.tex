@@ -47,26 +47,30 @@ ignored.
 
 \subsection{Tasks are driven by user input}
 
-\fixme{Extend}
-Tasks process input events from users.
-Sensors are also regarded as users.
-Gives rise to communication with the environment.
 
-In \TOPHAT, communication with the environment is represented by editors.
-A task of the form $\Edit v$, where $v$ is of type $\tau$, can receive any change event with a value of type $\tau$ and additionally the special event $\Empty$ that empties the editor.
-There are no output events, instead the environment can always inspect a task's value.
+The evaluation of tasks is driven by input events from users. When the system
+receives a valid event, it is applied to the current task, which results in a
+new task. This gives rise to communication with the users of the system.
+
+In \TOPHAT, this communication with the environment is represented by editors,
+which are denoted by a box symbol.
+A task of the form $\Edit v$, where $v$ is of type $\tau$, can receive a change
+event with a value of type $\tau$ and additionally the special event $\Empty$
+that empties the editor.
+There are no external output events, instead the new task can be observed, as
+described in the next section.
 % However, the environment can always inspect the current value of an editor.
 
-Editors have no notion of continuation.
-Their sole purpose is to interact with the environment, retaining the last value that has been sent to them.
+Editors have no notion of continuation. Their sole purpose is to facilitate
+interact with the user, retaining the last value that has been sent to them.
 %
-They can be used for both input and output.
-The interpretation of whether an editor represents input or output is left to the reader.
-An empty editor is most commonly interpreted as a prompt to input data, while a filled editor can be seen either as outputting its value, or as an input that comes with a default value.
-
+Since editors can be observed in for example a user interface, they can be used
+for both input and output. An empty editor is most commonly interpreted as a
+prompt to input data, while a filled editor can be seen either as outputting its
+value, or as an input that comes with a default or current value.
 
 \begin{example}[Vending machine]
-
+\label{Vending machine}
 % The following \CSP program models a vending machine that dispenses a small biscuit for one coin and a large biscuit for two coins. \todo{remove CSP?}
 % \begin{equation*}
 %   \textit{coin} \to (\textit{small} \to \text{STOP} \mid \textit{coin} \to \textit{large} \to \text{STOP})
@@ -80,11 +84,13 @@ An empty editor is most commonly interpreted as a prompt to input data, while a 
 This example demonstrates external communication and choice.
 A vending machine in \TOPHAT that dispenses a small biscuit for one coin and a large biscuit for two coins can be specified as follows
 \begin{TASK}
-  let vend : Task String = enter Int >>? \n. if n == 1 then edit "small" else if n == 2 then edit "large" else fail
+  let vend : Task String = enter Int >>? \n. if n == 1 then edit "small"
+                                                       else if n == 2 then edit "large"
+                                                                      else fail
 \end{TASK}
 The task asks the user to enter an amount of money.
 This editor stands for a coin slot in a real machine that freely accepts and returns coins.
-There is a continue button that is initially disabled.
+There is a continue button that is initially disabled, due to the fact that the right hand side of the step combinator results in $\Fail$.
 When the user has inserted exactly 1 or 2 coins, the continue button becomes enabled.
 When the user presses the continue button, the machine dispenses either a large or a small biscuit, depending on the amount of money.
 
