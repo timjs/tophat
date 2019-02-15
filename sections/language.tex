@@ -175,6 +175,7 @@ According to these rules, the left hand side must be a task $t : \Task \tau_1$, 
 Steps are guarded, which means that the step combinators can only proceed when the following conditions are met.
 The left hand side must have a value, only then can the right hand side calculate the successor task.
 The successor task must not be $\Fail$, introduced below.
+This is enforced on the semantic level, as described in the next section.
 The internal step can proceed immediately when these conditions are met.
 The external step must additionally receive a continue event $\Continue$.
 
