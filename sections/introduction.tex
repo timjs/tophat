@@ -17,7 +17,10 @@ that they need to interact with different people (end users, tax officers, custo
 and they use information from multiple sources (input forms, databases, sensors, etc.).
 
 We call such interactive units of work based on information sources \emph{tasks}.
-Tasks model collaboration between users and are driven by work users do.
+% Tasks stand for units of work in the real world, assigned to people.
+Tasks model real world collaboration between users,
+are driven by work they do,
+and are assigned to some user.
 Users could be people out in the field or sitting behind their desks,
 as well as machines doing calculations or fetching data.
 
@@ -25,16 +28,39 @@ as well as machines doing calculations or fetching data.
 
 \subsection{Task-oriented programming}
 
+% Task-Oriented Programming (\TOP) is a programming paradigm aimed at writing interactive multi-user applications in a declarative way \cite{conf/ppdp/PlasmeijerLMAK12}.
 Task-oriented programming (\TOP) is a programming paradigm which searches for the sweet spot between faithful modelling workflows
 and rapid prototyping of multi-user web applications supporting these workflows.
 % Task-oriented programming (\TOP) is a programming paradigm to support these ways of working.
 \TOP focusses on modelling collaboration patterns.
 This gives rise to user's need to interact and share information.
 Next to that, \TOP automatically provides solutions to common development jobs like designing \GUI\ s, connecting to databases, and communicating between servers and clients.
+
 Therefore,
 a language that supports \TOP should choose the right level of abstraction to support two things.
-First, it should allow to specify tasks from real world scenarios.
-Second, it should be able to generate multi-user web applications to support these scenarios.
+% \TOP has two aspects.
+% First, it should allow to specify tasks from real world scenarios.
+Firstly, it should provide primitive building blocks that are useful for high-level descriptions of how users collaborate with each other and with machines.
+These building blocks are \emph{editors}, \emph{composition}, and \emph{shared data}.
+% Second, it should be able to generate multi-user web applications to support these scenarios.
+Secondly, it should be able to generate applications, including graphical user interfaces, from workflows modelled with said building blocks.
+
+Users can work together in a number of ways, and this is reflected in \TOP by task compositions.
+There is sequential composition, parallel composition, and choice.
+Users need to communicate in order to engage in these forms of collaboration.
+This is reflected in \TOP by three kinds of communication mechanisms.
+There is data flow \emph{alongside} control flow, where the result of a task is passed onto the next.
+There is data flow \emph{across} control flow, where information is shared between multiple tasks.
+Finally, there is communication with the \emph{outside} world, where information is entered into the system via input events.
+The end points where the outside world interacts with \TOP applications are called editors.
+In generated applications, editors can take many forms, like input fields, selection boxes, or map widgets.
+
+\fixme{Change if title changes.}
+In this paper we study the essence of \TOP.
+We claim that at the heart of \TOP lie modular interactive workflows.
+Workflows because \TOP programs coordinate collaboration between people.
+Interactive because progress of \TOP programs is driven by user input.
+Modular because the embedding in a strongly-typed functional language allows powerful abstractions using type-driven techniques and higher-order functions.
 
 
 
@@ -42,14 +68,24 @@ Second, it should be able to generate multi-user web applications to support the
 
 
 Currently, we know of two frameworks using \TOP: \ITASKS and \MTASKS.
-\ITASKS is a full fledged \TOP framework able to generate rich client and server applications from a single source in the functional programming language Clean.
+
+\ITASKS is an implementation of \TOP, in the form of a shallowly embedded domain-specific language in the lazy functional programming language Clean.
+It is a library that provides editors, monadic combinators, and shared data sources.
+\ITASKS uses the generic programming facilities of Clean to derive rich client and server applications from a single source.
+It has been used to model an incident management tool for the Dutch coast guard~\cite{conf/iscram/LijnseJP12}.
+Also it has been used numerous times to prototype ideas for Command and Control~\cite{theses/nlda/Kool17, theses/radboud/Stutterheim17}, and in a case study for the Dutch tax authority \cite{conf/sfp/StutterheimAP17}.
+
 \MTASKS is a subset of \ITASKS,
 focussing on \IOT devices and deployment on micro controllers.
-Both have been used to model real world scenarios like \fixme{add}.
+\fixme{Add examples.}
+
+\fixme{Say what lacks in these approaches: no formal reasoning about properties.}
 
 
 
 \subsection{Contributions}
+
+\input{sections/contributions}
 
 In this paper we tend to identify the essence of \TOP in formal as well as an informal way.
 These core principles lead to a formal system for \TOP called \TOPHAT.
@@ -85,10 +121,10 @@ Our contributions to workflow modelling, functional programming language design,
 
 \subsection{Structure}
 
-\input{sections/structure}
-
-
-
-\subsection{Old}
-
-\input{sections/introduction-old}
+In Section~\ref{sec:example} we demonstrate the functionality of \TOPHAT by means of an example,
+Section~\ref{sec:intuition} gives an overview of the essential concepts of \TOP and \TOPHAT.
+Section~\ref{sec:language} introduces the \TOPHAT calculus syntax
+and Section~\ref{sec:semantics} the semantics.
+Then in Section~\ref{sec:properties} we show that certain properties hold for the calculus.
+We take a look at related work in Section~\ref{sec:relatedwork}
+and conclude in Section~\ref{sec:conclusions}.
