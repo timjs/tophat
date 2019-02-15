@@ -30,6 +30,18 @@ composable, using the aforementioned combinators. And tasks are higher order;
 they can be abstracted over zero or more arguments, and those arguments could
 be tasks themselves.
 
+From a programmer's point of view,
+tasks should not just model their real world equivalents.
+They should be reusable units in a programming language.
+Similar tasks should be specified once,
+and reused in new context.
+Taking this further,
+by specifying tasks that take other tasks as arguments,
+programmers can have a lot of freedom to create their own reusable collaboration patterns.
+In other words,
+programmers would like abstraction and higher-order tasks.
+
+
 \begin{example}[Twice]
 
 A simple higher-order task which performs a task twice can be specified as
