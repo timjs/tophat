@@ -147,7 +147,7 @@ The step combinators in $t \Then e$ and $t \Next e$ pass the value of $t$ to the
 They both act like $t$ as long as the step is guarded.
 Once it becomes unguarded, the task continues as $e\ v$, where $v$ is the observed value of $t$.
 % The continuation $e$ is a function which calculates the next task or $\Fail$, signalling no continuation is present.
-The task $t \Next e$ requires an input event $\Continue$ in addition to the step being unguarded. % in order to step.
+The task $t \Next e$ requires an input event $\Continue$ (Continue) in addition to the step being unguarded. % in order to step.
 
 The step combinators give rise to a method of internal communication.
 They represent data flow that \emph{follows} control flow.
