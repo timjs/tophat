@@ -13,7 +13,7 @@ programming (\TOP).
 \subsection{Tasks model real world collaborations between people and machines}
 
 The central objective of \TOP is to \emph{coordinate collaboration}.
-To this end, \TOPHAT has basic tasks called editors, whith which users can
+To this end, \TOPHAT has basic tasks called editors, with which users can
 interact, and combinators to express ways in which people can work together on
 these tasks. Tasks can be executed after each other, at the same time, or
 conditionally. This motivates the task combinators for steps, parallel
@@ -44,6 +44,8 @@ ignored.
 \end{example}
 
 \fixme{conclude something about why this is convenient}
+
+
 
 \subsection{Tasks are driven by user input}
 
@@ -85,8 +87,8 @@ This example demonstrates external communication and choice.
 A vending machine in \TOPHAT that dispenses a small biscuit for one coin and a large biscuit for two coins can be specified as follows
 \begin{TASK}
   let vend : Task String = enter Int >>? \n. if n == 1 then edit "small"
-                                                       else if n == 2 then edit "large"
-                                                                      else fail
+    else if n == 2 then edit "large"
+    else fail
 \end{TASK}
 The task asks the user to enter an amount of money.
 This editor stands for a coin slot in a real machine that freely accepts and returns coins.
@@ -105,7 +107,7 @@ When the user presses the continue button, the machine dispenses either a large 
 
 \subsection{Tasks can be observed}
 
-Several oberservations can be made of a task. The most obvious and basic
+Several observations can be made of a task. The most obvious and basic
 observation is determining the value of a task. Not all tasks have a value
 though, for example, the empty editor $\Enter \tau$ does not have a value.
 
