@@ -4,10 +4,12 @@
 
 \label{sec:conclusions}
 
-In this paper we have developed a domain-specific calculus for declarative interactive workflows.
-We have identified, what we believe to be, the essence of Task-Oriented Programming, and provided corresponding operators in our language.
-We have compared our language with \CSP to point out differences and similarities.
-Finally, we have proven type safety for our language.
+In this paper we have developed a domain-specific calculus for declarative interactive workflows, named \TOPHAT.
+We have shown that our calculus is modular, and clearly seperated from the host language it is embedded in.
+By developing this calculus, we have identified the essence of Task-Oriented Programming.
+In addition to the formal semantics, we have also demonstrated how to build a user interface from a task description.
+We have compared \TOPHAT with workflow moddeling languages, process algebras, functional reactive programming and session types to point out differences and similarities.
+Finally, we have proven type safety and progress for our language.
 
 
 
@@ -15,12 +17,12 @@ Finally, we have proven type safety for our language.
 
 There are a couple of ways in which we would like to continue this line of work.
 
-The addition of read-only shared editors would allow watching references without being able to change them.
-Some programs could be expressed more faithfully, where we for now require that users do not modify certain shares.
-
-One goal of the formalisation of a language is the ability to reason about programs.
+One of the main motivations to formalize Task Oriented Programmig is to be able to reason about programs.
 In this paper we reason about the language itself, but it would be nice to prove properties about individual programs.
-We would like to prove whether certain programs are equal, for example to show that the monad laws hold for our step combinator.
+To this end, we are very interested to see if it is possible to develop an axiomatic semantics for \TOPHAT that allows us to do so.
+There are certain properties of our calculus that make this particularly complex; we have to deal with parallelism, user interacton and references.
+
+We would also like to prove whether certain programs are equivalent, for example to show that the monad laws hold for our step combinator.
 This requires a notion of equality, which in the presence of side effects most certainly needs some form of coalgebraic input-output conformance.
 
 We have implemented the reduction semantics of our language in Idris, whose type system could aid in a formalisation of those proofs.
@@ -32,9 +34,11 @@ This analysis was developed for a simpler task calculus, and could be brought ov
 
 % Put this line back in for final version of paper: In other previous work, we have looked at building a generic feedback system for rule-based problems \cite{UUCS2017013}.
 Naus et al.~\cite{UUCS2017013} have looked at building a generic feedback system for rule-based problems.
-A workflow system typically is rule based, as outlined in this work.
+A workflow system typically is rule based, as outlined in their work.
 It would be interesting to fit the generic feedback system to \TOPHAT in order to support end-users working in applications developed in this calculus.
+
 
 Additionally, we would like to develop visualisations for \TOPHAT language constructs.
 An assistive development environment integrating these visualisations and the presented textual language
 would aid domain experts to model workflows in a more accessible manner.
+A system that visualizes iTask programs has been developed in the past~\cite{DBLP:conf/sfp/StutterheimPA14}.
