@@ -1,0 +1,83 @@
+% !TEX root=../icfp2019.tex
+
+
+
+\section{Introduction}
+
+
+
+\subsection{Task-oriented programming}
+
+Many applications these days are developed to support workflows in institutions and businesses.
+Take for example expenses declarations, order processing, and emergency management.
+Not all of these workflows happen inside organisations.
+Some occur on the boundary with customers, like flight bookings or tax returns.
+What they all have in common is,
+that they need to interact with different people (end users, tax officers, customers, etc.)
+and they use information from multiple sources (input forms, databases, sensors, etc.).
+
+We call such interactive units of work based on information sources \emph{tasks}.
+Tasks model collaboration between users and are driven by work users do.
+Users could be people out in the field or sitting behind their desks,
+as well as machines doing calculations or fetching data.
+
+Task-oriented programming (\TOP) is a programming paradigm which searches for the sweet spot between faithful modelling workflows
+and rapid prototyping of multi-user web applications supporting this workflow.
+% Task-oriented programming (\TOP) is a programming paradigm to support these ways of working.
+The paradigm takes collaboration patterns as the base of modelling
+and anticipates on user's need to interact and share information.
+A language that supports \TOP should allow to specify tasks from real world scenarios,
+and be able to generate multi-user web applications to support these scenarios.
+By choosing the right level of abstraction,
+\TOP focusses on creating workflow specifications,
+while automatically providing common development duties like designing \GUI\ s, connecting to databases, and communicating between servers and client.
+
+Currently, we know of two frameworks using \TOP: \ITASKS and \MTASKS.
+\ITASKS is a full fledged \TOP framework able to generate rich client and server applications from a single source in the functional programming language Clean.
+\MTASKS is a subset of \ITASKS,
+focussing on \IOT devices and deployment on micro controllers.
+Both have been used to model real world scenarios like \fixme{add}.
+
+In this paper we tend to identify the essence of \TOP in formal as well as an informal way.
+These core principles lead to a formal system for \TOP called \TOPHAT.
+\TOPHAT paves the way to formal reasoning about applications written using the \TOP paradigm,
+like those in \ITASKS and \MTASKS.
+
+\TOP applications give rise to concepts like concurrency, synchronisation, \GUI-programming and program generation.
+In this paper we identify common concepts with already existing languages and frameworks,
+and describe their similarities and differences.
+
+
+
+\subsection{Contributions}
+
+Our contributions to workflow modelling, functional programming language design, and rapid application development are as follows.
+
+\begin{enumerate}
+
+  \item
+    We informally describe the essential concepts of task-oriented programming (\TOP).
+    We have a strong focus on modelling using collaboration
+    while keeping a constant desire to rapidly generate executable applications into account.
+
+  \item
+    We present a formal calculus for \TOP, arising naturally from above essential concepts.
+    Hereby we provide ground work to apply formal reasoning about \TOP specifications in future work.
+
+  \item
+    Using both informal and formal descriptions, we compare \TOP and \TOPHAT with multiple related work in the area,
+    ranging from business process modelling languages, to process algebras and reactive programming frameworks.
+
+\end{enumerate}
+
+
+
+\subsection{Structure}
+
+\input{sections/structure}
+
+
+
+\subsection{Old}
+
+\input{sections/introduction-old}
