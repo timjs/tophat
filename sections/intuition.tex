@@ -14,8 +14,8 @@ programming (\TOP).
 
 The central objective of \TOP is to \emph{coordinate collaboration}.
 To this end, \TOPHAT has basic tasks called editors, with which users can
-interact, and combinators to express ways in which people can work together on
-these tasks. Tasks can be executed after each other, at the same time, or
+interact, and combinators to express ways in which people can work together.
+Tasks can be executed after each other, at the same time, or
 conditionally. This motivates the task combinators for steps, parallel
 combination, and choice.
 %One can say that tasks are a way to model \emph{workflows}.
@@ -25,37 +25,24 @@ combination, and choice.
 
 \subsection{Tasks are reusable}
 
-Tasks are extremely flexible. They are modular; \fixme{why exactly?}. Tasks are
-composable, using the aforementioned combinators. And tasks are higher order;
-they can be abstracted over zero or more arguments, and those arguments could
-be tasks themselves.
-
-From a programmer's point of view,
-tasks should not just model their real world equivalents.
-They should be reusable units in a programming language.
-Similar tasks should be specified once,
-and reused in new context.
-Taking this further,
-by specifying tasks that take other tasks as arguments,
-programmers can have a lot of freedom to create their own reusable collaboration patterns.
-In other words,
-programmers would like abstraction and higher-order tasks.
-
+Tasks are modular in the following ways.
+First, larger tasks are composed from smaller ones.
+Second, tasks are first-class, they can be arguments and results of functions.
+Third, tasks can be values of other tasks.
+These aspects make it possible for programmers to model custom collaboration patterns.
 
 \begin{example}[Twice]
 
-A simple higher-order task which performs a task twice can be specified as
-follows.
+A higher-order function which executes a given task twice.
+The task value of the first execution is ignored.
+
+\fixme{Is that our official syntax?}
 \begin{TASK}
-  let twice : Task $\tau$ -> Task $\tau$ = \t : Task $\tau$. t >>? \x : $\tau$. t
+  let twice : Task $\tau$ -> Task $\tau$ = \t : Task $\tau$. t >>? \x : $\tau$
 \end{TASK}
-By using the step combinator $\Next$ we specify that the given task \TS{t}
-should be performed a second time. The result \TS{x} from the first run is
-ignored.
+\qed
 
 \end{example}
-
-\fixme{conclude something about why this is convenient}
 
 
 
