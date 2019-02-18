@@ -128,6 +128,7 @@ The step combinator is one form of internal communication, where task values are
 Another form of internal communication is shared data.
 Shared data enables data flow \emph{across} control flow, in particular between parallel tasks.
 Shared data sources are assignable references whose changes are immediately visible to all tasks interested in them.
+Users can not directly interact with shared data, a shared editor is required for that.
 If $r$ is a reference of type $\tau$, then $\Update r$ is an editor whose value is that of $r$.
 
 The semantics of \TOPHAT requires all updates to shared data and all enabled internal steps to be processed before any further communication with the environment can take place.
