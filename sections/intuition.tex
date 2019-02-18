@@ -50,12 +50,12 @@ In this way the system communicates with the environment.
 In \TOPHAT, editors are the basic method of communication with the environment.
 There are different editors, denoted by different box symbols.
 An editor of the form $\Edit v$, where $v$ is of type $\tau$, reacts to two kinds of events:
-First, change events $v$ with a value of type $\tau$ and second, clear events $\Empty$ which empty the editor.
+Change events $v$ with a value of type $\tau$ and clear events $\Empty$ which empty the editor.
 
-The sole purpose of editors is to interact with the user by retaining the last value that has been sent to them.
+The sole purpose of editors is to interact with users by remembering the last value that has been sent to them.
 There are no output events.
 As values of editors can be observed, for example by a user interface, editors serve as facilities for both input and output.
-An empty editor $\Enter \tau$ stands for a prompt to input data, while a filled editor can be seen either as outputting its value, or as an input that comes with a default value.
+An empty editor $\Enter \tau$ stands for a prompt to input data, while a filled editor can be seen either as outputting a value, or as an input that comes with a default value.
 
 \begin{example}[Vending machine]
 \label{Vending machine}
@@ -69,7 +69,7 @@ It is a vending machine that dispenses a small biscuit for one coin and a large 
 \end{TASK}
 The editor $\Enter \Int$ asks the user to enter an amount of money.
 This editor stands for a coin slot in a real machine that freely accepts and returns coins.
-There is a continue button that is initially disabled, due to the fact that the right hand side of the step combinator results in $\Fail$.
+There is a continue button that is initially disabled, due to the fact that the left hand side of the step combinator has no value.
 When the user has inserted exactly 1 or 2 coins, the continue button becomes enabled.
 When the user presses the continue button, the machine dispenses either a large or a small biscuit, depending on the amount of money. \qed
 
