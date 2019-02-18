@@ -30,12 +30,10 @@ These aspects make it possible for programmers to model custom collaboration pat
 \begin{example}[Twice]
 
 A higher-order function which executes a given task twice.
-The task value of the first execution is ignored.
-
-\fixme{Is that our official syntax?}
 \begin{TASK}
-  let twice : Task $\tau$ -> Task $\tau$ = \t : Task $\tau$. t >>? \x : $\tau$
+  let twice : Task $\tau$ -> Task $\tau$ = \t : Task $\tau$. t >>? \x . t
 \end{TASK}
+The task value of the first execution is ignored.
 \qed
 
 \end{example}
