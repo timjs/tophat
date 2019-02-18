@@ -48,26 +48,19 @@ The task value of the first execution is ignored.
 \subsection{Tasks are driven by user input}
 
 
-The evaluation of tasks is driven by input events from users. When the system
-receives a valid event, it is applied to the current task, which results in a
-new task. This gives rise to communication with the users of the system.
+Input events drive evaluation of tasks.
+When the system receives a valid event, it applies the event to the current task, which results in a new task.
+In this way the system communicates with the environment.
 
-In \TOPHAT, this communication with the environment is represented by editors,
-which are denoted by a box symbol.
-A task of the form $\Edit v$, where $v$ is of type $\tau$, can receive a change
-event with a value of type $\tau$ and additionally the special event $\Empty$
-that empties the editor.
-There are no external output events, instead the new task can be observed, as
-described in the next section.
-% However, the environment can always inspect the current value of an editor.
+In \TOPHAT, editors are the basic method of communication with the environment.
+There are different editors, denoted by different box symbols.
+An editor of the form $\Edit v$, where $v$ is of type $\tau$, reacts to two kinds of events:
+First, change events $v$ with a value of type $\tau$ and second, clear events $\Empty$ which empty the editor.
 
-Editors have no notion of continuation. Their sole purpose is to facilitate
-interact with the user, retaining the last value that has been sent to them.
-%
-Since editors can be observed in for example a user interface, they can be used
-for both input and output. An empty editor is most commonly interpreted as a
-prompt to input data, while a filled editor can be seen either as outputting its
-value, or as an input that comes with a default or current value.
+The sole purpose of editors is to interact with the user by retaining the last value that has been sent to them.
+There are no output events.
+As values of editors can be observed, for example by a user interface, editors serve as facilities for both input and output.
+An empty editor $\Enter \tau$ stands for a prompt to input data, while a filled editor can be seen either as outputting its value, or as an input that comes with a default value.
 
 \begin{example}[Vending machine]
 \label{Vending machine}
