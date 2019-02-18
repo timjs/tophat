@@ -200,9 +200,8 @@ Input events for parallel tasks are disambiguated, internal steps have a well-de
 
 \subsection{Recap}
 
-The focus on collaboration gives rise to concepts like communication, concurrency and synchronisation.
-Using tasks, however, they are meant to be used on a higher level of abstraction, which allows concise declarative description of patterns of collaboration, without worrying about the implementation details of communication.
-By focussing on collaboration, tasks and \TOPHAT lead to high-level specifications closer to real-world workflows which, at the same time, can be used to generate distributive, multi-user applications to support such workflows.
+To model collaboration, one needs communication, concurrency, and synchronisation.
+In \TOP, collaboration is specified on a high level of abstraction, hiding the details of communication.
+For example, the cigarette smokers communicate with each other, but the programs do not explicitly mention sending or receiving events.
 
-To employ these patterns of collaboration, users need to communicate.
-This motivates different forms of communication: with the environment, along control flow, and across control flow.
+By focussing on collaboration instead of communication, \TOP leads to specifications closer to real-world workflows which, at the same time, can be used to generate distributed, multi-user applications to support such workflows.
