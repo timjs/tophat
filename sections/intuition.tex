@@ -119,7 +119,7 @@ Both steps act like $t$ as long as the step is guarded.
 A step is guarded as long as the speculative evaluation $e\ v$ yields $\Fail$.
 Once it becomes unguarded, the task continues as $e\ v$.
 The task $t \Next e$ requires a continue event $\Continue$ in addition to the step being unguarded.
-We designed speculative evaluation so that it does not have side effects.
+Speculative evaluation is designed so that it does not have side effects.
 
 The step combinators give rise to a method of internal communication:
 They represent data flow that \emph{follows} control flow.
