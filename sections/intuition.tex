@@ -64,15 +64,6 @@ An empty editor $\Enter \tau$ stands for a prompt to input data, while a filled 
 
 \begin{example}[Vending machine]
 \label{Vending machine}
-% The following \CSP program models a vending machine that dispenses a small biscuit for one coin and a large biscuit for two coins. \todo{remove CSP?}
-% \begin{equation*}
-%   \textit{coin} \to (\textit{small} \to \text{STOP} \mid \textit{coin} \to \textit{large} \to \text{STOP})
-% \end{equation*}
-% % An equivalent reactive system in \ESTEREL could be defined as\fixme{validate}
-% % \begin{equation*}
-%   % V_\text{\ESTEREL} = \text{await } \textit{coin}; ( \text{await } \textit{button}; \text{emit } \textit{small} \parallel \text{await } \textit{coin}; \text{await } \textit{button}; \text{emit } \textit{large})
-% % \end{equation*}
-% A vending machine in \TOPHAT that is close in spirit to the one above looks as follows.
 
 This example demonstrates external communication and choice.
 A vending machine in \TOPHAT that dispenses a small biscuit for one coin and a large biscuit for two coins can be specified as follows
