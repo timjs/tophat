@@ -105,28 +105,25 @@ The final observation is to determine whether a task results in $\Fail$.
 The step combinator and the choice combinator use this to prevent users from picking a failing task.
 
 
+
+
 \subsection{Tasks are never done}
 
-%NOTE: depends on: editors
-Users can continuously interact with tasks, they will never terminate. The event
-send by a user leads to a new task that can always receive a new event.
+Tasks never terminate, they always keep reacting to events.
+Editors can always be changed or cleared, and step combinators move on to new tasks.
 
-The new task can either be the same task, but with a new value for the changed
-editor, or the system can decide to move on to the next task.
+In a step $t \Next e$, the decision to move on to e is taken by $\Next$, not by t.
+The decision is based on a speculative evaluation of $e$.
+The step combinators in $t \Then e$ and $t \Next e$ pass the value $v$ of $t$ to the continuation $e$.
+Both steps act like $t$ as long as the step is guarded.
+A step is guarded as long as the speculative evaluation $e\ v$ yields $\Fail$.
+Once it becomes unguarded, the task continues as $e\ v$.
+The task $t \Next e$ requires a continue event $\Continue$ in addition to the step being unguarded.
+We designed speculative evaluation so that it does not have side effects.
 
-The decision to move on to the next task is not taken by the task itself.
-It is based on a calculation to determine the next tasks.
-The step combinators in $t \Then e$ and $t \Next e$ pass the value of $t$ to the continuation $e$.
-They both act like $t$ as long as the step is guarded.
-Once it becomes unguarded, the task continues as $e\ v$, where $v$ is the observed value of $t$.
-% The continuation $e$ is a function which calculates the next task or $\Fail$, signalling no continuation is present.
-The task $t \Next e$ requires an input event $\Continue$ (Continue) in addition to the step being unguarded. % in order to step.
-
-The step combinators give rise to a method of internal communication.
+The step combinators give rise to a method of internal communication:
 They represent data flow that \emph{follows} control flow.
 
-% The intuition about sequential composition is to first do one thing, and once it is done, do some other thing.
-% The notion of sequential composition exists in two forms: the external and the internal step.
 
 
 
