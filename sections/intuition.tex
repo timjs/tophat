@@ -107,16 +107,16 @@ The step combinator and the choice combinator use this to prevent users from pic
 Tasks never terminate, they always keep reacting to events.
 Editors can always be changed or cleared, and step combinators move on to new tasks.
 
-In a step $t \Next e$, the decision to move on to e is taken by $\Next$, not by t.
+In a step $t \Next e$, the decision to move on is taken by $\Next$, not by $t$.
 The decision is based on a speculative evaluation of $e$.
 The step combinators in $t \Then e$ and $t \Next e$ pass the value $v$ of $t$ to the continuation $e$.
 Both steps act like $t$ as long as the step is guarded.
-A step is guarded as long as the speculative evaluation $e\ v$ yields $\Fail$.
-Once it becomes unguarded, the task continues as $e\ v$.
-The task $t \Next e$ requires a continue event $\Continue$ in addition to the step being unguarded.
+A step is guarded if either the left task has no value, or the speculative evaluation $e\ v$ yields $\Fail$.
+Once it becomes unguarded, the step continues as $e\ v$.
+The task $t \Next e$ additionally requires a continue event $\Continue$ to proceed.
 Speculative evaluation is designed so that it does not have side effects.
 
-The step combinators give rise to a method of internal communication:
+The step combinators give rise to a form of internal communication:
 They represent data flow that \emph{follows} control flow.
 
 
