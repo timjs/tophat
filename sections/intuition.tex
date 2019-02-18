@@ -84,29 +84,25 @@ When the user presses the continue button, the machine dispenses either a large 
 
 \subsection{Tasks can be observed}
 
-Several observations can be made of a task. The most obvious and basic
-observation is determining the value of a task. Not all tasks have a value
-though, for example, the empty editor $\Enter \tau$ does not have a value.
+Several observations can be made of tasks.
+One of those is determining the value of a task $\Value(t)$.
+Not all tasks have a value, for example the empty editor $\Enter \tau$, which makes $\Value$ a partial function.
 
-We can also observe what potential events a task can take. This is essential in
-generating a (graphical) user interface for tasks. For example, the task
-$\Edit 5$ can take a new value as input, or it can be cleared, resulting in an
-empty editor of type Int.
+Another observation is the set of events a task can react to.
+This is important for generating user interfaces.
+For example, the task $\Edit 5$ can react to value events $v$ and empty events $\Empty$.
 
-In order to complete the user interface, we also need to be able to render a
-task. This is done in a modular and recursive fashion. Every combinator renders
-their sub-tasks in a certain way. For example, when rendering a task that is
-composed of a step combinator, we simply render the left side of it.
+In order to render a user interface, the system needs to observe a task's user interface.
+This is done compositionally.
+User interfaces of combined tasks are composed of the user interfaces of the components.
+For example of two tasks combined with a step combinator, only the left hand side is rendered.
+Two parallel tasks are rendered next to each other.
 
-When we are able to render tasks, and we are able to list all possible inputs,
-we can obviously construct a user interface, that displays the current state of
-the system, together with buttons that show the potential actions a user can
-apply.
+In order for the system to actually render a task, it needs to observe the task's value, possible inputs, and user interface.
+With this information, the system can then display the current state of the task, together with buttons that show the actions a user can engage in.
 
-Another useful observation is to determine whether a task results in $\Fail$.
-This is used by the step combinator, as demonstrated in
-Example~\ref{Vending machine}, and the choice combinator, to prevent users from
-picking a task that fails.
+The final observation is to determine whether a task results in $\Fail$.
+The step combinator and the choice combinator use this to prevent users from picking a failing task.
 
 
 \subsection{Tasks are never done}
