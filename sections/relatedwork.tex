@@ -89,10 +89,17 @@ using an \XML format. Processes specified in \BPEL are executable, just like \YA
 
 \subsection{Process algebras}
 
-The central objective of processes is to model patterns of their behaviour.
-These patterns of behaviour manifest themselves in sequences of actions that processes can engage in.
-Actions can be events from the environment, or signals send internally between processes.
-Processes are a way to model synchronisation patterns.
+There are two main differences between \TOP and process algebras.
+
+The first is a difference in scope.
+Process algebras focus on modelling the input/output behaviour of processes, by explicitly stating which actions are sent and received at certain points in the program.
+The goal of process algebras is formal reasoning about the interaction between subprocesses.
+Typically, one wishes to prove properties such as deadlock-freedom, liveness, or adherence to a protocol specification.
+
+The focus of \TOP is to model collaboration patterns, with the explicit goal of not having to specify how exactly subtasks communicate.
+The declarative specification of data dependencies between subtasks enables our system to hide such details.
+
+TODO: continue here
 
 % \begin{quote}
 %   \noindent In \TOP, communication is a means to an end. \\
