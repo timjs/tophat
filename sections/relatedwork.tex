@@ -90,35 +90,17 @@ using an \XML format. Processes specified in \BPEL are executable, just like \YA
 \subsection{Process algebras}
 
 There are two main differences between \TOP and process algebras.
-
 The first is a difference in scope.
 Process algebras focus on modelling the input/output behaviour of processes, by explicitly stating which actions are sent and received at certain points in the program.
-The goal of process algebras is formal reasoning about the interaction between subprocesses.
+The goal of process algebras is formal reasoning about the interaction between processes.
 Typically, one wishes to prove properties such as deadlock-freedom, liveness, or adherence to a protocol specification.
 
-The focus of \TOP is to model collaboration patterns, with the explicit goal of not having to specify how exactly subtasks communicate.
-The declarative specification of data dependencies between subtasks enables our system to hide such details.
+The focus of \TOP on the other hand is to model collaboration patterns, with the explicit goal of not having to specify how exactly subtasks communicate.
+The declarative specification of data dependencies between subtasks enables \TOP to hide such details.
 
-TODO: continue here
-
-% \begin{quote}
-%   \noindent In \TOP, communication is a means to an end. \\
-%   In \CSP, communication is the central matter of discourse.
-% \end{quote}
-
-%%NOTE: Already said in section intro --TS
-% Despite the different origins, \TOP and \CSP feature concepts that serve similar purposes.
-
-%%NOTE: Focus on what TOP is good at --TS
-% \CSP has a formal semantics that allows various kinds of correctness proofs, including equality of processes, and adherence to a specification.
-% This allows applications in program correctness, proofs of deadlock freedom, liveness, or verification of protocols.
-%
-% \TOP focuses less on formal correctness, and more on practical applicability.
-The big difference between processes and tasks is the level of detail in which programmers need to specify communication between modules.
-While processes are used to explicitly model low-level details about communication, tasks hide these details and provide high-level communication mechanisms to the programmer.
-It wants to be a calculus with intuitive semantics that facilitates communication between programmers and domain experts.
-Such programs are supposed to hide implementation details from domain experts while containing enough information to allow automatic generation of executable applications, including user interfaces.
-
+The second difference is in the way tasks communicate.
+There are two forms of communication between tasks: Passing values to continuations and sharing data.
+This is different from communication in process algebras, which is based on message-passing.
 
 
 \paragraph{Communication}
