@@ -79,35 +79,25 @@ focussing on \IOT devices and deployment on micro controllers.
 
 \subsection{Scope}
 
-\fixme{Rewrite}
-
 In this paper, we set out to develop a formal basis for \TOP, called \TOPHAT (TopHat).
-Our goal is to specify the basic building blocks of declarative workflows.
-We clearly separate them from general purpose programming concepts.
-This allows us to prove properties like progress and type preservation.
-\TOPHAT should be powerful enough to model complicated real-world situations,
-without losing opportunities for formal reasoning.
+Our goal is to pave the way for formal treatment of \TOP programs.
 
-By separating them in the style of a deep embedding \cite{conf/cefp/Gibbons13}, we make explicit where and where not, they depend on each other. \fixme{what to do with this sentence}
+\ITASKS is the de-facto reference implementation of \TOP.
+It has been designed for developing real-world applications, and is constantly being extended and improved with this goal in mind.
+All the bells and whistles of \ITASKS, the different variations of task combinators, and the details that come with real-world requirements, make it hard to see what the essence of \TOP is.
+It also makes formal reasoning about \TOP programs impossible.
 
-We show that, where process algebras focus on the \emph{coordination} of processes and the \emph{communication} between them,
-\TOP, and therefore \TOPHAT, focus on supporting \emph{tasks} and model ways to \emph{collaborate} on them.
+In this paper, we want to take a step back and look at the essence of \TOP.
+We do this both formally and informally.
+Informally in the sense that we give an intuitive description of the features that define task-oriented programming.
+Formally in the sense that we develop a calculus which formalizes these features as language constructs, and we give them semantics in the style that is common in programming language research.
 
-In this paper we aim to identify the essence of \TOP in formal as well as an informal way.
-These core principles lead to a formal system for \TOP, called \TOPHAT,
-which paves the way to formal reasoning.
-Applications written using the \TOP paradigm, like those in \ITASKS and \MTASKS, currently lack such a feature.
+One of the defining aspects of \ITASKS is its embedding in a functional programming language.
+This creates a synergy where \ITASKS profits from the expressivity of Clean, while enhancing the language with functionality for user interaction.
+The tight integration of task DSL and host language makes it sometimes difficult to see where the boundaries are.
 
-\TOP applications give rise to concepts like concurrency, synchronisation, \GUI-programming and program generation.
-In this paper we identify common concepts from already existing languages and frameworks,
-and describe their similarities and differences.\fixme{What do you mean with this sentence?}
-
-\fixme{Change or remove.}
-In this paper we study the essence of \TOP.
-We claim that at the heart of \TOP lie modular interactive workflows.
-Workflows because \TOP programs coordinate collaboration between people.
-Interactive because progress of \TOP programs is driven by user input.
-Modular because the embedding in a strongly-typed functional language allows powerful abstractions using type-driven techniques and higher-order functions.
+In \TOPHAT, we separate the task layer and the underlying host language, both syntactically and semantically.
+In this way we make explicit which of the synergetic effects of \TOP come from the task layer, and which come from functional programming.
 
 
 \subsection{Contributions}
