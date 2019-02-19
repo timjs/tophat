@@ -19,12 +19,13 @@ Tasks can be executed after each other, at the same time, or conditionally.
 This motivates the combinators step, parallel, and choice.
 
 \begin{example}[Breakfast]
+\label{exm:breakfast}
 
 The following program shows the different collaboration operators in action.
-The user has a choice whether they want tea or coffee.
+Users have a choice whether they want tea or coffee.
 They always get an egg.
 The drink and the food are prepared in parallel.
-When drink and food are prepared, the user can step to eating the result.
+When drink and food are prepared, users can step to eating the result.
 
 \begin{TASK}
   let makeBreakfast : Task Drink -> Task Food -> Task Unit =
@@ -43,16 +44,7 @@ Second, tasks are first-class, they can be arguments and results of functions.
 Third, tasks can be values of other tasks.
 These aspects make it possible for programmers to model custom collaboration patterns.
 
-\begin{example}[Twice]
-
-A higher-order function which executes a given task twice.
-\begin{TASK}
-  let twice : Task $\tau$ -> Task $\tau$ = \t : Task $\tau$. t >>? \x . t
-\end{TASK}
-The task value of the first execution is ignored.
-
-\end{example}
-
+\Cref{exm:breakfast} demonstrates how tasks can be parameterized by other tasks: makeBreakfast is a collaboration pattern that always works the same way, regardless of which food and drink are being prepared.
 
 
 \subsection{Tasks are driven by user input}
