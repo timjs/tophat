@@ -52,15 +52,9 @@ This is reflected in \TOP by three kinds of communication mechanisms.
 There is data flow \emph{alongside} control flow, where the result of a task is passed onto the next.
 There is data flow \emph{across} control flow, where information is shared between multiple tasks.
 Finally, there is communication with the \emph{outside} world, where information is entered into the system via input events.
+\fixme{Should this be mentioned earlier?}
 The end points where the outside world interacts with \TOP applications are called editors.
 In generated applications, editors can take many forms, like input fields, selection boxes, or map widgets.
-
-\fixme{Change if title changes.}
-In this paper we study the essence of \TOP.
-We claim that at the heart of \TOP lie modular interactive workflows.
-Workflows because \TOP programs coordinate collaboration between people.
-Interactive because progress of \TOP programs is driven by user input.
-Modular because the embedding in a strongly-typed functional language allows powerful abstractions using type-driven techniques and higher-order functions.
 
 
 
@@ -85,6 +79,8 @@ focussing on \IOT devices and deployment on micro controllers.
 
 \subsection{Scope}
 
+\fixme{Rewrite}
+
 In this paper, we set out to develop a formal basis for \TOP, called \TOPHAT (TopHat).
 Our goal is to specify the basic building blocks of declarative workflows.
 We clearly separate them from general purpose programming concepts.
@@ -98,15 +94,20 @@ We show that, where process algebras focus on the \emph{coordination} of process
 \TOP, and therefore \TOPHAT, focus on supporting \emph{tasks} and model ways to \emph{collaborate} on them.
 
 In this paper we aim to identify the essence of \TOP in formal as well as an informal way.
-These core principles lead to a formal system for \TOP called \TOPHAT.
-\TOPHAT paves the way to formal reasoning about applications written using the \TOP paradigm,
-like those in \ITASKS and \MTASKS.
+These core principles lead to a formal system for \TOP, called \TOPHAT,
+which paves the way to formal reasoning.
+Applications written using the \TOP paradigm, like those in \ITASKS and \MTASKS, currently lack such a feature.
 
 \TOP applications give rise to concepts like concurrency, synchronisation, \GUI-programming and program generation.
 In this paper we identify common concepts from already existing languages and frameworks,
 and describe their similarities and differences.\fixme{What do you mean with this sentence?}
 
-
+\fixme{Change or remove.}
+In this paper we study the essence of \TOP.
+We claim that at the heart of \TOP lie modular interactive workflows.
+Workflows because \TOP programs coordinate collaboration between people.
+Interactive because progress of \TOP programs is driven by user input.
+Modular because the embedding in a strongly-typed functional language allows powerful abstractions using type-driven techniques and higher-order functions.
 
 
 \subsection{Contributions}
