@@ -83,9 +83,19 @@ focussing on \IOT devices and deployment on micro controllers.
 
 
 
-\subsection{Contributions}
+\subsection{Scope}
 
-\input{sections/contributions}
+In this paper, we set out to develop a formal basis for \TOP, called \TOPHAT (TopHat).
+Our goal is to specify the basic building blocks of declarative workflows.
+We clearly separate them from general purpose programming concepts.
+This allows us to prove properties like progress and type preservation.
+\TOPHAT should be powerful enough to model complicated real-world situations,
+without losing opportunities for formal reasoning.
+
+By separating them in the style of a deep embedding \cite{conf/cefp/Gibbons13}, we make explicit where and where not, they depend on each other. \fixme{what to do with this sentence}
+
+We show that, where process algebras focus on the \emph{coordination} of processes and the \emph{communication} between them,
+\TOP, and therefore \TOPHAT, focus on supporting \emph{tasks} and model ways to \emph{collaborate} on them.
 
 In this paper we aim to identify the essence of \TOP in formal as well as an informal way.
 These core principles lead to a formal system for \TOP called \TOPHAT.
@@ -98,25 +108,43 @@ and describe their similarities and differences.\fixme{What do you mean with thi
 
 
 
+
+\subsection{Contributions}
+
 Our contributions to workflow modelling, functional programming language design, and rapid application development are as follows.
 
-\begin{enumerate}
 
+\begin{itemize}
   \item
     We informally describe the essential concepts of task-oriented programming (\TOP).
-    \TOP has a strong focus on modelling using collaboration
-    while keeping a constant desire to rapidly generate executable applications into account.
 
   \item
-    We present a formal calculus for \TOP, arising naturally from the aforementioned essential concepts.
-    In doing so, we lay the ground work to allow formal reasoning about \TOP specifications in future work.
+    We present a formal calculus for modelling declarative workflows, embedded in a simply typed lambda-calculus.
+    This calculus is based on the aforementioned essential \TOP concepts.
 
   \item
-    Using both informal and formal descriptions, we compare \TOP and \TOPHAT with multiple related works in the areas,
+    We develop an operational semantics that is driven by user input.
+    The semantics of the task language is clearly separated from the semantics of the underlying host language.
+
+  \item
+    Along with the semantics, we present the following semantic observations on tasks:
+    the current value, whether a term is stuck, the current user interface, and the accepted inputs. \fixme{we do not provide observation for user interface!}
+
+  \item
+    We implemented the whole semantic system in the dependently typed programming language Idris \cite{journals/jfp/Brady13}.
+
+  \item
+    We have implemented \TOPHAT in iTasks to demonstrate that the first is a subset of the second.
+
+  \item
+    Using both informal and formal descriptions, we compare \TOP with multiple related works in areas,
     ranging from business process modelling languages, to process algebras and reactive programming frameworks.
 
-\end{enumerate}
+    \item
+      We prove progress and type preservation for our calculus.
 
+
+\end{itemize}
 
 
 \subsection{Structure}
