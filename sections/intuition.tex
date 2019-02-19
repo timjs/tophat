@@ -7,14 +7,9 @@
 
 This section gives an overview over the core concepts of task-oriented programming.
 
-
-
-\subsection{Tasks model real world collaborations between people and machines}
-
 The central objective of \TOP is to \emph{coordinate collaboration}.
-The basic building blocks of \TOPHAT are editors and combinators.
-Editors are tasks with which users interact directly.
-Combinators express ways in which people can work together.
+The basic building blocks of \TOPHAT for this are task combinators.
+They express ways in which people can work together.
 Tasks can be executed after each other, at the same time, or conditionally.
 This motivates the combinators step ($\Then$, $\Next$), parallel ($\And$), and choice ($\Or$, $\Xor$).
 
@@ -22,10 +17,10 @@ This motivates the combinators step ($\Then$, $\Next$), parallel ($\And$), and c
 \label{exm:breakfast}
 
 The following program shows the different collaboration operators in action.
-Users have a choice whether they want tea or coffee.
+Users have a choice ($\Xor$) whether they want tea or coffee.
 They always get an egg.
-The drink and the food are prepared in parallel.
-When drink and food are prepared, users can step to eating the result.
+The drink and the food are prepared in parallel ($\And$).
+When drink and food are prepared, users can step ($\Next$) to eating the results.
 
 \begin{TASK}
   let makeBreakfast : Task Drink -> Task Food -> Task Unit =
