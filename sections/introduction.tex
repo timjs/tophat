@@ -116,7 +116,7 @@ Our contributions to workflow modelling, functional programming language design,
 
 \begin{itemize}
   \item
-    We informally describe the essential concepts of task-oriented programming (\TOP).
+    We describe the essential concepts of task-oriented programming.
 
   \item
     We present a formal calculus for modelling declarative workflows, embedded in a simply typed lambda-calculus.
@@ -131,17 +131,19 @@ Our contributions to workflow modelling, functional programming language design,
     the current value, whether a term is stuck, the current user interface, and the accepted inputs. \fixme{we do not provide observation for user interface!}
 
   \item
+    We prove progress and type preservation for our calculus.
+
+  \item
+    Using both the essential concepts and the formal calculus, we compare \TOP with multiple related works, in areas ranging from business process modelling to process algebras and reactive programming.
+
+  \item
     We implemented the whole semantic system in the dependently typed programming language Idris \cite{journals/jfp/Brady13}.
 
   \item
-    We have implemented \TOPHAT in iTasks to demonstrate that the first is a subset of the second.
+    %To create executable applications, we implemented \TOPHAT in iTasks.
 
-  \item
-    Using both informal and formal descriptions, we compare \TOP with multiple related works in areas,
-    ranging from business process modelling languages, to process algebras and reactive programming frameworks.
-
-    \item
-      We prove progress and type preservation for our calculus.
+    To create executable applications, we implemented the task layer of \TOPHAT in iTasks.
+    This also demonstrates that the former is a subset of the latter.
 
 
 \end{itemize}
