@@ -7,6 +7,8 @@
 
 
 
+\subsection{Task-oriented programming implementations}
+
 \paragraph{iTasks}
 
 As mentioned earlier, iTasks is an implementation of \TOP. iTasks has many
@@ -22,7 +24,8 @@ subset of the interface of iTasks. These semantics however do not make an
 explicit distinction between the host language and task language and they do not
 provide a formal semantics, which makes formal reasoning difficult.
 
-
+\paragraph{mTasks}
+\fixme{Hier iets gezelligs over mTasks}
 % Our work differs in three major ways.
 % First, we make an explicit distinction between the host language and the task
 % language, to emphasise their boundaries.
@@ -113,39 +116,14 @@ Contrast this with Milner's CCS \cite{books/Milner89CAC}, where concealed action
 Another similarity between \TOPHAT and process algebras, or any system with concurrency for that matter, is the need for synchronisation.
 Broadly speaking, concurrency means that different parts of a program can interact with the environment independently, in an interleaved manner.
 Synchronisation means that only some, but not all, of the possible interleavings are desirable.
-The semantics of the step combinators in \TOPHAT, together with the fact that internal communication happens atomically, allows for concise TODO: say that synchronization in TOPHAT is the best.
+The semantics of the step combinators in \TOPHAT, together with the fact that internal communication happens atomically, allows for concise TODO: say that synchronisation in TOPHAT is the best.
 
 
-\subsection{Related web services}
+\subsection{Reactive programming}
 
+\paragraph{Esterel \& HipHop}
 
-\paragraph{IFTTT}
-
-If This Then That (\IFTTT)~\cite{IFTTT} is a web service that allows users to write and
-configure simple conditional statements called applets, that can interact with
-web services and IoT devices. These applets can be seen as tiny workflows, that
-facilitate collaboration between different services and platforms. The
-complexity of the flow is very limited however, and is not geared towards humans
-collaborating.
-
-\paragraph{Google forms \& Wufoo}
-
-Google Forms~\cite{googleforms} and Wufoo~\cite{wufoo} are web based survey administration apps that allows
-users to compose forms and gather data from them. They are comparable to \TOP and
-iTasks in that they provide an easy way for users to construct forms on the web.
-However, Google Forms and Wufoo do not allow users to define what the system
-then should do with this information, and can therefore not be regarded as a
-workflow or business process modelling systems.
-
-\paragraph{Chorus} % (http://www.chorus-home.org/)
-
-Chorus~\cite{chen2017chorus} is a visual programming environment for online
-collaboration apps. The goal of Chorus is to allow users to program their own
-application, though which a collective task can be coordinated. Users work on a
-preset data-type that drives the behaviour of the user defined applications.
-
-
-\subsection{Functional Reactive Programming}
+\paragraph{Functional reactive programming}
 
 Functional Reactive Programming (\FRP) is a paradigm to describe dynamic changes of values in a declarative way.
 This is done by specifying networks of values, called behaviours, that can depend on each other and on external events.
@@ -181,3 +159,32 @@ Therefore, session types are not applicable to \TOP in the sense used in the lit
 Formal reasoning about \TOP programs is one of our future goals for \TOPHAT.
 The ideas and techniques of session types could be useful for specifying that a list of inputs of a certain form leads to desired task values.
 The details are a topic for future work.
+
+
+\subsection{Related web services}
+
+
+\paragraph{IFTTT}
+
+If This Then That (\IFTTT)~\cite{IFTTT} is a web service that allows users to write and
+configure simple conditional statements called applets, that can interact with
+web services and IoT devices. These applets can be seen as tiny workflows, that
+facilitate collaboration between different services and platforms. The
+complexity of the flow is very limited however, and is not geared towards humans
+collaborating.
+
+\paragraph{Google forms \& Wufoo}
+
+Google Forms~\cite{googleforms} and SurveyMonkey~\cite{wufoo} (and their various other tools like Wufoo, Precise Polling and Zoomerang) are web based survey administration apps that allows
+users to compose forms and gather data from them. They are comparable to \TOP and
+iTasks in that they provide an easy way for users to construct forms on the web.
+However, Google Forms and Wufoo do not allow users to define what the system
+then should do with this information, and can therefore not be regarded as a
+workflow or business process modelling systems.
+
+\paragraph{Chorus} % (http://www.chorus-home.org/)
+
+Chorus~\cite{chen2017chorus} is a visual programming environment for online
+collaboration apps. The goal of Chorus is to allow users to program their own
+application, though which a collective task can be coordinated. Users work on a
+preset data-type that drives the behaviour of the user defined applications.
