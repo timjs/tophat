@@ -18,6 +18,22 @@ Combinators express ways in which people can work together.
 Tasks can be executed after each other, at the same time, or conditionally.
 This motivates the combinators step, parallel, and choice.
 
+\begin{example}[Breakfast]
+
+The following program shows the different collaboration operators in action.
+The user has a choice whether they want tea or coffee.
+They always get an egg.
+The drink and the food are prepared in parallel.
+When drink and food are prepared, the user can step to eating the result.
+
+\begin{TASK}
+  let makeBreakfast : Task Drink -> Task Food -> Task Unit =
+    \makeDrink . \makeFood . makeDrink <&> makeFood >>? \<<d, f>>. eat d f
+  let main : Task Unit =
+    makeBreakfast (makeTea <?> makeCoffee) makeEgg
+\end{TASK}
+
+\end{example}
 
 \subsection{Tasks are reusable}
 
