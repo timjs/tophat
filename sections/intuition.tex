@@ -16,7 +16,7 @@ The basic building blocks of \TOPHAT are editors and combinators.
 Editors are tasks with which users interact directly.
 Combinators express ways in which people can work together.
 Tasks can be executed after each other, at the same time, or conditionally.
-This motivates the combinators step, parallel, and choice.
+This motivates the combinators step ($\Then$, $\Next$), parallel ($\And$), and choice ($\Or$, $\Xor$).
 
 \begin{example}[Breakfast]
 \label{exm:breakfast}
@@ -53,11 +53,14 @@ These aspects make it possible for programmers to model custom collaboration pat
 Input events drive evaluation of tasks.
 When the system receives a valid event, it applies the event to the current task, which results in a new task.
 In this way the system communicates with the environment.
+Input events are synchronous.
+We assume systems react instantaneous to each such event.
 
 In \TOPHAT, editors are the basic method of communication with the environment.
 There are different editors, denoted by different box symbols.
 An editor of the form $\Edit v$, where $v$ is of type $\tau$, reacts to two kinds of events:
 Change events $v$ with a value of type $\tau$ and clear events $\Empty$ which empty the editor.
+This results in a typed empty editor $\Enter \tau$, which is annotated with the same type.
 
 The sole purpose of editors is to interact with users by remembering the last value that has been sent to them.
 There are no output events.
@@ -68,17 +71,18 @@ An empty editor $\Enter \tau$ stands for a prompt to input data, while a filled 
 \label{Vending machine}
 
 This example demonstrates external communication and choice.
-It is a vending machine that dispenses a small biscuit for one coin and a large biscuit for two coins.
+It is a vending machine that dispenses a biscuit for one coin and a chocolate bar for two coins.
 \begin{TASK}
-  let vend : Task String = enter Int >>? \n. if n == 1 then edit "small"
-    else if n == 2 then edit "large"
+  let vend : Task Snack = enter Int >>? \n. if n == 1 then edit Biscuit
+    else if n == 2 then edit ChocolateBar
     else fail
 \end{TASK}
 The editor $\Enter \Int$ asks the user to enter an amount of money.
 This editor stands for a coin slot in a real machine that freely accepts and returns coins.
 There is a continue button that is initially disabled, due to the fact that the left hand side of the step combinator has no value.
 When the user has inserted exactly 1 or 2 coins, the continue button becomes enabled.
-When the user presses the continue button, the machine dispenses either a large or a small biscuit, depending on the amount of money.
+When the user presses the continue button, the machine dispenses either a biscuit or a chocolate bar, depending on the amount of money.
+Snacks are modelled using a custom data type.
 
 \end{example}
 
@@ -103,7 +107,7 @@ Two parallel tasks are rendered next to each other.
 In order for the system to actually render a task, it needs to observe the task's value, possible inputs, and user interface.
 With this information, the system can then display the current state of the task, together with buttons that show the actions a user can engage in.
 
-The final observation is to determine whether a task results in $\Fail$.
+The final observation is to determine whether a task results in $\Fail$ (failure).
 The step combinator and the choice combinator use this to prevent users from picking a failing task.
 
 
@@ -121,7 +125,7 @@ Both steps act like $t$ as long as the step is guarded.
 A step is guarded if either the left task has no value, or the speculative evaluation $e\ v$ yields $\Fail$.
 Once it becomes unguarded, the step continues as $e\ v$.
 The task $t \Next e$ additionally requires a continue event $\Continue$ to proceed.
-Speculative evaluation is designed so that it does not have side effects.
+Speculative evaluation is designed so that possible side effects are undone.
 
 The step combinators give rise to a form of internal communication:
 They represent data flow that \emph{follows} control flow.
@@ -178,10 +182,9 @@ When the agent supplies two of the ingredients by setting the respective shares 
 
 \subsection{Tasks are predictable}
 
-
-The parallel combinator $\And$ introduces concurrency: Two things are done at the same time.
 Let $t_1$ and $t_2$ be tasks.
 The parallel combination $t_1 \And t_2$ stands for two independent tasks carried out at the same time.
+Therefore $\And$ introduces concurrency.
 For the system it does not matter if the tasks are executed by two people actually in parallel, or by one person who switches between the tasks.
 The inputs sent to the component tasks are interleaved into a serial stream, which is sent to the parallel combinator.
 We assume that such a serialization is always possible.
