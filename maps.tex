@@ -13,13 +13,13 @@
     \Value(t_1 \Then e_2, s)          &=& \bot \\
     \Value(t_1 \Next e_2, s)          &=& \bot \\
     \Value(t_1 \And t_2, s)           &=& \left\{
-      \begin{array}{l@{}l}
+      \begin{array}{ll}
         \tuple{v_1, v_2}              & \ \when\ \Value(t_1, s) = v_1 \land \Value(t_2, s) = v_2 \\
         \bot                          & \ \otherwise
       \end{array}
     \right. \\
     \Value(t_1 \Or t_2, s)            &=& \left\{
-      \begin{array}{l@{}l}
+      \begin{array}{ll}
         v_1                           & \ \when\ \Value(t_1, s) = v_1 \\
         v_2                           & \ \when\ \Value(t_1, s) = \bot \land \Value(t_2, s) = v_2 \\
         \obox{\tuple{v_1, v_2}}{\bot} & \ \otherwise

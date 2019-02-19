@@ -8,6 +8,7 @@
 \fixme{Intro related work}
 
 
+
 \subsection{Task-oriented programming implementations}
 
 \paragraph{iTasks}
@@ -27,6 +28,7 @@ provide a formal semantics, which makes formal reasoning difficult.
 
 \paragraph{mTasks}
 \fixme{Hier iets gezelligs over mTasks}
+
 % Our work differs in three major ways.
 % First, we make an explicit distinction between the host language and the task
 % language, to emphasise their boundaries.
@@ -54,7 +56,6 @@ The systems described here follow a \emph{boxes and arrows} model of specifying 
 Control flow, represented by arrows, usually can go unrestricted from anywhere to anywhere else in a workflow.
 We see \TOP as the functional programming of workflows, as opposed to this \emph{goto}-style.
 
-
 \paragraph{Workflow patterns}
 
 Workflow patterns are regarded as special kind of the design patterns in
@@ -66,22 +67,16 @@ Workflow patterns are usually described in terms of control flow graphs, and no
 formal specification is given, which makes comparison and formal reasoning more
 difficult.
 
-\paragraph{Workflow Nets}
+\paragraph{Workflow Nets \& YAWL}
 
-Workflow Nets~(\WFN)\cite{journals/jcsc/Aalst98} allow for the modelling and analysis
-of business processes. They are graphical in nature, and clearly display how
-every component is related to each other. A downside of \WFN is that
-they do not facilitate higher order constructs and that they are often not
-directly executable.
+Workflow Nets~(\WFN) \cite{journals/jcsc/Aalst98} allow for the modelling and analysis of business processes.
+They are graphical in nature, and clearly display how every component is related to each other.
+A downside of \WFN is that they do not facilitate higher order constructs.
+Also, they are often not directly executable.
 
-\paragraph{YAWL}
-
-This is not always the case however. A language based on \WFN that is
-actually directly executable is \YAWL by \citet{DBLP:journals/is/AalstH05}.
-It facilitates modelling and execution of
-dynamic workflows, with support for \emph{and}, \emph{or} and \emph{xor} workflow patterns. As
-mentioned, \YAWL programs consist of \WFN, and are therefore programmed
-visually.
+A language based on \WFN that is actually directly executable is \YAWL by \citet{DBLP:journals/is/AalstH05}.
+It facilitates modelling and execution of dynamic workflows, with support for \emph{and}, \emph{or} and \emph{xor} workflow patterns.
+As mentioned, \YAWL programs consist of \WFN, and are therefore programmed visually.
 
 \paragraph{BPEL}
 
@@ -90,6 +85,7 @@ language allows for the specification of actions within business processes,
 using an \XML format. Processes specified in \BPEL are executable, just like \YAWL.
 
 \fixme{Is this higher order? What combinators can be used? Other limitations?}
+
 
 
 \subsection{Process algebras}
@@ -121,9 +117,14 @@ Synchronisation means that only some, but not all, of the possible interleavings
 The semantics of the step combinators in \TOPHAT, together with the fact that internal communication happens atomically, allows for concise TODO: say that synchronisation in TOPHAT is the best.
 
 
+
 \subsection{Reactive programming}
 
 \paragraph{Esterel \& HipHop}
+
+\fixme{Write}
+
+
 
 \paragraph{Functional reactive programming}
 
@@ -151,6 +152,7 @@ Furthermore, both systems can be used to declaratively program user interfaces, 
 In \TOP graphical user interfaces are automatically derived.
 
 
+
 \subsection{Session types}
 
 Session types are a type discipline that can be used to check whether communicating programs conform to a certain protocol.
@@ -162,6 +164,7 @@ Therefore, session types are not applicable to \TOP in the sense used in the lit
 Formal reasoning about \TOP programs is one of our future goals for \TOPHAT.
 The ideas and techniques of session types could be useful for specifying that a list of inputs of a certain form leads to desired task values.
 The details are a topic for future work.
+
 
 
 \subsection{Related web services}
