@@ -34,7 +34,6 @@ A higher-order function which executes a given task twice.
   let twice : Task $\tau$ -> Task $\tau$ = \t : Task $\tau$. t >>? \x . t
 \end{TASK}
 The task value of the first execution is ignored.
-\qed
 
 \end{example}
 
@@ -71,7 +70,7 @@ The editor $\Enter \Int$ asks the user to enter an amount of money.
 This editor stands for a coin slot in a real machine that freely accepts and returns coins.
 There is a continue button that is initially disabled, due to the fact that the left hand side of the step combinator has no value.
 When the user has inserted exactly 1 or 2 coins, the continue button becomes enabled.
-When the user presses the continue button, the machine dispenses either a large or a small biscuit, depending on the amount of money. \qed
+When the user presses the continue button, the machine dispenses either a large or a small biscuit, depending on the amount of money.
 
 \end{example}
 
@@ -163,7 +162,7 @@ The smokers are defined as follows.
   let paperSmoker = (update tobacco <&> update match) >>? continue in
   let matchSmoker = (update tobacco <&> update paper) >>? continue
 \end{TASK}
-When the agent supplies two of the ingredients by setting the respective shares to \TS{True}, only the step of the smoker that waits for those becomes enabled. \qed
+When the agent supplies two of the ingredients by setting the respective shares to \TS{True}, only the step of the smoker that waits for those becomes enabled.
 
 \end{example}
 
