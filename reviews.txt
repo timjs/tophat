@@ -1,0 +1,256 @@
+PLDI 2019 Paper #439 Reviews and Comments
+===========================================================================
+Paper #439 TopHat: A calculus for modular interactive workflows
+
+
+Review #439A
+===========================================================================
+
+Overall merit
+-------------
+C. I would not accept this paper but will not argue strongly against
+   accepting it.
+
+Reviewer expertise
+------------------
+Y. Knowledgeable
+
+Paper summary
+-------------
+This paper describes a core calculus for _task-oriented programming_
+(TOP). A simply-typed lambda calculus is extended with a type
+constructor for _tasks_ which involve interaction with an outside
+environment (e.g., a user through a webpage). The semantics are
+defined as an interleaving of a few different big- and small-step
+semantics to account for communication and pure term evaluation.
+
+The calculus is contrasted with communicating sequential processes
+(CSP)---the primitive concepts are similar but the goals are
+different.
+
+Finally, type soundness is shown via an adaptation of traditional
+progress and preservation proofs; additionally, it's proved that one
+can completely characterize the inputs each expression in the calculus
+may receive.
+
+Comments for author
+-------------------
+This is a nice semantics for a language with an interesting
+domain. The notion of tasks and their combinators make sense. My score
+is a 'C' for two reasons: the results are a little thin and the work
+isn't well situated in the literature.
+
+The paper would be strengthened by including:
+
+- Explicitly claimed contributions. What is new here, and why is it
+  important?
+
+- An application of the semantics to, e.g., simplify the
+  implementation of iTasks, to prove something about programs, or to
+  characterize which programs can never succeed.
+
+- Better explanation of related work.
+
+I should add that I thought the humor (e.g., Example 4.4) was done
+with a light touch---cute without being overbearing. Nice!
+
+# Related work
+
+Many of your tasks have a monadic feel to them. The type of $\rhd$ is
+the same as monadic bind (`(>>=)` in Haskell; your $\blacklozenge$ is
+the same as applicative choice (`(<|>)` in Haskell). Some comparison
+here would be nice.
+
+Some of Jonathan Edwards's work (Chorus/Subtext) is quite related and
+should be cited/discussed. Various "forms" and scripting applications
+(Google Forms, Wufoo, IFTTT) are also quite related. While these last
+aren't academic works, it's worth discussing how your calculus fits
+in.
+
+Functional reactive programming (FRP) is very, very related. You share
+an aim with early FRP work, à la Hudak but also FrTime and Flapjax and
+work by Krishnaswami (https://github.com/neel-krishnaswami/adjs):
+writing interactive programs in direct style. These works should also
+be cited and compared against.
+
+Esterel's mix of communication and sequential computation is quite
+similar to your task framework, as well: both involve running
+sequential code to completion in order to allow communication at
+synchronous 'moments'. It's probably good to not only cite the work
+from the Esterel/embedded systems community, but also more recent work
+in PL by Serrano (HipHop) and Findler (POP-PL, the Esterel semantics
+forthcoming in POPL 2018).
+
+Finally, "workflow languages" is a not insignificant area of study,
+even if it garners very little attention in PL venues. I'm thinking
+here of YAWL, BPEL, and the kinds of work that appear in venues like
+_Business Process Modeling_ (BPM).
+
+# Technical comments
+
+In the example in Section 2, you say that we will see communication on
+three levels: "with the environment, across control flow, and
+alongside it" (L124). It would be good if you highlighted when each of
+these happened in the example, since readers may not know quite what
+you mean by 'environment' or 'control flow'.
+
+L198 You say a "translation to iTasks". Is that translation automatic?
+That is, can the code you wrote actually run in any existing system?
+
+L203 What do you mean when you say "the first user can not pick seats
+1B and 1C"? Are they grayed out automatically, or does attempting to
+click 'Pick' fail?
+
+L465 You claim that TOP doesn't have any nondeterminism in its
+semantics, but surely there's _induced_ nondeterminism from the
+environment, no? For example, in the seat-selection program of Section
+2, there's a race between the three users to choose seats.
+
+L1112 Which theorem shows that "the normalisation semantics is a
+big-step semantics"? Why might one want to know this?
+
+L1231 You criticize iTasks, for being unable to do formal
+reasoning... but you don't actually do any either! What might you be
+able to show with your semantics?
+
+# Miscellany
+
+L95 "Along the" missing 'with'
+
+L595 "meant capture" missing 'to'
+
+L878 "itself" should be 'themselves'
+
+L948 S-ThenCont uses $s'''$ in its conclusion, but you probably meant
+to say $s''$.
+
+Questions for Authors
+---------------------
+L100 and L1094 Why does Idris help you gain confidence in your system
+in ways that, e.g., Clean doesn't? Does the code you wrote in Idris
+have any formal relation to the rules on paper?
+
+The rules S-ThenFail and S-ThenCont check to see whether the
+continuation of $\RHD$ is failing or not. Am I correct in
+understanding that these checks require speculatively executing
+functional code to check for failure, possibly rolling back any writes
+(S-ThenFail)? Have you thought about how this might interact with
+effects outside of the system from the functional code, from benign
+ones like logging to less-benign ones, like network requests?
+
+The rule H-PassNext always forwards 'Continue' to the outermost
+$\rhd$. It is conceptually possible, however, to nest tasks. Have you
+considered this?
+
+
+
+Review #439B
+===========================================================================
+
+Overall merit
+-------------
+D. I will argue against accepting this paper.
+
+Reviewer expertise
+------------------
+Y. Knowledgeable
+
+Paper summary
+-------------
+This paper presents TopHat, a language for describing task-based
+programs. TopHat includes a functional layer, which is a
+simply-typed lambda calculus with references and a task layer, which
+is a process calculus. A type system for TopHat is defined and preservation
+and progress theorems are proven for well-typed programs.
+
+Comments for author
+-------------------
+One interesting feature of TopHat is the modeling of user inputs,
+which leads to runtime checks and GUIs to ensure that users only
+provide values of the correct type.  Another interesting feature of
+TopHat is the inclusion of shared references which can be accessed by
+tasks. One could encode a shared reference as a process, but it is
+more cumbersome to deal with.
+
+Unfortunately, this work lacks novel contributions. The calculus is
+derivative and does not seem to go beyond what process calculi can
+do. Section 3's comparison between TopHat and CSP only highlights
+shallow differences. It is hard to argue that the abstractions of
+TopHat are necessary to solve any fundamental problems.
+
+The formalism is not as elegant as one could hope. In particular, the
+operational semantic rules involve 5 different stepping relations. It
+is also unclear how does the type system facilitate identifying
+problems in the modeling process. The standard progress and
+preservation theorems are not necessarily the right kind of
+properties for real world applications. For instance, what
+about data race in accessing shared references, what about
+protocol-level properties?
+
+The case studies are briefly mentioned in the introduction and one
+example is shown in section 2. Are the case studies re-implemented in
+the new implementation of TopHat? It would be nice to have a dedicated
+section for these case studies. I am particularly interested in seeing
+discussions on how the formalism contributes to constructing correct
+models or identifying problems in system designs.
+
+The related work section is very short. There is quite a bit of work on
+business process modeling that uses some sort of process calculus. These
+are not deep programming language research projects, but are related to TOP. In
+the PL community, recent work on session types could be seen as an
+alternative to model these task-oriented programs. Further, sessions types
+can provide stronger static guarantees than TopHat.
+
+On line 488: "These construct ..." => These constructs
+
+On line 1148 Lemma 6.4, shouldn't e' have type Task $\tau$?
+
+
+
+Review #439C
+===========================================================================
+
+Overall merit
+-------------
+C. I would not accept this paper but will not argue strongly against
+   accepting it.
+
+Reviewer expertise
+------------------
+X. Expert
+
+Paper summary
+-------------
+The paper presents a core calculus for Task Oriented Programming (TOP), using which multi-user applications are written in a declarative style. The calculus models essential features of TOP such as editors and communication between tasks. The calculus is built on STLC with tuples and references (the host language), extended with custom operators and types for TOP essentials. The paper presents the syntax, operational semantics, and a type system for the calculus, and proves progress and preservation theorems for the calculus. The paper also compares TOP with CSP and highlights differences in the two paradigms.
+
+Comments for author
+-------------------
+The paper is well-written, the calculus is clean and simple. All the formal judgments are also well-explained.
+
+My main concern with the paper is the motivation and how important the problem is.
+
+1. Is TOP only used to model the applications OR the code generated from it is actually deployed? The paper mentions only one real implementation of TOP, iTasks, and that too has only been used to prototype ideas. If that's the case, why is it an important problem?
+
+2. Outside of the usual progress and preservation, what kind of properties do programmers care about when programming or modeling such systems. What kind of formal reasoning systems could be built on top of the core calculus presented here.
+
+3. Have there been real bugs due to incorrect modeling. Or put another way, if we have a formal reasoning system for TOP applications built on this core calculus, what impact would it have.
+
+4. The paper has no evaluation, and so, it is not clear how useful is the core calculus presented in the paper? Can one build some real applications on top of it? Can they be typechecked in the type system or could the type system be too restrictive in some way? Line 88 mentions that "should be powerful enough", but it is not clear if it is.
+
+Some other comments:
+
+5. The calculus models shared state as references, but what about synchronizing it between multiple users? E.g. two users trying to write to the same shared state concurrently?
+
+6. Related to this, the difference between the TOP calculus and CSP seems to be the higher level of abstraction where explicit communication details are absent -- but then to deploy a real application, some layer has to make it explicit. Where does that happen?
+
+Minor nits:
+
+7. In Related Work, around line 1234, the paper says "Much research ..." but does not cite relevant papers. Would be useful to point to some papers to support this.
+
+8. Did the implementation in Idris also mechanize the metatheory? Or is it just an implementation of the calculus, type system, and its semantics. If the latter, what was the goal of this implementation?
+
+9. Figure 10, the Failing function, should the case for parallel composition of t1 and t2 (third last) use boolean OR instead of boolean AND? Since the result of this is a tuple, OR is more intuitive to me.
+
+10. Line 329, can you please explain more the input event C, it is quite opaque at this point (I think somewhere later it does say that this is the Continue event).
+
+11. Line 651: "the successor task must not be Fail", where is this enforced? The type system seems to allow for this.
