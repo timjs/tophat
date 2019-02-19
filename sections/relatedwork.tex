@@ -98,108 +98,22 @@ Typically, one wishes to prove properties such as deadlock-freedom, liveness, or
 The focus of \TOP on the other hand is to model collaboration patterns, with the explicit goal of not having to specify how exactly subtasks communicate.
 The declarative specification of data dependencies between subtasks enables \TOP to hide such details.
 
-The second difference is in the way tasks communicate.
+The second difference concerns internal communication.
 There are two forms of communication between tasks: Passing values to continuations and sharing data.
 This is different from communication in process algebras, which is based on message-passing.
 
 
-\paragraph{Communication}
+\paragraph{Similarities}
+There are some aspects that are similar in \TOPHAT and process algebras.
+Internal communication in Hoare's CSP \cite{books/Hoare85CSP} is introduced with the concealment operator.
+The semantics of CSP requires that all concealed actions are handled to exhaustion before any action with the environment can take place.
+This is somewhat similar to \TOPHAT, where all enabled internal steps must be taken until the system can react to input events again.
+Contrast this with Milner's CCS \cite{books/Milner89CAC}, where concealed actions are visible to the outside as $\tau$-actions, and can be interleaved with external communication.
 
-Both tasks and processes have two sorts of communication: with the environment, and between subsystems.
-In both paradigms, communication with the \emph{environment} is input and output.
-They block evaluation of programs until the environment sends or receives events.
-In both paradigms, communication \emph{between subsystems} does not block.
-They evaluate programs as far as possible until further external input is required.
-
-% \paragraph{Communication with the environment}
-
-Processes communicate with the environment by sending or receiving actions
-The \CSP process $(a \to P)$ can engage in action $a$, after which it continues as process $P$.
-% Prefixing has no direction of sending and receiving.
-Hoare uses the neutral phrase \emph{engaging in an action}.
-The interpretation of whether an action stands for input or output is left to the reader.
-For example, a vending machine $P = (\textit{coin} \to \textit{choc} \to P)$ is to be interpreted as taking a coin as input and producing chocolate as output.
-%%NOTE: Not that important I think, we don't use it in the rest of the text. --TS
-% In general, if $B$ is a set of events and $P(x)$ is an expression that evaluates to a process for each $x \in B$, the process $(x:B \to P(x))$ can engage in any one of the actions in $B$, after which it continues as the process determined by $P(x)$.
-% Hoare does not specify the language in which $P(x)$ is to be expressed.
-% He seems to permit any kind of mathematical formula, or any programming language.
-
-Sending and receiving of values is modelled by giving additional structure to the names of actions.
-For example, an action name could be $\textit{in}.5$, which can be interpreted as inputting the value 5.
-%
-In \TOP, input values are typed to match the type of the receiving editor.
-In \CSP action names are essentially strings, subject to implicit restrictions.
-
-% \paragraph{Communication between subsystems}
-
-% \CSP's semicolon is like an internal step $t \Then e$ in \TOP where $t$ uses $\Unit$ to signal when it is done, and $e$ never fails.
-\CSP uses prefixing for both internal and external communication.
-Prefixing becomes internal by using \emph{concealment}.
-Processes must take any concealed steps as soon as possible, before any further communication with the environment can take place.
-This means concealed actions have priority over exposed ones.
-This introduces the possibility of diverging computations, that is processes which continuously take internal steps without ever being able to engage in external communication.
-
-
-% \paragraph{Sequential composition}
-
-% In \CSP, sequential composition is represented by the semicolon combinator together with the special action $\checkmark$, called \emph{success}.
-% We require that if a process engages in $\checkmark$ at all, it must be its single last action.
-% When that happens, we say the process terminates successfully.
-% The process $P;Q$ behaves like $P$ until $P$ terminates successfully, after which it continues as $Q$.
-% If $P$ never terminates successfully, neither does $P;Q$
-
-
-
-\paragraph{Concurrency}
-
-Both tasks and processes are models of \emph{multiprogramming}, as opposed to \emph{multiprocessing}.
-This means that one processor evaluates multiple programs in an interleaving fashion.
-% instead of multiple processors.
-Multiprogramming involves three aspects: concurrency, synchronisation, and nondeterminism.
-
-In \CSP, there are two different combinators for parallel composition: parallel and interleave.
-The parallel process $P \parallel Q$ can take $P$-steps and $Q$-steps in arbitrary interleaving for actions unique to $P$ and $Q$.
-Actions in the alphabets of both $P$ and $Q$ must be taken in synchronisation, so if one process wants to take such a step, it must wait until the other is ready to do so.
-Synchronised steps are the only occasion where two processes actually do something at the same time.
-%
-The interleaving operator $P \mid\mid\mid Q$ does not synchronise any actions of $P$ and $Q$.
-All interleavings are permitted.
-Actions that occur in both alphabets are nondeterministically taken by either $P$ or $Q$.
-
-
-
-\paragraph{Synchronisation}
-
-Synchronisation means that an agent has to pause execution until some condition is met.
-The need for synchronisation arises quite naturally in countless variations in situations involving concurrency.
-For multiprogramming, synchronisation always means that some of the possible interleavings are forbidden.
-
-For example, the mutual exclusion problem for two parallel processes $a_p \to b_p \to \text{STOP} $ and $a_q \to b_q \to \text{STOP}$ can be stated as:
-In no interleaving should there be two adjacent $a$'s.
-%
-The mutual exclusion problem for two parallel tasks can be stated as follows.
-Let \TS{inc} and \TS{dec} be tasks that increment and decrement some shared counter.
-Then, in \TS{(inc x >>? dec) <&> (dec x >>? inc)}, the shared counter should at no point be greater than 1.
-This means that in no interleaving should there be two adjacent \TS{inc}'s.
-
-The basic method for synchronisation in \CSP is synchronised prefixing.
-If some action $a$ is in the alphabets of both $P$ and $Q$, then their parallel composition $P \parallel Q$ can take an $a$-step only if both $P$ and $Q$ are ready to take an $a$-step, in which case they both take this step simultaneously.
-Both have to wait for the condition that the other process is ready to take the step.
-All synchronisation problems in \CSP must be solved by employing synchronised steps in some form.
-
-
-
-\paragraph{Nondeterminism}
-
-Nondeterminism means that a system can react to the same input in different ways, the choice of which can not be influenced by the environment.
-
-\CSP has an operator to explicitly introduce nondeterminism.
-Furthermore, nondeterminism can arise from the combination of some other combinators, for example choice and concealment.
-%
-Hoare states that nondeterminism is only useful for \emph{specifying} processes, never for \emph{implementing} them \cite{books/Hoare85CSP}.
-\CSP can be used for both.
-A process with nondeterministic behaviour must always be regarded as a specification, while a deterministic process can be seen as specification or implementation.
-
+Another similarity between \TOPHAT and process algebras, or any system with concurrency for that matter, is the need for synchronisation.
+Broadly speaking, concurrency means that different parts of a program can interact with the environment independently, in an interleaved manner.
+Synchronisation means that only some, but not all, of the possible interleavings are desirable.
+The semantics of the step combinators in \TOPHAT, together with the fact that internal communication happens atomically, allows for concise TODO: say that synchronization in TOPHAT is the best.
 
 
 \subsection{Related web services}
