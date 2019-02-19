@@ -1,31 +1,3 @@
 % !TEX root=../icfp2019.tex
 
-\section{Future work}
-
-There are a couple of ways in which we would like to continue this line of work.
-
-One of the main motivations to formalize Task Oriented Programmig is to be able to reason about programs.
-In this paper we reason about the language itself, but it would be nice to prove properties about individual programs.
-To this end, we are very interested to see if it is possible to develop an axiomatic semantics for \TOPHAT that allows us to do so.
-There are certain properties of our calculus that make this particularly complex; we have to deal with parallelism, user interacton and references.
-
-We would also like to prove whether certain programs are equivalent, for example to show that the monad laws hold for our step combinator.
-This requires a notion of equality, which in the presence of side effects most certainly needs some form of coalgebraic input-output conformance.
-
-We have implemented the reduction semantics of our language in Idris, whose type system could aid in a formalisation of those proofs.
-
-Another form of reasoning about programs is static analysis.
-Klinik et al.~\cite{conf/ifl/KlinikJP17} have developed a cost analysis for tasks that require resources in order to be executed.
-% Put this line back in for final version of paper: In previous work we have developed a cost analysis for tasks that require resources in order to be executed \cite{conf/ifl/KlinikJP17}.
-This analysis was developed for a simpler task calculus, and could be brought over to the one developed here.
-
-% Put this line back in for final version of paper: In other previous work, we have looked at building a generic feedback system for rule-based problems \cite{UUCS2017013}.
-Naus et al.~\cite{UUCS2017013} have looked at building a generic feedback system for rule-based problems.
-A workflow system typically is rule based, as outlined in their work.
-It would be interesting to fit the generic feedback system to \TOPHAT in order to support end-users working in applications developed in this calculus.
-
-
-Additionally, we would like to develop visualizations for \TOPHAT language constructs.
-An assistive development environment integrating these visualizations and the presented textual language
-would aid domain experts to model workflows in a more accessible manner.
-A system that visualizes iTask programs has been developed in the past~\cite{DBLP:conf/sfp/StutterheimPA14}.
+\section{Outlook}
