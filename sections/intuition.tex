@@ -22,12 +22,26 @@ They always get an egg.
 The drink and the food are prepared in parallel ($\And$).
 When drink and food are prepared, users can step ($\Next$) to eating the results.
 
+% \begin{TASK}
+%   let makeBreakfast : Task Drink -> Task Food -> Task Unit =
+%     \makeDrink . \makeFood . makeDrink <&> makeFood >>? \<<d, f>>. eat d f
+%   let main : Task Unit =
+%     makeBreakfast (makeTea <?> makeCoffee) makeEgg
+% \end{TASK}
+
 \begin{TASK}
-  let makeBreakfast : Task Drink -> Task Food -> Task Unit =
-    \makeDrink . \makeFood . makeDrink <&> makeFood >>? \<<d, f>>. eat d f
+  let makeBreakfast : Task Drink -> Task Food -> Task <<Drink,Food>> =
+    \makeDrink . \makeFood . makeDrink <&> makeFood
   let main : Task Unit =
-    makeBreakfast (makeTea <?> makeCoffee) makeEgg
+    (makeBreakfast (makeTea <?> makeCoffee) makeEgg) >>? \<<d, f>>. eat d f
 \end{TASK}
+
+% \begin{TASK}
+%   let makeBreakfast : Task Drink -> Task Food -> Task Breakfast =
+%     \makeDrink . \makeFood . makeDrink <&> makeFood
+%   let main : Task Unit =
+%     (makeBreakfast (makeTea <?> makeCoffee) makeEgg) >>? \breakfast. eat breakfast
+% \end{TASK}
 
 \end{example}
 
