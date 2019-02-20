@@ -82,9 +82,13 @@ As mentioned, \YAWL programs consist of \WFN, and are therefore programmed visua
 
 \BPEL~\cite{bpel} is another popular business process language. The standardised
 language allows for the specification of actions within business processes,
-using an \XML format. Processes specified in \BPEL are executable, just like \YAWL.
-
-\fixme{Is this higher order? What combinators can be used? Other limitations?}
+using an \XML format.
+The language is mainly used for coordinating web services.
+Two workflow patterns are supported; execution of services can be done sequential or in parallel.
+On top of that, processes can be guarded by conditionals.
+There is no support for higher order processes however.
+Processes described in \BPEL can be regarded as activity graphs, and they can also be rendered as such.
+The specified processes in \BPEL are directly executable, just like \YAWL.
 
 
 
