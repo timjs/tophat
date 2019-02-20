@@ -7,68 +7,57 @@
 \begin{proof}
   We prove Theorem~\ref{thm:pres-eval} by induction on $e$:\\
 
-  \noindent\textbf{Case} $e=\lambda x:\tau.e, e_1 e_2, x, c, l, e_1 \star e_2,
-      \If{e_1}{e_2}{e_3},$\\
-      $\tuple{e_1, e_2},\unit,\Ref e,!e,e_1 := e_2$ preservation has
-      been proven for these cases by Pierce~\cite{books/Pierce02TAPL}.\\
+  \case
+    {$e=\lambda x:\tau.e, e_1 e_2, x, c, l, e_1 \star e_2,\If{e_1}{e_2}{e_3},\tuple{e_1, e_2},\unit,\Ref e,!e,e_1 := e_2$}
+    {Preservation has been proven for these cases by Pierce~\cite{books/Pierce02TAPL}.}
 
-  \noindent\textbf{Case} $\userule{E-Edit}$\\
-    \indent Given that $\Gamma,\Sigma\infers\Edit e:\Task \tau$ and $\Sigma\infers s$,
-      \refrule{T-Edit} gives us that $\Gamma,\Sigma\infers e:\tau$. The induction
-      hypothesis gives us that $e,s\evaluate v,s'$ also preserves, and thus
-      $\Gamma,\Sigma\infers v:\tau$ and $\Sigma\infers s'$. Therefore
-      $\Gamma,\Sigma\infers\Edit v:\Task\tau$.\\
+  \case
+    {$\userule{E-Edit}$}
+    {Given that $\Gamma,\Sigma\infers\Edit e:\Task \tau$ and $\Sigma\infers s$,\refrule{T-Edit} gives us that $\Gamma,\Sigma\infers e:\tau$.
+    The induction hypothesis gives us that $e,s\evaluate v,s'$ also preserves, and thus $\Gamma,\Sigma\infers v:\tau$ and $\Sigma\infers s'$.
+    Therefore $\Gamma,\Sigma\infers\Edit v:\Task\tau$.}
 
-  \noindent\textbf{Case} $\userule{E-Enter}$\\
-    \indent Evaluation does not alter $e$ and $s$, therefore this case holds tivially.\\
+  \case
+    {$\userule{E-Enter}$}
+    {Evaluation does not alter $e$ and $s$, therefore this case holds trivially.}
 
-  \noindent\textbf{Case} $\userule{E-Update}$\\
-    \indent Given that $\Gamma,\Sigma\infers \Edit e:\Task \tau$ and
-      $\Sigma\infers s$, \refrule{T-Update} gives us that $\Gamma,\Sigma\infers e:\Ref \tau$.
-      The induction hypothesis gives us that $e,s\evaluate l,s'$ also preserves,
-      and thus $\Gamma,\Sigma\infers l:\Ref\tau$ and $\Sigma\infers s'$.
-      Therefore $\Gamma,\Sigma\infers\Update l:\Task\tau$\\
+  \case
+    {$\userule{E-Update}$}
+    {Given that $\Gamma,\Sigma\infers \Edit e:\Task \tau$ and $\Sigma\infers s$, \refrule{T-Update} gives us that $\Gamma,\Sigma\infers e:\Ref \tau$.
+    The induction hypothesis gives us that $e,s\evaluate l,s'$ also preserves, and thus $\Gamma,\Sigma\infers l:\Ref\tau$ and $\Sigma\infers s'$.
+    Therefore $\Gamma,\Sigma\infers\Update l:\Task\tau$.}
 
-  \noindent\textbf{Case} $\userule{E-Fail}$\\
-    \indent Evaluation does not alter $e$ and $s$, therefore this case holds tivially.\\
+  \case
+    {$\userule{E-Fail}$}
+    {Evaluation does not alter $e$ and $s$, therefore this case holds trivially.}
 
-  \noindent\textbf{Case} $\userule{E-Then}$\\
-    \indent Given that $\Gamma,\Sigma\infers e_1\Then e_2:\Task \tau$ and
-      $\Sigma\infers s$, \refrule{T-Then} gives us that
-      $\Gamma,\Sigma\infers e_1:\Task\tau_1$ and
-      $\Gamma,\Sigma\infers e_2:\tau_1 \to \Task \tau$. By the induction
-      hypothesis, we know that $e_1,s\evaluate t_1,s'$ preserves and thus
-      $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and $\Sigma\infers s'$. Therefore
-      $\Gamma,\Sigma\infers t_1\Then e_2:\Task\tau$.\\
+  \case
+    {$\userule{E-Then}$}
+    {Given that $\Gamma,\Sigma\infers e_1\Then e_2:\Task \tau$ and $\Sigma\infers s$, \refrule{T-Then} gives us that $\Gamma,\Sigma\infers e_1:\Task\tau_1$ and $\Gamma,\Sigma\infers e_2:\tau_1 \to \Task \tau$.
+    By the induction hypothesis, we know that $e_1,s\evaluate t_1,s'$ preserves and thus $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and $\Sigma\infers s'$.
+    Therefore $\Gamma,\Sigma\infers t_1\Then e_2:\Task\tau$.}
 
-  \noindent\textbf{Case} $\userule{E-Next}$\\
-    \indent Given that $\Gamma,\Sigma\infers e_1\Next e_2:\Task \tau$ and
-      $\Sigma\infers s$, \refrule{T-Next} gives us that
-      $\Gamma,\Sigma\infers e_1:\Task\tau_1$ and
-      $\Gamma,\Sigma\infers e_2:\tau_1 \to \Task \tau$. By the induction
-      hypothesis, we know that $e_1,s\evaluate t_1,s'$ preserves and thus
-      $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and $\Sigma\infers s'$. Therefore
-      $\Gamma,\Sigma\infers t_1\Next e_2:\Task\tau$.\\
+  \case
+    {$\userule{E-Next}$}
+    {Given that $\Gamma,\Sigma\infers e_1\Next e_2:\Task \tau$ and $\Sigma\infers s$, \refrule{T-Next} gives us that $\Gamma,\Sigma\infers e_1:\Task\tau_1$ and $\Gamma,\Sigma\infers e_2:\tau_1 \to \Task \tau$.
+    By the induction hypothesis, we know that $e_1,s\evaluate t_1,s'$ preserves and thus $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and $\Sigma\infers s'$.
+    Therefore $\Gamma,\Sigma\infers t_1\Next e_2:\Task\tau$.}
 
-  \noindent\textbf{Case} $\userule{E-And}$\\
-    \indent  Given that $\Gamma,\Sigma\infers e_1\And e_2:\Task(\tau_1\times\tau_2)$
-      and $\Sigma\infers s$, \refrule{T-And} gives us that
-      $\Gamma,\Sigma\infers e_1:\Task\tau_1$ and
-      $\Gamma,\Sigma\infers e_2:\Task\tau_2$. By the induction hypothesis, we
-      know that both $e_1,s\evaluate t_1,s'$ and $e_2,s'\evaluate t_2,s''$
-      preserve and thus $\Gamma,\Sigma\infers t_1:\Task\tau_1$,
-      $\Sigma\infers s'$, $\Gamma,\Sigma\infers t_2:\Task\tau_2$ and
-      $\Sigma\infers s''$. Therfore
-      $\Gamma,\Sigma\infers t_1\And t_2:\Task(\tau_1\times\tau_2)$\\
+  \case
+    {$\userule{E-And}$}
+    {Given that $\Gamma,\Sigma\infers e_1\And e_2:\Task(\tau_1\times\tau_2)$ and $\Sigma\infers s$, \refrule{T-And} gives us that $\Gamma,\Sigma\infers e_1:\Task\tau_1$ and $\Gamma,\Sigma\infers e_2:\Task\tau_2$.
+    By the induction hypothesis, we know that both $e_1,s\evaluate t_1,s'$ and $e_2,s'\evaluate t_2,s''$ preserve and thus $\Gamma,\Sigma\infers t_1:\Task\tau_1$, $\Sigma\infers s'$, $\Gamma,\Sigma\infers t_2:\Task\tau_2$ and $\Sigma\infers s''$.
+    Therefore $\Gamma,\Sigma\infers t_1\And t_2:\Task(\tau_1\times\tau_2)$.}
 
-  \noindent\textbf{Case} $\userule{E-Or}$\\
-    \indent Given that $\Gamma,\Sigma\infers e_1\Or e_2:\Task\tau$ and $\Sigma\infers s$, \refrule{T-Or} gives us that $\Gamma,\Sigma\infers e_1:\Task\tau$ and
-      $\Gamma,\Sigma\infers e_2:\Task\tau$. By the induction hypothesis, we have that both
-      $e_1,s\evaluate t_1,s'$ and $e_2,s'\evaluate t_2,s''$ preserve and thus $\Gamma,\Sigma\infers t_1:\Task\tau$, $\Sigma\infers s'$,
-      $\Gamma,\Sigma\infers t_2:\Task\tau$ and $\Sigma\infers s''$. Therefore $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$.\\
+  \case
+    {$\userule{E-Or}$}
+    {Given that $\Gamma,\Sigma\infers e_1\Or e_2:\Task\tau$ and $\Sigma\infers s$, \refrule{T-Or} gives us that $\Gamma,\Sigma\infers e_1:\Task\tau$ and $\Gamma,\Sigma\infers e_2:\Task\tau$.
+    By the induction hypothesis, we have that both $e_1,s\evaluate t_1,s'$ and $e_2,s'\evaluate t_2,s''$ preserve and thus $\Gamma,\Sigma\infers t_1:\Task\tau$, $\Sigma\infers s'$, $\Gamma,\Sigma\infers t_2:\Task\tau$ and $\Sigma\infers s''$.
+    Therefore $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$.}
 
-  \noindent\textbf{Case} $\userule{E-Xor}$\\
-    \indent Evaluation does not alter $e$ and $s$, therefore this case holds tivially.
+  \case
+    {$\userule{E-Xor}$}
+    {Evaluation does not alter $e$ and $s$, therefore this case holds trivially.}
 
   % \noindent\textbf{Case} $\userule{E-Appoint}$
   %     Given that $\Gamma,\Sigma\infers u \At e:\Task\tau$ and $\Sigma\infers s$, the induction hypothesis gives us that $e,s\evaluate t,s'$ also preserves, and therefore by \refrule{T-Appoint} $\Gamma,\Sigma\infers u \At t:\Task\tau$.
@@ -81,57 +70,56 @@
 \begin{proof}
   We prove Lemma~\ref{lem:presvalue} by induction over $e$.\\
 
-  \noindent\textbf{Case} $\Value{(\Edit v,s)}=v$ By T-Edit, if
-  $\Gamma,\Sigma\infers \Edit v:\Task\tau$, then $\Gamma,\Sigma\infers v:\tau$.\\
+\case {$\Value{(\Edit v,s)}=v$}
+      {By T-Edit, if $\Gamma,\Sigma\infers \Edit v:\Task\tau$, then $\Gamma,\Sigma\infers v:\tau$.}
 
-  \noindent\textbf{Case} $\Value{(\Enter \tau,s)}=\bot$ Since this case does not
-  lead to a value, the lemma holds trivially.\\
+\case {$\Value{(\Enter \tau,s)}=\bot$ }
+      {Since this case does not lead to a value, the lemma holds trivially.}
 
-  \noindent\textbf{Case} $\Value{(\Update l,s)}=s(l)$ Given that
-  $\Gamma,\Sigma\infers\Update l:\Task \tau$ and $\Sigma\infers s$, we know that
-  $\Gamma,\Sigma\infers s(l):\tau$ by definiton.\\
+\case {$\Value{(\Update l,s)}=s(l)$ }
+      {Given that $\Gamma,\Sigma\infers\Update l:\Task \tau$ and $\Sigma\infers s$,
+      we know that $\Gamma,\Sigma\infers s(l):\tau$ by definiton.}
 
-  \noindent\textbf{Case} $\Value{(\Fail,s)}=\bot$ Since this case does not lead
-  to a value, the lemma holds trivially.\\
+\case {$\Value{(\Fail,s)}=\bot$ }
+      {Since this case does not lead to a value, the lemma holds trivially.}
 
-  \noindent\textbf{Case} $\Value{(t_1\Then e_2,s)}=\bot$ Since this case does
-  not lead to a value, the lemma holds trivially.\\
+\case {$\Value{(t_1\Then e_2,s)}=\bot$}
+      { Since this case does not lead to a value, the lemma holds trivially.}
 
-  \noindent\textbf{Case} $\Value{(t_2\Next e_2,s)}=\bot$ Since this case does
-  not lead to a value, the lemma holds trivially.\\
+\case {$\Value{(t_2\Next e_2,s)}=\bot$ }
+      {Since this case does not lead to a value, the lemma holds trivially.}
 
-  \noindent\textbf{Case} $\Value{(t_1\And t_2,s)}=\tuple{v_1, v_2}$ given that
-  $\Value{(t_1,s)}=v_1\wedge\Value{(t_2,s)}=v_2$\\ By \refrule{T-And} we have that
-  $\Gamma,\Sigma\infers t_1\And t_2:\Task(\tau_1\times\tau_2)$ and
-  $\Gamma,\Sigma\infers t_1:\tau_1$ and $\Gamma,\Sigma\infers t_2:\tau_2$. By the
-  induction hypothesis, $ \Value{(t_1,s)}=v_1$ and $\Value{(t_2,s)}=v_2$ preserve,
-  and thus $\Gamma,\Sigma\infers v_1:\tau_1$ and $\Gamma,\Sigma\infers v_2:\tau_2$.
-  This gives us that $\Gamma,\Sigma\infers \tuple{v_1, v_2}:\Task(\tau_1\times\tau_2)$ \\
+\case {$\Value{(t_1\And t_2,s)}=\tuple{v_1, v_2}$ given that $\Value{(t_1,s)}=v_1\wedge\Value{(t_2,s)}=v_2$}
+      {By \refrule{T-And} we have that $\Gamma,\Sigma\infers t_1\And t_2:\Task(\tau_1\times\tau_2)$ and $\Gamma,\Sigma\infers t_1:\tau_1$ and $\Gamma,\Sigma\infers t_2:\tau_2$.
+      By the induction hypothesis, $ \Value{(t_1,s)}=v_1$ and $\Value{(t_2,s)}=v_2$ preserve, and thus $\Gamma,\Sigma\infers v_1:\tau_1$ and $\Gamma,\Sigma\infers v_2:\tau_2$.
+      This gives us that $\Gamma,\Sigma\infers \tuple{v_1, v_2}:\Task(\tau_1\times\tau_2)$.}
 
-  \noindent\textbf{Case} $\Value{(t_1\And t_2,s)}=\bot$ given that
-  $\neg(\Value{(t_1,s)}=v_1\wedge\Value{(t_2,s)}=v_2)$\\ Since this case does
-  not lead to a value, the lemma holds trivially.\\
+\case {$\Value{(t_1\And t_2,s)}=\bot$ given that $\neg(\Value{(t_1,s)}=v_1\wedge\Value{(t_2,s)}=v_2)$}
+      { Since this case does not lead to a value, the lemma holds trivially.}
 
-  \noindent\textbf{Case} $\Value{(t_1\Or t_2,s)}=v_1$ given that
-  $\Value{(t_1,s)}=v_1$\\
+\case
+{$\Value{(t_1\Or t_2,s)}=v_1$ given that
+  $\Value{(t_1,s)}=v_1$}{
   By \refrule{T-Or} we have that $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$,
   and $\Gamma,\Sigma\infers t_1:\Task\tau$ and
   $\Gamma,\Sigma\infers t_2:\Task\tau$. By the induction hypothesis, we have
-  that $\Gamma,\Sigma\infers v_1:\tau$.\\
+  that $\Gamma,\Sigma\infers v_1:\tau$.}
 
-  \noindent\textbf{Case} $\Value{(t_1\Or t_2,s)}=v_2$ given that
-  $\Value{(t_1,s)}=\bot\wedge\Value{(t_2,s)}=v_2$\\
+\case
+{$\Value{(t_1\Or t_2,s)}=v_2$ given that
+  $\Value{(t_1,s)}=\bot\wedge\Value{(t_2,s)}=v_2$}{
   By \refrule{T-Or} we have that $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$,
   and $\Gamma,\Sigma\infers t_1:\Task\tau$ and
   $\Gamma,\Sigma\infers t_2:\Task\tau$. By the induction hypothesis, we have
-  that $\Gamma,\Sigma\infers v_2:\tau$.\\
+  that $\Gamma,\Sigma\infers v_2:\tau$.}
 
-  \noindent\textbf{Case} $\Value{(t_1\Or t_2,s)}=\bot$ given that
-  $\Value{(t_1,s)}=\bot\wedge\Value{(t_2,s)}=\bot$\\ Since this case does not
-  lead to a value, the lemma holds trivially.\\
+\case
+{$\Value{(t_1\Or t_2,s)}=\bot$ given that
+  $\Value{(t_1,s)}=\bot\wedge\Value{(t_2,s)}=\bot$}{ Since this case does not
+  lead to a value, the lemma holds trivially.}
 
-  \noindent\textbf{Case} $\Value{(t_1\Xor t_2,s)}=\bot$ Since this case does not
-  lead to a value, the lemma holds trivially.
+\case{$\Value{(t_1\Xor t_2,s)}=\bot$ }{Since this case does not
+  lead to a value, the lemma holds trivially.}
 
   % \noindent\textbf{Case} $\Value{(u\At t,s)}=\Value(t,s)$ This case follows
   % directly from the induction hypothesis.\\
@@ -144,91 +132,68 @@
 \begin{proof}
   We prove Theorem~\ref{thm:pres-stride} by induction on $e$:\\
 
-  \noindent\textbf{Case} $\userule{S-Fail}$ \\
-    \indent  Since this case does not alter the
-  expression, the theorem holds trivially.\\
+\case{$\userule{S-Fail}$}
+     {Since this case does not alter the expression, the theorem holds trivially.}
 
-  \noindent\textbf{Case} $\userule{S-Xor}$ \\
-    \indent  Since this case does not alter the
-  expression, the theorem holds trivially.\\
+\case{$\userule{S-Xor}$}
+     {Since this case does not alter the expression, the theorem holds trivially.}
 
-  \noindent\textbf{Case} $\userule{S-Update}$ \\
-    \indent  Since this case does not alter
-  the expression, the theorem holds trivially.\\
+\case{$\userule{S-Update}$}
+     {Since this case does not alter the expression, the theorem holds trivially.}
 
-  \noindent\textbf{Case} $\userule{S-Fill}$ \\
-    \indent  Since this case does not alter the
-  expression, the theorem holds trivially.\\
+\case{$\userule{S-Fill}$}
+     {Since this case does not alter the expression, the theorem holds trivially.}
 
-  \noindent\textbf{Case} $\userule{S-Edit}$ \\
-    \indent  Since this case does not alter the
-  expression, the theorem holds trivially.\\
+\case{$\userule{S-Edit}$}
+     {Since this case does not alter the expression, the theorem holds trivially.}
 
-  \noindent\textbf{Case} $\userule{S-And}$ \\
-    \indent  Given that
-  $\Gamma,\Sigma\infers t_1\And t_2:\Task(\tau_1\times\tau_2)$, by
-  \refrule{T-And we} have $\Gamma,\Sigma\infers t_1:\tau_1$ and
-  $\Gamma,\Sigma\infers t_2:\tau_2$. By the induction hypothesis, we also have $\Gamma,\Sigma\infers t_1':\tau_1$ and $\Gamma,\Sigma\infers t_2':\tau_2$.
-  This gives us that
-  $\Gamma,\Sigma\infers t_1'\And t_2':\Task(\tau_1\times\tau_2)$.\\
+\case{$\userule{S-And}$}
+     {Given that $\Gamma,\Sigma\infers t_1\And t_2:\Task(\tau_1\times\tau_2)$, by \refrule{T-And we} have $\Gamma,\Sigma\infers t_1:\tau_1$ and $\Gamma,\Sigma\infers t_2:\tau_2$.
+     By the induction hypothesis, we also have $\Gamma,\Sigma\infers t_1':\tau_1$ and $\Gamma,\Sigma\infers t_2':\tau_2$.
+     This gives us that $\Gamma,\Sigma\infers t_1'\And t_2':\Task(\tau_1\times\tau_2)$.}
 
-  \noindent\textbf{Case} $\userule{S-Next}$ \\
-    \indent  Given that
+\case{$\userule{S-Next}$}
+       {Given that
   $\Gamma,\Sigma\infers e_1\Next e_2:\Task \tau$, \refrule{T-Then} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and
   $\Gamma,\Sigma\infers e_2:\tau_1 \to \Task \tau$. By the induction hypothesis,
   we know that $t_1\stride t_1'$ preserves and thus
   $\Gamma,\Sigma\infers t_1':\Task\tau_1$. Therefore
-  $\Gamma,\Sigma\infers t_1'\Next e_2:\Task\tau$.\\\\
+  $\Gamma,\Sigma\infers t_1'\Next e_2:\Task\tau$.}
 
-  \noindent\textbf{Case} $\userule{S-OrLeft}$ \\
-    \indent  Given that
+\case{$\userule{S-OrLeft}$}
+       {Given that
   $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$, by \refrule{T-Or} we have
   $\Gamma,\Sigma\infers t_1:\Task\tau$. By the induction hypothesis, we know that
-  $t_1\stride t_1'$ preserves and thus $\Gamma,\Sigma\infers t_1':\Task\tau$.\\
+  $t_1\stride t_1'$ preserves and thus $\Gamma,\Sigma\infers t_1':\Task\tau$.}
 
-  \noindent\textbf{Case}\\
-  $\userule{S-OrRight}$ \\
-    \indent  Given that
-  $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$, by \refrule{T-Or} we have $\Gamma,\Sigma\infers t_2:\Task\tau$. By the induction hypothesis, we know that
-  $t_2\stride t_2'$ preserves and thus $\Gamma,\Sigma\infers t_2':\Task\tau$.\\
+\case{$\userule{S-OrRight}$ }
+     {Given that $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$, by \refrule{T-Or} we have $\Gamma,\Sigma\infers t_2:\Task\tau$.
+     By the induction hypothesis, we know that $t_2\stride t_2'$ preserves and thus $\Gamma,\Sigma\infers t_2':\Task\tau$.}
 
-  \noindent\textbf{Case}\\
-  $\userule{S-OrNone}$ \\
-    \indent  Given that
-  $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$, by \refrule{T-Or} we have
-  $\Gamma,\Sigma\infers t_1:\Task\tau$ and $\Gamma,\Sigma\infers t_2:\Task\tau$.
-  By the induction hypothesis, we know that $t_1\stride t_1'$ and
-  $t_2\stride t_2'$ preserve, and thus
-  $\Gamma,\Sigma\infers t_1'\Or t_2':\Task\tau$.\\
+  \case{$\userule{S-OrNone}$}
+  {Given that $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$, by \refrule{T-Or} we have $\Gamma,\Sigma\infers t_1:\Task\tau$ and $\Gamma,\Sigma\infers t_2:\Task\tau$.
+  By the induction hypothesis, we know that $t_1\stride t_1'$ and $t_2\stride t_2'$ preserve, and thus $\Gamma,\Sigma\infers t_1'\Or t_2':\Task\tau$.}
 
-  \noindent\textbf{Case} $\userule{S-ThenStay}$ \\
-    \indent  Given that
-  $\Gamma,\Sigma\infers t_1\Then e_2:\Task\tau$,
-  by \refrule{T-Then} we have $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and
-  $\Gamma,\Sigma\infers e_2:\tau_1\to\Task\tau$. By the induction
-  hypothesis, we know that $t_1\stride t_1'$ preserves, and thus
-  $\Gamma,\Sigma\infers t_1'\Then e_2:\Task\tau$.\\
+  \case{$\userule{S-ThenStay}$ }
+  {Given that $\Gamma,\Sigma\infers t_1\Then e_2:\Task\tau$, by \refrule{T-Then} we have $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and $\Gamma,\Sigma\infers e_2:\tau_1\to\Task\tau$.
+  By the induction hypothesis, we know that $t_1\stride t_1'$ preserves, and thus $\Gamma,\Sigma\infers t_1'\Then e_2:\Task\tau$.}
 
-  \noindent\textbf{Case}\\
-   $\userule{S-ThenFail}$ \\
-    \indent  Given that
-  $\Gamma,\Sigma\infers t_1\Then e_2:\Task\tau$,
+  \case{$\userule{S-ThenFail}$}
+  {Given that $\Gamma,\Sigma\infers t_1\Then e_2:\Task\tau$,
   by \refrule{T-Then} we have $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and
   $e_2:\tau_1\to\Task\tau$. By the induction
   hypothesis, we know that $t_1\stride t_1'$ preserves, and thus
-  $\Gamma,\Sigma\infers t_1'\Then e_2:\Task\tau$.\\
+  $\Gamma,\Sigma\infers t_1'\Then e_2:\Task\tau$.}
 
-  \noindent\textbf{Case}\\
-  $\userule{S-ThenCont}$\\
-    \indent  Given that
-  $\Gamma,\Sigma\infers t_1\Then e_2:\Task\tau$, by \refrule{T-Then} we have
+  \case{$\userule{S-ThenCont}$}
+  {Given that $\Gamma,\Sigma\infers t_1\Then e_2:\Task\tau$, by \refrule{T-Then} we have
   $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and
   $\Gamma,\Sigma\infers e_2:\tau_1\to\Task\tau$. By the induction hypothesis, we
   know that $t_1\stride t_1'$ preserves. By Lemma~\ref{lem:presvalue}, we know
   that $\Value{(t_1')}=v_1$ preserves. By Theorem~\ref{thm:pres-eval} we know
   that $e_2 v_1\evaluate t_2$ preserves. And finally by the induction hypothesis,
   we know that $t_2\stride t_2'$ preserves. Therefore
-  $\Gamma,\Sigma\infers t_2':\Task\tau$.
+  $\Gamma,\Sigma\infers t_2':\Task\tau$.}
   %
   % \noindent\textbf{Case} $\userule{S-Appoint}$ Given that
   % $\Gamma,\Sigma\infers u\At t:\Task\tau$, by \refrule{T-Appoint} we have
@@ -278,70 +243,63 @@ This lemma follows immediately from definition.
 \begin{proof}
   We prove Theorem~\ref{thm:pres-handle} by induction on $e$:
 
-  \noindent\textbf{Case} $\userule{H-Change}$\\
-  \indent Given that
-  $\Gamma,\Sigma\infers\Edit v:\Task\tau$ and $\Sigma\infers s$, the
-  \refrule{H-Change} rule additionally gives us that $v,v':\tau$. Therefore by
-  \refrule{T-Edit} we have that $\Gamma,\Sigma\infers\Edit v':\Task\tau$\\
+  \case
+    {$\userule{H-Change}$}
+    {Given that $\Gamma,\Sigma\infers\Edit v:\Task\tau$ and $\Sigma\infers s$, the \refrule{H-Change} rule additionally gives us that $v,v':\tau$. Therefore by \refrule{T-Edit} we have that $\Gamma,\Sigma\infers\Edit v':\Task\tau$.}
 
-  \noindent\textbf{Case} $\userule{H-Empty}$\\
-  \indent  Given that
-  $\Gamma,\Sigma\infers\Edit v:\Task\beta$ and $\Sigma\infers s$, the
-  \refrule{H-Empty} rule additionally gives us that $v:\tau$. Then by
-  \refrule{T-Enter} we have $\Gamma,\Sigma\infers\Enter \tau:\Task\tau$ \\
+  \case
+    {$\userule{H-Empty}$}
+    {Given that $\Gamma,\Sigma\infers\Edit v:\Task\beta$ and $\Sigma\infers s$, the \refrule{H-Empty} rule additionally gives us that $v:\tau$.
+    Then by \refrule{T-Enter} we have $\Gamma,\Sigma\infers\Enter \tau:\Task\tau$.}
 
-  \noindent\textbf{Case} $\userule{H-Fill}$\\
-  \indent  Given that
-  $\Gamma,\Sigma\infers\Enter\tau$ and $\Sigma\infers s$, the \refrule{H-Fill}
-  rule additionally gives us that $v':\tau$. Then by \refrule{T-Enter} we have
-  $\Gamma,\Sigma\infers \Edit v':\Task\tau$.\\
+  \case
+    {$\userule{H-Fill}$}
+    {Given that $\Gamma,\Sigma\infers\Enter\tau$ and $\Sigma\infers s$, the \refrule{H-Fill} rule additionally gives us that $v':\tau$.
+    Then by \refrule{T-Enter} we have $\Gamma,\Sigma\infers \Edit v':\Task\tau$.}
 
-  \noindent\textbf{Case} $\userule{H-Update}$\\
-  \indent  Given that
-  $\Gamma,\Sigma\infers\Update l:\Task\tau$ and $\Sigma\infers s$. This gives us
-  that $\Sigma(l)=\tau$, and we additionally obtain $s(l),v':\tau$ by
-  \refrule{H-Update}. By application of Lemma~\ref{lemmasigmaconsistent} this
-  case holds.\\
+  \case
+    {$\userule{H-Update}$}
+    {Given that $\Gamma,\Sigma\infers\Update l:\Task\tau$ and $\Sigma\infers s$.
+    This gives us that $\Sigma(l)=\tau$, and we additionally obtain $s(l),v':\tau$ by \refrule{H-Update}.
+    By application of Lemma~\ref{lemmasigmaconsistent} this case holds.}
 
-  \noindent\textbf{Case} $\userule{H-PickLeft}$\\
-  \indent  Given that
-  $\Gamma,\Sigma\infers t_1\Xor t_2:\Task\tau$ and $\Sigma\infers s$, then by
-  \refrule{T-Xor} we have $\Gamma,\Sigma\infers t_1:\Task \tau$.\\
+  \case
+    {$\userule{H-PickLeft}$}
+    {Given that $\Gamma,\Sigma\infers t_1\Xor t_2:\Task\tau$ and $\Sigma\infers s$,
+    then by \refrule{T-Xor} we have $\Gamma,\Sigma\infers t_1:\Task \tau$.}
 
-  \noindent\textbf{Case} $\userule{H-PickRight}$\\
-  \indent  Given that
-  $\Gamma,\Sigma\infers t_1\Xor t_2:\Task\tau$ and $\Sigma\infers s$, then by
-  \refrule{T-Xor} we have $\Gamma,\Sigma\infers t_2:\Task \tau$. \\
+  \case
+    {$\userule{H-PickRight}$}
+    {Given that $\Gamma,\Sigma\infers t_1\Xor t_2:\Task\tau$ and $\Sigma\infers s$,
+    then by \refrule{T-Xor} we have $\Gamma,\Sigma\infers t_2:\Task \tau$.}
 
-  \noindent\textbf{Case} $\userule{H-Next}$\\
-  \indent  Given that
-  $\Gamma,\Sigma\infers t_1\Next e_2 :\Task\tau$ and $\Sigma\infers s$. Then by
-  \refrule{T-Next}, we have $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and
-  $\Gamma,\Sigma\infers e_2:\tau_1\to\Task\tau$. Then by \refrule{T-Then} we
-  obtain $\Gamma,\Sigma\infers t_1\Then e_2:\Task\tau$.\\
+  \case
+    {$\userule{H-Next}$}
+    {Given that $\Gamma,\Sigma\infers t_1\Next e_2 :\Task\tau$ and $\Sigma\infers s$.
+    Then by \refrule{T-Next}, we have $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and $\Gamma,\Sigma\infers e_2:\tau_1\to\Task\tau$.
+    Then by \refrule{T-Then} we obtain $\Gamma,\Sigma\infers t_1\Then e_2:\Task\tau$.}
 
-  \noindent\textbf{Case} $\userule{H-PassThen}$\\
-  \indent  Given that
-  $\Gamma,\Sigma\infers t_1\Then e_2:\Task\tau$ and $\Sigma\infers s$,
-  \refrule{T-Then} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and
-  $\Gamma,\Sigma\infers e_2:\tau_1\to\Task\tau$. By the induction hypothesis, we
-  know that $t_1,s\handle{i}t_1',s'$ also preserves and thus
-  $\Gamma,\Sigma\infers t_1':\Task\tau_1$ and $\Gamma,Sigma\infers s'$. By
-  \refrule{T-Then} we now obtain that
-  $\Gamma,\Sigma\infers t_1'\Then e_2:\Task\tau$. \\
+  \case
+    {$\userule{H-PassThen}$}
+    {Given that $\Gamma,\Sigma\infers t_1\Then e_2:\Task\tau$ and $\Sigma\infers s$,
+    \refrule{T-Then} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and $\Gamma,\Sigma\infers e_2:\tau_1\to\Task\tau$.
+    By the induction hypothesis, we know that $t_1,s\handle{i}t_1',s'$ also preserves and thus $\Gamma,\Sigma\infers t_1':\Task\tau_1$ and $\Gamma,Sigma\infers s'$.
+    By \refrule{T-Then} we now obtain that $\Gamma,\Sigma\infers t_1'\Then e_2:\Task\tau$.}
 
-  \noindent\textbf{Case} $\userule{H-PassNext}$\\
-  \indent  Given that
+  \case
+    {$\userule{H-PassNext}$}
+    {Given that
   $\Gamma,\Sigma\infers t_1\Next e_2:\Task\tau$ and $\Sigma\infers s$,
   \refrule{T-Next} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and
   $\Gamma,\Sigma\infers e_2:\tau_1\to\Task\tau$. By the induction hypothesis, we
   know that $t_1,s\handle{i}t_1',s'$ also preserves and thus
   $\Gamma,\Sigma\infers t_1':\Task\tau_1$ and $\Gamma,Sigma\infers s'$. By
   \refrule{T-Next} we now obtain that
-  $\Gamma,\Sigma\infers t_1'\Next e_2:\Task\tau$. \\
+  $\Gamma,\Sigma\infers t_1'\Next e_2:\Task\tau$. }
 
-  \noindent\textbf{Case} $\userule{H-FirstAnd}$\\
-  \indent  Given that
+  \case
+    {$\userule{H-FirstAnd}$}
+    {Given that
   $\Gamma,\Sigma\infers t_1\And t_2:\Task(\tau_1\times\tau_2)$ and
   $\Sigma\infers s$, \refrule{T-And} gives us that
   $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and
@@ -349,10 +307,11 @@ This lemma follows immediately from definition.
   that $t_1,s\handle{i}t_1',s'$ also preserves and thus
   $\Gamma,\Sigma\infers t_1':\Task\tau_1$ and $\Sigma\infers s'$. Therefore by
   \refrule{T-Next} we obtain
-  $\Gamma,\Sigma\infers t_1'\And t_2:\Task(\tau_1\times\tau_2)$.\\
+  $\Gamma,\Sigma\infers t_1'\And t_2:\Task(\tau_1\times\tau_2)$.}
 
-  \noindent\textbf{Case} $\userule{H-SecondAnd}$ \\
-  \indent Given that
+  \case
+    {$\userule{H-SecondAnd}$}
+    {Given that
   $\Gamma,\Sigma\infers t_1\And t_2:\Task(\tau_1\times\tau_2)$ and
   $\Sigma\infers s$, \refrule{T-And} gives us that
   $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and
@@ -360,25 +319,23 @@ This lemma follows immediately from definition.
   that $t_2,s\handle{i}t_2',s'$ also preserves and thus
   $\Gamma,\Sigma\infers t_2':\Task\tau_2$ and $\Sigma\infers s'$. Therefore by
   \refrule{T-Next} we obtain
-  $\Gamma,\Sigma\infers t_1\And t_2':\Task(\tau_1\times\tau_2)$.\\
+  $\Gamma,\Sigma\infers t_1\And t_2':\Task(\tau_1\times\tau_2)$.}
 
-  \noindent\textbf{Case} $\userule{H-FirstOr}$\\
-  \indent  Given that
+  \case
+    {$\userule{H-FirstOr}$}
+    {Given that
   $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$ and $\Sigma\infers s$,
   \refrule{T-Or} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau$ and
   $\Gamma,\Sigma\infers t_2:\Task\tau$. By the induction hypothesis we know that
   $t_1,s\handle{i}t_1',s'$ also preserves, and therefore
   $\Gamma,\Sigma\infers t_1':\Task\tau$ and $\Sigma\infers s'$. By
-  \refrule{T-Or} we now obtain $\Gamma,\Sigma\infers t_1'\Or t_2:\Task\tau$.\\
+  \refrule{T-Or} we now obtain $\Gamma,\Sigma\infers t_1'\Or t_2:\Task\tau$.}
 
-  \noindent\textbf{Case} $\userule{H-SecondOr}$\\
-  \indent  Given that
-  $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$ and $\Sigma\infers s$,
-  \refrule{T-Or} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau$ and
-  $\Gamma,\Sigma\infers t_2:\Task\tau$. By the induction hypothesis we know that
-  $t_2,s\handle{i}t_2',s'$ also preserves, and therefore
-  $\Gamma,\Sigma\infers t_2':\Task\tau$ and $\Sigma\infers s'$. By T-Or we now
-  obtain $\Gamma,\Sigma\infers t_1\Or t_2':\Task\tau$.
+  \case
+    {$\userule{H-SecondOr}$}
+    {Given that $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$ and $\Sigma\infers s$, \refrule{T-Or} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau$ and $\Gamma,\Sigma\infers t_2:\Task\tau$.
+    By the induction hypothesis we know that $t_2,s\handle{i}t_2',s'$ also preserves, and therefore $\Gamma,\Sigma\infers t_2':\Task\tau$ and $\Sigma\infers s'$.
+    By T-Or we now obtain $\Gamma,\Sigma\infers t_1\Or t_2':\Task\tau$.}
 
   % \noindent\textbf{Case} $\userule{H-Appoint}$ Given that
   % $\Gamma,\Sigma\infers u\At t:\Task\tau$, \refrule{T-Assign} gives us that
@@ -501,35 +458,35 @@ This lemma follows immediately from definition.
 
   We prove Theorem~\ref{thm:failing} by induction on $e'$.\\
 
-  \noindent\textbf{Case} $e = \Fail$\\
-  $\Failing(\Fail,s)=\True$, and there is no handling rule that applies to fail.\\
+\case{$e = \Fail$}
+     {$\Failing(\Fail,s)=\True$, and there is no handling rule that applies to fail.}
 
-  \noindent\textbf{Case} $e = \Edit v$\\
-   Given that $\Gamma,\Sigma\infers\Edit v:\Task\tau$, $\Failing(\Edit v,s)=\False$, and there exists an input $i$, namely $v':\tau$.\\
+\case{$e = \Edit v$}
+       {$\Gamma,\Sigma\infers\Edit v:\Task\tau$, $\Failing(\Edit v,s)=\False$, and there exists an input $i$, namely $v':\tau$.}
 
-  \noindent\textbf{Case} $e = \Enter \tau$\\
-  $\Failing(\Enter \tau)=\False$, and there exists an in put i, namely $v:\tau$.\\
+\case{$e = \Enter \tau$}
+       {$\Failing(\Enter \tau)=\False$, and there exists an in put i, namely $v:\tau$.}
 
-  \noindent\textbf{Case} $e = \Update l$\\
-  Given that $\Gamma,\Sigma\infers\Update l:\Task\tau$, $\Failing(\Update l,s)=\False$, and there exists an input $i$, namely $v:\tau$.\\
+\case{$e = \Update l$}
+       {Given that $\Gamma,\Sigma\infers\Update l:\Task\tau$, $\Failing(\Update l,s)=\False$, and there exists an input $i$, namely $v:\tau$.}
 
-  \noindent\textbf{Case} $e = t_1\Then e_2$\\
-   $\Failing(t_1\Then e_2,s)=\Failing(t_1,s)$. If there exitsts an $i$ for $t_1$, then this $i$ also applies to $t_1\Then e_2$. This case therefore holds by the induction hypothesis.\\
+\case{$e = t_1\Then e_2$}
+       {$\Failing(t_1\Then e_2,s)=\Failing(t_1,s)$. If there exists an $i$ for $t_1$, then this $i$ also applies to $t_1\Then e_2$. This case therefore holds by the induction hypothesis.}
 
-  \noindent\textbf{Case} $e = t_1\Next e_2$\\
-   $\Failing(t_1\Next e_2,s)=\Failing(t_1,s)$. If there exitsts an $i$ for $t_1$, then this $i$ also applies to $t_1\Next e_2$. This case therefore holds by the induction hypothesis.\\
+\case{$e = t_1\Next e_2$}
+       {$\Failing(t_1\Next e_2,s)=\Failing(t_1,s)$. If there exists an $i$ for $t_1$, then this $i$ also applies to $t_1\Next e_2$. This case therefore holds by the induction hypothesis.}
 
-  \noindent\textbf{Case} $e = e_1\Xor e_2$\\
-   We normalise the two expressions first, $e_1,s\stride t_1,s'$, $e_2,s\stride t_2,s'$ and we can then be in two situations. One, we can have that $\Failing(t_1,s')$ and $\Failing(t_2,s')$ are both true. If that is so, then by definiton, we have both $\Failing(e_1\Xor e_2,s)$ and no rule of the hanlding semantics applies, and therefore there exists no input for this case.\\
-                                           Or we are in the situation where one or both of the two sub expressions does not fail. In that case, we know that $\Failing(e_1\Xor e_2,s)$ does not hold, and that at least one of the handling rules applies. Therefore, there must be an input $i$, namely $\Left$, $\Right$ or both.\\
+\case{$e = e_1\Xor e_2$}
+       {We normalise the two expressions first, $e_1,s\stride t_1,s'$, $e_2,s\stride t_2,s'$ and we can then be in two situations. One, we can have that $\Failing(t_1,s')$ and $\Failing(t_2,s')$ are both true. If that is so, then by definition, we have both $\Failing(e_1\Xor e_2,s)$ and no rule of the hanlding semantics applies, and therefore there exists no input for this case.\\
+                                           Or we are in the situation where one or both of the two sub expressions does not fail. In that case, we know that $\Failing(e_1\Xor e_2,s)$ does not hold, and that at least one of the handling rules applies. Therefore, there must be an input $i$, namely $\Left$, $\Right$ or both.}
 
-  \noindent\textbf{Case} $e = t_1\And t_2$\\
-   We can again find ourselfs in one of two situations. In the first case, both sub expressions fail, $\Failing(t_1,s)$ and $\Failing(t_2,s)$. In that case, we know that $\Failing(t_1\And t_2,s)$ also fails by definition. By the induction hypothesis, we know that for both $t_1$ and $t_2$ there is no input that can be handled. Since the only two rules for $\And$ that handle input just pass this input on to one of the two expressions, we know that indeed no $i$ applies.\\
-                                           In the case that one or both sub expressions do not fail, then by definition $t_1\And t_2$ not failing under $s$. Again by induction hypothesis, we know that for one or both of the expressions, there exits an $i$ that can be handled. Then by H-FirstAnd and H-SecondAnd, we know that we can pass this $i$, by prefixing it with either $\First$ or $\Second$.\\
+\case{$e = t_1\And t_2$}
+       {We can again find ourselves in one of two situations. In the first case, both sub expressions fail, $\Failing(t_1,s)$ and $\Failing(t_2,s)$. In that case, we know that $\Failing(t_1\And t_2,s)$ also fails by definition. By the induction hypothesis, we know that for both $t_1$ and $t_2$ there is no input that can be handled. Since the only two rules for $\And$ that handle input just pass this input on to one of the two expressions, we know that indeed no $i$ applies.\\
+                                           In the case that one or both sub expressions do not fail, then by definition $t_1\And t_2$ not failing under $s$. Again by induction hypothesis, we know that for one or both of the expressions, there exits an $i$ that can be handled. Then by H-FirstAnd and H-SecondAnd, we know that we can pass this $i$, by prefixing it with either $\First$ or $\Second$.}
 
-  \noindent\textbf{Case} $e = t_1\Or t_2$\\
-  We can again find ourselfs in one of two situations. In the first case, both sub expressions fail, $\Failing(t_1,s)$ and $\Failing(t_2,s)$. In that case, we know that $\Failing(t_1\Or t_2,s)$ also fails by definition. By the induction hypothesis, we know that for both $t_1$ and $t_2$ there is no input that can be handled. Since the only two rules for $\Or$ that handle input just pass this input on to one of the two expressions, we know that indeed no $i$ applies.\\
-                                           In the case that one or both sub expressions do not fail, then by definition $t_1\Or t_2$ not failing under $s$. Again by induction hypothesis, we know that for one or both of the expressions, there exits an $i$ that can be handled. Then by H-FirstOr and H-SecondOr, we know that we can pass this $i$, by prefixing it with either $\First$ or $\Second$.
+\case{$e = t_1\Or t_2$}
+       {We can again find ourselves in one of two situations. In the first case, both sub expressions fail, $\Failing(t_1,s)$ and $\Failing(t_2,s)$. In that case, we know that $\Failing(t_1\Or t_2,s)$ also fails by definition. By the induction hypothesis, we know that for both $t_1$ and $t_2$ there is no input that can be handled. Since the only two rules for $\Or$ that handle input just pass this input on to one of the two expressions, we know that indeed no $i$ applies.\\
+                                           In the case that one or both sub expressions do not fail, then by definition $t_1\Or t_2$ not failing under $s$. Again by induction hypothesis, we know that for one or both of the expressions, there exits an $i$ that can be handled. Then by H-FirstOr and H-SecondOr, we know that we can pass this $i$, by prefixing it with either $\First$ or $\Second$.}
 
   % \noindent\textbf{Case} $e = u \At t$\\
   %  This case follows directly from applying the induction hypothesis, since $\Failing(u \At t,s)=\Failing(t,s)$ and any input that applies to $t$ also applies to $u \At t$.\\
@@ -541,44 +498,51 @@ This lemma follows immediately from definition.
 
 \begin{proof}
 
-  \noindent\textbf{Case} $e=\Edit v:\Task\tau, i= v':\tau$\\
-   Given that $\userule{H-Change}$, we have by definition that $\Inputs(\Edit v:\Task\tau,s) = \set{v':\tau,\Empty}$, which includes $v':\tau$.
+  \case{$e=\Edit v:\Task\tau, i= v':\tau$}
+       {Given that $\userule{H-Change}$, we have by definition that $\Inputs(\Edit v:\Task\tau,s) = \set{v':\tau,\Empty}$, which includes $v':\tau$.}
 
-  \noindent\textbf{Case} $e=\Edit v:\Task\tau, i= \Empty$\\
-   Given that $\userule{H-Empty}$, we have by definition that $\Inputs(\Edit v:\Task\tau,s) = \set{v':\tau,\Empty}$, which includes $\Empty$.\\
+  \case{$e=\Edit v:\Task\tau, i= \Empty$}
+       {Given that $\userule{H-Empty}$, we have by definition that $\Inputs(\Edit v:\Task\tau,s) = \set{v':\tau,\Empty}$, which includes $\Empty$.}
 
-  \noindent\textbf{Case} $e=\Enter \tau, i= v':\tau$\\
-   Given that $\userule{H-Fill}$, we have by definiton that $\Inputs(\Enter \tau,s) = \set{v':\tau }$, which includes $v':\tau$.\\
+  \case{$e=\Enter \tau, i= v':\tau$}
+       {Given that $\userule{H-Fill}$, we have by definition that $\Inputs(\Enter \tau,s) = \set{v':\tau }$, which includes $v':\tau$.}
 
-  \noindent\textbf{Case} $e=\Update l:\Task\tau, i= v':\tau$\\
-   Given that $\userule{H-Update}$, we have by definiton that $\Inputs(\Update l:\Task\tau,s)= \set{v':\tau }$, which includes $v':\tau$.\\
+  \case{$e=\Update l:\Task\tau, i= v':\tau$}
+       {Given that $\userule{H-Update}$, we have by definition that $\Inputs(\Update l:\Task\tau,s)= \set{v':\tau }$, which includes $v':\tau$.}
 
-  \noindent\textbf{Case} $e=t_1\Xor t_2 , i= \Left$\\
-   Given that $\userule{H-PickLeft}$, we have by definition that $\Inputs(t_1\Xor t_2,s) = \set{ \Left,\Right}$, which includes $\Left$.\\
+  \case{$e=t_1\Xor t_2 , i= \Left$}
+       {Given that $\userule{H-PickLeft}$, we have by definition that $\Inputs(t_1\Xor t_2,s) = \set{ \Left,\Right}$, which includes $\Left$.}
 
-  \noindent\textbf{Case} $e=t_1\Xor t_2 , i= \Right$\\
-   Given that $\userule{H-PickRight}$, we have by definition that $\Inputs(t_1\Xor t_2,s) = \set{ \Left,\Right}$, which includes $\Right$.\\
+  \case{$e=t_1\Xor t_2 , i= \Right$}
+       {Given that $\userule{H-PickRight}$, we have by definition that $\Inputs(t_1\Xor t_2,s) = \set{ \Left,\Right}$, which includes $\Right$.}
 
-  \noindent\textbf{Case} $e=t_1\Next e_2 , i= \Continue $\\
-   Given that $\userule{H-Next}$, we have by definition that $\Inputs(t_1\Next e_2,s) = \Inputs(t_1,s) \cup \set{\Continue\mid \Value{(t_1,s)} = v_1 \wedge \neg\Failing{(e_2 v_1,s\stride)}}$. If the H-Next rule applies, this means that the conditions $\Value{(t_1,s)} = v_1 \wedge \neg\Failing{(e_2 v_1,s\stride)}$ are fulfilled, and therefore $\Continue$ is contained. \\
+  \case{$e=t_1\Next e_2 , i= \Continue $}
+       {Given that $\userule{H-Next}$, we have by definition that $\Inputs(t_1\Next e_2,s) = \Inputs(t_1,s) \cup \set{\Continue\mid \Value{(t_1,s)} = v_1 \wedge \neg\Failing{(e_2 v_1,s\stride)}}$.
+       If the H-Next rule applies, this means that the conditions $\Value{(t_1,s)} = v_1 \wedge \neg\Failing{(e_2 v_1,s\stride)}$ are fulfilled, and therefore $\Continue$ is contained.}
 
-  \noindent\textbf{Case} $e=t_1\Next e_2 , i\neq\Continue$\\
-   Given that $\userule{H-PassNext}$, we have by definition that $\Inputs(t_1\Next e_2,s) = \Inputs(t_1,s) \cup \set{\Continue\mid \Value{(t_1,s)} = v_1 \wedge \neg\Failing{(e_2 v_1,s\stride)}}$. By the induction hypthesis, we have that $i\in \Inputs(t_1,s)$, and by definiton of $\Inputs$, $i$ is therefore also included in this case.\\
+  \case{$e=t_1\Next e_2 , i\neq\Continue$}
+       {Given that $\userule{H-PassNext}$, we have by definition that $\Inputs(t_1\Next e_2,s) = \Inputs(t_1,s) \cup \set{\Continue\mid \Value{(t_1,s)} = v_1 \wedge \neg\Failing{(e_2 v_1,s\stride)}}$.
+       By the induction hypothesis, we have that $i\in \Inputs(t_1,s)$, and by definition of $\Inputs$, $i$ is therefore also included in this case.}
 
-  \noindent\textbf{Case} $e=t_1\Then e_2 , i$\\
-   Given that $\userule{H-PassThen}$, we have by definition that $\Inputs(t_1\Then e_2,s)= \Inputs(t_1,s)$. By the induction hypthesis, we have that $i\in \Inputs(t_1,s)$, and by definiton of $\Inputs$, $i$ is therefore also included in this case.\\
+  \case{$e=t_1\Then e_2 , i$}
+       {Given that $\userule{H-PassThen}$, we have by definition that $\Inputs(t_1\Then e_2,s)= \Inputs(t_1,s)$.
+       By the induction hypothesis, we have that $i\in \Inputs(t_1,s)$, and by definition of $\Inputs$, $i$ is therefore also included in this case.}
 
-  \noindent\textbf{Case} $e=t_1\And t_2 , i=\First i$\\
-   Given that $\userule{H-FirstAnd}$ we have by definition that $\Inputs(t_1\And t_2,s) = \set{\First\ i \mid i \in \Inputs(t_1,s)} \cup \set{\Second\ i \mid i \in \Inputs(t_2,s)}$. By the induction hypothesis, we have that $i\in\Inputs(t_1,s)$, and by definition of $\Inputs$, $\First i$ is therefore als included in this case.\\
+  \case{$e=t_1\And t_2 , i=\First i$}
+       {Given that $\userule{H-FirstAnd}$ we have by definition that $\Inputs(t_1\And t_2,s) = \set{\First\ i \mid i \in \Inputs(t_1,s)} \cup \set{\Second\ i \mid i \in \Inputs(t_2,s)}$.
+       By the induction hypothesis, we have that $i\in\Inputs(t_1,s)$, and by definition of $\Inputs$, $\First i$ is therefore als included in this case.}
 
-  \noindent\textbf{Case} $e=t_1\And t_2 , i=\Second i$\\
-   Given that $\userule{H-SecondAnd}$ we have by definition that $\Inputs(t_1\And t_2) = \set{\First\ i \mid i \in \Inputs(t_1,s)} \cup \set{\Second\ i \mid i \in \Inputs(t_2,s)}$. By the induction hypothesis, we have that $i\in\Inputs(t_2,s)$, and by definition of $\Inputs$, $\Second i$ is therefore als included in this case.\\
+  \case{$e=t_1\And t_2 , i=\Second i$}
+       {Given that $\userule{H-SecondAnd}$ we have by definition that $\Inputs(t_1\And t_2) = \set{\First\ i \mid i \in \Inputs(t_1,s)} \cup \set{\Second\ i \mid i \in \Inputs(t_2,s)}$.
+       By the induction hypothesis, we have that $i\in\Inputs(t_2,s)$, and by definition of $\Inputs$, $\Second i$ is therefore als included in this case.}
 
-  \noindent\textbf{Case} $e=t_1\Or t_2 , i=\First i$\\
-   Given that $\userule{H-FirstOr}$ we have by definition that $\Inputs(t_1\Or t_2,s) = \set{\First\ i \mid i \in \Inputs(t_1,s)} \cup \set{\Second\ i \mid i \in \Inputs(t_2,s)}$. By the induction hypothesis, we have that $i\in\Inputs(t_1,s)$, and by definition of $\Inputs$, $\First i$ is therefore als included in this case.\\
+  \case{$e=t_1\Or t_2 , i=\First i$}
+       {Given that $\userule{H-FirstOr}$ we have by definition that $\Inputs(t_1\Or t_2,s) = \set{\First\ i \mid i \in \Inputs(t_1,s)} \cup \set{\Second\ i \mid i \in \Inputs(t_2,s)}$.
+       By the induction hypothesis, we have that $i\in\Inputs(t_1,s)$, and by definition of $\Inputs$, $\First i$ is therefore als included in this case.}
 
-  \noindent\textbf{Case} $e=t_1\Or t_2 , i=\Second i$\\
-   Given that $\userule{H-FirstOr}$ we have by definition that $\Inputs(t_1\Or t_2,s) = \set{\First\ i \mid i \in \Inputs(t_1,s)} \cup \set{\Second\ i \mid i \in \Inputs(t_2,s)}$. By the induction hypothesis, we have that $i\in\Inputs(t_2,s)$, and by definition of $\Inputs$, $\Second i$ is therefore als included in this case.
+  \case{$e=t_1\Or t_2 , i=\Second i$}
+       {Given that $\userule{H-FirstOr}$ we have by definition that $\Inputs(t_1\Or t_2,s) = \set{\First\ i \mid i \in \Inputs(t_1,s)} \cup \set{\Second\ i \mid i \in \Inputs(t_2,s)}$.
+       By the induction hypothesis, we have that $i\in\Inputs(t_2,s)$, and by definition of $\Inputs$, $\Second i$ is therefore als included in this case.}
   %
   % \noindent\textbf{Case} $e=u\At t, i$\\
   %  Given that $\userule{H-Appoint}$, we can directly apply the induction hypothesis to prove this case.\\
