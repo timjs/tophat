@@ -35,7 +35,7 @@ When drink and food are prepared, users can step ($\Next$) to eating the results
   let makeBreakfast : Task Drink -> Task Food -> Task <<Drink,Food>> =
     \makeDrink. \makeFood. makeDrink <&> makeFood
   let main : Task Unit =
-    makeBreakfast (makeTea <?> makeCoffee) makeEgg >>? \<<d, f>>. eat d f
+    makeBreakfast (makeTea <?> makeCoffee) makeEgg >>? haveBreakfast
 \end{TASK}
 
 % \begin{TASK}
@@ -46,6 +46,8 @@ When drink and food are prepared, users can step ($\Next$) to eating the results
 % \end{TASK}
 
 \end{example}
+
+
 
 \subsection{Tasks are reusable}
 
