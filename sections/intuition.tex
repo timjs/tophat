@@ -142,7 +142,6 @@ Speculative evaluation is designed so that possible side effects are undone.
 
 The step combinators give rise to a form of internal communication:
 They represent data flow that \emph{follows} control flow.
-\fixme{example with paper deadline}
 
 
 
@@ -215,6 +214,30 @@ This allows a variety of synchronisation problems to be solved in an intuitive a
 \Citet{books/Hoare85CSP} states that nondeterminism is only ever useful for \emph{specifying} systems, never for implementing them.
 \TOPHAT is meant solely for implementation and does not have any form of nondeterminism.
 Input events for parallel tasks are disambiguated, internal steps have a well-defined evaluation order, and internal choice is left-biased.
+
+\lstset{emph={text}}
+\begin{example}[Abstract submission]
+\label{exm:abstract}
+
+The task of writing an abstract for a conference is never done.
+\fixme{Extend}
+
+% \begin{TASK}
+%   let submit : String -> Task Unit =
+%     \text. delay 30 (sendTo "icfp19@sigplan.org" text)
+%   let write : Task Unit =
+%     edit "Abstract: ..." >>= \abstract. if 500 <= words abstract <= 700 then submit abstract else fail
+% \end{TASK}
+
+\begin{TASK}
+  let submit : Ref String -> Task String = \text. sendTo "icfp19@sigplan.org" text
+  let write : Ref String -> Task String = \text. update text
+  let main : Task String = write abstract <|> delay 30 (submit abstract)
+\end{TASK}
+
+The \TS{delay} task is specified in Example~\ref{exm:delay} in Section~\ref{sec:language}.
+
+\end{example}
 
 
 \subsection{Recap}
