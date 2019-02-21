@@ -94,6 +94,7 @@ The specified processes in \BPEL are directly executable, just like \YAWL.
 
 \subsection{Process algebras}
 
+\paragraph{Differences}
 There are two main differences between \TOP and process algebras.
 The first is a difference in scope.
 Process algebras focus on modelling the input/output behaviour of processes, by explicitly stating which actions are sent and received at certain points in the program.
@@ -118,15 +119,54 @@ Contrast this with Milner's CCS \cite{books/Milner89CAC}, where concealed action
 Another similarity between \TOPHAT and process algebras, or any system with concurrency for that matter, is the need for synchronisation.
 Broadly speaking, concurrency means that different parts of a program can interact with the environment independently, in an interleaved manner.
 Synchronisation means that only some, but not all, of the possible interleavings are desirable.
-The semantics of the step combinators in \TOPHAT, together with the fact that internal communication happens atomically, allows for concise TODO: say that synchronisation in TOPHAT is the best.
+The semantics of the step combinators in \TOPHAT, together with the fact that internal communication happens atomically, allows for concise \fixme{Say that synchronisation in TOPHAT is the best.}
 
 
 
 \subsection{Reactive programming}
 
-\paragraph{Esterel \& HipHop}
+\paragraph{HipHop}
 
-\fixme{Write}
+HipHop \fixme{cite} is a programming language to develop synchronous reactive web systems.
+From a single source, both server and client applications can be generated.
+Programs are written in the Hop language, a Scheme dialect.
+Communication is based on a reactive layer embedded in Hop.
+Each reactive component starts by specifying possible input and output events.
+The component then proceeds as a state machine.
+
+Input events are sent to such a machine programatically using Hop, or are explicitly wired to events from the client.
+They are optionally associated with a Hop value.
+As Hop is a dynamic language, and HipHop uses strings to identify events, events and their possible associated values are not statically checked.
+Events are aggregated till the moment the machine as asked to react.
+% then are perceived as conceptually simultaneous.
+The machine is executed and reacts by building a multi-set of output events.
+The execution of a HipHop machine is atomic.
+The set of inputs is not influenced by the current computation.
+
+As with \TOPHAT, HipHop is a \DSL embedded in a general purpose programming language.
+% the same way \TOPHAT is embedded into the simply typed $\lambda$-calculus.
+Another similarity is that both specifications lead to executable server and client applications from a single source.
+However, HipHop is more low level regarding its specification.
+Where \TOPHAT takes tasks and collaboration as a starting point,
+HipHop focusses on synchronous communication and atom execution of reactive machines.
+
+This comes forward in the way both systems define events.
+In HipHop programmers can define and use their own events.
+Inputs in \TOPHAT are not extensible and not visible to the developer.
+They are a completely separate entity living on the semantic level.
+
+Another important difference is the way both systems handle events.
+In HipHop the programmer has control over the moment a machine should processes its events.
+This could be just one event, or a multi-set of events that are processed simultaneously.
+\TOPHAT always processes an input at the moment it occurs and only handles a single event in one instance.
+
+
+
+\paragraph{Esterel}
+
+The set of HipHop reactive statements is based on those of the Esterel language.
+Esterel is a programming language
+
 
 
 
