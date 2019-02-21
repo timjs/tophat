@@ -137,12 +137,37 @@
 %% Proofs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% \newcommand{\case}[2]{
+%     \noindent\textbf{Case} #1\\
+%     \vspace{5mm}
+%     \indent\begin{minipage}{\dimexpr\textwidth-3cm}
+%     #2
+%   \end{minipage}\\\\}
+
 \newcommand{\case}[2]{
-    \noindent\textbf{Case} #1\\
-    \vspace{5mm}
-    \indent\begin{minipage}{\dimexpr\textwidth-3cm}
+  \bigskip
+  \noindent\textbf{Case} #1
+  \nopagebreak[4]
+  \smallskip
+  \par
+  \begingroup
+    \leftskip\parindent
+    \noindent
     #2
-  \end{minipage}\\\\}
+    \par
+  \endgroup
+}
+
+% \newcommand{\case}[2]{
+%   \noindent
+%   \begin{tabular*}{\textwidth}{lp{0.8\textwidth}}
+%     \textbf{Case} & #1 \\
+%     \addlinespace
+%     & #2
+%   \end{tabular*}
+%   \medskip
+% }
+
 
 
 %% Depricated %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
