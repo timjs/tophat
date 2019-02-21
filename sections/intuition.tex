@@ -33,9 +33,8 @@ When drink and food are prepared, users can step ($\Next$) to eating the results
 
 \begin{TASK}
   let makeBreakfast : Task Drink -> Task Food -> Task <<Drink,Food>> =
-    \makeDrink. \makeFood. makeDrink <&> makeFood
-  let main : Task Unit =
-    makeBreakfast (makeTea <?> makeCoffee) makeEgg >>? haveBreakfast
+    \makeDrink. \makeFood. makeDrink <&> makeFood in
+  makeBreakfast (makeTea <?> makeCoffee) makeEgg >>? haveBreakfast
 \end{TASK}
 
 % \begin{TASK}
@@ -57,11 +56,11 @@ Second, tasks are first-class, they can be arguments and results of functions.
 Third, tasks can be values of other tasks.
 These aspects make it possible for programmers to model custom collaboration patterns.
 
-\Cref{exm:breakfast} demonstrates how tasks can be parameterized by other tasks: makeBreakfast is a collaboration pattern that always works the same way, regardless of which food and drink are being prepared.
+\Cref{exm:breakfast} demonstrates how tasks can be parameterised by other tasks: \TS{makeBreakfast} is a collaboration pattern that always works the same way, regardless of which food and drink are being prepared.
+
 
 
 \subsection{Tasks are driven by user input}
-
 
 Input events drive evaluation of tasks.
 When the system receives a valid event, it applies the event to the current task, which results in a new task.
@@ -215,29 +214,28 @@ This allows a variety of synchronisation problems to be solved in an intuitive a
 \TOPHAT is meant solely for implementation and does not have any form of nondeterminism.
 Input events for parallel tasks are disambiguated, internal steps have a well-defined evaluation order, and internal choice is left-biased.
 
-\lstset{emph={text}}
-\begin{example}[Abstract submission]
-\label{exm:abstract}
-
-The task of writing an abstract for a conference is never done.
-\fixme{Extend}
-
+% \lstset{emph={text}}
+% \begin{example}[Abstract submission]
+% \label{exm:abstract}
+%
+% The task of writing an abstract for a conference is never done.
+% Let \TS{abstract} be a reference to a string.
+%
+% % \begin{TASK}
+% %   let submit : String -> Task Unit =
+% %     \text. delay 30 (sendTo "icfp19@sigplan.org" text)
+% %   let write : Task Unit =
+% %     edit "Abstract: ..." >>= \abstract. if 500 <= words abstract <= 700 then submit abstract else fail
+% % \end{TASK}
+%
 % \begin{TASK}
-%   let submit : String -> Task Unit =
-%     \text. delay 30 (sendTo "icfp19@sigplan.org" text)
-%   let write : Task Unit =
-%     edit "Abstract: ..." >>= \abstract. if 500 <= words abstract <= 700 then submit abstract else fail
+%   let submit : Ref String -> Task String = \text. sendTo "icfp19@sigplan.org" text in
+%   update abstract <|> delay 30 (submit abstract)
 % \end{TASK}
-
-\begin{TASK}
-  let submit : Ref String -> Task String = \text. sendTo "icfp19@sigplan.org" text
-  let write : Ref String -> Task String = \text. update text
-  let main : Task String = write abstract <|> delay 30 (submit abstract)
-\end{TASK}
-
-The \TS{delay} task is specified in Example~\ref{exm:delay} in Section~\ref{sec:language}.
-
-\end{example}
+%
+% The \TS{delay} task is specified in Example~\ref{exm:delay} in Section~\ref{sec:language}.
+%
+% \end{example}
 
 
 \subsection{Recap}
