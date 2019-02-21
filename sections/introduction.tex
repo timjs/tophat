@@ -67,13 +67,13 @@ Currently, we know of two frameworks using \TOP: \ITASKS and \MTASKS.
 It is a library that provides editors, monadic combinators, and shared data sources.
 \ITASKS uses the generic programming facilities of Clean to derive rich client and server applications from a single source.
 It has been used to model an incident management tool for the Dutch coast guard~\cite{conf/iscram/LijnseJP12}.
-Also it has been used numerous times to prototype ideas for Command and Control~\cite{theses/nlda/Kool17, theses/radboud/Stutterheim17}, and in a case study for the Dutch tax authority \cite{conf/sfp/StutterheimAP17}.
+Also it has been used numerous times to prototype ideas for Command and Control~\cite{theses/nlda/Kool17, theses/radboud/Stutterheim17}, and in a case study for the Dutch tax authority~\cite{conf/sfp/StutterheimAP17}.
 
 \MTASKS is a subset of \ITASKS,
 focussing on \IOT devices and deployment on micro controllers.
-\fixme{Add examples.}
+It has been used to control home thermostats and other home automation applications \fixme{cite}.
 
-\fixme{Say what lacks in these approaches: no formal reasoning about properties.}
+Both implementations currently lack formal semantics which can be used to prove properties about tasks.
 
 
 
@@ -119,7 +119,7 @@ Our contributions to workflow modelling, functional programming language design,
 
   \item
     Along with the semantics, we present the following semantic observations on tasks:
-    the current value, whether a term is stuck, the current user interface, and the accepted inputs. \fixme{we do not provide observation for user interface!}
+    the current value, whether a term is stuck, the current user interface, and the accepted inputs.
 
   \item
     We prove progress and type preservation for our calculus.
