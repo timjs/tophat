@@ -286,56 +286,30 @@ This lemma follows immediately from definition.
     By the induction hypothesis, we know that $t_1,s\handle{i}t_1',s'$ also preserves and thus $\Gamma,\Sigma\infers t_1':\Task\tau_1$ and $\Gamma,Sigma\infers s'$.
     By \refrule{T-Then} we now obtain that $\Gamma,\Sigma\infers t_1'\Then e_2:\Task\tau$.}
 
-  \case
-    {$\userule{H-PassNext}$}
-    {Given that
-  $\Gamma,\Sigma\infers t_1\Next e_2:\Task\tau$ and $\Sigma\infers s$,
-  \refrule{T-Next} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and
-  $\Gamma,\Sigma\infers e_2:\tau_1\to\Task\tau$. By the induction hypothesis, we
-  know that $t_1,s\handle{i}t_1',s'$ also preserves and thus
-  $\Gamma,\Sigma\infers t_1':\Task\tau_1$ and $\Gamma,Sigma\infers s'$. By
-  \refrule{T-Next} we now obtain that
-  $\Gamma,\Sigma\infers t_1'\Next e_2:\Task\tau$. }
+\case{$\userule{H-PassNext}$}
+     {Given that $\Gamma,\Sigma\infers t_1\Next e_2:\Task\tau$ and $\Sigma\infers s$, \refrule{T-Next} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and $\Gamma,\Sigma\infers e_2:\tau_1\to\Task\tau$.
+     By the induction hypothesis, we know that $t_1,s\handle{i}t_1',s'$ also preserves and thus $\Gamma,\Sigma\infers t_1':\Task\tau_1$ and $\Gamma,Sigma\infers s'$.
+     By \refrule{T-Next} we now obtain that $\Gamma,\Sigma\infers t_1'\Next e_2:\Task\tau$. }
 
-  \case
-    {$\userule{H-FirstAnd}$}
-    {Given that
-  $\Gamma,\Sigma\infers t_1\And t_2:\Task(\tau_1\times\tau_2)$ and
-  $\Sigma\infers s$, \refrule{T-And} gives us that
-  $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and
-  $\Gamma,\Sigma\infers t_2:\Task\tau_2$. By the induction hypothesis, we know
-  that $t_1,s\handle{i}t_1',s'$ also preserves and thus
-  $\Gamma,\Sigma\infers t_1':\Task\tau_1$ and $\Sigma\infers s'$. Therefore by
-  \refrule{T-Next} we obtain
-  $\Gamma,\Sigma\infers t_1'\And t_2:\Task(\tau_1\times\tau_2)$.}
+\case{$\userule{H-FirstAnd}$}
+     {Given that $\Gamma,\Sigma\infers t_1\And t_2:\Task(\tau_1\times\tau_2)$ and $\Sigma\infers s$, \refrule{T-And} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and $\Gamma,\Sigma\infers t_2:\Task\tau_2$.
+     By the induction hypothesis, we know that $t_1,s\handle{i}t_1',s'$ also preserves and thus $\Gamma,\Sigma\infers t_1':\Task\tau_1$ and $\Sigma\infers s'$.
+     Therefore by \refrule{T-Next} we obtain $\Gamma,\Sigma\infers t_1'\And t_2:\Task(\tau_1\times\tau_2)$.}
 
-  \case
-    {$\userule{H-SecondAnd}$}
-    {Given that
-  $\Gamma,\Sigma\infers t_1\And t_2:\Task(\tau_1\times\tau_2)$ and
-  $\Sigma\infers s$, \refrule{T-And} gives us that
-  $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and
-  $\Gamma,\Sigma\infers t_2:\Task\tau_2$. By the induction hypothesis, we know
-  that $t_2,s\handle{i}t_2',s'$ also preserves and thus
-  $\Gamma,\Sigma\infers t_2':\Task\tau_2$ and $\Sigma\infers s'$. Therefore by
-  \refrule{T-Next} we obtain
-  $\Gamma,\Sigma\infers t_1\And t_2':\Task(\tau_1\times\tau_2)$.}
+\case{$\userule{H-SecondAnd}$}
+     {Given that $\Gamma,\Sigma\infers t_1\And t_2:\Task(\tau_1\times\tau_2)$ and $\Sigma\infers s$, \refrule{T-And} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and $\Gamma,\Sigma\infers t_2:\Task\tau_2$.
+     By the induction hypothesis, we know that $t_2,s\handle{i}t_2',s'$ also preserves and thus $\Gamma,\Sigma\infers t_2':\Task\tau_2$ and $\Sigma\infers s'$.
+     Therefore by \refrule{T-Next} we obtain $\Gamma,\Sigma\infers t_1\And t_2':\Task(\tau_1\times\tau_2)$.}
 
-  \case
-    {$\userule{H-FirstOr}$}
-    {Given that
-  $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$ and $\Sigma\infers s$,
-  \refrule{T-Or} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau$ and
-  $\Gamma,\Sigma\infers t_2:\Task\tau$. By the induction hypothesis we know that
-  $t_1,s\handle{i}t_1',s'$ also preserves, and therefore
-  $\Gamma,\Sigma\infers t_1':\Task\tau$ and $\Sigma\infers s'$. By
-  \refrule{T-Or} we now obtain $\Gamma,\Sigma\infers t_1'\Or t_2:\Task\tau$.}
+\case{$\userule{H-FirstOr}$}
+     {Given that $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$ and $\Sigma\infers s$, \refrule{T-Or} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau$ and $\Gamma,\Sigma\infers t_2:\Task\tau$.
+     By the induction hypothesis we know that $t_1,s\handle{i}t_1',s'$ also preserves, and therefore $\Gamma,\Sigma\infers t_1':\Task\tau$ and $\Sigma\infers s'$.
+     By \refrule{T-Or} we now obtain $\Gamma,\Sigma\infers t_1'\Or t_2:\Task\tau$.}
 
-  \case
-    {$\userule{H-SecondOr}$}
-    {Given that $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$ and $\Sigma\infers s$, \refrule{T-Or} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau$ and $\Gamma,\Sigma\infers t_2:\Task\tau$.
-    By the induction hypothesis we know that $t_2,s\handle{i}t_2',s'$ also preserves, and therefore $\Gamma,\Sigma\infers t_2':\Task\tau$ and $\Sigma\infers s'$.
-    By T-Or we now obtain $\Gamma,\Sigma\infers t_1\Or t_2':\Task\tau$.}
+\case{$\userule{H-SecondOr}$}
+     {Given that $\Gamma,\Sigma\infers t_1\Or t_2:\Task\tau$ and $\Sigma\infers s$, \refrule{T-Or} gives us that $\Gamma,\Sigma\infers t_1:\Task\tau$ and $\Gamma,\Sigma\infers t_2:\Task\tau$.
+     By the induction hypothesis we know that $t_2,s\handle{i}t_2',s'$ also preserves, and therefore $\Gamma,\Sigma\infers t_2':\Task\tau$ and $\Sigma\infers s'$.
+     By T-Or we now obtain $\Gamma,\Sigma\infers t_1\Or t_2':\Task\tau$.}
 
   % \noindent\textbf{Case} $\userule{H-Appoint}$ Given that
   % $\Gamma,\Sigma\infers u\At t:\Task\tau$, \refrule{T-Assign} gives us that
@@ -462,31 +436,54 @@ This lemma follows immediately from definition.
      {$\Failing(\Fail,s)=\True$, and there is no handling rule that applies to fail.}
 
 \case{$e = \Edit v$}
-       {$\Gamma,\Sigma\infers\Edit v:\Task\tau$, $\Failing(\Edit v,s)=\False$, and there exists an input $i$, namely $v':\tau$.}
+     {$\Gamma,\Sigma\infers\Edit v:\Task\tau$, $\Failing(\Edit v,s)=\False$, and there exists an input $i$, namely $v':\tau$.}
 
 \case{$e = \Enter \tau$}
-       {$\Failing(\Enter \tau)=\False$, and there exists an in put i, namely $v:\tau$.}
+     {$\Failing(\Enter \tau)=\False$, and there exists an in put i, namely $v:\tau$.}
 
 \case{$e = \Update l$}
-       {Given that $\Gamma,\Sigma\infers\Update l:\Task\tau$, $\Failing(\Update l,s)=\False$, and there exists an input $i$, namely $v:\tau$.}
+     {Given that $\Gamma,\Sigma\infers\Update l:\Task\tau$, $\Failing(\Update l,s)=\False$, and there exists an input $i$, namely $v:\tau$.}
 
 \case{$e = t_1\Then e_2$}
-       {$\Failing(t_1\Then e_2,s)=\Failing(t_1,s)$. If there exists an $i$ for $t_1$, then this $i$ also applies to $t_1\Then e_2$. This case therefore holds by the induction hypothesis.}
+     {$\Failing(t_1\Then e_2,s)=\Failing(t_1,s)$.
+     If there exists an $i$ for $t_1$, then this $i$ also applies to $t_1\Then e_2$.
+     This case therefore holds by the induction hypothesis.}
 
 \case{$e = t_1\Next e_2$}
-       {$\Failing(t_1\Next e_2,s)=\Failing(t_1,s)$. If there exists an $i$ for $t_1$, then this $i$ also applies to $t_1\Next e_2$. This case therefore holds by the induction hypothesis.}
+     {$\Failing(t_1\Next e_2,s)=\Failing(t_1,s)$.
+     If there exists an $i$ for $t_1$, then this $i$ also applies to $t_1\Next e_2$.
+     This case therefore holds by the induction hypothesis.}
 
 \case{$e = e_1\Xor e_2$}
-       {We normalise the two expressions first, $e_1,s\stride t_1,s'$, $e_2,s\stride t_2,s'$ and we can then be in two situations. One, we can have that $\Failing(t_1,s')$ and $\Failing(t_2,s')$ are both true. If that is so, then by definition, we have both $\Failing(e_1\Xor e_2,s)$ and no rule of the hanlding semantics applies, and therefore there exists no input for this case.\\
-                                           Or we are in the situation where one or both of the two sub expressions does not fail. In that case, we know that $\Failing(e_1\Xor e_2,s)$ does not hold, and that at least one of the handling rules applies. Therefore, there must be an input $i$, namely $\Left$, $\Right$ or both.}
+     {We normalise the two expressions first, $e_1,s\stride t_1,s'$, $e_2,s\stride t_2,s'$ and we can then be in two situations.
+     One, we can have that $\Failing(t_1,s')$ and $\Failing(t_2,s')$ are both true.
+     If that is so, then by definition, we have both $\Failing(e_1\Xor e_2,s)$ and no rule of the handling semantics applies, and therefore there exists no input for this case.
+
+     Or we are in the situation where one or both of the two sub expressions does not fail.
+     In that case, we know that $\Failing(e_1\Xor e_2,s)$ does not hold, and that at least one of the handling rules applies.
+     Therefore, there must be an input $i$, namely $\Left$, $\Right$ or both.}
 
 \case{$e = t_1\And t_2$}
-       {We can again find ourselves in one of two situations. In the first case, both sub expressions fail, $\Failing(t_1,s)$ and $\Failing(t_2,s)$. In that case, we know that $\Failing(t_1\And t_2,s)$ also fails by definition. By the induction hypothesis, we know that for both $t_1$ and $t_2$ there is no input that can be handled. Since the only two rules for $\And$ that handle input just pass this input on to one of the two expressions, we know that indeed no $i$ applies.\\
-                                           In the case that one or both sub expressions do not fail, then by definition $t_1\And t_2$ not failing under $s$. Again by induction hypothesis, we know that for one or both of the expressions, there exits an $i$ that can be handled. Then by H-FirstAnd and H-SecondAnd, we know that we can pass this $i$, by prefixing it with either $\First$ or $\Second$.}
+     {We can again find ourselves in one of two situations.
+     In the first case, both sub expressions fail, $\Failing(t_1,s)$ and $\Failing(t_2,s)$.
+     In that case, we know that $\Failing(t_1\And t_2,s)$ also fails by definition.
+     By the induction hypothesis, we know that for both $t_1$ and $t_2$ there is no input that can be handled.
+     Since the only two rules for $\And$ that handle input just pass this input on to one of the two expressions, we know that indeed no $i$ applies.
+
+     In the case that one or both sub expressions do not fail, then by definition $t_1\And t_2$ not failing under $s$.
+     Again by induction hypothesis, we know that for one or both of the expressions, there exits an $i$ that can be handled.
+     Then by H-FirstAnd and H-SecondAnd, we know that we can pass this $i$, by prefixing it with either $\First$ or $\Second$.}
 
 \case{$e = t_1\Or t_2$}
-       {We can again find ourselves in one of two situations. In the first case, both sub expressions fail, $\Failing(t_1,s)$ and $\Failing(t_2,s)$. In that case, we know that $\Failing(t_1\Or t_2,s)$ also fails by definition. By the induction hypothesis, we know that for both $t_1$ and $t_2$ there is no input that can be handled. Since the only two rules for $\Or$ that handle input just pass this input on to one of the two expressions, we know that indeed no $i$ applies.\\
-                                           In the case that one or both sub expressions do not fail, then by definition $t_1\Or t_2$ not failing under $s$. Again by induction hypothesis, we know that for one or both of the expressions, there exits an $i$ that can be handled. Then by H-FirstOr and H-SecondOr, we know that we can pass this $i$, by prefixing it with either $\First$ or $\Second$.}
+     {We can again find ourselves in one of two situations.
+     In the first case, both sub expressions fail, $\Failing(t_1,s)$ and $\Failing(t_2,s)$.
+     In that case, we know that $\Failing(t_1\Or t_2,s)$ also fails by definition.
+     By the induction hypothesis, we know that for both $t_1$ and $t_2$ there is no input that can be handled.
+     Since the only two rules for $\Or$ that handle input just pass this input on to one of the two expressions, we know that indeed no $i$ applies.
+
+     In the case that one or both sub expressions do not fail, then by definition $t_1\Or t_2$ not failing under $s$.
+     Again by induction hypothesis, we know that for one or both of the expressions, there exits an $i$ that can be handled.
+     Then by H-FirstOr and H-SecondOr, we know that we can pass this $i$, by prefixing it with either $\First$ or $\Second$.}
 
   % \noindent\textbf{Case} $e = u \At t$\\
   %  This case follows directly from applying the induction hypothesis, since $\Failing(u \At t,s)=\Failing(t,s)$ and any input that applies to $t$ also applies to $u \At t$.\\
