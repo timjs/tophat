@@ -5,7 +5,7 @@
 \subsection{Theorem~\ref{thm:pres-eval}}
 
 \begin{proof}
-  We prove Theorem~\ref{thm:pres-eval} by induction on $e$:\\
+  We prove Theorem~\ref{thm:pres-eval} by induction on $e$:
 
   \case
     {$e=\lambda x:\tau.e, e_1 e_2, x, c, l, e_1 \star e_2,\If{e_1}{e_2}{e_3},\tuple{e_1, e_2},\unit,\Ref e,!e,e_1 := e_2$}
@@ -68,7 +68,7 @@
 \subsection{Lemma~\ref{lem:presvalue}}
 
 \begin{proof}
-  We prove Lemma~\ref{lem:presvalue} by induction over $e$.\\
+  We prove Lemma~\ref{lem:presvalue} by induction over $e$.
 
 \case {$\Value{(\Edit v,s)}=v$}
       {By T-Edit, if $\Gamma,\Sigma\infers \Edit v:\Task\tau$, then $\Gamma,\Sigma\infers v:\tau$.}
@@ -122,7 +122,7 @@
   lead to a value, the lemma holds trivially.}
 
   % \noindent\textbf{Case} $\Value{(u\At t,s)}=\Value(t,s)$ This case follows
-  % directly from the induction hypothesis.\\
+  % directly from the induction hypothesis.
 \end{proof}
 
 
@@ -130,7 +130,7 @@
 \subsection{Theorem~\ref{thm:pres-stride}}
 
 \begin{proof}
-  We prove Theorem~\ref{thm:pres-stride} by induction on $e$:\\
+  We prove Theorem~\ref{thm:pres-stride} by induction on $e$:
 
 \case{$\userule{S-Fail}$}
      {Since this case does not alter the expression, the theorem holds trivially.}
@@ -198,7 +198,7 @@
   % \noindent\textbf{Case} $\userule{S-Appoint}$ Given that
   % $\Gamma,\Sigma\infers u\At t:\Task\tau$, by \refrule{T-Appoint} we have
   % $t:\Task\tau$. By the induction hypothesis, we know that $t,s\stride t',s'$
-  % preserves, and thus $\Gamma,\Sigma\infers u\At t':\Task\tau$.\\
+  % preserves, and thus $\Gamma,\Sigma\infers u\At t':\Task\tau$.
 
 \end{proof}
 
@@ -207,24 +207,24 @@
 \subsection{Theorem~\ref{thm:pres-norm}}
 
 \begin{proof}
-  We prove Theorem~\ref{thm:pres-norm} by induction on $e$:\\
+  We prove Theorem~\ref{thm:pres-norm} by induction on $e$:
 
-  \noindent\textbf{Case} $\userule{N-Done}$ \\
-  \indent Given that
-  $\Gamma,\Sigma\infers e:\Task\tau$ and $\Sigma\infers s$, we know that
-  $\Gamma,\Sigma\infers t:\Task\tau$ and $\Sigma\infers s'$ by
-  Theorem~\ref{thm:pres-eval}. Then by Theorem~\ref{thm:pres-stride}, we have
-  $\Gamma,\Sigma\infers t':\Task\tau$ and $\Sigma\infers s''$.\\
+  \case{$\userule{N-Done}$}
+    {Given that
+    $\Gamma,\Sigma\infers e:\Task\tau$ and $\Sigma\infers s$, we know that
+    $\Gamma,\Sigma\infers t:\Task\tau$ and $\Sigma\infers s'$ by
+    Theorem~\ref{thm:pres-eval}. Then by Theorem~\ref{thm:pres-stride}, we have
+    $\Gamma,\Sigma\infers t':\Task\tau$ and $\Sigma\infers s''$.}
 
-  \noindent\textbf{Case}\\
-  $\userule{N-Repeat}$ \\
-  \indent Given that
-  $\Gamma,\Sigma\infers e:\Task\tau$ and $\Sigma\infers s$, we know that
-  $\Gamma,\Sigma\infers t:\Task\tau$ and $\Sigma\infers s'$ by
-  Theorem~\ref{thm:pres-eval}. Then by Theorem~\ref{thm:pres-stride}, we have
-  $\Gamma,\Sigma\infers t':\Task\tau$ and $\Sigma\infers s''$. Then by the
-  induction hypothesis, we finally obtain that
-  $\Gamma,\Sigma\infers t'':\Task\tau$ and $\Sigma\infers s'''$.\\
+  \case
+    {$\userule{N-Repeat}$}
+    { Given that
+    $\Gamma,\Sigma\infers e:\Task\tau$ and $\Sigma\infers s$, we know that
+    $\Gamma,\Sigma\infers t:\Task\tau$ and $\Sigma\infers s'$ by
+    Theorem~\ref{thm:pres-eval}. Then by Theorem~\ref{thm:pres-stride}, we have
+    $\Gamma,\Sigma\infers t':\Task\tau$ and $\Sigma\infers s''$. Then by the
+    induction hypothesis, we finally obtain that
+    $\Gamma,\Sigma\infers t'':\Task\tau$ and $\Sigma\infers s'''$.}
 
 \end{proof}
 
@@ -430,7 +430,7 @@ This lemma follows immediately from definition.
 
 \begin{proof}
 
-  We prove Theorem~\ref{thm:failing} by induction on $e'$.\\
+  We prove Theorem~\ref{thm:failing} by induction on $e'$.
 
 \case{$e = \Fail$}
      {$\Failing(\Fail,s)=\True$, and there is no handling rule that applies to fail.}
@@ -485,8 +485,8 @@ This lemma follows immediately from definition.
      Again by induction hypothesis, we know that for one or both of the expressions, there exits an $i$ that can be handled.
      Then by H-FirstOr and H-SecondOr, we know that we can pass this $i$, by prefixing it with either $\First$ or $\Second$.}
 
-  % \noindent\textbf{Case} $e = u \At t$\\
-  %  This case follows directly from applying the induction hypothesis, since $\Failing(u \At t,s)=\Failing(t,s)$ and any input that applies to $t$ also applies to $u \At t$.\\
+  % \noindent\textbf{Case} $e = u \At t$
+  %  This case follows directly from applying the induction hypothesis, since $\Failing(u \At t,s)=\Failing(t,s)$ and any input that applies to $t$ also applies to $u \At t$.
 \end{proof}
 
 
@@ -541,6 +541,6 @@ This lemma follows immediately from definition.
        {Given that $\userule{H-FirstOr}$ we have by definition that $\Inputs(t_1\Or t_2,s) = \set{\First\ i \mid i \in \Inputs(t_1,s)} \cup \set{\Second\ i \mid i \in \Inputs(t_2,s)}$.
        By the induction hypothesis, we have that $i\in\Inputs(t_2,s)$, and by definition of $\Inputs$, $\Second i$ is therefore als included in this case.}
   %
-  % \noindent\textbf{Case} $e=u\At t, i$\\
-  %  Given that $\userule{H-Appoint}$, we can directly apply the induction hypothesis to prove this case.\\
+  % \noindent\textbf{Case} $e=u\At t, i$
+  %  Given that $\userule{H-Appoint}$, we can directly apply the induction hypothesis to prove this case.
 \end{proof}
