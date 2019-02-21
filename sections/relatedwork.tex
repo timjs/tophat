@@ -13,21 +13,14 @@
 
 \paragraph{iTasks}
 
-As mentioned earlier, iTasks is an implementation of \TOP. iTasks has many
-features, and its basic combinators are versatile and powerful. Simpler
-combinators are implemented by restricting the powerful ones. This is useful for
-everyday programming, where having lots of functionality at one's fingertips is
-convenient and efficient.
+As mentioned earlier, iTasks is an implementation of \TOP.
+iTasks has many features, and its basic combinators are versatile and powerful.
+Simpler combinators are implemented by restricting the powerful ones.
+This is useful for everyday programming, where having lots of functionality at one's fingertips is convenient and efficient.
 
-There have been two previous papers that describe semantics of iTasks, by
-\citet{conf/ifl/KoopmanPA08} and \citet{conf/ppdp/PlasmeijerLMAK12}.
-Both give a different semantics in the form of minimal implementations of a
-subset of the interface of iTasks. These semantics however do not make an
-explicit distinction between the host language and task language and they do not
-provide a formal semantics, which makes formal reasoning difficult.
-
-\paragraph{mTasks}
-\fixme{Hier iets gezelligs over mTasks}
+There have been two previous papers that describe semantics of iTasks, by \citet{conf/ifl/KoopmanPA08} and \citet{conf/ppdp/PlasmeijerLMAK12}.
+Both give a different semantics in the form of minimal implementations of a subset of the interface of iTasks.
+These semantics however do not make an explicit distinction between the host language and task language and they do not provide a formal semantics, which makes formal reasoning difficult.
 
 % Our work differs in three major ways.
 % First, we make an explicit distinction between the host language and the task
@@ -42,8 +35,18 @@ provide a formal semantics, which makes formal reasoning difficult.
 % itself makes no use of it.
 % We argue that this does not impact the expressiveness of our language.
 
-% mTasks is another implementation of TOP, designed for coordination of IoT devices. \alert{cite MSc Lubbers}
-% mTasks has been used in a demonstrator for home automation. \alert{cite MSc Andrade}
+
+
+\paragraph{mTasks}
+
+The \MTASKS framework is an implementation of \TOP geared towards \IOT devices.
+As \TOPHAT its basic combinators are a subset of \ITASKS.
+They are similar to those of \TOPHAT.
+However, on \IOT devices it is useful to continue running tasks endlessly,
+which is done in \MTASKS using a \CL{forever} combinator.
+This is currently not possible in \TOPHAT.
+
+As for \ITASKS, there is currently no formal semantics for \MTASKS.
 
 
 
