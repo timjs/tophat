@@ -94,6 +94,7 @@ The specified processes in \BPEL are directly executable, just like \YAWL.
 
 \subsection{Process algebras}
 
+\paragraph{Differences}
 There are two main differences between \TOP and process algebras.
 The first is a difference in scope.
 Process algebras focus on modelling the input/output behaviour of processes, by explicitly stating which actions are sent and received at certain points in the program.
@@ -118,7 +119,7 @@ Contrast this with Milner's CCS \cite{books/Milner89CAC}, where concealed action
 Another similarity between \TOPHAT and process algebras, or any system with concurrency for that matter, is the need for synchronisation.
 Broadly speaking, concurrency means that different parts of a program can interact with the environment independently, in an interleaved manner.
 Synchronisation means that only some, but not all, of the possible interleavings are desirable.
-The semantics of the step combinators in \TOPHAT, together with the fact that internal communication happens atomically, allows for concise TODO: say that synchronisation in TOPHAT is the best.
+The semantics of the step combinators in \TOPHAT, together with the fact that internal communication happens atomically, allows for concise \fixme{Say that synchronisation in TOPHAT is the best.}
 
 
 
