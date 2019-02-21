@@ -127,7 +127,7 @@ The semantics of the step combinators in \TOPHAT, together with the fact that in
 
 \paragraph{HipHop}
 
-HipHop \fixme{cite} is a programming language to develop synchronous reactive web systems.
+HipHop \fixme{cite} is a programming language tailored to the development synchronous reactive web systems.
 From a single source, both server and client applications can be generated.
 Programs are written in the Hop language, a Scheme dialect.
 Communication is based on a reactive layer embedded in Hop.
@@ -137,11 +137,11 @@ The component then proceeds as a state machine.
 Input events are sent to such a machine programatically using Hop, or are explicitly wired to events from the client.
 They are optionally associated with a Hop value.
 As Hop is a dynamic language, and HipHop uses strings to identify events, events and their possible associated values are not statically checked.
-Events are aggregated till the moment the machine as asked to react.
+Events are aggregated until the moment the machine as asked to react.
 % then are perceived as conceptually simultaneous.
 The machine is executed and reacts by building a multi-set of output events.
 The execution of a HipHop machine is atomic.
-The set of inputs is not influenced by the current computation.
+The set of inputs is not influenced by the current computations.
 
 As with \TOPHAT, HipHop is a \DSL embedded in a general purpose programming language.
 % the same way \TOPHAT is embedded into the simply typed $\lambda$-calculus.
@@ -150,15 +150,15 @@ However, HipHop is more low level regarding its specification.
 Where \TOPHAT takes tasks and collaboration as a starting point,
 HipHop focusses on synchronous communication and atom execution of reactive machines.
 
-This comes forward in the way both systems define events.
+This difference in focus shows in the way both systems define events.
 In HipHop programmers can define and use their own events.
 Inputs in \TOPHAT are not extensible and not visible to the developer.
 They are a completely separate entity living on the semantic level.
 
-Another important difference is the way both systems handle events.
-In HipHop the programmer has control over the moment a machine should processes its events.
+Another important difference is the way in which both systems handle events.
+In HipHop the programmer decides when a machine should processes its events.
 This could be just one event, or a multi-set of events that are processed simultaneously.
-\TOPHAT always processes an input at the moment it occurs and only handles a single event in one instance.
+\TOPHAT always processes an input the moment it occurs and only handles a single event in one instance.
 
 
 
