@@ -1,28 +1,27 @@
 % !TEX root=../icfp2019.tex
 
-Software that models how people work is omnipresent in todays society.
-Current languages and frameworks are limited in flexibility and lack the proper level of abstraction.
-Task-oriented programming (\TOP) is a programming paradigm that aims to provide the desired level of abstraction while still being expressive enough to describe real world collaboration.
+Software that models how people work is omnipresent in today's society.
+Current languages and frameworks are limited in flexibility and lack a good level of abstraction.
+Task-oriented programming (TOP) is a programming paradigm that aims to provide the desired level of abstraction while still being expressive enough to describe real world collaboration.
 It prescribes a declarative programming style to specify multi-user workflows.
 Workflows can be higher-order.
 They communicate through typed values on a local or global level.
 Such specifications can be turned into interactive applications for different platforms,
 supporting collaboration during execution.
 
-In this paper we give a description of the \TOP paradigm and then decompose the rich features of \TOP into elementary language elements,
+In this paper we give a description of the TOP paradigm and then decompose the rich features of TOP into elementary language elements,
 which makes them suitable for formal treatment.
 We use the simply typed lambda calculus, extended with pairs and references, as a base language.
-On top of this language, we develop \TOPHAT (TopHat), a calculus for modular interactive workflows.
-With \TOPHAT we prepare a way to formally reason about \TOP systems.
+On top of this language, we develop TopHat, a calculus for modular interactive workflows.
+With TopHat we prepare a way to formally reason about TOP systems.
 
-We describe \TOPHAT by means of a layered semantics.
+We describe TopHat by means of a layered semantics.
 These layers consist of multiple big step evaluations on expressions,
 and two labelled transition systems, handling user inputs.
 We show some interesting properties of this machinery.
 This approach allows for comparison with other work in the field.
-We place \TOPHAT in perspective with the process calculus \CSP.
+We place TopHat in perspective with the process calculus CSP.
 
-\fixme{Add Knowledge, Grounding and Importance}
 
 
 
