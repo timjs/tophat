@@ -34,7 +34,7 @@ When drink and food are prepared, users can step ($\Next$) to eating the results
 \begin{TASK}
   let makeBreakfast : Task Drink -> Task Food -> Task <<Drink,Food>> =
     \makeDrink. \makeFood. makeDrink <&> makeFood in
-  makeBreakfast (makeTea <?> makeCoffee) makeEgg >>? haveBreakfast
+  makeBreakfast (makeTea <?> makeCoffee) makeEgg >>? enjoyBreakfast
 \end{TASK}
 
 % \begin{TASK}
@@ -44,8 +44,13 @@ When drink and food are prepared, users can step ($\Next$) to eating the results
 %     makeBreakfast (makeTea <?> makeCoffee) makeEgg >>? \breakfast. eat breakfast
 % \end{TASK}
 
-\fixme{Extend comparison with real life.}
-
+The way the combinators are defined matches real life closely.
+When we want to have breakfast, we have to complete several other tasks first before we can do so.
+We decide what we want to have and then prepare it.
+We can prepare the different items we have for breakfast in parallel, but not at the same time.
+For example, it is impossible to scramble eggs, and put on the kettle for tea simultaneously.
+Instead, what is meant by parallel is that the order in which we do tasks and the smaller tasks that they are composed of, does not matter.
+Then finally, only when every item we want to have for breakfast is ready, can we sit down and enjoy it.
 \end{example}
 
 
