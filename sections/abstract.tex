@@ -1,27 +1,36 @@
 % !TEX root=../icfp2019.tex
 
+% Context
 Software that models how people work is omnipresent in today's society.
 Current languages and frameworks are limited in flexibility and lack a good level of abstraction.
 Task-oriented programming (TOP) is a programming paradigm that aims to provide the desired level of abstraction while still being expressive enough to describe real world collaboration.
 It prescribes a declarative programming style to specify multi-user workflows.
 Workflows can be higher-order.
-They communicate through typed values on a local or global level.
-Such specifications can be turned into interactive applications for different platforms,
-supporting collaboration during execution.
+They communicate through typed values on a local and global level.
+Such specifications can be turned into interactive applications for different platforms, supporting collaboration during execution.
 
-In this paper we give a description of the TOP paradigm and then decompose the rich features of TOP into elementary language elements,
-which makes them suitable for formal treatment.
+% Inquiry
+TOP has been around for more than a decade, in the form of iTasks, which is tailored for real-world usability.
+So far, it has not been given a formalization in the style common in programming language research.
+
+% Approach
+In this paper we give a description of the TOP paradigm and then decompose its rich features into elementary language elements, which makes them suitable for formal treatment.
 We use the simply typed lambda calculus, extended with pairs and references, as a base language.
 On top of this language, we develop TopHat, a calculus for modular interactive workflows.
-With TopHat we prepare a way to formally reason about TOP systems.
-
 We describe TopHat by means of a layered semantics.
-These layers consist of multiple big step evaluations on expressions,
-and two labelled transition systems, handling user inputs.
-We show some interesting properties of this machinery.
-This approach allows for comparison with other work in the field.
-We place TopHat in perspective with the process calculus CSP.
+These layers consist of multiple big step evaluations on expressions, and two labelled transition systems, handling user inputs.
 
+% Knowledge
+With TopHat we prepare a way to formally reason about TOP languages and programs.
+We show some interesting properties of the language.
+This approach allows for comparison with other work in the field.
+
+% Grounding
+%  ??? De taal zelf is eigenlijk het artifact
+
+% Importance
+TOP has been employed in projects with the Dutch coast guard, tax office, and navy.
+Our work matters because formal program verification is important for mission-critical software, especially for systems with concurrency.
 
 
 
