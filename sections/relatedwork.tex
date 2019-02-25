@@ -53,9 +53,9 @@ As for \ITASKS, there is currently no formal semantics for \MTASKS.
 
 \subsection{Worfklow modelling}
 
-Much research has been done into workflow modelling. These works focus on
-describing the collaboration between subsystems, rather than the communication
-between them.
+Much research has been done into workflow modelling.
+This work focusses on describing the collaboration between subsystems,
+rather than the communication between them.
 The systems described here follow a \emph{boxes and arrows} model of specifying workflows.
 Control flow, represented by arrows, usually can go unrestricted from anywhere to anywhere else in a workflow.
 We see \TOP as the functional programming of workflows, as opposed to this \emph{goto}-style.
@@ -131,7 +131,7 @@ The semantics of the step combinators in \TOPHAT, together with the fact that in
 
 \paragraph{HipHop \& Esterel}
 
-HipHop \cite{berry2011hiphop,journals/corr/BerryS13} is a programming language tailored to the development synchronous reactive web systems.
+HipHop \cite{berry2011hiphop,journals/corr/BerryS13} is a programming language tailored to the development of synchronous reactive web systems.
 From a single source, both server and client applications can be generated.
 Programs are written in the Hop language, a Scheme dialect.
 Communication is based on a reactive layer embedded in Hop.
@@ -142,7 +142,7 @@ The component then proceeds as a state machine.
 Input events are sent to such a machine programatically using Hop, or are explicitly wired to events from the client.
 They are optionally associated with a Hop value.
 As Hop is a dynamic language, and HipHop uses strings to identify events, events and their possible associated values are not statically checked.
-Events are aggregated until the moment the machine as asked to react.
+Events are aggregated until the moment the machine is asked to react.
 % then are perceived as conceptually simultaneous.
 The machine is executed and reacts by building a multi-set of output events.
 The execution of a HipHop machine is atomic.
@@ -153,7 +153,7 @@ As with \TOPHAT, HipHop is a \DSL embedded in a general purpose programming lang
 Another similarity is that both specifications lead to executable server and client applications from a single source.
 However, both HipHop and Esterel are more low level regarding their specification.
 Where \TOPHAT takes tasks and collaboration as a starting point,
-HipHop focusses on synchronous communication and atom execution of reactive machines.
+HipHop focusses on synchronous communication and atomic execution of reactive machines.
 
 This difference in focus shows in the way both systems define events.
 In HipHop programmers can define and use their own events.
@@ -161,7 +161,7 @@ Inputs in \TOPHAT are not extensible and not visible to the developer.
 They are a completely separate entity living on the semantic level.
 
 Another important difference is the way in which both systems handle events.
-In HipHop the programmer decides when a machine should processes its events.
+In HipHop the programmer decides when a machine should process its events.
 This could be just one event, or a multi-set of events that are processed simultaneously.
 \TOPHAT always processes an input the moment it occurs and only handles a single event in one instance.
 
@@ -182,7 +182,7 @@ In the meantime there are many variants and implementations, where reactive-bana
 \FRP and \TOP are different systems that have different goals in mind.
 Whereas \FRP expresses automatically updating data dependencies, \TOP expresses collaboration patterns.
 \TOP has no notion of time.
-Tasks can not change spontaneous over time, while behaviours can.
+Tasks cannot change spontaneous over time, while behaviours can.
 Only input events can change task values.
 The biggest conceptual difference between a workflow in \TOP and a data network in \FRP is that an event to a task only causes updates up until the next step, while an event in \FRP propagates through the whole network.
 
@@ -235,3 +235,4 @@ Chorus~\cite{chen2017chorus} is a visual programming environment for online
 collaboration apps. The goal of Chorus is to allow users to program their own
 application, though which a collective task can be coordinated. Users work on a
 preset data-type that drives the behaviour of the user defined applications.
+\fixme{compare with tophat}
