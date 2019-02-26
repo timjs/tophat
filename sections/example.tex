@@ -67,6 +67,7 @@ A passenger is valid if the name is not empty and the age is at least 0.
 A list of passengers is valid if each passenger is valid, and at least one of the passengers is an adult.
 When the user has entered a valid list of passengers, the step after \TS{>>?} becomes enabled,
 and the user can proceed to picking seats.
+The task $\Enter$ is an empty editor that asks for a value of the given type.
 \begin{TASK}
   let valid = \p. not (fst p == "") /\ snd p >= 0 in
   let adult = \p. snd p >= 18 in
@@ -74,7 +75,6 @@ and the user can proceed to picking seats.
   let bookFlight = enter (List Passenger) >>? \ps.
     if allValid ps then chooseSeats ps else fail
 \end{TASK}
-\fixme{Alejandro: At this point I wonder, what is $\Enter$}
 A selection of seats is correct if every entered seat is free.
 \begin{TASK}
   let correct = \ss. intersect ss !freeSeats == ss in
