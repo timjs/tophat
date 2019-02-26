@@ -50,6 +50,7 @@ We decide what we want to have and then prepare it.
 We can prepare the different items we have for breakfast in parallel, but not at the same time.
 For example, it is impossible to scramble eggs, and put on the kettle for tea simultaneously.
 Instead, what is meant by parallel is that the order in which we do tasks and the smaller tasks that they are composed of, does not matter.
+\fixme{Alejandro has placed a line and exclamation under this sentence. I'm not sure what to do here.}
 Then finally, only when every item we want to have for breakfast is ready, can we sit down and enjoy it.
 \end{example}
 
@@ -80,6 +81,8 @@ There are different editors, denoted by different box symbols.
 An editor of the form $\Edit v$, where $v$ is of type $\tau$, reacts to two kinds of events:
 Change events $v$ with a value of type $\tau$ and clear events $\Empty$ which empty the editor.
 This results in a typed empty editor $\Enter \tau$, which is annotated with the same type.
+\fixme{Alejandro: unclear} %Nico: He has marked the above paragraph as being unclear.
+
 
 The sole purpose of editors is to interact with users by remembering the last value that has been sent to them.
 There are no output events.
@@ -105,12 +108,12 @@ Snacks are modelled using a custom data type.
 
 \end{example}
 
-
+\fixme{Alejandro: What is a value? What is a type?}
 
 \subsection{Tasks can be observed}
 
 Several observations can be made about tasks.
-One of those is determining the value of a task $\Value(t)$.
+One of those is determining the value of a task $\Value(t)$. \fixme{Should we change the type of Value to Maybe v? Both johan and alejandro mention that it is not completely clear to them.}
 Not all tasks have a value, for example the empty editor $\Enter \tau$, which makes $\Value$ a partial function.
 
 Another observation is the set of events a task can react to.
@@ -127,7 +130,7 @@ In order for the system to actually render a task, it needs to observe the task'
 With this information, the system can then display the current state of the task, together with buttons that show the actions a user can engage in.
 
 The final observation is to determine whether a task results in $\Fail$ (failure).
-The step combinator and the choice combinator use this to prevent users from picking a failing task.
+The step combinator $\Next$ and the choice combinator $\Xor$ use this to prevent users from picking a failing task.
 
 
 
@@ -202,7 +205,7 @@ When the agent supplies two of the ingredients by setting the respective shares 
 
 Let $t_1$ and $t_2$ be tasks.
 The parallel combination $t_1 \And t_2$ stands for two independent tasks carried out at the same time.
-Therefore $\And$ introduces concurrency.
+Therefore $\And$ introduces concurrency. \fixme{Alejandro: But before you said it was interleaving!}%nico: en later doen we dit ook.
 For the system it does not matter if the tasks are executed by two people actually in parallel, or by one person who switches between the tasks.
 The inputs sent to the component tasks are interleaved into a serial stream, which is sent to the parallel combinator.
 We assume that such a serialization is always possible.
@@ -247,7 +250,7 @@ Input events for parallel tasks are disambiguated, internal steps have a well-de
 
 \subsection{Recap}
 
-To model collaboration, one needs communication, concurrency, and synchronisation.
+To model collaboration, one needs communication, concurrency, and synchronisation. \fixme{Alejandro: Is this a basic calculus to why iTasks is elaborated?} %nico: not sure what he means here...
 In \TOP, collaboration is specified on a high level of abstraction, hiding the details of communication.
 For example, the cigarette smokers communicate with each other, but the programs do not explicitly mention sending or receiving events.
 

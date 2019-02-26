@@ -19,7 +19,7 @@ The requirements of the application are as follows.
   \item Every passenger must have exactly one seat.
   \item Multiple users should be able to book tickets at the same time.
 \end{enumerate*}
-For this example we assume that the host language has lists and four functions on them: all, any, intersect, and difference.
+For this example we assume that the host language has lists and four functions on them: all, any, intersect, and difference. \fixme{Alejandro: small description may be needed} %nico: of the functions
 %%NOTE: After Peter's comments symbols are not clear --TS
 We also make use of string equality ($\equiv$), dereferencing ($!$), reference assignment ($:=$), and expression sequencing ($;$).
 For brevity, we omit the type annotations of variable bindings.
@@ -72,14 +72,16 @@ and the user can proceed to picking seats.
   let bookFlight = enter (List Passenger) >>? \ps.
     if allValid ps then chooseSeats ps else fail
 \end{TASK}
+\fixme{Alejandro: At this point I wonder, what is $\Enter$}
 A selection of seats is correct if every entered seat is free.
 \begin{TASK}
   let correct = \ss. intersect ss !freeSeats == ss in
   let chooseSeats = \ps. enter (List Seat) >>? \ss.
     if correct ss /\ length ps == length ss then confirmBooking ps ss else fail
 \end{TASK}
+
 The function \TS{confirmBooking} removes the picked seats from the shared list of free seats,
-and displays the end result using the \TS{edit}-construct.
+and displays the end result using the \TS{edit}-construct.\fixme{Alejandro: Give \TS{edit} a proper name?}
 \begin{TASK}
   let confirmBooking = \ps. \ss.
     freeSeats := difference !freeSeats ss; edit <<ps, ss>>

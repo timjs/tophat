@@ -13,7 +13,7 @@ These constructs are formalised in \cref{sec:semantics}.
 \subsection{Expressions}
 
 \label{sub:expressions}
-The host language is a simply typed lambda calculus, extended with some basic types and \ML-style references.
+The host language is a simply typed lambda calculus, extended with some basic types and \ML-style references.\fixme{Alejandro: why references?}
 The grammar in \cref{fig:language-grammar} defines the syntax of the host language.
 It has abstractions, applications, variables, and constants for booleans, integers and strings.
 The symbol $\star$ stands for binary operators.
@@ -32,7 +32,7 @@ The unit value will be used as the result of assignments.
   \usemacro{G-Language-Compact}
   \caption{Language grammar} \label{fig:language-grammar}
 \end{figure}
-
+\fixme{Alejandro about l: different syntax from vars?}
 \label{sub:notation}
 We use double quotation marks to denote strings.
 Integers are denoted by their decimal representation, and booleans are written $\True$ and $\False$.
@@ -46,7 +46,7 @@ The notation $\Let x:\tau = e_1 \In e_2$ is an abbreviation for $(\lambda x:\tau
 
 \label{sub:pretasks}
 The grammar in \cref{fig:task-grammar} specifies the syntactic category of \emph{pretasks}.
-Pretasks are tasks that have unevaluated subexpressions.
+Pretasks are tasks that have unevaluated subexpressions. \fixme{Alejandro: How do you define unevaluated?}
 Each pretask will be discussed in more detail in the following subsections.
 We use open symbols ($\Edit, \Enter, \Next, \Xor$) for tasks that require user input, and closed symbols ($\Update, \Then, \Or$) for tasks that can be evaluated without user input.
 
@@ -76,6 +76,7 @@ Typing rules are of the form $\RelationT$, which should be read as \enquote{in e
 Typing rules for expressions in the host language are presented in the appendix.
 The typing rules for pretasks are given in \cref{fig:typing-rules}.
 \fixme{Say someting about why we need beta, and use beta in the acutal typing rule}
+\fixme{Alejandro: Is there anything surprising? Say what}
 \begin{figure}[h]
   \small
   \begin{gather*}
@@ -165,7 +166,7 @@ Parallel composition comes in two variants: combining two tasks (\emph{and}-para
 We study sequential composition first, and after that combining and choosing.
 
 
-\paragraph{Internal and external step $(t \Then e, t \Next e)$}
+\paragraph{Internal and external step $(t \Then e, t \Next e)$}\fixme{Alejandro: The naming is confusing to me}
 \label{sub:steps}
 
 Sequential composition has a task $t$ on the left and a continuation $e$ on the right.
@@ -281,7 +282,7 @@ Users can work on both branches of an internal choice simultaneously.
 
 External choice ($\Xor$) is different in this regard.
 An external choice requires users to pick a branch before continuing with it.
-This means users cannot work on the branches of an external choice before picking one.
+This means users cannot work on the branches of an external choice before picking one. \fixme{Alejandro: Is this actually implied?}
 
 
 \begin{example}[Delay]

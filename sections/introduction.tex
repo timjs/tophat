@@ -4,6 +4,12 @@
 
 \section{Introduction}
 
+\fixme{Alejandro: The introduction seems to be more about why Task-Oriented Programming
+is nice and useful. Personally, I would like it to tell me another
+story: given that some people find TOP useful (as shown by the many
+examples), why should be care about formalizing it and which challenges
+does it pose? I think this is what people from ICFP would care about more.}
+
 Many applications these days are developed to support workflows in institutions and businesses.
 Take for example expense declarations, order processing, and emergency management.
 Some of these workflows occur on the boundary between organisations and customers,
@@ -25,10 +31,10 @@ as well as machines doing calculations or fetching data.
 
 
 \subsection{Task-oriented programming}
-
+\fixme{Alejandro: Not entirely convincing}%Nico: hij heeft het hier volgens mij over de titel van de sectie en het woord aims in de eerste zin. Misschien moeten we een hardere claim doen hier?
 % Task-Oriented Programming (\TOP) is a programming paradigm aimed at writing interactive multi-user applications in a declarative way \cite{conf/ppdp/PlasmeijerLMAK12}.
 Task-oriented programming (\TOP) is a programming paradigm which aims to be the sweet spot between faithful modelling workflows
-and rapid prototyping of multi-user web applications supporting these workflows.
+and rapid prototyping of multi-user web applications supporting these workflows.\fixme{Rinus: Hier zou ik een referentie naar ons ppdp2012 paper verwachten.}
 % Task-oriented programming (\TOP) is a programming paradigm to support these ways of working.
 \TOP focusses on modelling collaboration patterns.
 This gives rise to user's need to interact and share information.
@@ -39,7 +45,7 @@ a language that supports \TOP should choose the right level of abstraction to su
 % \TOP has two aspects.
 % First, it should allow to specify tasks from real world scenarios.
 Firstly, it should provide primitive building blocks that are useful for high-level descriptions of how users collaborate with each other and with machines.
-These building blocks are \emph{editors}, \emph{composition}, and \emph{shared data}.
+These building blocks are: \emph{editors}, \emph{composition}, and \emph{shared data}.
 % Second, it should be able to generate multi-user web applications to support these scenarios.
 Secondly, it should be able to generate applications, including graphical user interfaces, from workflows modelled with said building blocks.
 
@@ -59,7 +65,7 @@ In generated applications, editors can take many forms, like input fields, selec
 \subsection{Utilisation}
 
 
-Currently, we know of two frameworks using \TOP: \ITASKS and \MTASKS.
+Currently, we know of two frameworks implementing \TOP: \ITASKS and \MTASKS.
 
 \ITASKS is an implementation of \TOP, in the form of a shallowly embedded domain-specific language in the lazy functional programming language Clean.
 It is a library that provides editors, monadic combinators, and shared data sources.
@@ -71,7 +77,7 @@ Also it has been used numerous times to prototype ideas for Command and Control~
 focussing on \IOT devices and deployment on micro controllers.
 It has been used to control home thermostats and other home automation applications \cite{koopman2018task}.
 
-Both implementations currently lack formal semantics which can be used to prove properties about tasks.
+Both implementations currently lack formal semantics which can be used to prove properties about tasks.\fixme{Rinus: can be used.. -> is suited}
 
 
 
@@ -92,7 +98,7 @@ Formally in the sense that we develop a calculus which formalises these features
 
 One of the defining aspects of \ITASKS is its embedding in a functional programming language.
 This creates a synergy where \ITASKS profits from the expressivity of Clean, while enhancing the language with functionality for user interaction.
-The tight integration of task DSL and host language makes it sometimes difficult to see where the boundaries are.
+The tight integration of task DSL and a host language makes it sometimes difficult to see where the boundaries are.
 
 In \TOPHAT, we separate the task layer and the underlying host language, both syntactically and semantically.
 In this way we make explicit which of the synergetic effects of \TOP come from the task layer, and which come from functional programming.

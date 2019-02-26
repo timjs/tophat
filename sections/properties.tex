@@ -13,7 +13,7 @@ In order to validate our semantics, we show that our evaluation, normalisation
 and handling semantics is type preserving. We additionally prove a progress
 theorem for our small-step handling semantics.
 
-Additionally, we show that the normalisation semantics is a big-step semantics.
+Additionally, we show that the normalisation semantics is a big-step semantics. \fixme{Alejandro: ?}
 While at first sight, this might seem obvious, the fact that we are dealing with
 state complicates matters.
 
@@ -24,12 +24,12 @@ Finally, we prove that the function to compute all possible inputs $\Inputs$ is 
 
 
 
-\subsection{Preservation}
+\subsection{Type preservation}
 \label{sub:preservation}
 
 We show that the following three preservation Theorems hold.
 
-\begin{theorem}[Preservation under evaluation]
+\begin{theorem}[Type preservation under evaluation]
   % For all well typed expressions $e$ and states $s$,
   For all expressions $e$ and states $s$
   such that $\Gamma,\Sigma \infers e:\tau$ and $\Gamma,\Sigma \infers s$,
@@ -47,7 +47,7 @@ proof can be found in the appendix.
 
 Moving on, we show that normalisation also preserves types, by showing that the following Theorem holds.
 
-\begin{theorem}[Preservation under normalisation]
+\begin{theorem}[Type preservation under normalisation]
   % For all well typed expressions $e$ and states $s$,
   For all expressions $e$ and states $s$
   such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers s$,
@@ -59,7 +59,7 @@ Moving on, we show that normalisation also preserves types, by showing that the 
 Since this semantics makes use of the value function $\Value$ and the striding semantics $\stride$,
 we first need to show that preservation also holds for these two semantics.
 
-\begin{lemma}[Task value preserves]
+\begin{lemma}[Task value preserves types]
   % For all well typed expressions $e$ and states $s$,
   For all expressions $e$ and states $s$
   such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers s$,
@@ -68,7 +68,7 @@ we first need to show that preservation also holds for these two semantics.
   \label{lem:presvalue}
 \end{lemma}
 
-\begin{lemma}[Striding preserves]
+\begin{lemma}[Striding preserves types]
   For all expressions $e$ and states $s$
   such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers s$,
   if $e,s \stride e',s'$,
@@ -82,7 +82,7 @@ Theorem~\ref{thm:pres-norm}, again by induction over $e$.
 
 This brings us finally to the type preservation property of the handling semantics.
 
-\begin{theorem}[Preservation under handling]
+\begin{theorem}[Type preservation under handling]
   % For all well typed expressions $e$, states $s$, and inputs $i$,
   For all expressions $e$, states $s$ and inputs $i$
   such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers s$,
