@@ -208,7 +208,7 @@ When the agent supplies two of the ingredients by setting the respective shares 
 
 Let $t_1$ and $t_2$ be tasks.
 The parallel combination $t_1 \And t_2$ stands for two independent tasks carried out at the same time.
-Therefore $\And$ introduces concurrency. \fixme{Alejandro: But before you said it was interleaving!}%nico: en later doen we dit ook.
+This operator introduces interleaving concurrency.
 For the system it does not matter if the tasks are executed by two people actually in parallel, or by one person who switches between the tasks.
 The inputs sent to the component tasks are interleaved into a serial stream, which is sent to the parallel combinator.
 We assume that such a serialization is always possible.
