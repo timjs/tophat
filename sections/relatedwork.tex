@@ -22,11 +22,9 @@ To name two examples, the combinators \verb+(>>|)+ and \verb+(||-)+ are variatio
 
 There have been two previous papers that describe semantics of iTasks, by \citet{conf/ifl/KoopmanPA08} and \citet{conf/ppdp/PlasmeijerLMAK12}.
 Both give a different semantics in the form of minimal implementations of a subset of the interface of iTasks.
-These semantics however do not make an explicit distinction between the host language and task language and they do not provide a formal semantics, which makes formal reasoning difficult.
-
-\fixme{Rinus: Volgens mij is er wel degelijk een formele semantiek, omdat heel iTask wordt uitgelegd in termen van standaard Clean functies,
-en Clean heeft een semantiek (graaf herschrijf systeem).
-Dat de beschrijving onhandig (wellicht te low level is) is voor het formeel redeneren over iTask programma's is een beter argument.}
+These semantics however do not make an explicit distinction between the host language and task language and they do not provide an explicit formal semantics.
+\ITASKS implicitly has a formal semantics, inherited from the graph-rewriting semantics of Clean.
+This semantics however does not lend itself well for formal reasoning.
 
 % Our work differs in three major ways.
 % First, we make an explicit distinction between the host language and the task
