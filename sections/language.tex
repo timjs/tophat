@@ -24,6 +24,7 @@ Conditionals come in handy for defining guards.
 References will be used to implement shared editors.
 Our treatment of references closely follows the one by \citet{books/Pierce02TAPL}.
 Creating a reference using the keyword $\Ref$ yields a location $l$.
+While $x$ denotes program variables, $l$ denotes store locations.
 Locations are not intended to be directly manipulated by the programmer.
 The symbols ! and $:=$ stand for dereferencing and assignment.
 The unit value will be used as the result of assignments.
@@ -33,7 +34,6 @@ The unit value will be used as the result of assignments.
   \usemacro{G-Language-Compact}
   \caption{Language grammar} \label{fig:language-grammar}
 \end{figure}
-\fixme{Alejandro about l: different syntax from vars?}
 \label{sub:notation}
 We use double quotation marks to denote strings.
 Integers are denoted by their decimal representation, and booleans are written $\True$ and $\False$.
