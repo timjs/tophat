@@ -113,8 +113,11 @@ Snacks are modelled using a custom data type.
 \subsection{Tasks can be observed}
 
 Several observations can be made about tasks.
-One of those is determining the value of a task $\Value(t)$. \fixme{Should we change the type of Value to Maybe v? Both johan and alejandro mention that it is not completely clear to them.}
+One of those is determining the value of a task $\Value(t)$.
+% \fixme{Should we change the type of Value to Maybe v? Both johan and alejandro mention that it is not completely clear to them.}
+% I don't think that we should use Maybe. We should use the term partial function and bottom. -- mkl
 Not all tasks have a value, for example the empty editor $\Enter \tau$, which makes $\Value$ a partial function.
+For example, $\Value(\Edit 5) = 5$, $\Value(\Enter \Int) = \bot$.
 
 Another observation is the set of events a task can react to.
 This is important for generating user interfaces.
