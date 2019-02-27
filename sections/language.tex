@@ -193,8 +193,8 @@ Consider the following program.
 \begin{TASK}
   enter Int >>= \n. if n == 42 then edit "Good" else edit "Bad"
 \end{TASK}
-Initially the step is guarded because the editor doesn't have a value.
-When the user enters an integer, the program continues immediately with either \TS|edit "Good"| or \TS|edit "Bad"|, depending on the input.
+Initially, the step is guarded because the editor does not have a value.
+When users enter an integer, the program continues immediately with either \TS{edit "Good"} or \TS{edit "Bad"}, depending on the input.
 
 \end{example}
 
@@ -287,7 +287,9 @@ Users can work on both branches of an internal choice simultaneously.
 
 External choice ($\Xor$) is different in this regard.
 An external choice requires users to pick a branch before continuing with it.
-This means users cannot work on the branches of an external choice before picking one. \todo{Alejandro: Is this actually implied?}
+This means users cannot work on the branches of an external choice before picking one.
+%XXX: Alejandro: Is this actually implied?
+% Ik snap niet zo goed wat Alejandro hier mee bedoelt... --TS
 
 
 \begin{example}[Delay]

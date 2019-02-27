@@ -77,9 +77,9 @@ These aspects make it possible for programmers to model custom collaboration pat
 \subsection{Tasks are driven by user input}
 
 Input events drive evaluation of tasks.
-When the system receives a valid event, it applies the event to the current task, which results in a new task.
+When the system receives a valid event, it applies this event to the current task, which results in a new task.
 In this way the system communicates with the environment.
-Input events are synchronous.
+Inputs are synchronous.
 We assume systems react instantaneous to each such event.
 
 In \TOPHAT, \emph{editors} are the basic method of communication with the environment.
@@ -193,11 +193,11 @@ We study it here because it demonstrates the capabilities of guarded steps.
 The problem is stated as follows.
 In order to smoke a cigarette, three ingredients are required: tobacco, paper, and a match.
 There are three smokers, each having one of the ingredients and requiring the other two.
-There is an agent that randomly provides two of the ingredients.
+There is an agent that randomly provides two of those.
 The difficulty lies in the requirement that only the smoker may proceed whose missing ingredients are present.
 
 Downey models availability of the ingredients with a semaphore for each ingredient.
-The agent randomly signals two of the three semaphores.
+The agent randomly signals two of the three.
 The solution proposed by Downey involves an additional mutex, three additional semaphores, three additional threads called \emph{pushers}, and three regular Boolean variables.
 The job of the pushers is to record availability of their ingredient in their Boolean variable, and check availability of other resources, waking the correct smoker when appropriate.
 
@@ -205,9 +205,11 @@ The details of the solution are not important here.
 What is important is that the implementation of what is essentially deadlock-free waiting for two semaphores requires a substantial amount of additional synchronisation, together with non-trivial conditional statements.
 
 \TOPHAT allows a simple solution to this problem, using guarded steps.
-Steps can be guarded with arbitrary expressions, and the parallel combinator can be used to watch two shared editors at the same time.
+Steps can be guarded with arbitrary expressions.
+The parallel combinator can be used to watch two shared editors at the same time.
 Let \TS{match}, \TS{paper}, and \TS{tobacco} be references to Booleans.
 The smokers are defined as follows.
+% The problem is then specified as follows.
 \begin{TASK}
   let continue = \<<x,y>>. if x /\ y then smoke else fail in
   let tobaccoSmoker = (update match <&> update paper) >>? continue in
