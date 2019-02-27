@@ -83,7 +83,7 @@ A selection of seats is correct if every entered seat is free.
 \end{TASK}
 
 The function \TS{confirmBooking} removes the picked seats from the shared list of free seats,
-and displays the end result using an editor, depicted by \TS{edit}.
+and displays the end result using an editor, denoted by \TS{edit}.
 \begin{TASK}
   let confirmBooking = \ps. \ss.
     freeSeats := difference !freeSeats ss; edit <<ps, ss>>
