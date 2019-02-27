@@ -5,10 +5,9 @@
 \section{Semantics}
 \label{sec:semantics}
 
-\fixme{Alejandro: In the formalization you show quite some figures. I think that for
+\todo{Alejandro: In the formalization you show quite some figures. I think that for
 each figure you need to be more explicit in the text about what is
 unsurprising and what is new or should get the attention of the reader.}
-
 In this section we formalise the semantics of the language constructs described in \cref{sec:language}.
 We organise this by following the structure of the language.
 
@@ -56,10 +55,10 @@ Exceptions to this are steps and external choice, where some or all of the opera
   \usemacro{G-Values-Compact}
   \caption{Value grammar} \label{fig:value-grammar}
 \end{figure}
-\fixme{Alejandro over tasks: I was not expecting these to be values...}
+\todo{Alejandro over tasks: I was not expecting these to be values...}
 The rules to evaluate expressions $e$ do not differ from standard work, except for the task constructs.
 The evaluation rules for tasks can be deduced from the value grammar.
-They are given in the appendix. \fixme{Alejandro: What is interesting about them?}
+They are given in the appendix. \todo{Alejandro: What is interesting about them?}
 
 % \begin{figure}[h]
 %
@@ -148,7 +147,7 @@ To determine if an external choice is failing, it needs to peek into the future 
 
 \paragraph{User interface}
 
-%\fixme{Add $\UserInterface$ to appendix and refer.}
+%FIXME: Add $\UserInterface$ to appendix and refer.
 \TOPHAT is designed such that a user interface can be generated from a task's syntax tree.
 A possible graphical user interface is shown in \cref{fig:flight-booking}, where tasks are rendered as \HTML pages.
 Editors are rendered as input fields,
@@ -197,7 +196,7 @@ with $s'=\set{l\mapsto\True}$.
 This expression is not normalised, because the left task can take a step.
 The issue here lies in the fact that the right task updates $l$.
 To overcome this problem, the \refrule{N-Done} and \refrule{N-Repeat} rules ensure that striding is applied until the state $s$ becomes stable and no further normalisation can take place.
-\fixme{The example is not 100\% clear to me}
+\todo{The example is not 100\% clear to me}
 
 The striding semantics is responsible for reducing internal steps and internal choices.
 A stride from task $t$ in state $s$ to $t'$ in state $s'$ is denoted by $\RelationS$.

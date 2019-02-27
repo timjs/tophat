@@ -77,9 +77,9 @@ It has functions, pairs, basic types, unit, references, and tasks.
 Typing rules are of the form $\RelationT$, which should be read as \enquote{in environment $\Gamma$ and store typing $\Sigma$, expression $e$ has type $\tau$}.
 Typing rules for expressions in the host language are presented in the appendix.
 The typing rules for pretasks are given in \cref{fig:typing-rules}.
+\todo{Say someting about why we need beta, and use beta in the acutal typing rule}
+\todo{Alejandro: Is there anything surprising? Say what}
 
-\fixme{Say someting about why we need beta, and use beta in the acutal typing rule}
-\fixme{Alejandro: Is there anything surprising? Say what}
 \begin{figure}[h]
   \small
   \begin{gather*}
@@ -286,7 +286,7 @@ Users can work on both branches of an internal choice simultaneously.
 
 External choice ($\Xor$) is different in this regard.
 An external choice requires users to pick a branch before continuing with it.
-This means users cannot work on the branches of an external choice before picking one. \fixme{Alejandro: Is this actually implied?}
+This means users cannot work on the branches of an external choice before picking one. \todo{Alejandro: Is this actually implied?}
 
 
 \begin{example}[Delay]
@@ -310,8 +310,7 @@ It is a task which takes another task as parameter.
 
 % \subsection{Appointment}
 %
-% \fixme{write this subsection}
-
+%
 % It is essential for a workflow system to support multiple collaborators working
 % together. Adding this funcitonaltiy to the \TOPHAT calculus is very
 % straightforward. We identify users by means of a name $u$ which we can then use
@@ -348,4 +347,3 @@ These annotations are used to filter the user interfaces for each user so that t
 % In \cref{sec:handling}, a function is described to calculate which users can take what actions.
 % Other than this function, the appointment of tasks has no influence on the semantics.
 % All semantic rules in \cref{sec:semantics} simply continue with their operations as if the label was not there.
-% \todo{we still have to fix the type of $\Inputs$ and state the type of $u$}
