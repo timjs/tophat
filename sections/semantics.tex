@@ -5,26 +5,21 @@
 \section{Semantics}
 \label{sec:semantics}
 
-\todo{Alejandro: In the formalization you show quite some figures. I think that for
-each figure you need to be more explicit in the text about what is
-unsurprising and what is new or should get the attention of the reader.}
+%XXX: Alejandro: In the formalisation you show quite some figures. I think that for each figure you need to be more explicit in the text about what is unsurprising and what is new or should get the attention of the reader.
+% Geen tijd meer voor denk ik. --TS
+
 In this section we formalise the semantics of the language constructs described in \cref{sec:language}.
 We organise this by following the structure of the language.
-
 Firstly, the task language is embedded in a simply typed lambda calculus.
-This requires a specification of the evaluation of terms in the host language, and how it handles the task language.
-
+This requires a specification of the \emph{evaluation} of terms in the host language, and how it handles the task language.
 Secondly, there are two ways to drive evaluation of task expressions, internally by the system itself, and externally by the user.
-This is done in two additional semantics, one for the internal normalisation of tasks, and another for the interaction with the end user.
+This is done in two additional semantics, one for the internal \emph{normalisation} of tasks, and another for the \emph{interaction} with the end user.
 
-One of our explicit goals is to keep the semantics for evaluation and normalisation separate,
-to not mix general purpose programming notions with workflow specific semantics.
-This is achieved by letting tasks be values in the host language.
-
-The three main layers of semantics are thus \emph{evaluation}, \emph{normalisation}, and \emph{interaction}.
+The three main layers of semantics are thus evaluation, normalisation, and interaction.
 The semantics, together with \emph{observations}, will be discussed in the following subsections.
-\Cref{fig:semantic-functions} shows the relation between the semantics.
+\Cref{fig:semantic-functions} shows the relation between all semantics arrows.
 It also shows that there are two helper semantics, \emph{handle} and \emph{stride}.
+We use the convention that downward arrows are big-step semantics, and rightward arrows are small-step semantics.
 
 \begin{figure}[h]
   \centering
@@ -35,7 +30,9 @@ It also shows that there are two helper semantics, \emph{handle} and \emph{strid
   \label{fig:semantic-functions}
 \end{figure}
 
-We use the convention that downward arrows are big-step semantics, and rightward arrows are small-step semantics.
+One of our explicit goals is to keep the semantics for evaluation and normalisation separate,
+to not mix general purpose programming notions with workflow specific semantics.
+This is achieved by letting tasks be values in the host language.
 
 
 
@@ -55,10 +52,16 @@ Exceptions to this are steps and external choice, where some or all of the opera
   \usemacro{G-Values-Compact}
   \caption{Value grammar} \label{fig:value-grammar}
 \end{figure}
-\todo{Alejandro over tasks: I was not expecting these to be values...}
+
+%XXX: Alejandro over tasks: I was not expecting these to be values...
+% Ik heb een verwijzing gemaakt hier naartoe, hoop dat het geen groot probleem is... --TS
+
 The rules to evaluate expressions $e$ do not differ from standard work, except for the task constructs.
 The evaluation rules for tasks can be deduced from the value grammar.
-They are given in the appendix. \todo{Alejandro: What is interesting about them?}
+They are given in the appendix.
+Most task constructors are strict in their arguments.
+Only steps keep their left hand side unevaluated to delay side effects till the moment the step is taken.
+The same holds for both branches of the external choice.
 
 % \begin{figure}[h]
 %
@@ -96,7 +99,6 @@ It is only described in passing here.
 
 
 
-
 \paragraph{Observable values $(\Value)$}
 
 Task values are used by steps to calculate the successor task.
@@ -126,7 +128,7 @@ In \cref{sub:fail} we introduced $\Fail$ to stand for an impossible task.
 Combinations of tasks can also be impossible.
 Take for example the parallel composition of two fails ($\Fail \And \Fail$).
 This expression is equivalent to $\Fail$, because it can not handle input and can not be further normalised.
-
+%
 This intuition is formalised by the function $\Failing$ in \cref{fig:observation-failing}.
 It determines whether a task is impossible.
 Such tasks are called \emph{failing}.
@@ -188,6 +190,7 @@ Consider the following example, where $s=\set{l\mapsto\False}$.
 \begin{TASK}
   (update l >>= \x:Bool. if x then e else fail) <&> (l := True; edit <<>>)
 \end{TASK}
+\pagebreak[2]
 \refrule{S-And} reduces this expression in one step to
 \begin{TASK}
   (update l >>= \x:Bool. if x then e else fail) <&> (edit <<>>)
@@ -196,7 +199,7 @@ with $s'=\set{l\mapsto\True}$.
 This expression is not normalised, because the left task can take a step.
 The issue here lies in the fact that the right task updates $l$.
 To overcome this problem, the \refrule{N-Done} and \refrule{N-Repeat} rules ensure that striding is applied until the state $s$ becomes stable and no further normalisation can take place.
-\todo{The example is not 100\% clear to me}
+%XXX: Alejandro: The example is not 100\% clear to me
 
 The striding semantics is responsible for reducing internal steps and internal choices.
 A stride from task $t$ in state $s$ to $t'$ in state $s'$ is denoted by $\RelationS$.
@@ -251,7 +254,7 @@ Stepping away from task $t_1$ can only be performed when
 $t_1$ has a value: $\Value(t_1) = v_1$.
 Only then can a new task $t_2$ be calculated from the expression $e$.
 On top of that, $t_2$ must not be failing: $\neg\Failing(t_2)$.
-
+%
 These principles lead to the stepping rules in \cref{fig:striding-semantics}.
 \refrule{S-ThenStay} does nothing,
 because the left side does not have a value.
@@ -304,6 +307,7 @@ The definition of this function is listed in \cref{fig:observation-input}.
   \usemacro{G-Inputs-Compact}
   \caption{Input grammar} \label{fig:input-grammar}
 \end{figure}
+
 \begin{figure}[h]
   \small
   \usemacro{O-Inputs}
