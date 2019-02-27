@@ -5,7 +5,7 @@
 \section{Example}
 \label{sec:example}
 
-In this section we develop a small example program to demonstrate the capabilities of \TOPHAT.
+In this section we develop an example program to demonstrate the capabilities of \TOPHAT.
 The example is a small flight booking system.
 It demonstrates communication on all three levels: with the environment, across control flow, and alongside it.
 Also, it shows synchronisation and input validation.
@@ -36,9 +36,9 @@ For brevity, we omit the type annotations of variable bindings.
     The first user entered name and age and continued picking seats.
     The second is entering details of two passengers.
     The ages are not filled in, therefore the \TS{Continue} button is disabled.
-    The third user finished a booking.
-    The first user can not pick seats \smallcaps{1b} and \smallcaps{1c} any more.
     The message bubble shows that the \TS{age} field only accepts integer values.
+    The third user finished a booking,
+    therefore, the first user can not pick seats \smallcaps{1b} and \smallcaps{1c} any more.
   }
   \label{fig:flight-booking}
 \end{figure}
@@ -62,11 +62,10 @@ The list of free seats is stored in a reference. % called \TS{freeSeats}.
 \end{TASK}
 
 Now we develop our workflow in a top down way.
-Our flight booking starts with an interactive task \TS{enter (List Passenger)}.
+Our flight booking starts with an interactive task \TS{enter (List Passenger)}, where users can enter a list of passengers.
 A task $\Enter \tau$ is an empty editor that asks for a value of the given type $\tau$.
-where users can enter a list of passengers.
-A passenger is valid if the name is not empty and the age is at least 0.
-A list of passengers is valid if each passenger is valid, and at least one of the passengers is an adult.
+Passengers are valid if their name is not empty and their age is at least 0.
+Lists of passengers are valid if each passenger is valid, and at least one of the passengers is an adult.
 When the user has entered a valid list of passengers, the step after \TS{>>?} becomes enabled,
 and the user can proceed to picking seats.
 \begin{TASK}
@@ -84,7 +83,7 @@ A selection of seats is correct if every entered seat is free.
 \end{TASK}
 
 The function \TS{confirmBooking} removes the picked seats from the shared list of free seats,
-and displays the end result using an editor \TS{edit}.
+and displays the end result using an editor, depicted by \TS{edit}.
 \begin{TASK}
   let confirmBooking = \ps. \ss.
     freeSeats := difference !freeSeats ss; edit <<ps, ss>>
@@ -92,7 +91,7 @@ and displays the end result using an editor \TS{edit}.
 % It uses a function \TS{difference}, which removes all elements from the second list from the first list.
 
 The main task starts three \TS{bookFlight} tasks,
-which could be performed by three different users in parallel
+which could be performed by three different users in parallel.
 \begin{TASK}
   bookFlight <&> bookFlight <&> bookFlight
 \end{TASK}
