@@ -50,21 +50,21 @@
 
 
 \newrule{T-Ref}
-  {\Gamma,\Sigma \infers e:\tau}
-  {\Gamma,\Sigma \infers \Ref e :\Reference \tau}
+  {\Gamma,\Sigma \infers e:\beta}
+  {\Gamma,\Sigma \infers \Ref e :\Reference \beta}
 
 \newrule{T-Deref}
-  {\Gamma,\Sigma \infers e:\Reference \tau}
-  {\Gamma,\Sigma\infers\ !e:\tau}
+  {\Gamma,\Sigma \infers e:\Reference \beta}
+  {\Gamma,\Sigma\infers\ !e:\beta}
 
 \newrule{T-Assign}
-  {\Gamma,\Sigma\infers e_1:\Reference \tau \Quad
-   \Gamma,\Sigma\infers e_2:\tau}
+  {\Gamma,\Sigma\infers e_1:\Reference \beta \Quad
+   \Gamma,\Sigma\infers e_2:\beta}
   {\Gamma,\Sigma\infers e_1 := e_2:\Unit}
 
 \newrule{T-Loc}
-  {\Sigma(l) = \tau}
-  {\Gamma,\Sigma\infers l:\Reference \tau}
+  {\Sigma(l) = \beta}
+  {\Gamma,\Sigma\infers l:\Reference \beta}
 
 
 \newrule{T-Edit}
@@ -76,8 +76,8 @@
   {\Gamma,\Sigma \infers \Enter \tau : \Task \tau}
 
 \newrule{T-Update}
-  {\Gamma,\Sigma \infers e : \Reference \tau}
-  {\Gamma,\Sigma \infers \Update e : \Task \tau}
+  {\Gamma,\Sigma \infers e : \Reference \beta}
+  {\Gamma,\Sigma \infers \Update e : \Task \beta}
 
 
 \newrule{T-Fail}

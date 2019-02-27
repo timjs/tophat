@@ -77,8 +77,9 @@ It has functions, pairs, basic types, unit, references, and tasks.
 Typing rules are of the form $\RelationT$, which should be read as \enquote{in environment $\Gamma$ and store typing $\Sigma$, expression $e$ has type $\tau$}.
 Typing rules for expressions in the host language are presented in the appendix.
 The typing rules for pretasks are given in \cref{fig:typing-rules}.
-\todo{Say someting about why we need beta, and use beta in the acutal typing rule}
-\todo{Alejandro: Is there anything surprising? Say what}
+Most typing rules lift the type of their subexpressions into the $\Task$-type.
+The typing rules for steps make sure the continuations $e_2$ are functions which accept a well-typed value from the left hand side (\refrule{T-Then}, \refrule{T-Next}).
+References, and therefore shared editors, can only be of a basic type so they do not introduce implicit recursion (\refrule{T-Update}).
 
 \begin{figure}[h]
   \small
