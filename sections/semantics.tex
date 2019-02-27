@@ -294,7 +294,7 @@ Sending an input event $i$ to a task $t$ first handles the event and then prepar
 \end{figure}
 
 Inputs $i$ are formed according to the grammar in \cref{fig:input-grammar}.
-F and S in an input encode the path to the task for which the input is designated.
+$\First$ and $\Second$ in an input encode the path to the task for which the input is designated.
 %
 There is a function $\Inputs$ which calculates the possible input events a given task expects.
 It takes a normalised task and a state and returns a set of inputs that can be handled.
