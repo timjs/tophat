@@ -62,13 +62,13 @@ The list of free seats is stored in a reference. % called \TS{freeSeats}.
 \end{TASK}
 
 Now we develop our workflow in a top down way.
-A flight booking starts with an interactive task \TS{enter (List Passenger)}
+Our flight booking starts with an interactive task \TS{enter (List Passenger)}.
+A task $\Enter \tau$ is an empty editor that asks for a value of the given type $\tau$.
 where users can enter a list of passengers.
 A passenger is valid if the name is not empty and the age is at least 0.
 A list of passengers is valid if each passenger is valid, and at least one of the passengers is an adult.
 When the user has entered a valid list of passengers, the step after \TS{>>?} becomes enabled,
 and the user can proceed to picking seats.
-The task $\Enter$ is an empty editor that asks for a value of the given type.
 \begin{TASK}
   let valid = \p. not (fst p == "") /\ snd p >= 0 in
   let adult = \p. snd p >= 18 in
