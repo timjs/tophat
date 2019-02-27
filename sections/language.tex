@@ -47,8 +47,8 @@ The notation $\Let x:\tau = e_1 \In e_2$ is an abbreviation for $(\lambda x:\tau
 
 \label{sub:pretasks}
 The grammar in \cref{fig:task-grammar} specifies the syntactic category of \emph{pretasks}.
-Pretasks are tasks that have unevaluated subexpressions.
-This means they are considered to be in normal form for the host language, even if their subexpressions are not in normal form.
+Pretasks are tasks that have unevaluated subexpressions with respect to the host language.
+Who expressions are evaluated will be discussed in Section~\ref{sec:evaluation}.
 Each pretask will be discussed in more detail in the following subsections.
 We use open symbols ($\Edit, \Enter, \Next, \Xor$) for tasks that require user input, and closed symbols ($\Update, \Then, \Or$) for tasks that can be evaluated without user input.
 
@@ -77,6 +77,7 @@ It has functions, pairs, basic types, unit, references, and tasks.
 Typing rules are of the form $\RelationT$, which should be read as \enquote{in environment $\Gamma$ and store typing $\Sigma$, expression $e$ has type $\tau$}.
 Typing rules for expressions in the host language are presented in the appendix.
 The typing rules for pretasks are given in \cref{fig:typing-rules}.
+
 \fixme{Say someting about why we need beta, and use beta in the acutal typing rule}
 \fixme{Alejandro: Is there anything surprising? Say what}
 \begin{figure}[h]
