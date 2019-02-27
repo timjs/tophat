@@ -2,10 +2,10 @@
 
 \section{Proofs}
 
-\subsection{Theorem~\ref{thm:pres-eval}}
+\subsection{\cref{thm:pres-eval}}
 
 \begin{proof}
-  We prove Theorem~\ref{thm:pres-eval} by induction on $e$:
+  We prove \cref{thm:pres-eval} by induction on $e$:
 
   \case
     {$e=\lambda x:\tau.e, e_1 e_2, x, c, l, e_1 \star e_2,\If{e_1}{e_2}{e_3},\tuple{e_1, e_2},\unit,\Ref e,!e,e_1 := e_2$}
@@ -65,10 +65,10 @@
 
 
 
-\subsection{Lemma~\ref{lem:presvalue}}
+\subsection{\cref{lem:presvalue}}
 
 \begin{proof}
-  We prove Lemma~\ref{lem:presvalue} by induction over $e$.
+  We prove \cref{lem:presvalue} by induction over $e$.
 
 \case {$\Value{(\Edit v,s)}=v$}
       {By T-Edit, if $\Gamma,\Sigma\infers \Edit v:\Task\tau$, then $\Gamma,\Sigma\infers v:\tau$.}
@@ -127,10 +127,10 @@
 
 
 
-\subsection{Theorem~\ref{thm:pres-stride}}
+\subsection{\cref{thm:pres-stride}}
 
 \begin{proof}
-  We prove Theorem~\ref{thm:pres-stride} by induction on $e$:
+  We prove \cref{thm:pres-stride} by induction on $e$:
 
 \case{$\userule{S-Fail}$}
      {Since this case does not alter the expression, the theorem holds trivially.}
@@ -189,8 +189,8 @@
   {Given that $\Gamma,\Sigma\infers t_1\Then e_2:\Task\tau$, by \refrule{T-Then} we have
   $\Gamma,\Sigma\infers t_1:\Task\tau_1$ and
   $\Gamma,\Sigma\infers e_2:\tau_1\to\Task\tau$. By the induction hypothesis, we
-  know that $t_1\stride t_1'$ preserves. By Lemma~\ref{lem:presvalue}, we know
-  that $\Value{(t_1')}=v_1$ preserves. By Theorem~\ref{thm:pres-eval} we know
+  know that $t_1\stride t_1'$ preserves. By \cref{lem:presvalue}, we know
+  that $\Value{(t_1')}=v_1$ preserves. By \cref{thm:pres-eval} we know
   that $e_2 v_1\evaluate t_2$ preserves. And finally by the induction hypothesis,
   we know that $t_2\stride t_2'$ preserves. Therefore
   $\Gamma,\Sigma\infers t_2':\Task\tau$.}
@@ -204,33 +204,28 @@
 
 
 
-\subsection{Theorem~\ref{thm:pres-norm}}
+\subsection{\Cref{thm:pres-norm}}
 
 \begin{proof}
-  We prove Theorem~\ref{thm:pres-norm} by induction on $e$:
+  We prove \cref{thm:pres-norm} by induction on $e$:
 
   \case{$\userule{N-Done}$}
     {Given that
-    $\Gamma,\Sigma\infers e:\Task\tau$ and $\Sigma\infers s$, we know that
-    $\Gamma,\Sigma\infers t:\Task\tau$ and $\Sigma\infers s'$ by
-    Theorem~\ref{thm:pres-eval}. Then by Theorem~\ref{thm:pres-stride}, we have
-    $\Gamma,\Sigma\infers t':\Task\tau$ and $\Sigma\infers s''$.}
+    $\Gamma,\Sigma\infers e:\Task\tau$ and $\Sigma\infers s$, we know that $\Gamma,\Sigma\infers t:\Task\tau$ and $\Sigma\infers s'$ by
+    \Cref{thm:pres-eval}.
+    Then by \cref{thm:pres-stride}, we have $\Gamma,\Sigma\infers t':\Task\tau$ and $\Sigma\infers s''$.}
 
   \case
     {$\userule{N-Repeat}$}
-    { Given that
-    $\Gamma,\Sigma\infers e:\Task\tau$ and $\Sigma\infers s$, we know that
-    $\Gamma,\Sigma\infers t:\Task\tau$ and $\Sigma\infers s'$ by
-    Theorem~\ref{thm:pres-eval}. Then by Theorem~\ref{thm:pres-stride}, we have
-    $\Gamma,\Sigma\infers t':\Task\tau$ and $\Sigma\infers s''$. Then by the
-    induction hypothesis, we finally obtain that
-    $\Gamma,\Sigma\infers t'':\Task\tau$ and $\Sigma\infers s'''$.}
+    { Given that $\Gamma,\Sigma\infers e:\Task\tau$ and $\Sigma\infers s$, we know that $\Gamma,\Sigma\infers t:\Task\tau$ and $\Sigma\infers s'$ by \cref{thm:pres-eval}.
+    Then by \cref{thm:pres-stride}, we have $\Gamma,\Sigma\infers t':\Task\tau$ and $\Sigma\infers s''$.
+    Then by the induction hypothesis, we finally obtain that $\Gamma,\Sigma\infers t'':\Task\tau$ and $\Sigma\infers s'''$.}
 
 \end{proof}
 
 
 
-\subsection{Theorem~\ref{thm:pres-handle}}
+\subsection{\cref{thm:pres-handle}}
 
 We require the following Lemma for this proof.
 
@@ -241,7 +236,7 @@ We require the following Lemma for this proof.
 This lemma follows immediately from definition.
 
 \begin{proof}
-  We prove Theorem~\ref{thm:pres-handle} by induction on $e$:
+  We prove \cref{thm:pres-handle} by induction on $e$:
 
   \case
     {$\userule{H-Change}$}
@@ -261,7 +256,7 @@ This lemma follows immediately from definition.
     {$\userule{H-Update}$}
     {Given that $\Gamma,\Sigma\infers\Update l:\Task\tau$ and $\Sigma\infers s$.
     This gives us that $\Sigma(l)=\tau$, and we additionally obtain $s(l),v':\tau$ by \refrule{H-Update}.
-    By application of Lemma~\ref{lemmasigmaconsistent} this case holds.}
+    By application of \cref{lemmasigmaconsistent} this case holds.}
 
   \case
     {$\userule{H-PickLeft}$}
@@ -318,7 +313,7 @@ This lemma follows immediately from definition.
   % $\Gamma,\Sigma\infers u\At t'$ and $\Sigma\infers s'$.
 \end{proof}
 
-% \subsection{Theorem~\ref{thmprogressnorm}}
+% \subsection{\cref{thmprogressnorm}}
 %
 % \begin{proof} We prove this Theorem by induction on $e$.\\
 %
@@ -353,10 +348,10 @@ This lemma follows immediately from definition.
 %
 % \end{proof}
 
-% \subsection{Lemma~\ref{lem:stride-does-not-eval}}
+% \subsection{\cref{lem:stride-does-not-eval}}
 %
 % \begin{proof}
-%   We prove Lemma~\ref{lem:stride-does-not-eval} by induction on $e$. First we
+%   We prove \cref{lem:stride-does-not-eval} by induction on $e$. First we
 %   apply evaluation, and we then find ourselves in one of the cases below.\\
 %
 %   \noindent\textbf{Case} $\userule{S-ThenStay}$\\
@@ -426,11 +421,11 @@ This lemma follows immediately from definition.
 
 
 
-\subsection{Theorem~\ref{thm:failing}}
+\subsection{\cref{thm:failing}}
 
 \begin{proof}
 
-  We prove Theorem~\ref{thm:failing} by induction on $e'$.
+  We prove \cref{thm:failing} by induction on $e'$.
 
 \case{$e = \Fail$}
      {$\Failing(\Fail,s)=\True$, and there is no handling rule that applies to fail.}
@@ -491,7 +486,7 @@ This lemma follows immediately from definition.
 
 
 
-\subsection{Theorem~\ref{thm:safety-i}}
+\subsection{\cref{thm:safety-i}}
 
 \begin{proof}
 
