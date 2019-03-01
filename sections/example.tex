@@ -61,7 +61,7 @@ The list of free seats is stored in a reference. % called \TS{freeSeats}.
   let freeSeats = ref [<<1,"A">>, <<1,"B">>, <<1,"C">>, ...]
 \end{TASK}
 
-Now we develop our workflow in a top down way.
+Now we develop our workflow in a top-down manner.
 Our flight booking starts with an interactive task \TS{enter (List Passenger)}, where users can enter a list of passengers.
 A task $\Enter \tau$ is an empty editor that asks for a value of the given type $\tau$.
 Passengers are valid if their name is not empty and their age is at least 0.
@@ -82,7 +82,7 @@ A selection of seats is correct if every entered seat is free.
     if correct ss /\ length ps == length ss then confirmBooking ps ss else fail
 \end{TASK}
 
-The function \TS{confirmBooking} removes the picked seats from the shared list of free seats,
+The function \TS{confirmBooking} removes the selected seats from the shared list of free seats,
 and displays the end result using an editor, denoted by \TS{edit}.
 \begin{TASK}
   let confirmBooking = \ps. \ss.
