@@ -48,7 +48,7 @@ The notation $\Let x:\tau = e_1 \In e_2$ is an abbreviation for $(\lambda x:\tau
 \label{sub:pretasks}
 The grammar in \cref{fig:task-grammar} specifies the syntactic category of \emph{pretasks}.
 Pretasks are tasks that have unevaluated subexpressions with respect to the host language.
-Who expressions are evaluated will be discussed in \cref{sec:evaluation}.
+How expressions are evaluated will be discussed in \cref{sec:evaluation}.
 Each pretask will be discussed in more detail in the following subsections.
 We use open symbols ($\Edit, \Enter, \Next, \Xor$) for tasks that require user input, and closed symbols ($\Update, \Then, \Or$) for tasks that can be evaluated without user input.
 
@@ -137,7 +137,7 @@ It could also be a parser that tries to parse a line of text to match the type o
 
 Editors that hold an expression $e : \tau$ have type $\Task \tau$.
 Empty editors are annotated with a type in order to ensure type safety.
-Without that it would be possible to change the type of an editor, by clearing it and filling it with a value of different type.
+Without type annotations, it would be possible to change the type of an editor, by clearing it and filling it with a value of different type.
 
 \paragraph{Shared editors $(\Update e)$}
 
@@ -146,7 +146,7 @@ If $e$ is a reference $\Reference \tau$, then $\Update e$ is of type $\Task \tau
 Shared editors cannot be cleared, only changed.
 
 Changes to a shared editor are immediately visible to all shared editors watching the same reference.
-Imagine two users, Marco and Christopher, both watching shared editors of the same coordinate.
+Imagine two users, Marco and Christopher, both watching shared editors of the same coordinates.
 The editors are visualised as a pin on a map.
 When Marco moves his pin, he updates the value of the shared editor, thereby changing the value of the reference.
 This change is immediately reflected on Christopher's screen: The pin changes its position on his map.
