@@ -5,7 +5,7 @@
 \section{Intuition}
 \label{sec:intuition}
 
-This section gives an overview over the core concepts of task-oriented programming.
+This section gives an overview of the core concepts of task-oriented programming.
 
 
 
@@ -21,11 +21,11 @@ This motivates the combinators step, parallel, and choice.
 \begin{example}[Breakfast]
 \label{exm:breakfast}
 
-The following program shows the different collaboration operators in the setting of making a breakfast.
+The following program shows the different collaboration operators in the setting of making breakfast.
 Users have a choice ($\Xor$) whether they want tea or coffee.
 They always get an egg.
 The drink and the food are prepared in parallel ($\And$).
-When drink and food are prepared, users can step ($\Next$) to eating the results.
+When both the drink and the food are prepared, users can step ($\Next$) to eating the result.
 
 \lstset{emph={makeDrink,makeFood}}
 
@@ -65,7 +65,7 @@ Then finally, only when every item we want to have for breakfast is ready, can w
 \subsection{Tasks are reusable}
 
 There are three ways in which tasks are modular.
-First, larger tasks are composed from smaller ones.
+First, larger tasks are composed of smaller ones.
 Second, tasks are first-class, they can be arguments and results of functions.
 Third, tasks can be values of other tasks.
 These aspects make it possible for programmers to model custom collaboration patterns.
@@ -80,7 +80,7 @@ Input events drive evaluation of tasks.
 When the system receives a valid event, it applies this event to the current task, which results in a new task.
 In this way the system communicates with the environment.
 Inputs are synchronous.
-We assume systems react instantaneous to each such event.
+We assume systems react instantaneously to each if those events.
 
 In \TOPHAT, \emph{editors} are the basic method of communication with the environment.
 Editors are modelled after input widgets from graphical user interfaces.
@@ -98,7 +98,7 @@ This results is an empty editor $\Enter \Int$, annotated to only hold integers.
 
 The sole purpose of editors is to interact with users by remembering the last value that has been sent to them.
 There are no output events.
-As values of editors can be observed, for example by a user interface, editors serve as facilities for both input and output.
+As values of editors can be observed, for example by a user interface, editors facilitate both input and output.
 An empty editor ($\Enter$) stands for a prompt to input data,
 while a filled editor ($\Edit$) can be seen either as outputting a value, or as an input that comes with a default value.
 
@@ -214,7 +214,8 @@ The smokers are defined as follows.
   let continue = \<<x,y>>. if x /\ y then smoke else fail in
   let tobaccoSmoker = (update match <&> update paper) >>? continue in
   let paperSmoker = (update tobacco <&> update match) >>? continue in
-  let matchSmoker = (update tobacco <&> update paper) >>? continue
+  let matchSmoker = (update tobacco <&> update paper) >>? continue in
+  tobaccoSmoker <&> paperSmoker <&> matchSmoker
 \end{TASK}
 When the agent supplies two of the ingredients by setting the respective shares to \TS{True}, only the step of the smoker that waits for those becomes enabled.
 
