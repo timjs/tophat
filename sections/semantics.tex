@@ -40,7 +40,7 @@ This is achieved by letting tasks be values in the host language.
 \label{sec:evaluation}
 
 The host language evaluates expressions using a big-step semantics.
-Evaluating an expression $e$ in state $s$ into a value $v$ in state $s'$ is denoted by $\RelationE$.
+Evaluating an expression $e$ in state $\sigma$ into a value $v$ in state $\sigma'$ is denoted by $\RelationE$.
 To ease reasoning about references, we choose a call-by-value evaluation strategy.
 
 \Cref{fig:value-grammar} shows values with respect to the evaluation semantics.
@@ -167,7 +167,7 @@ When the guard condition of a step is not fulfilled, the button is disabled.
 The normalisation semantics is responsible for reducing expressions of type $\Task$ until they are ready to handle input.
 It is a big-step semantics, and makes use of evaluation of the host language.
 We write $\RelationN$ to describe that
-an expression $e$ in state $s$ normalises to task $t$ in state $s'$.
+an expression $e$ in state $\sigma$ normalises to task $t$ in state $\sigma'$.
 
 Normalisation rules are given in \cref{fig:normalisation-semantics}.
 Both rules ensure that expressions are first evaluated by the host language ($\evaluate$), and then by the stride semantics ($\stride$).
@@ -186,7 +186,7 @@ These two actions are repeated until the resulting state and task stabilise.
 \end{figure}
 
 The split between striding and normalisation is due to mutable references.
-Consider the following example, where $s=\set{l\mapsto\False}$.
+Consider the following example, where $\sigma=\set{l\mapsto\False}$.
 \begin{TASK}
   (update l >>= \x:Bool. if x then e else fail) <&> (l := True; edit <<>>)
 \end{TASK}
@@ -195,14 +195,14 @@ Consider the following example, where $s=\set{l\mapsto\False}$.
 \begin{TASK}
   (update l >>= \x:Bool. if x then e else fail) <&> (edit <<>>)
 \end{TASK}
-with $s'=\set{l\mapsto\True}$.
+with $\sigma'=\set{l\mapsto\True}$.
 This expression is not normalised, because the left task can take a step.
 The issue here lies in the fact that the right task updates $l$.
-To overcome this problem, the \refrule{N-Done} and \refrule{N-Repeat} rules ensure that striding is applied until the state $s$ becomes stable and no further normalisation can take place.
+To overcome this problem, the \refrule{N-Done} and \refrule{N-Repeat} rules ensure that striding is applied until the state $\sigma$ becomes stable and no further normalisation can take place.
 %XXX: Alejandro: The example is not 100\% clear to me
 
 The striding semantics is responsible for reducing internal steps and internal choices.
-A stride from task $t$ in state $s$ to $t'$ in state $s'$ is denoted by $\RelationS$.
+A stride from task $t$ in state $\sigma$ to $t'$ in state $\sigma'$ is denoted by $\RelationS$.
 The rules for striding are given in \cref{fig:striding-semantics}.
 Tasks like editors, fail and external choice are not further reduced.
 For external choice and parallel there are congruence rules.
@@ -316,7 +316,7 @@ The definition of this function is listed in \cref{fig:observation-input}.
 
 Handling input is done by the \emph{handling} semantics shown in \cref{fig:handling-semantics}.
 It is a small step semantics with labelled transitions.
-It takes a task $t$ in a state $s$ and an input $i$, and yields a new task $t'$ in a new state $s'$.
+It takes a task $t$ in a state $\sigma$ and an input $i$, and yields a new task $t'$ in a new state $\sigma'$.
 
 \begin{figure}[h]
   \small
