@@ -20,7 +20,7 @@ What they all have in common is
 that they need to interact with different people (end users, tax officers, customers, etc.)
 and they use information from multiple sources (input forms, databases, sensors, etc.).
 
-\subsection{Tasks}
+\paragraph{Tasks}
 
 We call interactive units of work based on information sources \emph{tasks}.
 % Tasks stand for units of work in the real world, assigned to people.
@@ -32,7 +32,7 @@ as well as machines doing calculations or fetching data.
 
 
 
-\subsection{Task-oriented programming}
+\paragraph{Task-oriented programming}
 \label{sec:top}
 
 %XXX: Alejandro: Not entirely convincing
@@ -69,7 +69,7 @@ In generated applications, editors can take many forms, like input fields, selec
 
 
 
-\subsection{Utilisation}
+\paragraph{Utilisation}
 
 
 Currently, we know of two frameworks implementing \TOP: \ITASKS and \MTASKS.
@@ -88,7 +88,7 @@ Both implementations currently lack formal semantics which are suited to prove p
 
 
 
-\subsection{Challenges}
+\paragraph{Challenges}
 
 % \ITASKS is the de-facto reference implementation of \TOP.
 Both \ITASKS and \MTASKS have been designed for developing real-world applications.
@@ -113,45 +113,36 @@ We give this formal calculus the name \TOPHAT (TopHat).
 
 
 
-\subsection{Contributions}
+\paragraph{Contributions}
 
 Our contributions to workflow modelling, functional programming language design, and rapid application development are as follows.
 
 
-\begin{itemize}
+\begin{enumerate*}
   \item
     We describe the essential concepts of task-oriented programming.
-
   \item
     We present a formal calculus for modelling declarative workflows, embedded in a simply typed lambda-calculus, called \TOPHAT.
     It is based on the aforementioned essential \TOP concepts.
-
   \item
     We develop a layered operational semantics for \TOPHAT that is driven by user input.
     The semantics of the task language is clearly separated from the semantics of the underlying host language.
-
   \item
     Along with this semantics, we present the following semantic observations on tasks:
     the current value, whether a term is stuck, the current user interface, and the accepted inputs.
-
   \item
     We prove progress and type preservation for \TOPHAT.
-
   \item
     Using both the essential concepts and the formal calculus, we compare \TOP with related work in areas ranging from business process modelling, to process algebras and reactive programming.
-
   \item
     We implemented the whole semantic system in the dependently typed programming language Idris \cite{journals/jfp/Brady13}.
-
   \item
     To create executable applications, we implemented the task layer of \TOPHAT in iTasks.
     This also demonstrates that the former is a subset of the latter.
+\end{enumerate*}
 
 
-\end{itemize}
-
-
-\subsection{Structure}
+\paragraph{Structure}
 
 In \cref{sec:example} we demonstrate the functionality of \TOPHAT by means of an example,
 \Cref{sec:intuition} gives an overview of the essential concepts of \TOP.

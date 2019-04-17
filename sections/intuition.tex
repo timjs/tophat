@@ -9,7 +9,7 @@ This section gives an overview of the core concepts of task-oriented programming
 
 
 
-\subsection{Tasks model collaboration}
+\subsubsection*{Tasks model collaboration}
 %NOTE: Heb toch maar deze kop toegevoegd, onderstaande gaat er duidelijk over, en de sprong van het voorbeeld naar "Tasks are reusable" is anders abrupt!
 
 The central objective of \TOP is to \emph{coordinate collaboration}.
@@ -62,7 +62,7 @@ Then finally, only when every item we want to have for breakfast is ready, can w
 
 
 
-\subsection{Tasks are reusable}
+\subsubsection*{Tasks are reusable}
 
 There are three ways in which tasks are modular.
 First, larger tasks are composed of smaller ones.
@@ -74,7 +74,7 @@ These aspects make it possible for programmers to model custom collaboration pat
 
 
 
-\subsection{Tasks are driven by user input}
+\subsubsection*{Tasks are driven by user input}
 
 Input events drive evaluation of tasks.
 When the system receives a valid event, it applies this event to the current task, which results in a new task.
@@ -125,7 +125,7 @@ Snacks are modelled using a custom data type.
 
 
 
-\subsection{Tasks can be observed}
+\subsubsection*{Tasks can be observed}
 
 Several observations can be made on tasks.
 One of those is determining the value of a task.
@@ -153,7 +153,7 @@ The step combinator $\Next$ and the choice combinator $\Xor$ use this to prevent
 
 
 
-\subsection{Tasks are never done}
+\subsubsection*{Tasks are never done}
 
 Tasks never terminate, they always keep reacting to events.
 Editors can always be changed or cleared, and step combinators move on to new tasks.
@@ -172,7 +172,7 @@ Step combinators give rise to a form of internal communication.
 They represent data flow that \emph{follows} control flow.
 
 
-\subsection{Tasks can share information}
+\subsubsection*{Tasks can share information}
 
 The step combinator is one form of internal communication, where task values are passed to continuations.
 Another form of internal communication is shared data.
@@ -223,7 +223,7 @@ When the agent supplies two of the ingredients by setting the respective shares 
 
 
 
-\subsection{Tasks are predictable}
+\subsubsection*{Tasks are predictable}
 
 Let $t_1$ and $t_2$ be tasks.
 The parallel combination $t_1 \And t_2$ stands for two independent tasks carried out at the same time.
@@ -270,7 +270,7 @@ Input events for parallel tasks are disambiguated, internal steps ($\Then$) have
 % \end{example}
 
 
-\subsection{Recap}
+\subsubsection*{Recap}
 
 Collaboration in the real world consists of three aspects: communication, concurrency, and synchronisation.
 These aspects are reflected in \TOP on a high level of abstraction, hiding the details of communication.
