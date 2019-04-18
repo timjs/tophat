@@ -1,0 +1,510 @@
+ICFP 2019 Paper #111 Reviews and Comments
+===========================================================================
+Paper #111 TopHat: A formal foundation for task-oriented programming
+
+
+Review #111A
+===========================================================================
+
+Overall merit
+-------------
+B. OK paper, but I will not champion it.
+
+Reviewer expertise
+------------------
+Y. I am knowledgeable in the area, though not an expert.
+
+Paper summary
+-------------
+Interactive workflow "tasks" are a common use of computing
+resources. This paper provides a middleweight calculus modeling key
+ideas of such interactions: a set of combinators specifies the inputs,
+computations, steps, and orderings in such tasks.
+
+The model is a subset of features of existing implementations iTasks
+and mTasks, though there's no formal relationship.
+
+The semantics are proven type safe and a small model is implemented in
+Idris (though no detail is given on this mechanized model).
+
+The paper concludes with a substantial comparison to related work.
+
+Comments for author
+-------------------
+The work here is a nice semantics on an important topic that has
+received too little attention in the PL community. My score is a B for
+several reasons:
+
+- Nothing is _done_ with the semantics beyond sanity checking. Such
+  type safety proofs show only that you've built a sensible
+  system. What is the semantics for?
+
+- The papers aims and claims don't match up with its actual
+  contributions.
+
+  While "formal program verification is important for mission-critical
+  software", no actual formal verification happens here---and there's
+  no evidence that the workflows described here are mission critical.
+
+  The "_____-oriented programming" framing leads one to compare the
+  system to other orientations, which may be unfavorable either
+  because other orientations are total views of what programming is
+  (and so more substantial ideas than what any single semantics might
+  offer) or because other orientations are seen as software
+  engineering fads.
+
+- The semantics is entirely operational, which offers the weakest
+  reasoning principles as compared with denotational or axiomatic
+  models. The semantics and combinators also have gaps, allowing one
+  to express senseless workflows.
+
+Despite these flaws, I think the combinators given here will be useful
+elsewhere, so I lean towards acceptance.
+
+# What might improve the paper?
+
+- Moderate the claims. The key novelty here is an interesting library
+  of combinators in an important domain and a nice semantics for a
+  non-recursive fragment. Your properties don't quite "validate" your
+  semantics (line 838), but rather serve as a sanity check.
+
+- Use the semantics for something. An Iris-like logic would more than
+  suffice for proofs of equivalence of programs. Why not prove that
+  one can always eventually eat breakfast? (Such a property is highly
+  desirable and sure to be popular.)
+
+  In the related work, you frequently remark that other systems don't
+  support formal reasoning---such statements would be more sensible if
+  you used your semantics for formal reasoning.
+
+- Summarize the interaction trees of tasks. Throughout the paper, it's
+  stressed that TopHat merely specifies collaboration rather than
+  explicit communication, as in, e.g., process calculi or session
+  types. While such a system is perhaps nice to program in, having a
+  term `e : Task t` doesn't tell me much of anything about the set of
+  input events `e` can receive. Regular expressions (with embedded
+  functional programs to enable transitions) should suffice here, and
+  will make for a nice, abstract denotational semantics of tasks.
+
+- Prove that your combinators are orthogonal. Pierce's spider calculus
+  (2010) is a nice example: each primitive is proved 'independent' of
+  the others.
+
+- Clarify which kinds of tasks are realizable. There's no monadic
+  "join" operation that allows us to work with `Task (Task t)`, yet
+  the type is expressible. The set of editors is also surely limited:
+  what can one do with a $\square (\lambda x:\textsc{Int}. x)$? What
+  about $\blacksquare (\textsc{Int}\rightarrow\textsc{Int})$? What
+  about $\square (\square 5)$? What about $\blacksquare (\textsc{Task}
+  ~ \textsc{Int})$?
+
+  Relatedly, tasks are values in the host language (line 591). What
+  eliminators on tasks do you offer?
+
+- You are able to write the smoker program simply because your
+  semantics eats all the complexity. What would dining philosophers
+  look like in your system? It seems you cannot write a version of it
+  that dynamically determines the number of philosophers. What might
+  you need to add to the language to support that?
+
+  Later on (line 472) you talk about "immediately reflected" changes,
+  but consistent, available (i.e., immediate), and persistent
+  propagation is impossible in a distributed system. How should we
+  think about the possibility of network delay or failure?
+  Communication-based systems force programmers to think about these
+  issues, for better or worse.
+
+  Similarly, your comparison to HipHop misses a crucial fact: HipHop's
+  Esterel-like semantics has no data races, while TopHat is full of
+  data races. While not themselves a problem, there's strong anecdotal
+  evidence that racy models are harder to program in.
+
+- Clarify your implementations. What does the Idris implementation do?
+  Is it actually executable, or is it a relational model? How does
+  your Idris implementation compare to your embedding in iTasks? Have
+  you tried testing whether the two semantics behave the same?
+
+- Clarify your relation to FRP. You say that TopHat has no notion of
+  time, but $\blacksquare \mathsf{time}$ seems to exactly be a
+  time-varying value. It seems that one could use $\blacksquare$ and
+  $\RHD$ to write FRP-ish programs, e.g., your derived `delay`
+  combinator.
+
+# Questions
+
+You say you "show that the normalisation semantics is a big-step
+semantics". Which property is that, and why is it important? Why does
+having state complicate a big-step semantics?
+
+Could you encode BPEL in TopHat? If not, which features does BPEL
+support that you do not? (E.g., cycles?)
+
+# Minor stuff
+
+- Line 235: What is an invalid event?
+
+- Line 269: What about explicit option types?
+
+- Line 349: We haven't seen these internal operators yet. It might be
+  good to at least name them all up front. Could you extend the
+  airline example to include them?
+
+- Line 403: You call $\bowtie$ "combination" but perhaps 'parallel
+  composition' or 'interleaving' would be more helpful.
+
+- Line 657: It may be worth clarifying that $\rhd$ doesn't need to
+  look at $e_2$ because a `C` event is needed. Why doesn't
+  $\mathcal{F}$ look at $e_2$ for $\RHD$, though, which needs no
+  continue event? Isn't $\blacksquare 5 \RHD \Lightning$ failing?
+
+- Line 793: The typing side conditions on operational are a strange
+  violation of the phase distinction.
+
+- Line 949: If iTasks "implicitly has a formal semantics", are there
+  any languages that _don't_?
+
+- A few typos: focussing, 'mad an implementation', moddeling
+
+
+
+Review #111B
+===========================================================================
+
+Overall merit
+-------------
+B. OK paper, but I will not champion it.
+
+Reviewer expertise
+------------------
+Z. I am not an expert. My evaluation is that of an informed outsider.
+
+Paper summary
+-------------
+The paper presents a formalization of the essence of an existing "real-world task" workflow modelling language and methodology called TOP
+
+Comments for author
+-------------------
+I am an outsider for this particular area of programming languages and was not familiar with TOP.
+
+The paper is well written and interesting, especially for those who know and use TOP and need a detailed description of its formal semantics and some of its properties.
+
+If I have misgivings, I think it is about TOP itself - the question is not its soundness, or its semantics, but its utility for the business domain and the "logical encoding" approach used to formalizing real-world business systems.  My own experience has been with systems such as Oracle Policy Automation which approaches modelling of real-world processes in a vastly different way.  So the sea of symbols as an "encoding" of the real world is imply daunting and unfamiliar to me, and I am skeptical of its utility.  However, since the focus of the paper is on formalization and not on TOP itself, this is me just admitting a (perhaps unfair) bias.
+
+I've given my review a low confidence rating as a result.
+
+
+
+Review #111C
+===========================================================================
+
+Overall merit
+-------------
+C. Weak paper, though I will not fight strongly against it.
+
+Reviewer expertise
+------------------
+Y. I am knowledgeable in the area, though not an expert.
+
+Paper summary
+-------------
+The paper presents TopHat, an imperative higher-order language with facilities
+for interacting with an external environment.
+
+In typical use cases, the environment can be thought of as a user interacting
+with the program through a graphical interface. TopHat allows a program to
+communicate with the environment via "tasks", which are logical descriptions of
+input/output interfaces. Compound tasks can be formed via dedicated combinators:
+pairing, monadic-bind-like sequential composition, choice, etc.
+
+Technically, the paper contains an introduction to "task-oriented" programming
+in TopHat, a formal semantics for TopHat, a type safety result, and a discussion
+of related work.
+
+Comments for author
+-------------------
+
+I welcome every effort to make UI programming easier, given the sorry state of
+current programming practice. As such, I am largely sympathetic towards the aims
+of "task-oriented programming", and find this paper intriguing. Unfortunately,
+I'm not convinced that it would be a good fit for ICFP in its current form.
+
+First, I don't think the paper contains enough technical contributions. I
+understand that its goal is to give a standalone formalization of task-oriented
+programming, which has been around for some time but always in the form of
+libraries. But as is, this formalization does not pay off: all applications are
+left for future work, which I find highly unsatisfactory. Apparently, we did not
+learn anything new about the equivalence of task-oriented programs, nor gain
+insight into their implementation, etc. Such points are left for future work,
+but would greatly improve the relevance of the work.
+
+Second, I am doubtful of certain design aspects of TopHat.
+
+For example, the language mixes a form of shared memory with bespoke concurrency
+constructs, which has several important consequences. In particular, sequential
+composition performs speculative execution: if t is a task with a set value, the
+sequential composition combinator t ▷ e tries to execute e with this value, and
+backtracks if e fails ("failing" is an explicit concept in TopHat),
+reestablishing memory as if e had never been executed. This makes composition
+very expressive (see e.g. the example given in §3.6, p. 7), but also very
+costly, as, in the worst case, the entire store must be duplicated. But I am
+even more worried about the impact of this semantics on reasoning: can one
+really understand what's going on in a TopHat program which is not very small?
+Doesn't this make it hard to understand the complexity of TopHat programs?
+
+Also, while TopHat seems to be a language dedicated to reactive programming,
+i.e., continuous interaction with an environment, it does not help with managing
+this interaction in a modular way. As far as I see, there is no way for a task A
+to interpose itself between the environment and another task B, i.e., for A to
+encapsulate B in a way that is transparent from B's perspective. This is
+possible in the reactive languages I know of (e.g., Esterel).
+
+Third, in my opinion the paper is poorly written and hard to understand. It
+contains too many forward references and makes use of symbols or notions before
+they are defined (see below). I also found several statements hard to interpret,
+e.g. the task pairing combinator supposedly "introduces interleaving
+concurrency" (p. 7), but as far as I see the semantics of TopHat is perfectly
+deterministic (given a fixed input sequence) and does not involve interleaved
+access to the store. My confusion was exacerbated by the related work section,
+where TopHat is compared in vague terms to works whose relevance is not entirely
+obvious to me (e.g., process algebra) but where closely-related work from the
+ICFP community, such as Carlsson and Hallgren's Fudgets or Conal Elliott's
+Tangible Values, is not mentioned at all. Similarly, the comparison to reactive
+programming works are not technical enough in my opinion.
+
+## Detailed comments
+
+p. 4
+
+- The "lightning strike" symbol used in the examples should be introduced in the
+  text as soon as it is used.
+
+- The "bookFlight ⋈ bookFlight ⋈ bookFlight" example is very problematic. At
+  this point, I had zero understanding of TopHat's concurrency model, and thus
+  this program looked like it had a data race, making it plainly incorrect. As a
+  consequence, I found the paragraphs extolling the virtues of shared-memory
+  programming flabbergasting! This should be addressed immediately in the text,
+  explaining what is atomic and what isn't.
+
+p. 5
+
+- While discussing the semantics of parallel composition (⋈), it is stated that
+  "what is meant by parallel is that the order in which we do tasks and the
+  smaller tasks that they are composed of, does not matter". But I cannot
+  reconcile this statement with the formal semantics: ⋈ is not commutative at
+  all, since for instance "l := True ⋈ l := False" will always result in a store
+  containing l ↦ True, and "l := False ⋈ l := True" in one containing l ↦ False.
+
+- "Inputs are synchronous."
+
+  I believe that only a single task may evolve per time step, judging from the
+  grammar of inputs presented in Fig 14. So what does this mean, exaclty? That
+  program and environment alternate?
+
+p. 6
+
+- I would have liked an intuitive description of the graphical representation of
+  choice combinators.
+
+p. 7
+
+- "The details of the solution [Downey's] are not important here."
+
+  Then perhaps one could simplify the preceding paragraph?
+
+p. 8
+
+- Internal choice is mentioned here, without ever being introduced before!
+
+p. 9
+
+- The grammar allows function-valued editors. What does ⊠(Int → Int) look like?
+
+- The grammar allows higher-order tasks and editors. What does ⊠⊠Int look like?
+
+p. 10
+
+- "If e is a reference of type Ref τ, then ▪e is of type Task τ"
+
+  Here τ should be changed into β, or T-Update should be modified.
+
+- The rationale for the external vs. internal distinction is never given. I
+  would expect that in an expressive language, external combinators would be
+  definable in terms of their internal counterparts.
+
+p. 11
+
+- I liked example 4.4.
+
+p. 13
+
+- "When both branches have a value, it takes the value of the left branch"
+
+  Why not give some combination function?
+
+p. 14
+
+- In Figure 10, F is a function only if ⇓ is deterministic. I believe it is, but
+  perhaps this should be stated explicitly somewhere.
+
+p. 15
+
+- Isn't rule S-Xor lacking some premises?
+
+p. 17
+
+- l. 832: obfuscating the link to the public GitHub repository is worse than
+  useless. Why not attach an anonymized copy of the source code to the paper?
+
+p. 18
+
+- "we mad": we made.
+
+- "Also, we mad[e] an implementation of TopHat combinators into iTasks. This
+  shows that TopHat is a subset of iTasks."
+
+  I'm nitpicking, but I don't like that turn of phrase. Without additional
+  information about the simplicity of this implementation, this conclusion is
+  incorrect. Otherwise, the fact that you can implement, say, Clean on top of
+  x86 assembly would imply that Clean is a subset of x86 assembly.
+
+- l. 926: "understand" -> understanding.
+
+- "We do not know yet if the more complex combinators of iTasks are expressible
+  in the basic combinators of TopHat."
+
+  I would have liked to know what these combinators look like.
+
+p. 20
+
+- "However, on IOT devices it is useful to continue running tasks endlessly,
+  which is done in mTasks using a "forever" combinator. This is currently not
+  possible in TopHat."
+
+  So in TopHat tasks do not "run endlessly", yet they "never terminate" and
+  "always keep reacting to events" (p. 6)? This is very confusing.
+
+p. 21
+
+- As I said above, I'm not sure TopHat, a deterministic functional language,
+  compares to process algebra.
+
+- l. 996-999: this paragraph is extremely vague ("model collaboration patterns",
+  "declarative specification"). Moreover, I don't think comparing "goals" of
+  formalisms leads to useful distinctions, otherwise we would conclude that
+  functional languages (whose goals are to program computers) and Alonzo
+  Church's λ-calculus (whose original goal was to give a foundation for
+  mathematics) have nothing to do with each other.
+
+- l. 1015: "syntonisation" -> synchronisation.
+
+- l. 1025: "programatically" -> "programmatically".
+
+- In my opinion, comparing TopHat to ReactiveML would be more relevant, since a
+  lot of the HipHop work is about coping with the vagaries of the web
+  programming environment.
+
+p. 22
+
+- "FRP and TOP are different systems and have different goals in mind."
+
+  Same remarks as above.
+
+- "TOP has no notion of time" Really? If so, why talk about synchrony and the
+  instantaneous character of reactions earlier?
+
+p. 23
+
+- l. 1110: "moddeling" -> "modeling".
+
+
+
+Review #111D
+===========================================================================
+
+Overall merit
+-------------
+C. Weak paper, though I will not fight strongly against it.
+
+Reviewer expertise
+------------------
+Y. I am knowledgeable in the area, though not an expert.
+
+Paper summary
+-------------
+The paper a formal operational model for a core task-oriented language
+inspired by iTasks. The model has a stratified structure. At the bottom
+layer there is a base functional typed language with first-class
+cells. On top of that there is a language of typed task-related effects.
+The semantics of the model is also stratified. At the bottom layer there
+is a small-step operational semantics for the base language and on top of
+that there are two layers for the effect layer. The bottom of these two
+layers deals with task reductions that do not require user input. The
+top deals with task reductions that are triggered by user input.
+The model is proven type sound and has been implemented in Idris and the
+task effect language on top of iTasks.
+
+Comments for author
+-------------------
++++++ Comments +++++
+
+++ I think the goal of formalizing the core of iTasks is great. TOP is an
+interesting programming paradigm and it would be good to be able to
+understand its essence and furthermore to have techniques to prove the
+properties of TOP programs.
+
+++ The development of the model seems sensible and the provided examples
+are quite interesting.
+
+-- However I think this current paper is far from this goal. As is it
+feels more like an exercise in formalisms rather than a research result.
+In particular, the approach to describing TOP is a straightforward
+adaptation of ideas from process calculi (see work on languages with
+session types).
+
+-- Moreover, the task layer and its type system are straightforward
+adaptation of monadic effect descriptions. This is a missed opportunity as
+a richer type system could be used to prove interesting properties such as
+for instance that certain tasks never fail.
+
+-- Finally, there is nothing surprising or challenging in proving type
+soundness for the model.
+
+-- This model doesn't meet the requirements to be called a calculus.
+Plotkin's seminal paper on the call-by-name and call-by-value lambda
+calculus provides a blueprint for how one constructs a calculus for an
+existing language. For a more recent example see Florence et al. 's POPL
+paper on a calculus for Esterel with the same motivation as this paper but
+for Esterel. This effort builds on equatinal theories for effectual programs developed by Felleisen in the 80s. In general, a calculus should allow sound  and consistent
+equational reasoning with respect to the existing semantics  of the language
+(in this case the graph rewriting one of Clean) and this is possible even in the
+presence of effects at the price of weakening reasoning power.
+
+-- Again related to Esterel and the above, the paper ``An axiomatic semantics for
+Esterel'' by Simone Tini presents an alternative approach to formalizing
+Esterel with the goal of reasoning about Esterel programs. That paper opts
+for bisimulation techniques instead of algebraic manipulations of syntax.
+Thus similar to TOPHAT, the paper opts for an LTS approach. Again though,
+and unlike TOPHAT, the design of the model is directly connected with certain
+properties and techniques.
+
+
++++++ Small points/typos +++++
+
+page 13: I is mentioned here but it is defined in page 16.
+
+page 18, first line: "we mad" ---> "we made"
+
+page 18, first line: "combinators into" ---> "combinators on top of"
+
+page 21, section 7.3, last line: "syntonisation" ---> "synchronization"
+
+
+
+++++++ QUESTIONS THAT THE AUTHORS ARE EXPECTED TO ANSWER ++++++
+
+
+1) What is challenging/surprising about constructing TOPHAT?
+
+2) Could you please explain what kind of properties of iTasks
+programs you intend to intend to try to prove with TOPHAT and
+how its design helps this process?
