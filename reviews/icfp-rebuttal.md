@@ -85,6 +85,11 @@ together with shared memory (■), can model most of its use cases,
 is the main challenge solved in this work.
 We did not give this example in section 1.4, where it belongs.
 
+The insight that a fail task (☇) is a basic task which will never have an observable value
+and also can be used for guards is a total change from the iTasks implementation.
+Also, our system radically simplifies the notion of editors and connects them to the already existing notion of widgets.
+All these points belong to the process of creating TopHat and are not apparent in the paper.
+
 
 ### Application
 
