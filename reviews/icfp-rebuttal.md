@@ -6,10 +6,20 @@ Verder ga ik er bij verschillende dingen wellicht te hard in op de details.
 Kunst is om zoveel als mogelijk terug te grijpen naar de dingen die de reviewers positief vinden aan ons paper.
 Dat is belangrijk voor jullie om te checken!
 
-Daarbij zit ik nu 26 woorden over de limiet in het algemene deel (dus tot aan het kopje "specific questions").
+Daarbij zit ik nu zo'n 100 woorden over de limiet van 1000 in het algemene deel (dus tot aan het kopje "specific questions").
 Iets om rekening mee te houden!
 
-Tekst [tussen blokhaken] ben ik niet tevreden over en zou ik graag anders hebben.
+Ik vraag me even af op welk punt we nog het beste de "de positieve opmerkingen van de reviewers [kunnen] meenemen",
+zoals Rinus aangaf:
+
+> TOP is, zoals de reviewers aangeven, een belangrijk concept die een oplossing biedt voor interactieve applicaties (Achilles hiel van FP),
+> met iTasks worden complexe commerciele applicaties gemaakt (dus het is praktisch bruikbaar),
+> een semantiek die het redeneren over programma's mogelijk maakt is belangrijk, maar niet eenvoudig door de vele mogelijkheden,
+> en daarom is TopHat waarbij jullie je bewust beperken een eerste noodzakelijke stap.
+
+Verder zijn er gaten voor een implementatie van de dining philosophers.
+Kun jij die toevoegen Markus?
+En heb ik de laatste vraag van reviewer D nog niet beantwoord.
 
 -- TS
 -->
@@ -20,35 +30,42 @@ We thank the reviewers for their efforts and constructive comments.
 We are pleased to read that reviewers consider the paper is "intriguing" and "well written and interesting".
 We are glad to hear "the model seems sensible and the provided examples are quite interesting",
 and that we are addressing "an important topic that has received too little attention in the PL community".
-Also, we will make sure to incorporate all detailed comments in the final version of the paper.
 
 First and foremost, we'd like to apologise naming our model a calculus.
 In light of Plotkin's paper from 1973, our model does not meet the requirements to be called a calculus.
 Therefore, we will rename our model to a language.
 We are grateful for reviewer D to bring this up.
 
-Next to this, reviewers raised three main points:
+Next to this, reviewers raised three main concerns:
 
 * The semantics presented is not challenging or special in any way.
-* The work does not contain an application of the given semantics
-  or a description why it will be usable for formal reasoning.
+* The work does not contain an application of the given semantics.
 * Some undesired tasks can be constructed or unwanted effects could happen.
 
 Below we would like to address these three concerns first, after which we answer specific questions of each reviewer.
+Naturally, will make sure to incorporate all detailed comments in the final version of the paper.
 
 
-## Challenge
+## General concerns
 
-The challenge in creating this model is indeed not the used techniques,
-which are well established and proved their usefulness in computer science.
-[The challenge is going back to the roots of workflow and business process modelling,
-while adding facilities to specify higher order workflows and generate applications.]
+### Challenge
+
+As reviewers point out,
+the challenge in creating this model is indeed not the used techniques.
+It is indeed the case that proving type soundness is just a sanity check and not a validation.
+This should be reflected in the paper.
+
+<!-- Deze sectie kan iemand vast veeeeel korter herformuleren... ;-)  --TS -->
+
+The main challenge we faced was creating a language which models workflows and business processes,
+while being able to specify higher order workflows and generate applications out of such specifications.
 The resulting applications should have automatically generated user interfaces
 and no data races despite a multi user environment.
 
 Although the iTasks framework already promises this,
-it is a large library [with lots of bells and whistles].
-So, in particular, the challenge is to reformulate the iTasks framework and its ideas in a handful of elementary and well-behaved combinators.
+it is a large library embedded in an general purpose functional programming language.
+So, our challenge was to reformulate the iTasks framework and its ideas in a handful of elementary and well-behaved combinators.
+
 The iTasks framework is totally build on top of two "super combinators" called `step` and `parallel`.
 Both were created to express every possible collaboration pattern the creators encountered during case studies.
 All other simpler combinators are derivations of these two.
@@ -62,47 +79,52 @@ parallel
   -> Task [ ( Int, TaskValue a ) ]
 ```
 Where `ITask` is a type class facilitating (de)serialisability, datatype generic representations,
-type information at runtime, and a way to produce user facing editors.
+type information at runtime, and a way to produce graphical editors.
 Trimming this combinator down to two elementary combinators (⋈ and ⧫) which,
 together with shared memory (■), can model most of its use cases,
 is the main challenge solved in this work.
+We did not give this example in section 1.4, where it belongs.
 
 
-## Application
+### Application
 
 The analysis that the current work does not apply the semantics is a valid one.
-The exclusion of any [proofs] is an intentional one.
-In this work we focus on properly introducing the core concepts of TOP,
-formally describe them,
-and placing this model into the right context by comparing it a large set of other frameworks and algebras.
+The exclusion of any application is an intentional one.
+In this work, we focus on properly introducing the core concepts of TOP,
+linking them to a formal description,
+showing this description is sane,
+and placing the resulting model into the right context by comparing it a fair set of other frameworks and algebras.
+These four things lead to a holistic description of TOP which can be used for further research as well as implementation.
+Summarising: the presented system is "useful elsewhere", as indicated by reviewer A.
 
-In an upcoming article, we are using our system to symbolically execute tasks:
-"Proving task properties using symbolic TopHat", which is under consideration for IFL'19.
+In an upcoming article, we are using our system to symbolically execute tasks.
+<!-- Moet zo'n verwijzing er in?  --TS -->
+["Proving task properties using symbolic TopHat", under consideration for IFL'19.]
 Symbolic execution allows us to prove properties like "breakfast will always be served" (ex 3.1),
 and "passengers always get a seat" (ex 2.1).
-These kind of properties would not be expressible and provable using a library like the iTasks framework
-and need a well described core set of functionality as presented in this work.
-Also, symbolic execution allows us to relate traces of inputs to tasks and observations on them,
+It will be possible to relate traces of inputs to tasks and observations on them,
 a suggestion made by reviewer A.
+These kind of properties would not be expressible and provable using a library like the iTasks framework.
+They need a well described core set of functionality as presented in this work.
 
-Also, this gives us space to discuss and analyse a bigger case studies for the Dutch tax office and the Dutch coast guard,
-which is more mission critical than the examples given in the current work.
+A split also gives us the opportunity to discuss and analyse bigger case studies from the Dutch tax office and the Dutch coast guard.
+They are certainly more mission critical than the small examples given in the current work.
 
 
-## Undesired tasks and effects
+### Undesired tasks and effects
 
-### Higher order tasks
+#### Higher order tasks
 
 As reviewers A and C point out, it is possible to express tasks of higher order types,
 which we did not discuss in the paper.
-This is an omission which we should fix for the final version of the paper.
+This is an omission which we should fix for the final version.
 Examples given are:
 
 * ⊠(Int -> Int) or □(λx:τ. x)
 * ⊠(Task Int) or ⊠(⊠Int)
 
 It is indeed possible to have tasks of functions and tasks of tasks.
-On the user interaction part, one could render such editors as a selection menu of functions or tasks already available in the system.
+On the user interaction part, one could render above editors as a selection menu of functions or tasks already available in the system.
 Users could pick one of them, and continue with execution,
 such as picking a function to operate on an integer and applying it to a entered integer like such:
 
@@ -125,24 +147,23 @@ This means the example below are not possible:
 * ■l where l : Task Int
 
 
-### Race conditions and distributed systems
+#### Race conditions and distributed systems
 
-Line 363, which states that our model model supports distributed applications,
+Line 363, which states that our model supports distributed applications,
 should never have reached the submitted version.
 It is simply not true.
-The system can only "generate _multi-user applications_ to support [...] workflows".
-Multiple users can interact with an application running on a single server.
+The system can only "generate _multi-user applications_ to support [...] workflows":
+multiple users can interact with an application running on a single server.
 
 There is an important consequence of this choice that we should state more clearly in the paper.
-If one takes as a definition for a _data race_ that
+If one takes as a definition for a data race that
 _the same program with the same inputs sometimes gives different results_
 then this is not possible in TopHat.
 The order of execution is completely determined by the order of the inputs,
 which we assume to be a serial stream.
-Therefore, it is indeed the case that program and environment alternate:
+Therefore, it is indeed the case that program and environment alternate as mentioned by reviewer C:
 a user gives an input, the system makes some calculations and the user interface will change.
 Only then the user can give her next input, etc.
-
 I.e., in the booking example (ex 2.1):
 the user who books the seat first gets the seat.
 This is exactly the desired behaviour.
@@ -150,15 +171,32 @@ This is exactly the desired behaviour.
 
 ## Specific questions
 
-### Speculative evaluation
+### Reviewer A
 
-The speculative evaluation of task continuations in the semantics is needed to express guards.
-We acknowledge that taking state into account needs to reestablish memory if the evaluation leads to failure.
-A different approach would be move state from the expression layer to the task layer.
-We choose not to do this to keep task modelling features and default language features as branching and references completely separate.
-We should have mentioned this reasoning in section 5.3.
+> You say you "show that the normalisation semantics is a big-step semantics".
+> Which property is that, and why is it important?
+> Why does having state complicate a big-step semantics?
 
-### Dining philosophers
+This is an leftover and should not have made it into this version.
+We will remove it.
+
+
+> Could you encode BPEL in TopHat? If not, which features does BPEL
+> support that you do not? (E.g., cycles?)
+
+It should be possible to express most BPEL programs in TopHat
+as BPEL supports the same basic compositions as TopHat (sequence and parallel)
+and the same structured programming constructs.
+Only loop constructs are not supported, as TopHat does not have recursion.
+
+An embedding in the other direction, however, would not be possible.
+BPEL lacks the higher order constructs which TopHat has.
+
+
+> You are able to write the smoker program simply because your semantics eats all the complexity.
+> What would dining philosophers look like in your system?
+> It seems you cannot write a version of it that dynamically determines the number of philosophers.
+> What might you need to add to the language to support that?
 
 The dining philosophers are very easy to express using TopHat.
 <!-- Definition should be here.  -- TS -->
@@ -166,3 +204,38 @@ To express a dynamic version of this problem,
 we would need a (restricted) version of recursion.
 One could think of built in recursion principle on natural numbers
 or a replicate function on tasks.
+
+
+### Reviewer C
+
+#### On speculative evaluation
+
+The speculative evaluation of task continuations in the semantics is needed to express guards.
+We acknowledge that taking state into account needs to reestablish memory if the evaluation leads to failure.
+A different approach would be move state from the expression layer to the task layer.
+We choose not to do this to keep task modelling features and default language features as branching and references completely separate.
+We should have mentioned this reasoning in section 5.3.
+
+
+#### On the notion of time in comparison to FRP
+
+The main difference between time in TopHat and in FRP is that
+behaviours in FRP are explicitly functions from time to values.
+In TopHat, tasks have a notion of order, but do not explicitly depend on time.
+
+This doesn't mean, however, that task cannot react on a time value, as is done in example 4.5.
+Takeaway is that _a clock in TopHat is just a user which updates a shared time value on a regular base_.
+We will explicitly mention this in the paper in example 4.5 and in section 7.4.
+
+
+### Reviewer D
+
+> 1) What is challenging/surprising about constructing TOPHAT?
+
+We hope to have answered this question in the general section,
+in the paragraphs about "Challenge".
+
+> 2) Could you please explain what kind of properties of iTasks programs you intend to prove with TOPHAT
+>    and how its design helps this process?
+
+<!-- How does the design help??  --TS -->
