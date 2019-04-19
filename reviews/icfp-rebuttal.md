@@ -185,11 +185,11 @@ We will remove it.
 > support that you do not? (E.g., cycles?)
 
 It should be possible to express most BPEL programs in TopHat
-as BPEL supports the same basic compositions as TopHat (sequence and parallel)
-and the same structured programming constructs.
-Only loop constructs are not supported, as TopHat does not have recursion.
+as BPEL supports the same basic constructs as TopHat (sequence and parallel)
+and the same structured programming features.
+Only loops are not supported, as TopHat does not have recursion.
 
-An embedding in the other direction, however, would not be possible.
+An embedding in the other direction would not be possible.
 BPEL lacks the higher order constructs which TopHat has.
 
 
@@ -198,9 +198,69 @@ BPEL lacks the higher order constructs which TopHat has.
 > It seems you cannot write a version of it that dynamically determines the number of philosophers.
 > What might you need to add to the language to support that?
 
-The dining philosophers are very easy to express using TopHat.
-<!-- Definition should be here.  -- TS -->
-To express a dynamic version of this problem,
+The dining philosophers can be expressed in iTasks as follows.
+<!-- Ik heb geen tijd meer voor een vertaling naar TopHat  --TS -->
+
+```
+module Main
+
+import Data.Func
+import Data.Functor
+import iTasks
+
+Start world = startEngine main world
+
+fork0 = sharedStore "fork0" True
+fork1 = sharedStore "fork1" True
+fork2 = sharedStore "fork2" True
+numSitting = sharedStore "numSitting" 0
+
+takeFork side fork =
+  watch fork -|| (viewInformation "Philosopher" [] ("waiting for "+++side+++" fork")) >>*
+  [ OnAction (Action "Take fork") (ifValue id (const continue))
+  ]
+where
+  continue :: Task ()
+  continue = void $ set False fork
+
+putFork fork =
+  void $ set True fork
+
+sitDown =
+  watch numSitting -|| viewInformation "Philosopher" [] "hungry" >>*
+  [ OnAction (Action "Sit down") (ifValue (\x -> x < 2) (const $ void $ upd inc numSitting))
+  ]
+
+getUp =
+  viewInformation "Philosopher" [] "done eating" >>*
+  [ OnAction (Action "Get up") (always $ void $ upd dec numSitting)
+  ]
+
+philosopher leftFork rightFork =
+  sitDown >>- \_ ->
+  takeFork "left" leftFork >>- \_ ->
+  takeFork "right" rightFork >>- \_ ->
+  viewInformation "Philosopher" [] "eating..." >>*
+  [ OnAction (Action "Eat") (always $ return ())
+  ] >>- \_ ->
+  putFork rightFork >>- \_ ->
+  putFork leftFork >>- \_ ->
+  getUp
+
+main =
+  allTasks
+    [ forever $ philosopher fork0 fork1
+    , forever $ philosopher fork1 fork2
+    , forever $ philosopher fork2 fork0
+    , void $ viewSharedInformation "fork 0" [] fork0
+    , void $ viewSharedInformation "fork 1" [] fork1
+    , void $ viewSharedInformation "fork 2" [] fork2
+    , void $ viewSharedInformation "num sitting" [] numSitting
+    ]
+```
+
+
+To express version with dynamic number of philosophers
 we would need a (restricted) version of recursion.
 One could think of built in recursion principle on natural numbers
 or a replicate function on tasks.
@@ -212,7 +272,7 @@ or a replicate function on tasks.
 
 The speculative evaluation of task continuations in the semantics is needed to express guards.
 We acknowledge that taking state into account needs to reestablish memory if the evaluation leads to failure.
-A different approach would be move state from the expression layer to the task layer.
+A different approach would be move state from the expression layer to the task layer, which would limit guards to pure expressions.
 We choose not to do this to keep task modelling features and default language features as branching and references completely separate.
 We should have mentioned this reasoning in section 5.3.
 
@@ -238,4 +298,10 @@ in the paragraphs about "Challenge".
 > 2) Could you please explain what kind of properties of iTasks programs you intend to prove with TOPHAT
 >    and how its design helps this process?
 
-<!-- How does the design help??  --TS -->
+The design of TopHat makes it possible to apply different kinds of program verification techniques to it.
+So far we have been considering the Dijkstra monad and symbolic execution.
+We are currently working on implementing a symbolic execution engine for TopHat.
+This would allow us to prove properties like the ones mentioned above:
+- "breakfast will always be served" (ex 3.1),
+- "passengers always get a seat"
+- "no two passengers can book the same seat" (ex 2.1).
