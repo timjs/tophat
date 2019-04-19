@@ -84,7 +84,7 @@ and can be used for guards.
 
 Also, our system simplifies the notion of editors and connects them to the already existing notion of widgets.
 
-All these points are not sufficiently emphasized in the paper.
+All these points are not sufficiently emphasised in the paper.
 
 
 ### Application
@@ -94,13 +94,13 @@ This is intentional.
 In this work, we focus on introducing the core concepts of TOP,
 linking them to a formal description,
 showing that this description is sane,
-and puting the resulting language into context by comparing it to other similar systems.
+and putting the resulting language into context by comparing it to other similar systems.
 These four things lead to a holistic description of TOP which can be used for further research as well as implementation.
 
 In an upcoming article, we are using our system to symbolically execute tasks.
 <!-- Moet zo'n verwijzing er in?  --TS -->
 <!-- Ja!  --mkl -->
-["Proving task properties using symbolic TopHat", under consideration for IFL'19.]
+["Proving task properties using symbolic TopHat", to be submitted to IFL'19.]
 Symbolic execution allows us to prove properties like "breakfast will always be served" (ex 3.1),
 "passengers always get a seat", and "no two passengers can book the same seat" (ex 2.1).
 It will be possible to relate traces of inputs to tasks and observations on them,
@@ -152,7 +152,7 @@ Line 363, which states that our model supports distributed applications,
 should not have reached the submitted version.
 The system can only "generate _multi-user applications_ to support [...] workflows":
 multiple users can interact with an application running on a single server.
-It is the users who are distributed, but their events are serialized by the server before being fed to the program.
+It is the users who are distributed, but their events are serialised by the server before being fed to the program.
 
 There is an important consequence of this choice that we should state more clearly in the paper.
 If one takes the following definition for a data race:
