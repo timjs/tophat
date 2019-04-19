@@ -89,27 +89,25 @@ All these points are not sufficiently emphasized in the paper.
 
 ### Application
 
-The analysis that the current work does not apply the semantics is a valid one.
-The exclusion of any application is an intentional one.
-In this work, we focus on properly introducing the core concepts of TOP,
+It is true that the paper does not use the semantics to prove properties about tasks.
+This is intentional.
+In this work, we focus on introducing the core concepts of TOP,
 linking them to a formal description,
-showing this description is sane,
-and placing the resulting model into the right context by comparing it a fair set of other frameworks and algebras.
+showing that this description is sane,
+and puting the resulting language into context by comparing it to other similar systems.
 These four things lead to a holistic description of TOP which can be used for further research as well as implementation.
-Summarising: the presented system is "useful elsewhere", as indicated by reviewer A.
 
 In an upcoming article, we are using our system to symbolically execute tasks.
 <!-- Moet zo'n verwijzing er in?  --TS -->
 ["Proving task properties using symbolic TopHat", under consideration for IFL'19.]
 Symbolic execution allows us to prove properties like "breakfast will always be served" (ex 3.1),
-and "passengers always get a seat" (ex 2.1).
+"passengers always get a seat", and "no two passengers can book the same seat" (ex 2.1).
 It will be possible to relate traces of inputs to tasks and observations on them,
 a suggestion made by reviewer A.
-These kind of properties would not be expressible and provable using a library like the iTasks framework.
-They need a well described core set of functionality as presented in this work.
 
-A split also gives us the opportunity to discuss and analyse bigger case studies from the Dutch tax office and the Dutch coast guard.
-They are certainly more mission critical than the small examples given in the current work.
+We plan to use this technique to discuss and analyse bigger case studies from the Dutch tax office and the Dutch coast guard.
+There is an implementation of a part of the Dutch law for solar panel subsidies, and the command and control process for search and rescue operations.
+These are certainly more mission critical than the small examples given in the current work.
 
 
 ### Undesired tasks and effects
