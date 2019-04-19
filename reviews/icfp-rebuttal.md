@@ -99,6 +99,7 @@ These four things lead to a holistic description of TOP which can be used for fu
 
 In an upcoming article, we are using our system to symbolically execute tasks.
 <!-- Moet zo'n verwijzing er in?  --TS -->
+<!-- Ja!  --mkl -->
 ["Proving task properties using symbolic TopHat", under consideration for IFL'19.]
 Symbolic execution allows us to prove properties like "breakfast will always be served" (ex 3.1),
 "passengers always get a seat", and "no two passengers can book the same seat" (ex 2.1).
@@ -149,23 +150,24 @@ This means the example below are not possible:
 #### Race conditions and distributed systems
 
 Line 363, which states that our model supports distributed applications,
-should never have reached the submitted version.
-It is simply not true.
+should not have reached the submitted version.
 The system can only "generate _multi-user applications_ to support [...] workflows":
 multiple users can interact with an application running on a single server.
+It is the users who are distributed, but their events are serialized by the server before being fed to the program.
 
 There is an important consequence of this choice that we should state more clearly in the paper.
-If one takes as a definition for a data race that
-_the same program with the same inputs sometimes gives different results_
+If one takes the following definition for a data race:
+
+  the same program with the same inputs sometimes gives different results
+
 then this is not possible in TopHat.
-The order of execution is completely determined by the order of the inputs,
-which we assume to be a serial stream.
-Therefore, it is indeed the case that program and environment alternate as mentioned by reviewer C:
-a user gives an input, the system makes some calculations and the user interface will change.
-Only then the user can give her next input, etc.
-I.e., in the booking example (ex 2.1):
+The order of execution is completely determined by the order of the inputs.
+Therefore, it is the case that program and environment alternate as mentioned by reviewer C.
+A user gives an input, the system makes some calculations and the user interface will change.
+Only then can the user give the next input.
+For the booking example (ex 2.1) this means that
 the user who books the seat first gets the seat.
-This is exactly the desired behaviour.
+This is the desired behaviour.
 
 
 ## Specific questions
