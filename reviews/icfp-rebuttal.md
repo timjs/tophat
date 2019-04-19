@@ -73,14 +73,17 @@ parallel
 ```
 Where `ITask` is a type class that provides serialisation, datatype generic representations,
 run-time type information, and generation of graphical editors.
-Trimming this combinator down to two elementary combinators (⋈ and ⧫) which,
-together with shared memory (■), can model most of its use cases,
-is the main challenge solved in this work.
+The main challenge solved in this work is
+trimming this combinator down to two elementary combinators (⋈ and ⧫) which,
+together with shared memory (■), can model most of its use cases.
 We did not give this example in section 1.4, where it belongs.
 
-The insight that the fail task (☇) is a basic task which will never have an observable value
-and can be used for guards is a deviation from iTasks that lets us simplify the step combinator significantly.
+Furthermore, we were able to significantly simplify the step combinator using the
+insight that the fail task (☇) is a basic task which will never have an observable value
+and can be used for guards.
+
 Also, our system simplifies the notion of editors and connects them to the already existing notion of widgets.
+
 All these points are not sufficiently emphasized in the paper.
 
 
