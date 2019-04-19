@@ -124,24 +124,23 @@ Examples given are:
 * ⊠(Task Int) or ⊠(⊠Int)
 
 It is indeed possible to have tasks of functions and tasks of tasks.
-On the user interaction part, one could render above editors as a selection menu of functions or tasks already available in the system.
+One could render editors like this as a selection menu of functions or tasks already available in the system.
 Users could pick one of them, and continue with execution,
 such as picking a function to operate on an integer and applying it to a entered integer like such:
 
 t1 := ⊠(Int -> Int) ⋈ ⊠Int ▶︎ λ⟨f,x⟩. □(f x)
 
-Something similar holds for executing a task entered by a user or, more generally, saved by another task.
+Something similar holds for executing a task inside a task.
 Here t1 is selected and will be executed in the next normalisation round:
 
 t2 := □(t1) ▶︎ λt. t
 
-This also gives an answer to the missing join operation in the language and is the only way programmers can eliminate tasks.
-A top level task can only be eliminated by running the semantics,
-as it needs user input.
+This also gives an answer to the missing join operation.
+A task can only be eliminated by the semantics, and only if it is the top-level expression.
 
-Saving something else than an basic type in a reference is, however, not allowed by the grammar.
+Our grammar only allows putting values of basic types in references.
 This is a deliberate choice to exclude recursion by using references.
-This means the example below are not possible:
+This means the following are not possible:
 
 * ■l where l : Int -> Int
 * ■l where l : Task Int
