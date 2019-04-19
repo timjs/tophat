@@ -27,50 +27,43 @@ En heb ik de laatste vraag van reviewer D nog niet beantwoord.
 # Rebuttal paper #111
 
 We thank the reviewers for their efforts and constructive comments.
-We are pleased to read that reviewers consider the paper is "intriguing" and "well written and interesting".
-We are glad to hear "the model seems sensible and the provided examples are quite interesting",
+We are glad to hear that the reviewers consider the paper "intriguing" and "well written and interesting",
+that "the model seems sensible and the provided examples are quite interesting",
 and that we are addressing "an important topic that has received too little attention in the PL community".
 
-First and foremost, we'd like to apologise naming our model a calculus.
-In light of Plotkin's paper from 1973, our model does not meet the requirements to be called a calculus.
-Therefore, we will rename our model to a language.
-We are grateful for reviewer D to bring this up.
+First and foremost we are grateful for reviewer D for bringig up that in light
+of Plotkin's paper from 1973, our model does not meet the requirements to be
+called a calculus.
+We will call it a domain specific language, or just language.
 
-Next to this, reviewers raised three main concerns:
+The reviewers concerns fall into three main categories:
 
-* The semantics presented is not challenging or special in any way.
+* The semantics presented is not challenging or special.
 * The work does not contain an application of the given semantics.
 * Some undesired tasks can be constructed or unwanted effects could happen.
 
-Below we would like to address these three concerns first, after which we answer specific questions of each reviewer.
-Naturally, will make sure to incorporate all detailed comments in the final version of the paper.
+We will address these concerns, after which we will answer specific questions of each reviewer.
+Naturally, all comments will be addressed in the final version of the paper.
 
 
 ## General concerns
 
 ### Challenge
 
-As reviewers point out,
-the challenge in creating this model is indeed not the used techniques.
-It is indeed the case that proving type soundness is just a sanity check and not a validation.
+As the reviewers point out,
+the challenge in creating our language is neither the used techniques,
+nor proving soundness.
 This should be reflected in the paper.
 
-<!-- Deze sectie kan iemand vast veeeeel korter herformuleren... ;-)  --TS -->
+The main challenge we faced was stripping down iTasks into a handful of
+elementary and well-behaved combinators while retaining the essential features
+of TOP.
 
-The main challenge we faced was creating a language which models workflows and business processes,
-while being able to specify higher order workflows and generate applications out of such specifications.
-The resulting applications should have automatically generated user interfaces
-and no data races despite a multi user environment.
+iTasks is built on the two feature-rich combinators `step` and `parallel`.
+Both were designed to express every possible collaboration pattern the creators encountered during case studies.
+All other combinators are derived from these two.
 
-Although the iTasks framework already promises this,
-it is a large library embedded in an general purpose functional programming language.
-So, our challenge was to reformulate the iTasks framework and its ideas in a handful of elementary and well-behaved combinators.
-
-The iTasks framework is totally build on top of two "super combinators" called `step` and `parallel`.
-Both were created to express every possible collaboration pattern the creators encountered during case studies.
-All other simpler combinators are derivations of these two.
-
-For example, `parallel` has the type (in Haskell syntax):
+For example, `parallel` has the following type, given in Haskell syntax:
 ```
 parallel
   :: ITask a
@@ -78,17 +71,17 @@ parallel
   -> [ TaskCont [ ( Int, TaskValue a ) ] ( ParallelTaskType, ParallelTask a ) ]
   -> Task [ ( Int, TaskValue a ) ]
 ```
-Where `ITask` is a type class facilitating (de)serialisability, datatype generic representations,
-type information at runtime, and a way to produce graphical editors.
+Where `ITask` is a type class that provides serialisation, datatype generic representations,
+run-time type information, and generation of graphical editors.
 Trimming this combinator down to two elementary combinators (⋈ and ⧫) which,
 together with shared memory (■), can model most of its use cases,
 is the main challenge solved in this work.
 We did not give this example in section 1.4, where it belongs.
 
-The insight that a fail task (☇) is a basic task which will never have an observable value
-and also can be used for guards is a total change from the iTasks implementation.
-Also, our system radically simplifies the notion of editors and connects them to the already existing notion of widgets.
-All these points belong to the process of creating TopHat and are not apparent in the paper.
+The insight that the fail task (☇) is a basic task which will never have an observable value
+and can be used for guards is a deviation from iTasks that lets us simplify the step combinator significantly.
+Also, our system simplifies the notion of editors and connects them to the already existing notion of widgets.
+All these points are not sufficiently emphasized in the paper.
 
 
 ### Application
