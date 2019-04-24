@@ -12,18 +12,9 @@
 In order to validate our semantics, we show that our evaluation, normalisation
 and handling semantics is type preserving. We additionally prove a progress
 theorem for our small-step handling semantics.
-
-Additionally, we show that the normalisation semantics is a big-step semantics.
-%XXX: Alejandro: ?
-% Niks meer mee doen, was voor PLDI reviewers duidelijk genoeg. --TS
-While at first sight, this might seem obvious, the fact that we are dealing with
-state complicates matters.
-
 We show that our failing function $\Failing$ indeed only indicates expressions
 that can not be normalised and that allow no further interaction.
-
 Finally, we prove that the function to compute all possible inputs $\Inputs$ is sound and complete.
-
 
 
 \subsection{Type preservation}
