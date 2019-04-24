@@ -101,7 +101,7 @@ which could be performed by three different users in parallel.
 A screenshot of the running application is shown in \cref{fig:flight-booking}.
 
 All instances of the \TS{bookFlight} task have access to the shared list of free seats.
-Rewriting the example in a calculus without side effects would not only be cumbersome,
+Rewriting the example in a language without side effects would not only be cumbersome,
 obfuscating the code with explicit threading of state,
 but it would be impossible to model the parallel execution of three \TS{bookFlight} tasks.
 It is not known upfront which task will finish first,

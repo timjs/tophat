@@ -5,7 +5,7 @@
 \section{Calculus}
 \label{sec:language}
 
-In this section, we present the constructs of \TOPHAT, our modular interactive workflow calculus.
+In this section, we present the constructs of \TOPHAT, our modular interactive workflow language.
 We define the host and task language, the types, and the static semantics.
 Then we describe the workings of each construct using examples.
 These constructs are formalised in \cref{sec:semantics}.
@@ -13,7 +13,7 @@ These constructs are formalised in \cref{sec:semantics}.
 \subsection{Expressions}
 
 \label{sub:expressions}
-The host language is a simply typed lambda calculus, extended with some basic types and \ML-style references.
+The host language is a simply typed $lambda$-calculus, extended with some basic types and \ML-style references.
 We use references to represent shared data sources.
 The grammar in \cref{fig:language-grammar} defines the syntax of the host language.
 It has abstractions, applications, variables, and constants for booleans, integers and strings.
@@ -316,7 +316,7 @@ It is a task which takes another task as parameter.
 %
 %
 % It is essential for a workflow system to support multiple collaborators working
-% together. Adding this funcitonaltiy to the \TOPHAT calculus is very
+% together. Adding this funcitonaltiy to the \TOPHAT language is very
 % straightforward. We identify users by means of a name $u$ which we can then use
 % to label appointed tasks. The sole purpose of this labelling is to be able to
 % tell which inputs are expected from what users. Other than that, it has no
