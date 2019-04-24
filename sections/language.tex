@@ -190,7 +190,7 @@ The external step must additionally receive a continue event $\Continue$.
 \begin{example}[Conditional stepping]
 \label{exm:conditions}
 
-Consider the following program.
+Consider the following:
 \begin{TASK}
   enter Int >>= \n. if n == 42 then edit "Good" else edit "Bad"
 \end{TASK}
@@ -211,7 +211,7 @@ Programmers can use $\Fail$ to tell steps that no sensible successor task can be
 
 \begin{example}[Guarded stepping]
 
-Consider this slight variation on \cref{exm:conditions}.
+Consider this slight variation on \cref{exm:conditions}:
 \begin{TASK}
   enter Int >>= \n. if n == 42 then edit "Good" else fail
 \end{TASK}
@@ -234,10 +234,10 @@ and a guarded internal step.
   let wait : Int -> Task Unit = \amount : Int.
     update time >>= \start : Int.
     update time >>= \now : Int.
-      if now >= start + amount then edit <<>> else fail
+      if now > start + amount then edit <<>> else fail
 \end{TASK}
 The first step is immediately taken, resulting in \TS{start} to be the time at the moment \TS{wait} is executed.
-The second step is guarded until the current time is greater or equal to the start time plus the requested amount.
+The second step is guarded until the current time is greater to the start time plus the requested \TS{amount}.
 
 \end{example}
 
@@ -247,7 +247,7 @@ The second step is guarded until the current time is greater or equal to the sta
 
 A common pattern in workflow design is splitting up work into multiple tasks that can be executed simultaneously.
 In \TOPHAT, all parallel branches can progress independently, driven by input events.
-This requires input events to be tagged in order to reach the intended task.
+This requires inputs to be tagged in order to reach the intended~task. %%XXX: Hack to force `task` on the same line.
 
 There are two ways to proceed after a parallel composition.
 One way is to wait for all tasks to produce results and combine those,
@@ -273,7 +273,7 @@ The task
   enter Int <&> edit " Batman" >>= \<<n, s>>. edit (replicate n "Na" ++ s)
 \end{TASK}
 can only step when both editors have values.
-When it steps, the continuation uses the pair of integer and string to calculate the result.
+When it steps, the continuation uses the pair to calculate the result.
 
 \end{example}
 
