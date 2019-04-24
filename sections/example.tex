@@ -68,6 +68,8 @@ Passengers are valid if their name is not empty and their age is at least 0.
 Lists of passengers are valid if each passenger is valid, and at least one of the passengers is an adult.
 When the user has entered a valid list of passengers, the step after \TS{>>?} becomes enabled,
 and the user can proceed to picking seats.
+In case of an invalid list of passengers,
+the step is guarded by the failing task \TS{fail}.
 \begin{TASK}
   let valid = \p. not (fst p == "") /\ snd p >= 0 in
   let adult = \p. snd p >= 18 in
