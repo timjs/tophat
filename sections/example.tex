@@ -79,7 +79,8 @@ A selection of seats is correct if every entered seat is free.
 \begin{TASK}
   let correct = \ss. intersect ss !freeSeats == ss in
   let chooseSeats = \ps. enter (List Seat) >>? \ss.
-    if correct ss /\ length ps == length ss then confirmBooking ps ss else fail
+    if correct ss /\ length ps == length ss
+      then confirmBooking ps ss else fail
 \end{TASK}
 
 The function \TS{confirmBooking} removes the selected seats from the shared list of free seats,

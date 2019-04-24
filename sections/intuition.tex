@@ -27,7 +27,7 @@ They always get an egg.
 The drink and the food are prepared in parallel ($\And$).
 When both the drink and the food are prepared, users can step ($\Next$) to eating the result.
 
-\lstset{emph={makeDrink,makeFood}}
+\lstset{emph={mkDrink,mkFood}}
 
 % \begin{TASK}
 %   let makeBreakfast : Task Drink -> Task Food -> Task Unit =
@@ -37,9 +37,9 @@ When both the drink and the food are prepared, users can step ($\Next$) to eatin
 % \end{TASK}
 
 \begin{TASK}
-  let makeBreakfast : Task Drink -> Task Food -> Task <<Drink,Food>> =
-    \makeDrink. \makeFood. makeDrink <&> makeFood in
-  makeBreakfast (makeTea <?> makeCoffee) makeEgg >>? enjoyBreakfast
+  let mkBrkfst : Task Drink -> Task Food -> Task <<Drink,Food>>
+    = \mkDrink. \mkFood. mkDrink <&> mkFood in
+  mkBrkfst (mkTea <?> mkCoffee) mkEgg >>? enjoyMorning
 \end{TASK}
 
 % \begin{TASK}
@@ -111,8 +111,7 @@ This example demonstrates external communication and choice.
 It is a vending machine that dispenses a biscuit for one coin and a chocolate bar for two coins.
 \begin{TASK}
   let vend : Task Snack = enter Int >>? \n. if n == 1 then edit Biscuit
-    else if n == 2 then edit ChocolateBar
-    else fail
+    else if n == 2 then edit ChocolateBar else fail
 \end{TASK}
 The editor $\Enter \Int$ asks the user to enter an amount of money.
 This editor stands for a coin slot in a real machine that freely accepts and returns coins.

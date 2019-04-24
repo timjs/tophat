@@ -303,7 +303,7 @@ If the user does not make a choice within a given time frame, the program procee
 The example makes use of the task \TS{wait} from \cref{exm:wait}.
 \begin{TASK}
   let cancel : Task Unit = edit <<>> in
-  let delay : Int -> Task Unit -> Task Unit = \n : Int. \proceed : Task Unit.
+  let delay : Int -> Task Unit -> Task Unit = \n. \proceed.
     (proceed <?> cancel) <|> (wait n >>= \u : Unit. proceed)
 \end{TASK}
 Note that \TS{delay} is higher-order.
