@@ -34,6 +34,7 @@ The unit value will be used as the result of assignments.
   \usemacro{G-Language-Minimal}
   \caption{Language grammar} \label{fig:language-grammar}
 \end{figure}
+
 \label{sub:notation}
 We use double quotation marks to denote strings.
 Integers are denoted by their decimal representation, and booleans are written $\True$ and $\False$.
@@ -112,15 +113,15 @@ Editors that have a value can be \emph{changed} or \emph{emptied}.
 Empty editors can be \emph{filled}.
 This is depicted as a state diagram in \cref{fig:editor-state} below.
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\columnwidth,page=3]{figures/drawings-crop.pdf}
-  \caption{
-    Possible states of an editor and its transitions.
-    Shared editors cannot be cleared.
-  }
-  \label{fig:editor-state}
-\end{figure}
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[width=\columnwidth,page=3]{figures/drawings-crop.pdf}
+%   \caption{
+%     Possible states of an editor and its transitions.
+%     Shared editors cannot be cleared.
+%   }
+%   \label{fig:editor-state}
+% \end{figure}
 
 Editors stand for various forms of input and output, for example widgets in a \GUI, form fields on a webpage, sensors, or network connections.
 %
