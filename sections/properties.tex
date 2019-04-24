@@ -34,11 +34,6 @@ We show that the following three preservation Theorems hold.
 Where $\Sigma \infers \sigma$ means that for all $l\in \sigma$, it holds that
 $\Sigma(l)=\Gamma,\Sigma\infers \sigma(l)$.
 
-\Cref{thm:pres-eval} is shown to be correct by induction over $e$. The full
-proof can be found in the appendix.
-
-
-Moving on, we show that normalisation also preserves types, by showing that the following Theorem holds.
 
 \begin{theorem}[Type preservation under normalisation]
   % For all well typed expressions $e$ and states $\sigma$,
@@ -49,32 +44,6 @@ Moving on, we show that normalisation also preserves types, by showing that the 
   \label{thm:pres-norm}
 \end{theorem}
 
-Since this semantics makes use of the value function $\Value$ and the striding semantics $\stride$,
-we first need to show that preservation also holds for these two semantics.
-
-\begin{lemma}[Task value preserves types]
-  % For all well typed expressions $e$ and states $\sigma$,
-  For all expressions $e$ and states $\sigma$
-  such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers \sigma$,
-  if $\Value{(e,\sigma)}=v$,
-  then $v:\tau$.
-  \label{lem:presvalue}
-\end{lemma}
-
-\begin{lemma}[Striding preserves types]
-  For all expressions $e$ and states $\sigma$
-  such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers \sigma$,
-  if $e,\sigma \stride e',\sigma'$,
-  then $\Gamma,\Sigma \infers e':\Task\tau$ and $\Sigma \infers \sigma'$.
-  \label{thm:pres-stride}
-\end{lemma}
-
-\Cref{lem:presvalue} and \cref{thm:pres-stride} are proven in the
-appendix by induction over $e$. This subsequently allows us to prove
-\Cref{thm:pres-norm}, again by induction over $e$.
-
-This brings us finally to the type preservation property of the handling semantics.
-
 \begin{theorem}[Type preservation under handling]
   % For all well typed expressions $e$, states $\sigma$, and inputs $i$,
   For all expressions $e$, states $\sigma$ and inputs $i$
@@ -84,8 +53,8 @@ This brings us finally to the type preservation property of the handling semanti
   \label{thm:pres-handle}
 \end{theorem}
 
-And again, this is proven by induction over $e$.
-
+All three Theorems are proven to be correct by induction over $e$.
+The full proofs are listed in the appendix.
 From \cref{thm:pres-handle} and \cref{thm:pres-norm} we directly
 obtain that the driving semantics also preserves types.
 
@@ -110,11 +79,7 @@ some type $\tau$, and a well typed state means that $\Sigma\infers \sigma$.
 
 If an expression $e$ and state $\sigma$ are well-typed, then after normalisation, the pair $e',\sigma'$
 either fails, or there exists some input $i$ that can be handled by it under the handling semantics.
-In order to prove this Theorem, we require an additional theorem.
-
-% \paragraph{Failing}
-
-We need to show that the failing function $\Failing$ behaves as desired.
+In order to prove this Theorem, we need to show that the failing function $\Failing$ behaves as desired.
 
 \begin{theorem}[Failing means no interaction possible]
   For all well typed expressions $e$ and states $\sigma$,
