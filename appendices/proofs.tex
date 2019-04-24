@@ -67,6 +67,15 @@
 
 \subsection{\cref{lem:presvalue}}
 
+\begin{lemma}[Task value preserves types]
+  % For all well typed expressions $e$ and states $\sigma$,
+  For all expressions $e$ and states $\sigma$
+  such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers \sigma$,
+  if $\Value{(e,\sigma)}=v$,
+  then $v:\tau$.
+  \label{lem:presvalue}
+\end{lemma}
+
 \begin{proof}
   We prove \cref{lem:presvalue} by induction over $e$.
 
@@ -128,6 +137,14 @@
 
 
 \subsection{\cref{thm:pres-stride}}
+
+\begin{lemma}[Striding preserves types]
+  For all expressions $e$ and states $\sigma$
+  such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers \sigma$,
+  if $e,\sigma \stride e',\sigma'$,
+  then $\Gamma,\Sigma \infers e':\Task\tau$ and $\Sigma \infers \sigma'$.
+  \label{thm:pres-stride}
+\end{lemma}
 
 \begin{proof}
   We prove \cref{thm:pres-stride} by induction on $e$:
@@ -226,6 +243,8 @@
 
 
 \subsection{\cref{thm:pres-handle}}
+
+
 
 We require the following Lemma for this proof.
 
