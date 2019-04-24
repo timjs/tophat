@@ -73,20 +73,20 @@
 
 
 \newrule{T-Then}
-  {\Gamma,\Sigma \infers e_1 : \Task \tau_1 \Quad
-   \Gamma,\Sigma \infers e_2 : \tau_1 \to \Task \tau_2}
+  {\upon{\Gamma,\Sigma \infers e_1 : \Task \tau_1}
+   {\Gamma,\Sigma \infers e_2 : \tau_1 \to \Task \tau_2}}
   {\Gamma,\Sigma \infers e_1 \Then e_2 : \Task \tau_2}
 
 
 \newrule{T-Next}
-  {\Gamma,\Sigma \infers e_1 : \Task \tau_1 \Quad
-   \Gamma,\Sigma \infers e_2 : \tau_1 \to \Task \tau_2}
+  {\upon{\Gamma,\Sigma \infers e_1 : \Task \tau_1}
+   {\Gamma,\Sigma \infers e_2 : \tau_1 \to \Task \tau_2}}
   {\Gamma,\Sigma \infers e_1 \Next e_2 : \Task \tau_2}
 
 
 \newrule{T-And}
-  {\upon{\Gamma,\Sigma \infers e_1 : \Task \tau_1}
-   {\Gamma,\Sigma \infers e_2 : \Task \tau_2}}
+  {\Gamma,\Sigma \infers e_1 : \Task \tau_1 \Quad
+   \Gamma,\Sigma \infers e_2 : \Task \tau_2}
   {\Gamma,\Sigma \infers e_1 \And e_2 : \Task\,(\tau_1 \times \tau_2)}
 
 

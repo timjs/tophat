@@ -215,22 +215,22 @@ For external choice and parallel there are congruence rules.
   \end{gather*}
 
   \paragraph{Step}
-  \begin{align*}
-    \userule{S-ThenStay} \Quad
-    & \userule{S-ThenFail} \Break
-    & \userule{S-ThenCont}
-  \end{align*}
+  \begin{gather*}
+    \userule{S-ThenStay} \Break
+    \userule{S-ThenFail} \Break
+    \userule{S-ThenCont}
+  \end{gather*}
 
   \paragraph{Choose}
-  \begin{align*}
-    \userule{S-OrLeft} \Quad
-    & \userule{S-OrRight} \Break
-    & \userule{S-OrNone}
-  \end{align*}
+  \begin{gather*}
+    \userule{S-OrLeft} \Break
+    \userule{S-OrRight} \Break
+    \userule{S-OrNone}
+  \end{gather*}
 
   \paragraph{Ready}
   \begin{gather*}
-    \userule{S-Edit} \Quad \userule{S-Fill} \Quad \userule{S-Update} \Quad
+    \userule{S-Edit} \Quad \userule{S-Fill} \Quad \userule{S-Update} \Break
     \userule{S-Fail} \Quad \userule{S-Xor}
   \end{gather*}
 
@@ -342,8 +342,9 @@ It takes a task $t$ in a state $\sigma$ and an input $i$, and yields a new task 
 
   \paragraph{Passing}
   \begin{gather*}
-    \userule{H-PassThen} \Quad \userule{H-FirstAnd} \Quad \userule{H-FirstOr} \Break
-    \userule{H-PassNext} \Quad \userule{H-SecondAnd} \Quad \userule{H-SecondOr}
+    \userule{H-PassThen} \Quad \userule{H-PassNext} \Break
+    \userule{H-FirstAnd} \Quad \userule{H-SecondAnd} \Break
+    \userule{H-FirstOr}  \Quad \userule{H-SecondOr} 
   %  \userule{H-Appoint}
   \end{gather*}
 
