@@ -30,10 +30,10 @@ When both the drink and the food are prepared, users can step ($\Next$) to eatin
 \lstset{emph={mkDrink,mkFood}}
 
 % \begin{TASK}
-%   let makeBreakfast : Task Drink -> Task Food -> Task Unit =
+%   let mkBrkfst : Task Drink -> Task Food -> Task Unit =
 %     \makeDrink. \makeFood. makeDrink <&> makeFood >>? \<<d, f>>. eat d f
 %   let main : Task Unit =
-%     makeBreakfast (makeTea <?> makeCoffee) makeEgg
+%     mkBrkfst (makeTea <?> makeCoffee) makeEgg
 % \end{TASK}
 
 \begin{TASK}
@@ -43,10 +43,10 @@ When both the drink and the food are prepared, users can step ($\Next$) to eatin
 \end{TASK}
 
 % \begin{TASK}
-%   let makeBreakfast : Task Drink -> Task Food -> Task Breakfast =
+%   let mkBrkfst : Task Drink -> Task Food -> Task Breakfast =
 %     \makeDrink. \makeFood. makeDrink <&> makeFood
 %   let main : Task Unit =
-%     makeBreakfast (makeTea <?> makeCoffee) makeEgg >>? \breakfast. eat breakfast
+%     mkBrkfst (makeTea <?> makeCoffee) makeEgg >>? \breakfast. eat breakfast
 % \end{TASK}
 
 The way the combinators are defined matches real life closely.
@@ -69,8 +69,8 @@ First, larger tasks are composed of smaller ones.
 Second, tasks are first-class, they can be arguments and results of functions.
 Third, tasks can be values of other tasks.
 These aspects make it possible for programmers to model custom collaboration patterns.
-
-\Cref{exm:breakfast} demonstrates how tasks can be parameterised by other tasks: \TS{makeBreakfast} is a collaboration pattern that always works the same way, regardless of which food and drink are being prepared.
+%
+\Cref{exm:breakfast} demonstrates how tasks can be parameterised by other tasks: \TS{mkBrkfst} is a collaboration pattern that always works the same way, regardless of which food and drink are being prepared.
 
 
 
@@ -118,7 +118,7 @@ This editor stands for a coin slot in a real machine that freely accepts and ret
 There is a continue button that is initially disabled, due to the fact that the left hand side of the step combinator has no value.
 When the user has inserted exactly 1 or 2 coins, the continue button becomes enabled.
 When the user presses the continue button, the machine dispenses either a biscuit or a chocolate bar, depending on the amount of money.
-Snacks are modelled using a custom data type.
+Snacks are modelled using a custom type.
 
 \end{example}
 
@@ -132,7 +132,7 @@ One of those is determining the value of a task.
 % I don't think that we should use Maybe. We should use the term partial function and bottom. --MKL
 % I agree! I made the examples here also concrete instead of introducing the value function. --TS
 Not all tasks have a value, the empty editor for instance, which makes value observation partial.
-For example, the value of $\Edit 7$ is $7$, but the value of $\Enter \Int$ is $\bot$.
+I.e., the value of $\Edit 7$ is $7$, but the value of $\Enter \Int$ is $\bot$.
 
 Another observation is the set of input events a task can react to.
 % This is important for generating user interfaces.
@@ -200,9 +200,9 @@ The agent randomly signals two of the three.
 The solution proposed by Downey involves an additional mutex, three additional semaphores, three additional threads called \emph{pushers}, and three regular Boolean variables.
 The job of the pushers is to record availability of their ingredient in their Boolean variable, and check availability of other resources, waking the correct smoker when appropriate.
 
-The details of the solution are not important here.
+% The details of the solution are not important here.
 What is important is that the implementation of what is essentially deadlock-free waiting for two semaphores requires a substantial amount of additional synchronisation, together with non-trivial conditional statements.
-
+%
 \TOPHAT allows a simple solution to this problem, using guarded steps.
 Steps can be guarded with arbitrary expressions.
 The parallel combinator can be used to watch two shared editors at the same time.
