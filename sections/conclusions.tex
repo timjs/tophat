@@ -5,8 +5,8 @@
 \label{sec:conclusions}
 
 In this paper we have identified and intuitively described the essence of task-oriented programming.
-We then formalized this essence by developing a domain-specific calculus for declarative interactive workflows, called \TOPHAT.
-The task calculus and the host language are clearly separated, to make explicit where the boundaries are.
+We then formalized this essence by developing a domain-specific language for declarative interactive workflows, called \TOPHAT.
+The task language and the host language are clearly separated, to make explicit where the boundaries are.
 The semantics of the task layer is driven by user input.
 We have compared \TOPHAT with workflow moddeling languages, process algebras, functional reactive programming and session types to point out differences and similarities.
 Finally, we have proven type safety and progress for our language.
@@ -18,7 +18,7 @@ There are a couple of ways in which we would like to continue this line of work.
 One of the main motivations to formalize task-oriented programming is to be able to reason about programs.
 In this paper we reason about the language itself, but it would be nice to prove properties about individual programs.
 To this end, we are very interested to see if it is possible to develop an axiomatic semantics for \TOPHAT that allows us to do so.
-There are certain properties of our calculus that make this particularly complex:
+There are certain properties of our language that make this particularly complex:
 We have to deal with parallelism, user interaction, and references.
 
 We would also like to prove whether certain programs are equivalent, for example to show that the monad laws hold for our step combinator.
@@ -27,11 +27,11 @@ We have implemented the reduction semantics of our language in Idris, whose type
 
 Another form of reasoning about programs is static analysis.
 \citet{conf/ifl/KlinikJP17} have developed a cost analysis for tasks that require resources in order to be executed.
-This analysis was developed for a simpler task calculus, and could be brought over to the one developed here.
+This analysis was developed for a simpler task language, and could be brought over to the one developed here.
 
 \citet{DBLP:conf/sfp/NausJ16} have looked at building a generic feedback system for rule-based problems.
 A workflow system typically is rule based, as outlined in their work.
-It would be interesting to fit the generic feedback system to \TOPHAT in order to support end-users working in applications developed in this calculus.
+It would be interesting to fit the generic feedback system to \TOPHAT in order to support end-users working in applications developed in this language.
 
 Additionally, we would like to develop visualizations for \TOPHAT language constructs.
 An assistive development environment integrating these visualizations and the presented textual language

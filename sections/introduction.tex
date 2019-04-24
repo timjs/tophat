@@ -103,13 +103,13 @@ This makes formal reasoning about \TOP programs impossible.
 In this paper, we want to take a step back and look at the spirit of \TOP.
 We do this both formally and informally.
 Informally in the sense that we give an intuitive description of the features that define task-oriented programming.
-Formally in the sense that we develop a calculus which formalises these features as language constructs,
+Formally in the sense that we develop a language which formalises these features as language constructs,
 and we give them a semantics in the style that is common in programming language research.
 We separate the task layer and the underlying host language, both syntactically and semantically.
 Thus making explicit which properties of \TOP come from the task layer, and which come from functional programming.
-Our challenge, therefore, is to model the properties of \TOP into a calculus
+Our challenge, therefore, is to model the properties of \TOP into a language
 and pave the way for formal treatment of \TOP programs.
-We give this formal calculus the name \TOPHAT (TopHat).
+We give this formal language the name \TOPHAT (TopHat).
 
 
 
@@ -123,7 +123,7 @@ Our contributions to workflow modelling, functional programming language design,
     We describe the essential concepts of task-oriented programming.
 
   \item
-    We present a formal calculus for modelling declarative workflows, embedded in a simply typed lambda-calculus, called \TOPHAT.
+    We present a formal language for modelling declarative workflows, embedded in a simply typed $lambda$-calculus, called \TOPHAT.
     It is based on the aforementioned essential \TOP concepts.
 
   \item
@@ -138,7 +138,7 @@ Our contributions to workflow modelling, functional programming language design,
     We prove progress and type preservation for \TOPHAT.
 
   \item
-    Using both the essential concepts and the formal calculus, we compare \TOP with related work in areas ranging from business process modelling, to process algebras and reactive programming.
+    Using both the essential concepts and the formal language, we compare \TOP with related work in areas ranging from business process modelling, to process algebras and reactive programming.
 
   \item
     We implemented the whole semantic system in the dependently typed programming language Idris \cite{journals/jfp/Brady13}.
@@ -155,8 +155,8 @@ Our contributions to workflow modelling, functional programming language design,
 
 In \cref{sec:example} we demonstrate the functionality of \TOPHAT by means of an example,
 \Cref{sec:intuition} gives an overview of the essential concepts of \TOP.
-\Cref{sec:language} introduces the \TOPHAT calculus syntax
+\Cref{sec:language} introduces the \TOPHAT language syntax
 and \cref{sec:semantics} the semantics.
-Then in \cref{sec:properties} we show that certain properties hold for the calculus.
+Then in \cref{sec:properties} we show that certain properties hold for the language.
 We take a look at related work in \cref{sec:relatedwork}
 and conclude in \cref{sec:conclusions}.
