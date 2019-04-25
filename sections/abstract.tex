@@ -14,20 +14,19 @@ So far, it has not been given a formalisation which is suitable for formal reaso
 
 % Approach
 In this paper we give a description of the TOP paradigm and then decompose its rich features into elementary language elements, which makes them suitable for formal treatment.
-We use the simply typed $lambda$-calculus, extended with pairs and references, as a base language.
+We use the simply typed lambda-calculus, extended with pairs and references, as a base language.
 On top of this language, we develop TopHat, a language for modular interactive workflows.
 We describe TopHat by means of a layered semantics.
 These layers consist of multiple big-step evaluations on expressions, and two labelled transition systems, handling user inputs.
 
 % Knowledge
 With TopHat we prepare a way to formally reason about TOP languages and programs.
-We show some interesting properties of the language.
 This approach allows for comparison with other work in the field.
 % Grounding
 We have implemented the semantic rules of TopHat in Idris, and the task layer on top of the iTasks framework.
 This shows that our approach is feasible, and lets us demonstrate the concepts by means of illustrative case studies.
 % Importance
-TOP has been appplied in projects with the Dutch coast guard, tax office, and navy.
+TOP has been applied in projects with the Dutch coast guard, tax office, and navy.
 Our work matters because formal program verification is important for mission-critical software, especially for systems with concurrency.
 
 
@@ -36,5 +35,5 @@ Our work matters because formal program verification is important for mission-cr
 % Inquiry: What problem or question does the paper address? How has this problem or question been addressed by others (if at all)?
 % Approach: What was done that unveiled new knowledge?
 % Knowledge: What new facts were uncovered? If the research was not results oriented, what new capabilities are enabled by the work?
-% Grounding: What argument, feasibility proof, artifacts, or results and evaluation support this work?
+% Grounding: What argument, feasibility proof, artefacts, or results and evaluation support this work?
 % Importance: Why does this work matter?
