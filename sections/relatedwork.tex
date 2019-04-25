@@ -23,8 +23,7 @@ To name two examples, the combinators \verb+(>>|)+ and \verb+(||-)+ are variatio
 There have been two previous papers that describe semantics of iTasks, by \citet{conf/ifl/KoopmanPA08} and \citet{conf/ppdp/PlasmeijerLMAK12}.
 Both give a different semantics in the form of minimal implementations of a subset of the interface of iTasks.
 These semantics however do not make an explicit distinction between the host language and task language and they do not provide an explicit formal semantics.
-\ITASKS implicitly has a formal semantics, inherited from the graph-rewriting semantics of Clean.
-This semantics however does not lend itself well for formal reasoning.
+Therefore, the do not lend itself well for formal reasoning.
 
 % Our work differs in three major ways.
 % First, we make an explicit distinction between the host language and the task
@@ -126,7 +125,7 @@ Contrast this with Milner's CCS \cite{books/Milner89CAC}, where concealed action
 Another similarity between \TOPHAT and process algebras, or any system with concurrency for that matter, is the need for synchronisation.
 Broadly speaking, concurrency means that different parts of a program can interact with the environment independently, in an interleaved manner.
 Synchronisation means that only some, but not all, of the possible interleavings are desirable.
-The semantics of the step combinators in \TOPHAT, together with the fact that internal communication happens atomically, allows for concise and intuitive syntonisation code.
+The semantics of the step combinators in \TOPHAT, together with the fact that internal communication happens atomically, allows for concise and intuitive synchronisation code.
 
 
 
@@ -142,7 +141,7 @@ The set of HipHop reactive statements is based on those of the Esterel language 
 Each reactive component starts by specifying possible input and output events.
 The component then proceeds as a state machine.
 
-Input events are sent to such a machine programatically using Hop, or are explicitly wired to events from the client.
+Input events are sent to such a machine programmatically using Hop, or are explicitly wired to events from the client.
 They are optionally associated with a Hop value.
 As Hop is a dynamic language, and HipHop uses strings to identify events, events and their possible associated values are not statically checked.
 Events are aggregated until the moment the machine is asked to react.

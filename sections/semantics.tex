@@ -344,7 +344,7 @@ It takes a task $t$ in a state $\sigma$ and an input $i$, and yields a new task 
   \begin{gather*}
     \userule{H-PassThen} \Quad \userule{H-PassNext} \Break
     \userule{H-FirstAnd} \Quad \userule{H-SecondAnd} \Break
-    \userule{H-FirstOr}  \Quad \userule{H-SecondOr} 
+    \userule{H-FirstOr}  \Quad \userule{H-SecondOr}
   %  \userule{H-Appoint}
   \end{gather*}
 
@@ -389,6 +389,6 @@ The source code can be found on GitHub.\footnote{\url{http://github.com/XXX/XXX}
 A command-line interface is part of this implementation.
 It prompts users to type input events, which get parsed and processed by the interaction semantics.
 
-Also, we made an implementation of \TOPHAT combinators into \ITASKS,
+Also, we made an implementation of \TOPHAT combinators on top of \ITASKS,
 so that \TOPHAT specifications can be compiled to runnable applications.
 This shows that \TOPHAT is a subset of \ITASKS.
