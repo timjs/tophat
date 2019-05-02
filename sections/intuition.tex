@@ -79,8 +79,7 @@ These aspects make it possible for programmers to model custom collaboration pat
 Input events drive evaluation of tasks.
 When the system receives a valid event, it applies this event to the current task, which results in a new task.
 In this way the system communicates with the environment.
-Inputs are synchronous.
-We assume systems react instantaneously to each of those events.
+Inputs are synchronous, which means the order of execution is completely determined by the order of the inputs.
 
 In \TOPHAT, \emph{editors} are the basic method of communication with the environment.
 Editors are modelled after input widgets from graphical user interfaces.
