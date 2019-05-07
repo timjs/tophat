@@ -23,7 +23,7 @@ We have to deal with parallelism, user interaction, and references.
 
 We would also like to prove whether certain programs are equivalent, for example to show that the monad laws hold for our step combinator.
 This requires a notion of equality, which in the presence of side effects most certainly needs some form of coalgebraic input-output conformance.
-We have implemented the reduction semantics of our language in Idris, whose type system could aid in the formalisation of such proofs.
+We have implemented the reduction semantics of our language in Haskell, whose type system could aid in the formalisation of such proofs.
 
 Another form of reasoning about programs is static analysis.
 \citet{conf/ifl/KlinikJP17} have developed a cost analysis for tasks that require resources in order to be executed.
