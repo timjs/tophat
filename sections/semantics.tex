@@ -328,8 +328,7 @@ It takes a task $t$ in a state $\sigma$ and an input $i$, and yields a new task 
   \paragraph{Editing}
   \begin{gather*}
     \userule{H-Change} \Quad
-    \userule{H-Empty} \Break
-    \userule{H-Fill} \Quad
+    \userule{H-Fill} \Break
     \userule{H-Update}
   \end{gather*}
 
@@ -353,10 +352,9 @@ It takes a task $t$ in a state $\sigma$ and an input $i$, and yields a new task 
 
 %FIXME: Revert rule names in front to normal sentences?
 \refrule{H-Change},
-\refrule{H-Empty},
 \refrule{H-Fill},
 \refrule{H-Update}:
-Input events $v$ and $\Empty$ are used to change the value of editors and empty them.
+Input events $v$ are used to change the value of editors.
 Editors only accept values of the correct type.
 
 \refrule{H-Next}:

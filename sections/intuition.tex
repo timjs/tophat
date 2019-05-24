@@ -85,10 +85,7 @@ In \TOPHAT, \emph{editors} are the basic method of communication with the enviro
 Editors are modelled after input widgets from graphical user interfaces.
 There are different editors, denoted by different box symbols.
 Take for example an editor holding the integer seven: $\Edit 7$.
-Such an editor reacts to two kinds of events.
-The first are change events, for example the values $42$ or $37$, which are of the same type.
-The second is a clear event $\Empty$, which empties the editor.
-This results is an empty editor $\Enter \Int$, annotated to only hold integers.
+Such an editor reacts to change events, for example the values $42$ or $37$, which are of the same type.
 
 %XXX: Alejandro: unclear
 %XXX: Alejandro: What is a value? What is a type?
@@ -135,7 +132,7 @@ I.e., the value of $\Edit 7$ is $7$, but the value of $\Enter \Int$ is $\bot$.
 
 Another observation is the set of input events a task can react to.
 % This is important for generating user interfaces.
-For example, the task $\Edit 7$ can react to value events and empty events, as discussed before.
+For example, the task $\Edit 7$ can react to value events, as discussed before.
 
 In order to render a task, we need to observe a task's user interface.
 This is done compositionally.

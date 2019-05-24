@@ -109,7 +109,7 @@ End users should be able to enter information into the system, change it, clear 
 To do this, we introduce the concept of \emph{editors}.
 %
 Editors are typed containers that either hold a value or are empty.
-Editors that have a value can be \emph{changed} or \emph{emptied}.
+Editors that have a value can be \emph{changed}.
 Empty editors can be \emph{filled}.
 
 % \begin{figure}[h]
@@ -137,7 +137,7 @@ It could also be a parser that tries to parse a line of text to match the type o
 
 Editors that hold an expression $e : \tau$ have type $\Task \tau$.
 Empty editors are annotated with a type in order to ensure type safety.
-Without type annotations, it would be possible to change the type of an editor, by clearing it and filling it with a value of different type.
+
 
 \paragraph{Shared editors $(\Update e)$}
 

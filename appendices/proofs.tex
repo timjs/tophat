@@ -262,11 +262,6 @@ This lemma follows immediately from definition.
     {Given that $\Gamma,\Sigma\infers\Edit v:\Task\tau$ and $\Sigma\infers s$, the \refrule{H-Change} rule additionally gives us that $v,v':\tau$. Therefore by \refrule{T-Edit} we have that $\Gamma,\Sigma\infers\Edit v':\Task\tau$.}
 
   \case
-    {$\userule{H-Empty}$}
-    {Given that $\Gamma,\Sigma\infers\Edit v:\Task\beta$ and $\Sigma\infers s$, the \refrule{H-Empty} rule additionally gives us that $v:\tau$.
-    Then by \refrule{T-Enter} we have $\Gamma,\Sigma\infers\Enter \tau:\Task\tau$.}
-
-  \case
     {$\userule{H-Fill}$}
     {Given that $\Gamma,\Sigma\infers\Enter\tau$ and $\Sigma\infers s$, the \refrule{H-Fill} rule additionally gives us that $v':\tau$.
     Then by \refrule{T-Enter} we have $\Gamma,\Sigma\infers \Edit v':\Task\tau$.}
@@ -511,9 +506,6 @@ This lemma follows immediately from definition.
 
   \case{$e=\Edit v:\Task\tau, i= v':\tau$}
        {Given that $\userule{H-Change}$, we have by definition that $\Inputs(\Edit v:\Task\tau,s) = \set{v':\tau,\Empty}$, which includes $v':\tau$.}
-
-  \case{$e=\Edit v:\Task\tau, i= \Empty$}
-       {Given that $\userule{H-Empty}$, we have by definition that $\Inputs(\Edit v:\Task\tau,s) = \set{v':\tau,\Empty}$, which includes $\Empty$.}
 
   \case{$e=\Enter \tau, i= v':\tau$}
        {Given that $\userule{H-Fill}$, we have by definition that $\Inputs(\Enter \tau,s) = \set{v':\tau }$, which includes $v':\tau$.}

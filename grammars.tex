@@ -1,4 +1,4 @@
-% !TEX root=icfp2019.tex
+% !TEX root=main.tex
 
 
 %% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -201,7 +201,6 @@
       &      &\mid& \Second i            & – pass to second \\
     Actions
       & a    & ::=& v                    & – change editor to value \\
-      &      &\mid& \Empty               & – empty an editor \\
       &      &\mid& \Continue            & – continue with next task \\
       &      &\mid& \Pick                & – pick route \\
     Routes
@@ -215,7 +214,7 @@
     Inputs
       & i &  ::= & a \Mid \First i \Mid \Second i                      & – action, pass to first, pass to second \\
     Actions
-      & a &  ::= & v \Mid \Empty \Mid \Continue \Mid \Left \Mid \Right & – change, empty, continue, go left, go right
+      & a &  ::= & v \Mid \Continue \Mid \Left \Mid \Right & – change, continue, go left, go right
   \end{grammar}
 }
 
@@ -226,7 +225,7 @@
     i ::= &                                           & Inputs \\
     \mid  & a \Mid \First i \Mid \Second i            & – action, pass to first, pass to second \\
     a ::= &                                           & Actions \\
-    \mid  & v \Mid \Empty \Mid \Continue              & – change, empty, continue\\
+    \mid  & v \Mid \Continue              & – change, continue\\
     \mid  & \Left \Mid \Right                         & – go left, go right
   \end{grammar*}
 }
