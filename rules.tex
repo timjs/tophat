@@ -1,4 +1,4 @@
-% !TEX root=icfp2019.tex
+% !TEX root=main.tex
 
 
 %% Typing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -324,7 +324,7 @@
 \newrule{N-Done}
     {e,\sigma \evaluate t,\sigma'  \Quad
      t,\sigma' \stride t',\sigma''}
-    {e,\sigma \normalise t',\sigma''}
+    {e,\sigma \normalise t,\sigma'}
     [\sigma'=\sigma''\wedge t=t']
 
 \newrule{N-Repeat}
