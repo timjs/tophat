@@ -1,0 +1,33 @@
+We want to thank the reviewers for their insightful comments.
+We are pleased that the reviewers find our paper well written and understandable, and that it makes a significant contribution.
+Below we answer the questions of reviewer 1 and 2.
+We will thankfully incorporate the minor details in the final version of our paper.
+
+
+Questions of reviewer 1
+
+* Why is there a need to add the simply-typed lambda calculus as a basis?
+
+With the task layer, one can express workflows.
+We embedded the task layer in a host language in order to allow user defined combinators, for example a function that takes a task as argument and executes it two times in sequence.
+This explanation will be added to the final version of this paper.
+
+* I do not understand why the authors choose to do two steps in one small step at S-AND.
+
+The S-AND rule performs two steps in order to keep the semantics deterministic.
+We intend to clarify this in writing in the final version.
+
+
+Questions of reviewer 2
+
+* Speaking about references you say "so they do not introduce implicit recursion (T-Update)".
+What do you want to mean by "implicit recursion". Is it because in the other cases \tau can be again a Task and here \beta can only be a basic type?
+
+There is a trick to use references to implement general recursion (Pierce TAPL exercise 13.5.8). We want to prohibit this.
+
+
+* "Without type annotations, it would be possible to change the type of an editor, by clearing it and filling it with a value of different type."
+Is this a hypothetical affirmation (for the case the language wasn't type-safe) or a current feature of the language?
+
+We want to ensure that editors never change type. Without type annotations, it would be possible for an expression to change type during execution.
+This is not desirable for any type-safe language.

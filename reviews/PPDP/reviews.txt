@@ -1,0 +1,158 @@
+----------------------- REVIEW 1 ---------------------
+SUBMISSION: 5
+TITLE: TopHat: A formal foundation for task-oriented programming
+AUTHORS: Tim Steenvoorden, Nico Naus and Markus Klinik
+
+----------- Overall evaluation -----------
+SCORE: 1 (weak accept)
+----- TEXT:
+The paper provides a formal semantics for the Task-oriented programming paradigm.
+The paradigm-specific concepts facilitate modeling real world workflows.
+
+The authors motivate and introduce the language concepts in descriptions of concrete examples.
+The formal semantics specifies the reduction of TOP programs.
+1.) The reduction of expressions towards tasks is specified using a big-step semantics, where abstract syntax is mapped to reduced abstract syntax.
+1.1.) Observation of tasks is specified in terms of an abstract semantics for failing.
+It determines if a combination of tasks always fails.
+2.) The reduction of a task program to normal form is specified in terms of a big-step semantics
+that can be seen as the transitive closure over explicit reduction steps (called striding).
+The normalisation uses the reduction of expression to task.
+3.) The user input handling is viewed as a separate kind of reduction, since editors (comparable to variables) may be modified by an external event. If a value in an editor becomes available, then the reduction of the task program is proceeded.
+
+* The contribution is of a theoretical nature, where the authors followed well-known standards
+from books, for example, by Nielson and Nielson or the TAPL book by Benjamin Pierce.
+
+* The formal specification is clearly a result of the authors' expertise on TOP. Descriptions are well written and understandable. The formal proof of preservation and progress based on structural induction is additionally provided.
+At some points, the writing can be improved to answer questions and prevent confusions.
+
+* Eight contributions are promised, which is a lot and adds confusion and separation of things that actually belong together.:
+1) concepts of Task-oriented programming of TOP
+- Clearly explained in Section 2-3
+2) a formal language for modelling declarative workﬂows
+- Introduced in Section 2-3
+- Explained in Section 4
+3) layered operational semantics for TOP that is driven by user input.
+- Section 5
+4) semantic observations on tasks: the current value, whether a term is stuck, the current user interface, and the accepted inputs.
+- Section 5.2
+5) We prove progress and type preservation
+6) compare TOP with related work
+- This is too informal and not systematic enough to serve as an isolated contribution.
+7) We implemented the whole semantic system.
+- This is mentioned but not discussed. It would be a separate contribution, if it was discussed, for example by explaining idiomatic differences between formal semantics and implementation. Otherwise, it just serves as another form of validation.
+8) we implemented the task layer of TOP in iTasks
+- This is also mentioned but not discussed.
+
+* Even though examples are provided, it is hard to identify the connection to the concrete languages iTasks and mTasks, if a reader doesn't know the languages. In terms of writing this paper, this connection could be significantly improved by relating more to the existing language constructs and comparing them to defined semantics. The authors clearly clarify the complexity of such comparison at the beginning.
+
+* Why is there a need to add the simply-typed lambda calculus as a basis?
+This should be answered in 1-2 sentences.
+
+* I do not understand why the authors choose to do two steps in one small step at S-AND. This seems to lead to a problem. Maybe, this can be clarified by better writting.
+An alternative would clearly be to have two rules, where one only makes a step for t1 ~> t1' and the other makes a step for t2 ~> t2' in the premise. This seems to be the cause for 5 rules that do not make any progress.
+
+* Additionally, this points to the fact that no normal form is defined for Striding, which uses a small-step semantics. Thus the task constructs are evaluated as long as rules are applicable.
+The Normalisation semantics can be seen as the transitive closure for the small-step striding semantics,
+but this is not clear enough.
+
+* Formal reasoning on models of tasks also calls for a short reference and comparison to ontological models.
+
+@inproceedings{DBLP:conf/ic3k/Bermejo-Alonso18,
+ author    = {Julita Bermejo{-}Alonso},
+ title     = {Reviewing Task and Planning Ontologies: An Ontology Engineering Process},
+ booktitle = {Proceedings of the 10th International Joint Conference on Knowledge
+              Discovery, Knowledge Engineering and Knowledge Management, {IC3K}
+              2018, Volume 2: KEOD, Seville, Spain, September 18-20, 2018.},
+ pages     = {181--188},
+ year      = {2018},
+ crossref  = {DBLP:conf/ic3k/2018keod},
+ url       = {https://doi.org/10.5220/0006922401810188},
+ doi       = {10.5220/0006922401810188},
+ timestamp = {Mon, 01 Oct 2018 13:54:58 +0200},
+ biburl    = {https://dblp.org/rec/bib/conf/ic3k/Bermejo-Alonso18},
+ bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{DBLP:conf/wonto/MartinsF08,
+ author    = {Aline Freitas Martins and
+              Ricardo de Almeida Falbo},
+ title     = {Models for Representing Task Ontologies},
+ booktitle = {Proceedings of the 3rd Workshop on Ontologies and their Applications,
+              Salvador, Bahia, Brazil, October 26, 2008},
+ year      = {2008},
+ crossref  = {DBLP:conf/wonto/2008},
+ url       = {http://ceur-ws.org/Vol-427/paper4.pdf},
+ timestamp = {Mon, 30 May 2016 16:57:35 +0200},
+ biburl    = {https://dblp.org/rec/bib/conf/wonto/MartinsF08},
+ bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+- Minor detail: See data on first page Conference’17, July 2017
+
+
+----------------------- REVIEW 2 ---------------------
+SUBMISSION: 5
+TITLE: TopHat: A formal foundation for task-oriented programming
+AUTHORS: Tim Steenvoorden, Nico Naus and Markus Klinik
+
+----------- Overall evaluation -----------
+SCORE: 2 (accept)
+----- TEXT:
+The paper presents TopHat, a task-oriented programming language. TopHat is a declarative language tailored for the development of workflow applications. The language is designed in two layers: a host language and a task language. The host language is a simply-typed lambda calculus with ML-style references (used to represent shared data among tasks). The other layer deals with the notion of task. Tasks are components built using common workflow primitives (sequential and parallel composition, choice operators) together with so-called editors which are the units in the workflow that perform the input-output interaction with end users.
+
+The paper starts with an informal description of the essentials of task-oriented programming showing examples in TopHat, then introduces the TopHat language, giving a formal semantics also in layers, and finally proves some properties of the semantics.
+
+I find the paper well-written, well-structured and pleasant to read. It gives a clean and suitable description of a kernel language that captures the essentials of task-oriented programming, or more generally speaking, the essentials of workflow programming. In my opinion, the language is well designed; the semantics seems consistent.
+
+What I found particularly interesting is how editors are integrated in the language. They make it possible to maintain the workflow description in an abstract level while dealing with communication and interaction with end users. This reminds me a lot with what one does with monads.
+
+Minor details
+
+- page 5, line 532-533
+Speaking about references you say "so they do not introduce implicit recursion (T-Update)". What do you want to mean by "implicit recursion". Is it because in the other cases \tau can be again a Task and here \beta can only be a basic type?
+
+- page 5, line 571-573
+"Without type annotations, it would be possible to change the type of an editor, by clearing it and filling it with a value of different type." Is this a hypothetical affirmation (for the case the language wasn't type-safe) or a current feature of the language?
+
+- page 7, line 784
+rhs of equation, \sigma instead of s
+
+- page 8, line 862-863
+you mention S-AND before having introduced the striding semantics (perhaps add a reference to the figure where this rule appears).
+
+- page 9, lines 960-962
+when you write v' : \tau (in the set comprehensions) I assume the intention is to say any input value of type \tau. I would write it as {v' | v' : \tau}.
+
+- page 10, line 1049
+the judgement about well-formed states \Gamma, \Sigma |- \sigma should include the \Gamma or not? Because in the other occurrences of the judgement \Gamma is not included. However, when you explain what the judgement means (line 1051) you use the \Gamma.
+
+
+----------------------- REVIEW 3 ---------------------
+SUBMISSION: 5
+TITLE: TopHat: A formal foundation for task-oriented programming
+AUTHORS: Tim Steenvoorden, Nico Naus and Markus Klinik
+
+----------- Overall evaluation -----------
+SCORE: 3 (strong accept)
+----- TEXT:
+This paper provides a formal semantics for TopHat, a language for task-oriented programming (TOP), which is used to model collobarative interactions between users.  The paper describes TOP and TopHat, provides examples, gives a formal operational semantics for TopHat, and provides proofs of several important properties.
+
+ The paper is well written and clear.  Everytime I had a question, it was answered within one or two pages.  I was previously unaware of TOP: the paper gives an accessible introduction to the approach and its uses and limitations.  I found the semantics relatively easy to follow.  This formalism seems like a good starting point to allow for formal reasoning of TOP programs, although that seems like future work (and may be based on an axiomatic semantics, apparently).
+
+ Apparently there are no existing formal semantics for TOP, so the paper seems to make a significant contribution.  I found the related work section to be a good overview of approaches to TOP-like problems.
+
+
+ P.2
+
+ Unfortunate page break after two lines of code--can you instead fit all of the code on the next page?
+
+ P.4
+
+ In Example 3.3, there is a reference to [7], then in the next paragraph 'Downey' is referenced.  Please make it clear that [7] and Downey are the same reference.
+
+ P.6
+
+ The starting double-quotes around 'Batman' and 'Na' are backwards.
+
+
+------------------------------------------------------
