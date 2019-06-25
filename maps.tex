@@ -1,4 +1,4 @@
-% !TEX root=icfp2019.tex
+% !TEX root=main.tex
 
 
 %% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -8,7 +8,7 @@
     \signature{\Value : \mathrm{Tasks} \times \mathrm{States} \rightharpoonup \mathrm{Values}} \\
     \Value(\Edit v, \sigma)                &=& v \\
     \Value(\Enter \tau, \sigma)            &=& \bot \\
-    \Value(\Update l, \sigma)              &=& s(l) \\
+    \Value(\Update l, \sigma)              &=& \sigma(l) \\
     \Value(\Fail, \sigma)                  &=& \bot \\
     \Value(t_1 \Then e_2, \sigma)          &=& \bot \\
     \Value(t_1 \Next e_2, \sigma)          &=& \bot \\
