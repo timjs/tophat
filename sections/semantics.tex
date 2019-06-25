@@ -196,6 +196,7 @@ Consider the following example, where $\sigma=\set{l\mapsto\False}$.
   (update l >>= \x:Bool. if x then e else fail) <&> (edit <<>>)
 \end{TASK}
 with $\sigma'=\set{l\mapsto\True}$.
+\todo{you mention S-AND before having introduced the striding semantics (perhaps add a reference to the figure where this rule appears).}
 This expression is not normalised, because the left task can take a step.
 The issue here lies in the fact that the right task updates $l$.
 To overcome this problem, the \refrule{N-Done} and \refrule{N-Repeat} rules ensure that striding is applied until the state $\sigma$ becomes stable and no further normalisation can take place.
@@ -313,7 +314,7 @@ The definition of this function is listed in \cref{fig:observation-input}.
   \usemacro{O-Inputs-Compact}
   \caption{Inputs} \label{fig:observation-input}
 \end{figure}
-
+\todo{when you write $v' : \tau$ (in the set comprehensions) I assume the intention is to say any input value of type $\tau$. I would write it as ${v' | v' : \tau}$.}
 Handling input is done by the \emph{handling} semantics shown in \cref{fig:handling-semantics}.
 It is a small step semantics with labelled transitions.
 It takes a task $t$ in a state $\sigma$ and an input $i$, and yields a new task $t'$ in a new state $\sigma'$.
