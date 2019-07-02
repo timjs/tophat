@@ -101,9 +101,9 @@
 \newmacro{O-Inputs-Compact}{
   \begin{function}
     \signature{\Inputs : \mathrm{Tasks} \times \mathrm{States} \to \powerset(\mathrm{Inputs})} \\
-    \Inputs(\Edit v, \sigma)             &=& \set{v':\tau, \Empty}                       \quad\where\ \Edit v : \Task\tau \\
-    \Inputs(\Enter \tau, \sigma)         &=& \set{v':\tau} \\
-    \Inputs(\Update l, \sigma)           &=& \obox{\set{v':\tau, \Empty}}{\set{v':\tau}} \quad\where\ \Update l : \Task\tau \\
+    \Inputs(\Edit v, \sigma)             &=& \set{v'\mid\nothing \infers v':\tau}\cup \set{\Empty}                       \quad\where\ \Edit v : \Task\tau \\
+    \Inputs(\Enter \tau, \sigma)         &=& \set{v'\mid\nothing \infers v':\tau} \\
+    \Inputs(\Update l, \sigma)           &=& \obox{\set{v'\mid\nothing \infers v':\tau}\cup \set{\Empty}}{\set{v'\mid\nothing \infers v':\tau}} \quad\where\ \Update l : \Task\tau \\
     \Inputs(\Fail, \sigma)               &=& \nothing \\
     \Inputs(t_1 \Then e_2, \sigma)       &=& \Inputs(t_1, \sigma) \\
     \Inputs(t_1 \Next e_2, \sigma)       &=& \Inputs(t_1, \sigma) \cup \{\Continue \mid \Value(t_1, \sigma) = v_1 \land \phantom{} \\

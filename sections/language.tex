@@ -82,8 +82,6 @@ Most typing rules lift the type of their subexpressions into the $\Task$-type.
 The typing rules for steps make sure the continuations $e_2$ are functions which accept a well-typed value from the left hand side (\refrule{T-Then}, \refrule{T-Next}).
 References, and therefore shared editors, can only be of a basic type so they do not introduce implicit recursion (\refrule{T-Update}).
 
-\todo{Speaking about references you say "so they do not introduce implicit recursion (T-Update)". What do you want to mean by "implicit recursion". Is it because in the other cases $\tau$ can be again a Task and here $\beta$ can only be a basic type?}
-
 \begin{figure}[h]
   \small
   \begin{gather*}
@@ -138,9 +136,7 @@ It could also be a parser that tries to parse a line of text to match the type o
 \paragraph{Valued and unvalued editors $(\Edit e, \Enter \tau)$}
 
 Editors that hold an expression $e : \tau$ have type $\Task \tau$.
-Empty editors are annotated with a type in order to ensure type safety.
-
-\todo{"Without type annotations, it would be possible to change the type of an editor, by clearing it and filling it with a value of different type." Is this a hypothetical affirmation (for the case the language wasn't type-safe) or a current feature of the language?}
+Empty editors are annotated with a type in order to ensure type safety and type preservation during evaluation.
 
 \paragraph{Shared editors $(\Update e)$}
 
@@ -278,7 +274,6 @@ can only step when both editors have values.
 When it steps, the continuation uses the pair to calculate the result.
 
 \end{example}
-\todo{The starting double-quotes around 'Batman' and 'Na' are backwards.}
 
 \paragraph{Internal and external choice $(e_1 \Or e_2, e_1 \Xor e_2)$}
 

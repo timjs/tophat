@@ -27,31 +27,30 @@ We show that the following three preservation Theorems hold.
   For all expressions $e$ and states $\sigma$
   such that $\Gamma,\Sigma \infers e:\tau$ and $\Gamma,\Sigma \infers \sigma$,
   if $e,\sigma \evaluate e',\sigma'$,
-  then $\Gamma,\Sigma \infers e':\tau$ and $\Sigma \infers \sigma'$.
+  then $\Gamma,\Sigma \infers e':\tau$ and $\Gamma,\Sigma \infers \sigma'$.
   \label{thm:pres-eval}
 \end{theorem}
 
 \noindent
-Where $\Sigma \infers \sigma$ means that for all $l\in \sigma$, it holds that
-$\Sigma(l)=\Gamma,\Sigma\infers \sigma(l)$.
+Where $\Gamma,\Sigma \infers \sigma$ means that for all $l\in \sigma$, it holds that
+$\Gamma,\Sigma\infers \sigma(l):\Sigma(l)$.
 
-\todo{the judgement about well-formed states $\Gamma, \Sigma |- \sigma$ should include the $\Gamma$ or not? Because in the other occurrences of the judgement $\Gamma$ is not included. However, when you explain what the judgement means (line 1051) you use the $\Gamma$.}
 
 \begin{theorem}[Type preservation under normalisation]
   % For all well typed expressions $e$ and states $\sigma$,
   For all expressions $e$ and states $\sigma$
-  such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers \sigma$,
+  such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Gamma,\Sigma \infers \sigma$,
   if $e,\sigma \normalise e',\sigma'$,
-  then $\Gamma,\Sigma \infers e':\Task\tau$ and $\Sigma \infers \sigma'$.
+  then $\Gamma,\Sigma \infers e':\Task\tau$ and $\Gamma,\Sigma \infers \sigma'$.
   \label{thm:pres-norm}
 \end{theorem}
 
 \begin{theorem}[Type preservation under handling]
   % For all well typed expressions $e$, states $\sigma$, and inputs $i$,
   For all expressions $e$, states $\sigma$ and inputs $i$
-  such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Sigma \infers \sigma$,
+  such that $\Gamma,\Sigma \infers e:\Task\tau$ and $\Gamma,\Sigma \infers \sigma$,
   if $ e,\sigma \handle{i} e',\sigma'$,
-  then $\Gamma,\Sigma\infers e':\Task\tau$ and $\Sigma\infers \sigma'$.
+  then $\Gamma,\Sigma\infers e':\Task\tau$ and $\Gamma,\Sigma\infers \sigma'$.
   \label{thm:pres-handle}
 \end{theorem}
 
