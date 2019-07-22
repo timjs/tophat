@@ -1,0 +1,7 @@
+[project]
+name = "examples"
+version = "0.1.0"
+sourcedir = "."
+authors = ["Tim Steenvoorden <tim@cs.ru.nl>"]
+
+[executable]
