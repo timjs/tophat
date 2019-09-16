@@ -74,7 +74,7 @@
 %\titlenote{with title note}             %% \titlenote is optional;
                                         %% can be repeated if necessary;
                                         %% contents suppressed with 'anonymous'
-%\subtitle{Revisited edition}            %% \subtitle is optional
+\subtitle{Appendices}                   %% \subtitle is optional
 %\subtitlenote{with subtitle note}       %% \subtitlenote is optional;
                                         %% can be repeated if necessary;
                                         %% contents suppressed with 'anonymous'
@@ -153,9 +153,9 @@
 
 %% Abstract
 %% Must come before \maketitle command
-\begin{abstract}
-  \input{sections/abstract}
-\end{abstract}
+% \begin{abstract}
+%   \input{sections/abstract}
+% \end{abstract}
 
 % \begin{teaserfigure}
 %    \includegraphics[width=\textwidth]{figures/declrequest-part.pdf}
@@ -178,17 +178,6 @@
 %% environment and commands, and keywords command.
 \maketitle
 
-\input{sections/introduction}
-\input{sections/example}
-\input{sections/intuition}
-\input{sections/language}
-\input{sections/semantics}
-\input{sections/properties}
-\input{sections/outlook}
-\input{sections/relatedwork}
-\input{sections/conclusions}
-
-
 % %% Acknowledgments
 % \begin{acks}                            %% acks environment is optional
 %                                         %% contents suppressed with 'anonymous'
@@ -202,15 +191,16 @@
 
 
 %% Bibliography
-\bibliography{bibliography}
+%\bibliography{bibliography}
 
 
 %% Appendix
-% \pagebreak \appendix
-% \onecolumn
-% \input{appendices/rules}
-% \pagebreak
-% \input{appendices/proofs}
+\appendix
+
+\onecolumn
+\input{appendices/rules}
+\pagebreak
+\input{appendices/proofs}
 
 
 \end{document}
