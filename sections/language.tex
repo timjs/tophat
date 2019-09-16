@@ -76,7 +76,7 @@ It has functions, pairs, basic types, unit, references, and tasks.
 \end{figure}
 
 Typing rules are of the form $\RelationT$, which should be read as \enquote{in environment $\Gamma$ and store typing $\Sigma$, expression $e$ has type $\tau$}.
-Typing rules for expressions in the host language are presented in the appendix.
+Typing rules for expressions in the host language are presented in the appendix\footnote{\url{https://github.com/timjs/tophat/appendix.pdf}}.
 The typing rules for pretasks are given in \cref{fig:typing-rules}.
 Most typing rules lift the type of their subexpressions into the $\Task$-type.
 The typing rules for steps make sure the continuations $e_2$ are functions which accept a well-typed value from the left hand side (\refrule{T-Then}, \refrule{T-Next}).
