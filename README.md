@@ -33,3 +33,7 @@ Can be found in [main.pdf](main.pdf).
 ## Appendices
 
 Can be found in [appendix.pdf](appendix.pdf).
+
+## Implementation
+
+A Haskell implementation can be found in a [separate repository](https://github.com/timjs/tophat-haskell).
